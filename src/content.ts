@@ -72,6 +72,58 @@ export const projects = [
     width: 1440,
     height: 1000,
   },
+  {
+    "id": "iter",
+    "name": "ITER",
+    "category": "NAVIGATION AND ACCESSIBILITY",
+    "stack": [
+      "React",
+      "TypeScript",
+      "Three.js",
+      "SVG",
+      "Web Speech"
+    ],
+    "live": "https://iter-navigator.vercel.app/",
+    "source": "https://github.com/seoshiro/iter-navigator",
+    "evidence": "https://github.com/seoshiro/iter-navigator/blob/main/README.md",
+    "color": "#9ab8b2",
+    "width": 1440,
+    "height": 1000
+  },
+  {
+    "id": "ayqyn",
+    "name": "AYQYN",
+    "category": "LOCAL APPLICATIONS",
+    "stack": [
+      "Electron",
+      "JavaScript",
+      "ONNX Runtime",
+      "MediaPipe"
+    ],
+    "live": "https://seoshiro.github.io/ayqyn-local/replay/",
+    "source": "https://github.com/seoshiro/ayqyn-local",
+    "evidence": "https://github.com/seoshiro/ayqyn-local/blob/main/docs/LOCALIZATION_QA.md",
+    "color": "#79cabc",
+    "width": 1800,
+    "height": 1200
+  },
+  {
+    "id": "sidereal",
+    "name": "SIDEREAL",
+    "category": "MUSICAL INSTRUMENTS",
+    "stack": [
+      "TypeScript",
+      "SVG",
+      "Web Audio",
+      "LocalStorage"
+    ],
+    "live": "https://seoshiro.github.io/sidereal/",
+    "source": "https://github.com/seoshiro/sidereal",
+    "evidence": "https://github.com/seoshiro/sidereal/blob/main/docs/QA.md",
+    "color": "#b9c9ff",
+    "width": 1920,
+    "height": 1080
+  },
 ] as const;
 export type ProjectId = (typeof projects)[number]["id"];
 export const dimensions: Record<
@@ -82,6 +134,9 @@ export const dimensions: Record<
     detail: [number, number];
   }
 > = {
+  iter: {"main":[1440,1000],"preview":[1440,1000],"detail":[1440,1000]},
+  ayqyn: {"main":[1800,1200],"preview":[1800,1200],"detail":[1800,1200]},
+  sidereal: {"main":[1920,1080],"preview":[1920,1080],"detail":[390,844]},
   orbit: {main:[1440,1000],preview:[1440,1000],detail:[1440,1000]},
   reson: {main:[1440,1000],preview:[1440,1000],detail:[1440,1000]},
   lumen: {main:[1440,1000],preview:[1440,1000],detail:[1440,1000]},
@@ -155,9 +210,9 @@ export interface Copy {
 }
 export const copy: Record<Locale, Copy> = {
   en: {
-    title: "Beibars Ileskhan — developer & interface maker",
+    title: "Beibars Ileskhan — AI-assisted product creation",
     description:
-      "Selected web projects by Beibars Ileskhan (seoshiro): creative tools, careful data handling, and interfaces with a point of view.",
+      "Digital products by Beibars Ileskhan (seoshiro): ideas, prototypes, and browser tools created with AI assistance.",
     skip: "Skip to content",
     work: "Work",
     about: "About",
@@ -166,21 +221,21 @@ export const copy: Record<Locale, Copy> = {
     motion: "Animation",
     motionOff: "Pause animation",
     motionOn: "Play animation",
-    eyebrow: "DEVELOPER / INTERFACE MAKER",
+    eyebrow: "AI-ASSISTED PRODUCT CREATION",
     name: "Beibars Ileskhan",
-    heroLine: "Useful by design.",
+    heroLine: "Ideas take\nshape.",
     intro:
-      "I build web interfaces and browser tools. My recent projects help organize creative work, review changes, and handle files with care.",
+      "I turn ideas into digital products with AI. I define the task, connect tools, and refine the result.",
     viewWork: "Explore the work",
-    heroFoot: "Independent projects. Open source. Built for the browser.",
+    heroFoot: "Ideas. Tools. Products.",
     selected: "Selected work",
-    selectedNote: "Eight projects. Different problems. The same attention to detail.",
+    selectedNote: "Working tools, real interfaces, and the decisions behind them.",
     caseStudy: "Inside the project",
     live: "Live project",
     source: "Source code",
-    role: "PROJECT CONTEXT",
+    role: "MY ROLE",
     roleText:
-      "Independent portfolio project. Implementation, design decisions, and verification are documented in the source repository.",
+      "AI-assisted product creation: I define the brief, choose and connect tools, direct AI-assisted implementation, and review the visual result. The repository documents the implementation and checks.",
     input: "Starting point",
     output: "What you leave with",
     engineering: "Under the surface",
@@ -189,32 +244,80 @@ export const copy: Record<Locale, Copy> = {
     back: "All projects",
     next: "Next project",
     aboutLabel: "A BIT ABOUT MY APPROACH",
-    aboutTitle: "The details are\nthe work.",
+    aboutTitle: "Idea. Prototype.\nRefinement.",
     aboutText:
-      "I’m Beibars, also known as seoshiro. My projects sit between expressive interfaces and practical browser tools. I like taking something scattered—references, revisions, files—and giving it a clear shape.",
+      "I’m Beibars, also known as seoshiro. I explore ideas, assemble prototypes with AI, and refine how they look and work. I’m learning to write code independently and understand it more deeply as I go.",
     principles: [
       {
-        title: "Make the next step clear.",
-        text: "A good interface helps you understand what you have, what changed, and what to do next.",
+        title: "Define the task.",
+        text: "Clarify the problem, the intended result, and what a useful first version needs.",
       },
       {
-        title: "Treat data with care.",
-        text: "Visible saves, bounded imports, and portable backups make a small tool easier to trust.",
+        title: "Connect the tools.",
+        text: "Choose tools, guide AI, and bring the pieces together in a working prototype.",
       },
       {
-        title: "Make it feel considered.",
-        text: "Typography, motion, and keyboard behavior belong in the same conversation as the code.",
+        title: "Review and refine.",
+        text: "Compare the result with the brief, check the interaction, and improve the visual direction.",
       },
     ],
     contactTitle: "Let’s make\nsomething useful.",
     contactText: "Find my projects and start a conversation on GitHub.",
     github: "Find me on GitHub",
-    footer: "Built with attention. Shared with the source.",
+    footer: "Created with AI assistance. Shared with the source.",
     imageFailed:
       "Project screenshot unavailable. The case study and live project are still accessible.",
     project: {
       ...recentCopy.en,
       orbit: orbitCopy.en,
+      iter: {
+        "category": "Navigation and accessibility",
+        "title": "One route.\nThree ways to read it.",
+        "summary": "An educational navigator for a fictitious building. Passage constraints, a 3D model, an SVG plan and written steps describe the same route.",
+        "alt": "ITER with passage constraints, a three-dimensional building and route steps",
+        "detailAlt": "ITER route shown as a 2D plan",
+        "input": "Choose a start, destination, minimum passage width and maximum slope. You can avoid stairs or simulate a lift closure. All data belongs to an educational building.",
+        "output": "A route with distance, explained constraints, steps, 3D and SVG representations. Select a step from any view.",
+        "decisions": [
+          "The planner filters graph edges by the constraints and finds the shortest available route. Closed sections and unknown conditions are explicit.",
+          "Text, SVG and Three.js share node and edge IDs. Without WebGL, the route remains available as a plan and written steps.",
+          "Web Speech API reads the route on request. The educational obstacle wall sends reports through its existing public service with server validation."
+        ],
+        "limit": "A fictitious building and illustrative geometry. Results do not certify the accessibility of a physical space. Voices depend on the browser; the report wall depends on a separate service.",
+        "caption": "A route through ITER’s educational building, with its 3D view and passage settings."
+      },
+      ayqyn: {
+        "category": "Local applications",
+        "title": "Observe with context.\nLeave decisions to people.",
+        "summary": "A Windows local proctoring prototype: participant consent, camera preparation, on-device observations and a separate human review of events.",
+        "alt": "AYQYN observation details and a reviewer’s decision",
+        "detailAlt": "AYQYN session overview and preparation",
+        "input": "Prepare a local session with participant consent and camera calibration. A test scenario and browser replay let you explore the workflow without a camera.",
+        "output": "An observation timeline, reviewer decisions with reasons, and a JSON report without images.",
+        "decisions": [
+          "YOLO and MediaPipe process frames on the device in a separate process. Processing and snapshot consent are separate; saving snapshots is off by default.",
+          "The reviewer sees duration, face count, frame quality and model confidence for phone detection. They confirm or dismiss the observation and explain their decision.",
+          "JSON reports contain no images. The public browser replay shows saved detector results as diagrams without running a camera; photographs are used in the local test replay."
+        ],
+        "limit": "A prototype for Qostanai AI Industry Hackathon 2026, Case 3. Gaze direction is approximate; observations do not prove misconduct and require human review. This is not a certified examination environment. Browser replay does not test camera accuracy.",
+        "caption": "Reviewing an observation in AYQYN v0.2.4. The test profile uses licensed photographs, not images of exam participants. Codex was used to prepare the code, interface and project materials. YOLO and MediaPipe models were used as provided; the team did not train them."
+      },
+      sidereal: {
+        "category": "Musical instruments",
+        "title": "Draw a constellation.\nHear a composition.",
+        "summary": "A musical observatory in the browser. A star’s position sets its timing and pitch; an orbital cursor turns the drawing into a four-bar composition.",
+        "alt": "SIDEREAL editor with a circular score, three constellations and note settings",
+        "detailAlt": "SIDEREAL editor at phone width",
+        "input": "Add stars to the circular score and choose their voices. Start with a preset or learn the controls in a separate practice sky.",
+        "output": "Save the composition in the browser atlas, transfer it through JSON or a link, or download a PNG map or a WAV containing one playback with release tails.",
+        "decisions": [
+          "SVG connects the stars, list and exact note parameters. Angle is time; radius is pitch. Keyboard and numeric controls complement dragging.",
+          "Web Audio synthesizes three voices. Sound starts after a user action, the audio clock drives the cursor and a hidden page pauses playback.",
+          "The guide runs in a separate practice space. Local records and incoming scores are validated; save failures are visible and JSON transfer needs no server."
+        ],
+        "limit": "Fixed four bars and three voices. No MIDI, microphone recording or device synchronization. PNG is a constellation score, not staff notation; WAV contains one pass. Listening quality depends on the browser and device.",
+        "caption": "SIDEREAL’s circular score and settings for the selected note."
+      },
       perch: {
         category: "SPATIAL TOOLS",
         title: "A room.\nA few possibilities.",
@@ -227,14 +330,14 @@ export const copy: Record<Locale, Copy> = {
         output:
           "Editable layout alternatives, fit notes, a portable JSON project, a dimensioned SVG plan, a 3D PNG, and a printable room report.",
         decisions: [
-          "One room model drives the SVG plan and original Three.js furniture. Numeric edits, plan dragging, and 3D selection stay in sync.",
+          "One room model drives the SVG plan and procedural Three.js furniture. Numeric edits, plan dragging, and 3D selection stay in sync.",
           "Rotated footprints, room bounds, ceiling height, and inward door swings produce fit warnings. Copies remain independent; undo and redo preserve the editing history.",
           "Browser-local saves include a recovery backup. Rendering runs on demand; the plan and forms remain usable without WebGL. The whole workspace supports English, Russian, and Kazakh.",
         ],
         limit:
           "A furnishing study for rectangular rooms, not a construction or safety document. Materials and light are illustrative; fit notes do not certify walking clearance. No cloud sync or collaboration. Export JSON to move work between devices.",
         caption:
-          "Fresh captures of the live studio and two layout alternatives, using its furnished demo room.",
+          "Actual live studio and layout comparison, using its furnished demo room.",
       },
       forme: {
         category: "VISUAL DIRECTION",
@@ -324,9 +427,9 @@ export const copy: Record<Locale, Copy> = {
     },
   },
   ru: {
-    title: "Бейбарс Илесхан — разработчик интерфейсов",
+    title: "Бейбарс Илесхан — цифровые продукты с ИИ",
     description:
-      "Веб-проекты Бейбарса Илесхана (seoshiro): инструменты для творчества, аккуратная работа с данными и продуманные интерфейсы.",
+      "Цифровые продукты Бейбарса Илесхана (seoshiro): идеи, прототипы и браузерные инструменты, созданные с помощью ИИ.",
     skip: "К содержимому",
     work: "Проекты",
     about: "Обо мне",
@@ -335,21 +438,21 @@ export const copy: Record<Locale, Copy> = {
     motion: "Анимация",
     motionOff: "Остановить анимацию",
     motionOn: "Включить анимацию",
-    eyebrow: "РАЗРАБОТЧИК / АВТОР ИНТЕРФЕЙСОВ",
+    eyebrow: "СОЗДАНИЕ ПРОДУКТОВ С ИИ",
     name: "Бейбарс Илесхан",
-    heroLine: "С пользой.\nСо смыслом.",
+    heroLine: "Придаю идеям\nформу.",
     intro:
-      "Я создаю веб-интерфейсы и браузерные инструменты. Мои последние проекты помогают организовать творческую работу, разобраться в изменениях и бережно работать с файлами.",
+      "Превращаю идеи в цифровые продукты с помощью ИИ. Формулирую задачу, соединяю инструменты и дорабатываю результат.",
     viewWork: "Смотреть проекты",
-    heroFoot: "Личные проекты. Открытый код. Работа в браузере.",
+    heroFoot: "Идеи. Инструменты. Продукты.",
     selected: "Избранные проекты",
-    selectedNote: "Восемь проектов. Разные задачи. Одинаковое внимание к деталям.",
+    selectedNote: "Работающие инструменты, реальные интерфейсы и решения за ними.",
     caseStudy: "О проекте",
     live: "Открыть проект",
     source: "Исходный код",
-    role: "КОНТЕКСТ ПРОЕКТА",
+    role: "МОЯ РОЛЬ",
     roleText:
-      "Личный проект для портфолио. Реализация, дизайн и результаты проверок описаны в репозитории.",
+      "Создание продукта с помощью ИИ: формулирую задачу, выбираю и соединяю инструменты, направляю реализацию с ИИ и оцениваю визуальный результат. Устройство проекта и проверки описаны в репозитории.",
     input: "С чего начинается",
     output: "Что получается",
     engineering: "Как устроено",
@@ -358,32 +461,80 @@ export const copy: Record<Locale, Copy> = {
     back: "Все проекты",
     next: "Следующий проект",
     aboutLabel: "О МОЁМ ПОДХОДЕ",
-    aboutTitle: "Работа состоит\nиз деталей.",
+    aboutTitle: "Идея. Прототип.\nДоработка.",
     aboutText:
-      "Я Бейбарс, в сети — seoshiro. Мои проекты соединяют выразительные интерфейсы с практичными браузерными инструментами. Мне нравится придавать ясную форму тому, что пока разрозненно: референсам, версиям, файлам.",
+      "Я Бейбарс, в сети — seoshiro. Исследую идеи, собираю прототипы с ИИ и дорабатываю их внешний вид и поведение. Параллельно учусь самостоятельно писать код и глубже понимать, как он работает.",
     principles: [
       {
-        title: "Показывать следующий шаг.",
-        text: "Интерфейс помогает понять, что у вас есть, что изменилось и что делать дальше.",
+        title: "Сформулировать задачу.",
+        text: "Разобраться в проблеме, ожидаемом результате и том, что нужно первой полезной версии.",
       },
       {
-        title: "Бережно работать с данными.",
-        text: "Понятное сохранение, ограниченный импорт и переносимые резервные копии помогают доверять инструменту.",
+        title: "Соединить инструменты.",
+        text: "Выбрать инструменты, направить ИИ и собрать части в работающий прототип.",
       },
       {
-        title: "Продумывать всё вместе.",
-        text: "Типографика, движение и работа с клавиатуры заслуживают такого же внимания, как код.",
+        title: "Проверить и доработать.",
+        text: "Сопоставить результат с задачей, проверить взаимодействие и уточнить визуальное направление.",
       },
     ],
     contactTitle: "Давайте создадим\nчто-то полезное.",
     contactText: "Мои проекты и возможность связаться со мной — на GitHub.",
     github: "Найти меня на GitHub",
-    footer: "С вниманием к деталям. С открытым кодом.",
+    footer: "Создано с помощью ИИ. С открытым кодом.",
     imageFailed:
       "Снимок проекта недоступен. Описание и ссылка на проект остаются доступны.",
     project: {
       ...recentCopy.ru,
       orbit: orbitCopy.ru,
+      iter: {
+        "category": "Навигация и доступность",
+        "title": "Один маршрут.\nТри способа прочитать.",
+        "summary": "Учебный навигатор по вымышленному зданию. Ограничения прохода, 3D-модель, схема и последовательность шагов объясняют один и тот же маршрут.",
+        "alt": "ITER: условия прохода, трёхмерное здание и шаги маршрута",
+        "detailAlt": "Схема маршрута ITER в 2D",
+        "input": "Выберите начало и цель маршрута, минимальную ширину прохода и допустимый уклон. Можно исключить лестницы или смоделировать закрытие лифта. Все данные относятся к учебному зданию.",
+        "output": "Маршрут с расстоянием, объяснением ограничений, шагами, 3D и SVG-представлением. Необходимый шаг можно выбрать в любом представлении.",
+        "decisions": [
+          "Планировщик фильтрует рёбра графа по условиям и ищет кратчайший доступный путь. Закрытый участок и неизвестное состояние показаны явно.",
+          "Текст, SVG и Three.js используют общие идентификаторы узлов и рёбер. При отсутствии WebGL маршрут остаётся в схеме и текстовых шагах.",
+          "Web Speech API озвучивает маршрут по явному запросу. Учебная стена препятствий поддерживает сообщения через существующий публичный сервис, с серверной проверкой данных."
+        ],
+        "limit": "Вымышленное здание и условная геометрия. Результат не подтверждает доступность реального помещения. Голоса зависят от браузера; доступность стены сообщений зависит от отдельного сервиса.",
+        "caption": "Маршрут в учебном здании ITER: 3D-вид и настройки условий прохода."
+      },
+      ayqyn: {
+        "category": "Локальные приложения",
+        "title": "Наблюдение — с контекстом.\nРешение — за человеком.",
+        "summary": "Windows-прототип локального прокторинга: согласие участника, подготовка камеры, наблюдения на устройстве и отдельная проверка событий человеком.",
+        "alt": "AYQYN: сведения о наблюдении и решение проверяющего",
+        "detailAlt": "AYQYN: обзор и подготовка сессии",
+        "input": "Подготовьте локальную сессию: получите согласие участника и выполните калибровку камеры. Для знакомства без камеры есть тестовый сценарий и браузерный повтор наблюдений.",
+        "output": "Хронология наблюдений, решения проверяющего с пояснениями и JSON-отчёт без изображений.",
+        "decisions": [
+          "YOLO и MediaPipe обрабатывают кадры на устройстве в отдельном процессе. Согласие на обработку и сохранение снимков разделены; сохранение снимков по умолчанию выключено.",
+          "Проверяющий видит длительность, число лиц, качество кадра и уверенность модели при обнаружении телефона. Он подтверждает или отклоняет наблюдение и поясняет решение.",
+          "JSON-отчёт не содержит изображений. Публичный браузерный replay показывает сохранённые результаты детектора в виде схем и не запускает камеру; фотографии используются в локальном тестовом повторе."
+        ],
+        "limit": "Прототип для Qostanai AI Industry Hackathon 2026, кейс №3. Направление взгляда определяется приблизительно; наблюдения не доказывают нарушение и требуют проверки человеком. Это не сертифицированная экзаменационная среда. Браузерный повтор не проверяет точность работы камеры.",
+        "caption": "Проверка наблюдения в AYQYN v0.2.4. Использован тестовый профиль с лицензированными фотографиями, а не снимками участников экзамена. В подготовке кода, интерфейса и материалов использовался Codex. Модели YOLO и MediaPipe взяты готовыми; команда их не обучала."
+      },
+      sidereal: {
+        "category": "Музыкальные инструменты",
+        "title": "Нарисовать созвездие.\nУслышать композицию.",
+        "summary": "Музыкальная обсерватория в браузере. Положение звезды задаёт время и высоту ноты, а орбитальный курсор собирает рисунок в четырёхтактовую композицию.",
+        "alt": "Редактор SIDEREAL: круговая партитура, три созвездия и настройки нот",
+        "detailAlt": "Редактор SIDEREAL на экране телефона",
+        "input": "Добавьте звёзды на круговую партитуру и выберите для них тембр. Можно начать с готового рисунка или освоить редактор в отдельном учебном небе.",
+        "output": "Композицию можно сохранить в атласе браузера, перенести через JSON или ссылку, скачать как PNG-карту или WAV с одним проигрыванием и затуханием звука.",
+        "decisions": [
+          "SVG связывает звёзды, список и точные параметры нот. Угол — время, радиус — высота; клавиатура и числовые настройки дополняют перетаскивание.",
+          "Web Audio синтезирует три голоса. Звук запускается только по действию пользователя, аудиочасы управляют курсором, скрытая вкладка приостанавливает воспроизведение.",
+          "Обучение проходит в отдельном пространстве. Локальные записи и входящие партитуры проверяются; ошибки сохранения видны, перенос через JSON не требует сервера."
+        ],
+        "limit": "Фиксированные четыре такта и три голоса. Нет MIDI, записи микрофона и синхронизации устройств. PNG — карта композиции, а не нотный стан; WAV содержит один проход. Качество звучания зависит от браузера и устройства.",
+        "caption": "Круговая партитура SIDEREAL и панель настройки выбранной ноты."
+      },
       perch: {
         category: "ПРОСТРАНСТВЕННЫЕ ИНСТРУМЕНТЫ",
         title: "Одна комната.\nНесколько вариантов.",
@@ -396,14 +547,14 @@ export const copy: Record<Locale, Copy> = {
         output:
           "Редактируемые варианты расстановки, замечания о размещении, JSON-проект, SVG-план с размерами, PNG из 3D-вида и отчёт для печати.",
         decisions: [
-          "Единая модель комнаты управляет SVG-планом и оригинальной мебелью Three.js. Числовые правки, перетаскивание на плане и выбор в 3D синхронизированы.",
+          "Единая модель комнаты управляет SVG-планом и процедурной мебелью Three.js. Числовые правки, перетаскивание на плане и выбор в 3D синхронизированы.",
           "Поворот мебели, границы комнаты, высота потолка и открывание дверей внутрь учитываются в предупреждениях. Копии независимы; изменения можно отменять и повторять.",
           "Локальное сохранение в браузере включает резервную копию. Сцена рисуется по запросу; план и формы работают без WebGL. Весь интерфейс доступен на английском, русском и казахском.",
         ],
         limit:
           "Эскиз расстановки для прямоугольных комнат, а не строительный документ или оценка безопасности. Материалы и свет условны; замечания не подтверждают нормы проходов. Облачной синхронизации и совместной работы нет. Для переноса на другое устройство экспортируйте JSON.",
         caption:
-          "Свежие снимки работающей студии и двух вариантов расстановки на примере её демонстрационной комнаты.",
+          "Реальная студия и сравнение расстановок на примере её демонстрационной комнаты.",
       },
       forme: {
         category: "ВИЗУАЛЬНОЕ НАПРАВЛЕНИЕ",
@@ -492,9 +643,9 @@ export const copy: Record<Locale, Copy> = {
     },
   },
   kk: {
-    title: "Бейбарыс Ілесхан — интерфейс әзірлеушісі",
+    title: "Бейбарыс Ілесхан — ЖИ көмегімен цифрлық өнімдер",
     description:
-      "Бейбарыс Ілесханның (seoshiro) веб-жобалары: шығармашылық құралдар, деректерге ұқыпты қарау және ойластырылған интерфейстер.",
+      "Бейбарыс Ілесханның (seoshiro) цифрлық өнімдері: ЖИ көмегімен жасалған идеялар, прототиптер және браузер құралдары.",
     skip: "Мазмұнға өту",
     work: "Жобалар",
     about: "Өзім туралы",
@@ -503,21 +654,21 @@ export const copy: Record<Locale, Copy> = {
     motion: "Анимация",
     motionOff: "Анимацияны тоқтату",
     motionOn: "Анимацияны қосу",
-    eyebrow: "ӘЗІРЛЕУШІ / ИНТЕРФЕЙС АВТОРЫ",
+    eyebrow: "ЖИ КӨМЕГІМЕН ӨНІМ ЖАСАУ",
     name: "Бейбарыс Ілесхан",
-    heroLine: "Пайдасы бар.\nМәні бар.",
+    heroLine: "Идеяға пішін\nберемін.",
     intro:
-      "Мен веб-интерфейстер мен браузер құралдарын жасаймын. Соңғы жобаларым шығармашылық жұмысты реттеуге, өзгерістерді қарауға және файлдармен ұқыпты жұмыс істеуге көмектеседі.",
+      "ЖИ көмегімен идеяларды цифрлық өнімге айналдырамын. Міндетті анықтап, құралдарды біріктіріп, нәтижені жетілдіремін.",
     viewWork: "Жобаларды көру",
-    heroFoot: "Жеке жобалар. Ашық код. Браузерде жұмыс істейді.",
+    heroFoot: "Идеялар. Құралдар. Өнімдер.",
     selected: "Таңдаулы жобалар",
-    selectedNote: "Сегіз жоба. Әртүрлі міндет. Детальдарға бірдей көңіл.",
+    selectedNote: "Жұмыс істейтін құралдар, нақты интерфейстер және олардың шешімдері.",
     caseStudy: "Жоба туралы",
     live: "Жобаны ашу",
     source: "Бастапқы код",
-    role: "ЖОБА КОНТЕКСТІ",
+    role: "МЕНІҢ РӨЛІМ",
     roleText:
-      "Портфолиоға арналған жеке жоба. Іске асыру, дизайн шешімдері мен тексерулер репозиторийде сипатталған.",
+      "ЖИ көмегімен өнім жасау: міндетті анықтаймын, құралдарды таңдап біріктіремін, ЖИ көмегімен іске асыруды бағыттап, визуалды нәтижені бағалаймын. Жоба құрылымы мен тексерулер репозиторийде сипатталған.",
     input: "Бастапқы нүкте",
     output: "Нәтижесінде",
     engineering: "Ішкі құрылымы",
@@ -526,32 +677,80 @@ export const copy: Record<Locale, Copy> = {
     back: "Барлық жобалар",
     next: "Келесі жоба",
     aboutLabel: "МЕНІҢ ТӘСІЛІМ ТУРАЛЫ",
-    aboutTitle: "Жұмыс —\nдетальдардан тұрады.",
+    aboutTitle: "Идея. Прототип.\nЖетілдіру.",
     aboutText:
-      "Мен Бейбарыспын, желіде — seoshiro. Жобаларым мәнерлі интерфейстер мен пайдалы браузер құралдарын біріктіреді. Референстерге, нұсқаларға және файлдарға түсінікті құрылым бергенді ұнатамын.",
+      "Мен Бейбарыспын, желіде — seoshiro. Идеяларды зерттеп, ЖИ көмегімен прототиптер жасап, олардың көрінісі мен жұмысын жетілдіремін. Сонымен бірге кодты өз бетімше жазуды және оны тереңірек түсінуді үйреніп жүрмін.",
     principles: [
       {
-        title: "Келесі қадамды айқын ету.",
-        text: "Интерфейс не бар екенін, не өзгергенін және әрі қарай не істеу керегін түсінуге көмектеседі.",
+        title: "Міндетті анықтау.",
+        text: "Мәселені, күтілетін нәтижені және алғашқы пайдалы нұсқаға не қажет екенін түсіну.",
       },
       {
-        title: "Деректерге ұқыпты қарау.",
-        text: "Түсінікті сақтау, шектелген импорт және тасымалданатын сақтық көшірмелер құралға сенуге көмектеседі.",
+        title: "Құралдарды біріктіру.",
+        text: "Құралдарды таңдап, ЖИ жұмысын бағыттау және бөліктерді жұмыс істейтін прототипке біріктіру.",
       },
       {
-        title: "Бәрін бірге ойластыру.",
-        text: "Типографика, қозғалыс және пернетақтамен басқару код сияқты мұқият назарды қажет етеді.",
+        title: "Тексеру және жетілдіру.",
+        text: "Нәтижені міндетпен салыстырып, өзара әрекеттесуді тексеру және визуалды бағытты нақтылау.",
       },
     ],
     contactTitle: "Пайдалы дүние\nжасайық.",
     contactText: "Жобаларымды GitHub-та көріп, сол жерден хабарласа аласыз.",
     github: "GitHub-та табу",
-    footer: "Детальдарға көңіл бөлінген. Коды ашық.",
+    footer: "ЖИ көмегімен жасалған. Коды ашық.",
     imageFailed:
       "Жоба суреті қолжетімсіз. Сипаттама мен жоба сілтемесі қолжетімді.",
     project: {
       ...recentCopy.kk,
       orbit: orbitCopy.kk,
+      iter: {
+        "category": "Навигация және қолжетімділік",
+        "title": "Бір бағыт.\nҮш түрлі көрініс.",
+        "summary": "Ойдан шығарылған ғимаратқа арналған оқу навигаторы. Өту шарттары, 3D модель, SVG сызбасы және мәтіндік қадамдар бір бағытты түсіндіреді.",
+        "alt": "ITER: өту шарттары, үш өлшемді ғимарат және бағыт қадамдары",
+        "detailAlt": "ITER бағытының 2D сызбасы",
+        "input": "Басталу нүктесін, баратын жерді, өткелдің ең аз енін және ең үлкен еңісін таңдаңыз. Баспалдақсыз бағыт іздеуге немесе лифт жабылған жағдайды модельдеуге болады. Барлық дерек оқу ғимаратына жатады.",
+        "output": "Қашықтығы мен шарттары түсіндірілген бағыт, қадамдар, 3D және SVG көріністері. Қадамды кез келген көріністен таңдауға болады.",
+        "decisions": [
+          "Жоспарлаушы граф қырларын шарттар бойынша сүзеді және қолжетімді ең қысқа жолды табады. Жабық бөліктер мен белгісіз жағдайлар айқын көрсетіледі.",
+          "Мәтін, SVG және Three.js ортақ түйіндер мен қырлардың ID-лерін қолданады. WebGL болмаса, бағыт сызба мен мәтіндік қадамдарда сақталады.",
+          "Web Speech API пайдаланушы сұрағанда бағытты оқиды. Оқу кедергілер қабырғасы хабарламаларды деректерді серверде тексеретін қолданыстағы қызмет арқылы жібереді."
+        ],
+        "limit": "Ойдан шығарылған ғимарат пен шартты геометрия. Нәтиже нақты бөлменің қолжетімділігін растамайды. Дауыстар браузерге, хабарлама қабырғасы бөлек қызметке байланысты.",
+        "caption": "ITER оқу ғимаратындағы бағыт: 3D көрініс және өту шарттарының параметрлері."
+      },
+      ayqyn: {
+        "category": "Жергілікті қолданбалар",
+        "title": "Бақылау — контекстпен.\nШешім — адамнан.",
+        "summary": "Windows-тағы жергілікті прокторинг прототипі: қатысушы келісімі, камераны дайындау, құрылғыдағы бақылаулар және оқиғаларды адамның бөлек тексеруі.",
+        "alt": "AYQYN: бақылау мәліметтері және тексерушінің шешімі",
+        "detailAlt": "AYQYN: сессияны шолу және дайындау",
+        "input": "Жергілікті сессияны дайындаңыз: қатысушының келісімін алып, камераны калибрлеңіз. Камерасыз танысу үшін тест сценарийі мен браузердегі қайталау бар.",
+        "output": "Бақылаулар хронологиясы, тексерушінің түсіндірмесі бар шешімдері және суреттерсіз JSON есебі.",
+        "decisions": [
+          "YOLO мен MediaPipe кадрларды құрылғыда бөлек процесте өңдейді. Өңдеуге және суреттерді сақтауға келісім бөлек беріледі; суреттерді сақтау әдепкіде өшірулі.",
+          "Тексеруші ұзақтықты, беттер санын, кадр сапасын және телефонды анықтау кезіндегі модель сенімділігін көреді. Ол бақылауды растайды немесе қабылдамайды және шешімін түсіндіреді.",
+          "JSON есебінде суреттер жоқ. Ашық браузерлік қайталау детектордың сақталған нәтижелерін сызба түрінде көрсетеді және камераны қоспайды; фотолар жергілікті тест қайталауында қолданылады."
+        ],
+        "limit": "Qostanai AI Industry Hackathon 2026 хакатонының №3 кейсіне арналған прототип. Көзқарас бағыты шамамен анықталады; бақылаулар бұзушылықты дәлелдемейді және адам тексеруін қажет етеді. Бұл сертификатталған емтихан ортасы емес. Браузердегі қайталау камераның дәлдігін тексермейді.",
+        "caption": "AYQYN v0.2.4 жүйесінде бақылауды тексеру. Тест профилінде емтихан қатысушыларының суреттері емес, лицензияланған фотолар қолданылған. Кодты, интерфейсті және жоба материалдарын дайындауда Codex қолданылды. YOLO мен MediaPipe модельдері дайын күйінде алынды; команда оларды оқытқан жоқ."
+      },
+      sidereal: {
+        "category": "Музыкалық құралдар",
+        "title": "Шоқжұлдыз сал.\nӘуенін тыңда.",
+        "summary": "Браузердегі музыкалық обсерватория. Жұлдыздың орны нотаның уақыты мен биіктігін анықтайды, ал орбиталық көрсеткіш суретті төрт тактілік композицияға айналдырады.",
+        "alt": "SIDEREAL редакторы: дөңгелек партитура, үш шоқжұлдыз және нота параметрлері",
+        "detailAlt": "Телефон экранындағы SIDEREAL редакторы",
+        "input": "Дөңгелек партитураға жұлдыздар қосып, олардың тембрін таңдаңыз. Дайын үлгіден бастауға немесе бөлек оқу кеңістігінде жаттығуға болады.",
+        "output": "Композицияны браузер атласына сақтауға, JSON не сілтеме арқылы тасымалдауға, PNG картасы немесе бір рет ойнатылып, дыбысы бәсеңдейтін WAV ретінде жүктеп алуға болады.",
+        "decisions": [
+          "SVG жұлдыздарды, тізімді және нақты параметрлерді байланыстырады. Бұрыш — уақыт, радиус — дыбыс биіктігі. Сүйреуге пернетақта мен сандық басқару балама болады.",
+          "Web Audio үш дауысты синтездейді. Дыбыс тек пайдаланушы әрекетінен кейін басталады, көрсеткіш аудио сағатымен жүреді, жасырын бет ойнатуды тоқтатады.",
+          "Оқу нұсқаулығы жеке кеңістікте өтеді. Жергілікті жазбалар мен кіріс партитуралар тексеріледі; сақтау қатесі көрінеді, JSON тасымалына сервер қажет емес."
+        ],
+        "limit": "Төрт такт пен үш дауыс. MIDI, микрофон жазбасы және құрылғылар арасындағы синхрондау жоқ. PNG — композиция картасы, нота дәптері емес; WAV бір айналымды қамтиды. Дыбыс браузер мен құрылғыға байланысты.",
+        "caption": "SIDEREAL дөңгелек партитурасы және таңдалған нотаның параметрлері."
+      },
       perch: {
         category: "КЕҢІСТІК ҚҰРАЛДАРЫ",
         title: "Бір бөлме.\nБірнеше мүмкіндік.",
@@ -564,14 +763,14 @@ export const copy: Record<Locale, Copy> = {
         output:
           "Өңделетін орналасу нұсқалары, сыйымдылық ескертулері, JSON жобасы, өлшемдері бар SVG жоспар, 3D PNG және басып шығаруға арналған бөлме есебі.",
         decisions: [
-          "Бір бөлме моделі SVG жоспар мен түпнұсқа Three.js жиһазын басқарады. Сандық өңдеу, жоспарда сүйреу және 3D таңдау өзара синхрондалады.",
+          "Бір бөлме моделі SVG жоспар мен процедуралық Three.js жиһазын басқарады. Сандық өңдеу, жоспарда сүйреу және 3D таңдау өзара синхрондалады.",
           "Жиһаздың бұрылуы, бөлме шекарасы, төбе биіктігі және ішке ашылатын есіктер ескертулерде ескеріледі. Көшірмелер тәуелсіз; өзгерістерді болдырмауға және қайталауға болады.",
           "Браузердегі жергілікті сақтау қалпына келтіру көшірмесін қамтиды. Сахна қажет кезде салынады; жоспар мен өрістер WebGL болмаса да жұмыс істейді. Толық интерфейс ағылшын, орыс және қазақ тілдерінде қолжетімді.",
         ],
         limit:
           "Тікбұрышты бөлмені жиһаздау нобайы, құрылыс немесе қауіпсіздік құжаты емес. Материалдар мен жарық шартты; ескертулер өту жолдарының талаптарға сай екенін растамайды. Бұлттық синхрондау және бірлескен жұмыс жоқ. Басқа құрылғыға көшу үшін JSON экспорттаңыз.",
         caption:
-          "Жұмыс істейтін студия мен екі орналасу нұсқасының жаңа скриншоттары; жиһаздалған демо бөлме қолданылды.",
+          "Нақты студия мен орналасу нұсқаларын салыстыру; жиһаздалған демо бөлме қолданылды.",
       },
       forme: {
         category: "ВИЗУАЛДЫ БАҒЫТ",
@@ -671,5 +870,5 @@ export function pageHref(
   const base = id
     ? `${nested ? "" : "projects/"}${id}.html`
     : `${nested ? "../" : ""}index.html`;
-  return `${base}${locale === "en" ? "" : `?lang=${locale}`}`;
+  return `${base}?lang=${locale}`;
 }

@@ -51,7 +51,7 @@ test("Static home and case pages expose real work and explicit limitations in ev
   }
 });
 test("Links preserve locale and resolve correctly from home or case directory", () => {
-  assert.equal(pageHref("forme", "en", false), "projects/forme.html");
+  assert.equal(pageHref("forme", "en", false), "projects/forme.html?lang=en");
   assert.equal(pageHref("forme", "ru", true), "forme.html?lang=ru");
   assert.equal(pageHref(null, "kk", true), "../index.html?lang=kk");
 });

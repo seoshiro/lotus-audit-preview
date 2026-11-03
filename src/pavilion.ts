@@ -2,7 +2,9 @@ import * as T from 'three';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 import {environmentInfo} from './environment-info.ts';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {projects,type ProjectId} from './content.ts';
+import {projects,type ProjectId as CurrentProjectId} from './content.ts';
+// Archived pavilion implementation: its eight exhibits predate the lotus release.
+type ProjectId = Exclude<CurrentProjectId, 'iter'|'ayqyn'|'sidereal'>;
 
 export type Exhibit = ProjectId|'about';
 export type View = 'overview'|'objects'|'tools';

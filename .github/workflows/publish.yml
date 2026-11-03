@@ -1,4 +1,4 @@
-name: Verify and publish pinned constellation portfolio
+name: Verify and publish lotus portfolio
 on:
   push:
     branches: [main]
@@ -14,13 +14,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      PORTFOLIO_COMMIT: bdffb0e339ac92eb24a8ea80152a76fc44528d46
+      PORTFOLIO_COMMIT: ${{ github.sha }}
     steps:
       - name: Check out the verified portfolio source
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
-          repository: seoshiro/portfolio-constellation
-          ref: bdffb0e339ac92eb24a8ea80152a76fc44528d46
           persist-credentials: false
       - name: Verify exact source revision
         run: test "$(git rev-parse HEAD)" = "$PORTFOLIO_COMMIT"
@@ -54,6 +52,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - name: Deploy verified pinned portfolio
+      - name: Deploy verified lotus portfolio
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

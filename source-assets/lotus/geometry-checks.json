@@ -1,0 +1,168 @@
+{
+  "topology": [
+    {
+      "name": "Lotus_Petal_0_Ceramic_Silver_Solid",
+      "vertices": 6162,
+      "faces": 6160,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Lotus_Petal_1_Ceramic_Silver_Solid",
+      "vertices": 6162,
+      "faces": 6160,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Lotus_Petal_2_Ceramic_Silver_Solid",
+      "vertices": 6162,
+      "faces": 6160,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Lotus_Petal_3_Ceramic_Silver_Solid",
+      "vertices": 6162,
+      "faces": 6160,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Lotus_Petal_4_Ceramic_Silver_Solid",
+      "vertices": 6162,
+      "faces": 6160,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    }
+  ],
+  "motion_bounds": [
+    {
+      "progress": 0.0,
+      "min_z": 0.10725241899490356,
+      "max_z": 3.1529033184051514,
+      "max_radius": 1.1107741416221861
+    },
+    {
+      "progress": 0.05,
+      "min_z": 0.12640340626239777,
+      "max_z": 3.1770670413970947,
+      "max_radius": 1.1903059128016926
+    },
+    {
+      "progress": 0.1,
+      "min_z": 0.14710915088653564,
+      "max_z": 3.1893715858459473,
+      "max_radius": 1.2713311283328639
+    },
+    {
+      "progress": 0.15,
+      "min_z": 0.16927865147590637,
+      "max_z": 3.1900997161865234,
+      "max_radius": 1.3535742759704603
+    },
+    {
+      "progress": 0.2,
+      "min_z": 0.1928144097328186,
+      "max_z": 3.17932391166687,
+      "max_radius": 1.4368561115411833
+    },
+    {
+      "progress": 0.25,
+      "min_z": 0.21761296689510345,
+      "max_z": 3.156679153442383,
+      "max_radius": 1.5210831165313736
+    },
+    {
+      "progress": 0.3,
+      "min_z": 0.24356523156166077,
+      "max_z": 3.122264862060547,
+      "max_radius": 1.6062359206546517
+    },
+    {
+      "progress": 0.35,
+      "min_z": 0.27055710554122925,
+      "max_z": 3.076246500015259,
+      "max_radius": 1.6925475597381607
+    },
+    {
+      "progress": 0.4,
+      "min_z": 0.2984699308872223,
+      "max_z": 3.018838405609131,
+      "max_radius": 1.7803890987272952
+    },
+    {
+      "progress": 0.45,
+      "min_z": 0.327180951833725,
+      "max_z": 2.9502668380737305,
+      "max_radius": 1.8704387153025046
+    },
+    {
+      "progress": 0.5,
+      "min_z": 0.35042786598205566,
+      "max_z": 2.870833396911621,
+      "max_radius": 1.9638364315032977
+    },
+    {
+      "progress": 0.55,
+      "min_z": 0.3725733757019043,
+      "max_z": 2.7812764644622803,
+      "max_radius": 2.0619063706778133
+    },
+    {
+      "progress": 0.6,
+      "min_z": 0.3947596848011017,
+      "max_z": 2.6819615364074707,
+      "max_radius": 2.166388155165537
+    },
+    {
+      "progress": 0.65,
+      "min_z": 0.4104490876197815,
+      "max_z": 2.5729641914367676,
+      "max_radius": 2.2778911590576194
+    },
+    {
+      "progress": 0.7,
+      "min_z": 0.41498515009880066,
+      "max_z": 2.4547643661499023,
+      "max_radius": 2.3937003612518333
+    },
+    {
+      "progress": 0.75,
+      "min_z": 0.4000146687030792,
+      "max_z": 2.327911376953125,
+      "max_radius": 2.5084648890494874
+    },
+    {
+      "progress": 0.8,
+      "min_z": 0.3672106862068176,
+      "max_z": 2.192941665649414,
+      "max_radius": 2.6196992397308376
+    },
+    {
+      "progress": 0.85,
+      "min_z": 0.3221931457519531,
+      "max_z": 2.0504403114318848,
+      "max_radius": 2.7216134071350124
+    },
+    {
+      "progress": 0.9,
+      "min_z": 0.26825523376464844,
+      "max_z": 1.9010334014892578,
+      "max_radius": 2.8185398865212052
+    },
+    {
+      "progress": 0.95,
+      "min_z": 0.20763397216796875,
+      "max_z": 1.7458436489105225,
+      "max_radius": 2.906547244544707
+    },
+    {
+      "progress": 1.0,
+      "min_z": 0.1418401151895523,
+      "max_z": 1.585374116897583,
+      "max_radius": 2.9839730398305337
+    }
+  ],
+  "glb_bytes": 1592952
+}

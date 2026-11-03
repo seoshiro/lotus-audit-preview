@@ -1,27 +1,61 @@
-# seoshiro / Beibars Ileskhan
+# BEIBARS / LOTUS
 
-The main portfolio is [seoshiro.github.io](https://seoshiro.github.io/). Sources live separately in [portfolio-constellation](https://github.com/seoshiro/portfolio-constellation).
+[Live portfolio](https://seoshiro.github.io/) · [GitHub profile](https://github.com/seoshiro)
 
-## Pinned release — 2026-10-12
+An ivory and graphite portfolio for Beibars Ileskhan, an AI-assisted product creator. A single original mechanical lotus unfolds with normal page scrolling. Five rigid ceramic and silver petals rotate at their base hinges; the same model moves into the selected-work index. Ordinary HTML links provide every route independently of the canvas.
 
-Source: **bdffb0e339ac92eb24a8ea80152a76fc44528d46**. [Exact source verification CI](https://github.com/seoshiro/portfolio-constellation/actions/runs/38287000060). [Root verification and Pages deployment](https://github.com/seoshiro/seoshiro.github.io/actions/workflows/publish.yml). [Live release manifest](https://seoshiro.github.io/version.json).
+The selected projects are **PERCH**, **SELVEDGE**, and **FORME**, using their actual application captures. Eight additional projects remain in the expandable archive. All eleven existing full HTML case URLs and their EN/KK addresses are preserved. Legacy language routes retain translated static content without JavaScript and otherwise continue to an explicit locale URL. The copy distinguishes Beibars's direction, tool integration and visual review from AI-assisted implementation, and acknowledges that independent coding is an ongoing learning process.
 
-The single publish.yml checks out that exact source, repeats verification, builds and publishes static dist through this repository's existing Pages environment. Both ref and PORTFOLIO_COMMIT must match. Historical root files remain available for recovery; separate application repositories and Pages projects are unchanged.
+## Run locally
 
-The editorial release updates the home page, all eleven cases, previews, captions, alternative text and existing metadata in RU/EN/KK. It replaces generic slogans with project actions, identifies GitHub as a profile and retains factual product limits. AYQYN distinguishes human review, local photographic test fixtures and public replay diagrams, with explicit tool attribution. LUMEN describes its current lens-only scene and identifies the preserved earlier screenshot.
+Node 24 is used by the release workflow.
 
-The dark atlas, Manrope/Onest fonts, angular cursor, entry, music, card reveals, media hover, native transitions, typing and exact catalogue return are unchanged. No dependency or source workflow changes. Two browser-test race conditions were isolated: locale selection waits for a rendered control, and the mouse is parked outside the moving map during keyboard/touch assertions. Application behavior and all assertions are unchanged.
+```sh
+npm ci --ignore-scripts
+npm run dev
+```
 
-Lint, TypeScript, 12 unit tests, all 89 browser scenarios, build/artifact checks, 144 additional localized page/viewport checks, actual pixels and independent factual/editorial review passed before pinning. Physical phones, Safari and native Kazakh editorial review were unavailable; mobile/touch coverage uses installed Chrome.
+Production preview and verification:
 
-Only the earlier authorized silent SIDEREAL and ORBIT application demos are public. Portfolio QA screenshots, traces and review recordings stay private outside both repositories.
+```sh
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run preview
+npm run test:browser
+```
 
-## Update and restore
+The preview serves only `dist` on `127.0.0.1:5317`. Install the Playwright Chromium browser for Linux CI; the local Windows configuration uses installed Chrome. No backend, analytics, remote font service, paid generation, or runtime API key is required.
 
-Complete source checks, real browser/pixel inspection and independent audit; commit/push source and verify its exact CI. Update both full SHA fields and this record in one normal root commit, verify root CI/Pages, then live manifest, 40 HTML routes and delivered application/audio/demo hashes.
+## Read the code
 
-For rollback, pin previous source **31f0d821dce2bcaf66af2fd5d72d73bcaac419cf**, published by root **aa944db8c5b5e263daf7d301fc347f4af2056f0f**, through a normal root commit and repeat CI/live verification.
+| File | Responsibility |
+| --- | --- |
+| `src/lotus-copy.ts` | Page copy in RU, EN and KK; three featured project IDs |
+| `src/content.ts` | Real project facts, case narratives, evidence links and image dimensions |
+| `src/render.ts` | Semantic home and complete case-page HTML |
+| `scripts/generate.ts` | Generates readable Russian static pages before bundling |
+| `src/main.ts` | Language preferences, navigation context, active project and progressive enhancement |
+| `src/lotus-scene.ts` | One WebGL scene, model loading, base-hinge transforms, camera, picking and disposal |
+| `src/style.css`, `src/case.css` | Shared materials, responsive layout and case typography |
+| `source-assets/lotus/` | Original Blender source, deterministic scripts and geometry audit |
+| `.github/workflows/publish.yml` | Verifies this exact repository revision, then publishes its artifact to Pages |
 
-The exact original baseline **a06ece34d9a084d529cfa406f22b0436a746ae98** remains at [archive/pre-constellation-2026-10-10](https://github.com/seoshiro/seoshiro.github.io/tree/archive/pre-constellation-2026-10-10), with a verified local Git bundle. Full restoration requires inspecting later changes and normally reverting original rollout **8b84f2a53b69d5e2ac3d9204cd87b184c26915c4**, then verifying its restored publisher and live root. Never force push or delete separate Pages projects.
+Start with the copy and renderer. Then follow `enhance()` in `main.ts` into `startLotus()`. The model contract is documented in [lotus-model.md](docs/lotus-model.md). The normalized scroll progress belongs only to the introductory section; no wheel or touch scrolling is intercepted.
 
-See [catalogue/case behavior](https://github.com/seoshiro/portfolio-constellation/blob/main/docs/CATALOGUE-MOTION.md), [assets](https://github.com/seoshiro/portfolio-constellation/blob/main/docs/ASSETS.md) and [publishing/rollback](https://github.com/seoshiro/portfolio-constellation/blob/main/docs/PUBLISHING.md).
+## Access and recovery
+
+RU/EN/KK switches retain scroll position and project selection; the chosen language is stored locally. Full case navigation stores return context in session storage. The mobile menu supports Escape and returns focus to its button. Reduced motion shortens the introduction and uses still poses. A manual motion control pauses the current unfolding pose.
+
+Text and real project links render before the model. A failed GLB, denied WebGL or lost context leaves the transparent model posters and useful content available. JavaScript-disabled visitors receive the complete static page and native case navigation. No synthetic progress indicator or dependency on a video is used.
+
+## Assets and verification
+
+The original GLB is about 1.52 MiB and has exactly five independently transformable hinges. The editable `.blend`, generator, proof renders and collision audit are versioned outside the deployed public directory. The two 1200px WebP posters total about 62 KB. Cormorant Garamond and IBM Plex Sans are hosted locally with their OFL licenses; the full Latin/Cyrillic/Kazakh glyph coverage was checked. All reference screens were studied as concepts, never embedded in place of an interface.
+
+See [content audit](docs/content-audit-lotus.md), [browser checks](docs/lotus-browser-tests.md), and [release notes](docs/LOTUS-RELEASE.md) for concrete checks and limits. Viewport emulation is not a physical-phone test. Historical design notes remain in `docs`; the Lotus release supersedes the earlier pavilion/constellation presentation.
+
+## Previous version
+
+The pre-Lotus repository revision is preserved at `backup/pre-lotus-2026-11-03` (`4c8a892da5e10de01746821be8e8b648dc5c66ed`) and in a local Git bundle. Its workflow pinned the earlier `portfolio-constellation` source; that separate repository is untouched. Rollback can use a regular revert of the Lotus release commit and the restored workflow, retaining the full history. Do not force-push or delete other repositories.

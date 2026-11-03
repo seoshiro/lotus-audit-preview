@@ -1,0 +1,284 @@
+{
+  "recordedAt": "2026-11-03T20:52:49.019Z",
+  "environment": {
+    "os": "win32 10.0.26200",
+    "node": "v24.18.0",
+    "chrome": "156.0.8078.76",
+    "cpu": "AMD Ryzen 5 7535HS with Radeon Graphics        ",
+    "logicalCpus": 12,
+    "memoryGiB": 15,
+    "headless": true,
+    "target": "http://127.0.0.1:5317",
+    "network": "Unthrottled local loopback; fresh isolated browser context per viewport.",
+    "mobile": "390px viewport emulation only; no physical phone measurement."
+  },
+  "limits": [
+    "Paint and resource timings describe this local Chrome session, not a public network.",
+    "requestAnimationFrame intervals describe callback scheduling during wheel input; they are not verified rendering FPS.",
+    "No Lighthouse score, network throttling, CPU throttling or physical-device claim."
+  ],
+  "measurements": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "navigation": {
+        "ttfbMs": 9.799999952316284,
+        "domInteractiveMs": 55.5,
+        "domContentLoadedMs": 186.5,
+        "loadEventMs": 228.60000002384186,
+        "transferBytes": 17208,
+        "encodedBytes": 16908,
+        "decodedBytes": 16908
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTimeMs": 308
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTimeMs": 308
+        }
+      ],
+      "resources": [
+        {
+          "path": "/assets/modulepreload-polyfill-B5Qt9EMX.js",
+          "type": "script",
+          "durationMs": 12.100000023841858,
+          "transferBytes": 1011,
+          "encodedBytes": 711,
+          "decodedBytes": 711
+        },
+        {
+          "path": "/assets/main-CpiIt92V.js",
+          "type": "script",
+          "durationMs": 15.5,
+          "transferBytes": 106937,
+          "encodedBytes": 106637,
+          "decodedBytes": 106637
+        },
+        {
+          "path": "/assets/style-DS7ItegH.css",
+          "type": "link",
+          "durationMs": 14.5,
+          "transferBytes": 22108,
+          "encodedBytes": 21808,
+          "decodedBytes": 21808
+        },
+        {
+          "path": "/assets/lotus-poster.webp",
+          "type": "img",
+          "durationMs": 14.100000023841858,
+          "transferBytes": 25776,
+          "encodedBytes": 25476,
+          "decodedBytes": 25476
+        },
+        {
+          "path": "/assets/IBMPlexSans-Regular-BiEB_oxT.woff2",
+          "type": "css",
+          "durationMs": 109.69999992847443,
+          "transferBytes": 63320,
+          "encodedBytes": 63020,
+          "decodedBytes": 63020
+        },
+        {
+          "path": "/assets/IBMPlexSans-Medium-BQLKo0ot.woff2",
+          "type": "css",
+          "durationMs": 110.29999995231628,
+          "transferBytes": 67040,
+          "encodedBytes": 66740,
+          "decodedBytes": 66740
+        },
+        {
+          "path": "/assets/CormorantGaramond-CP37eywO.woff2",
+          "type": "css",
+          "durationMs": 112.30000007152557,
+          "transferBytes": 209728,
+          "encodedBytes": 209428,
+          "decodedBytes": 209428
+        },
+        {
+          "path": "/assets/lotus-scene-Dea9oqCi.js",
+          "type": "script",
+          "durationMs": 9.600000023841858,
+          "transferBytes": 628948,
+          "encodedBytes": 628648,
+          "decodedBytes": 628648
+        },
+        {
+          "path": "/assets/perch.webp",
+          "type": "img",
+          "durationMs": 4.100000023841858,
+          "transferBytes": 71630,
+          "encodedBytes": 71330,
+          "decodedBytes": 71330
+        },
+        {
+          "path": "/models/lotus.glb",
+          "type": "fetch",
+          "durationMs": 11.799999952316284,
+          "transferBytes": 1593252,
+          "encodedBytes": 1592952,
+          "decodedBytes": 1592952
+        },
+        {
+          "path": "/favicon.svg",
+          "type": "other",
+          "durationMs": 5.399999976158142,
+          "transferBytes": 704,
+          "encodedBytes": 404,
+          "decodedBytes": 404
+        }
+      ],
+      "resourcesTotalTransferBytes": 2790454,
+      "resourcesTotalEncodedBytes": 2787154,
+      "webglRenderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "scrollCadence": {
+        "callbacks": 298,
+        "sampleDurationMs": 2184.5,
+        "medianIntervalMs": 7,
+        "p95IntervalMs": 13.300000000000182,
+        "longestIntervalMs": 14.199999999999818,
+        "intervalsOver50Ms": 0,
+        "finalSceneProgress": "1.000"
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "navigation": {
+        "ttfbMs": 1.6999999284744263,
+        "domInteractiveMs": 17.899999976158142,
+        "domContentLoadedMs": 114.60000002384186,
+        "loadEventMs": 250.29999995231628,
+        "transferBytes": 17208,
+        "encodedBytes": 16908,
+        "decodedBytes": 16908
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTimeMs": 172
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTimeMs": 172
+        }
+      ],
+      "resources": [
+        {
+          "path": "/assets/modulepreload-polyfill-B5Qt9EMX.js",
+          "type": "script",
+          "durationMs": 10.600000023841858,
+          "transferBytes": 1011,
+          "encodedBytes": 711,
+          "decodedBytes": 711
+        },
+        {
+          "path": "/assets/main-CpiIt92V.js",
+          "type": "script",
+          "durationMs": 13.799999952316284,
+          "transferBytes": 106937,
+          "encodedBytes": 106637,
+          "decodedBytes": 106637
+        },
+        {
+          "path": "/assets/style-DS7ItegH.css",
+          "type": "link",
+          "durationMs": 11.899999976158142,
+          "transferBytes": 22108,
+          "encodedBytes": 21808,
+          "decodedBytes": 21808
+        },
+        {
+          "path": "/assets/lotus-poster.webp",
+          "type": "img",
+          "durationMs": 12,
+          "transferBytes": 25776,
+          "encodedBytes": 25476,
+          "decodedBytes": 25476
+        },
+        {
+          "path": "/assets/IBMPlexSans-Regular-BiEB_oxT.woff2",
+          "type": "css",
+          "durationMs": 79.40000009536743,
+          "transferBytes": 63320,
+          "encodedBytes": 63020,
+          "decodedBytes": 63020
+        },
+        {
+          "path": "/assets/IBMPlexSans-Medium-BQLKo0ot.woff2",
+          "type": "css",
+          "durationMs": 80,
+          "transferBytes": 67040,
+          "encodedBytes": 66740,
+          "decodedBytes": 66740
+        },
+        {
+          "path": "/assets/CormorantGaramond-CP37eywO.woff2",
+          "type": "css",
+          "durationMs": 82.30000007152557,
+          "transferBytes": 209728,
+          "encodedBytes": 209428,
+          "decodedBytes": 209428
+        },
+        {
+          "path": "/assets/lotus-scene-Dea9oqCi.js",
+          "type": "script",
+          "durationMs": 10.899999976158142,
+          "transferBytes": 628948,
+          "encodedBytes": 628648,
+          "decodedBytes": 628648
+        },
+        {
+          "path": "/assets/lotus-open.webp",
+          "type": "img",
+          "durationMs": 10.5,
+          "transferBytes": 37262,
+          "encodedBytes": 36962,
+          "decodedBytes": 36962
+        },
+        {
+          "path": "/models/lotus.glb",
+          "type": "fetch",
+          "durationMs": 8.599999904632568,
+          "transferBytes": 1593252,
+          "encodedBytes": 1592952,
+          "decodedBytes": 1592952
+        },
+        {
+          "path": "/assets/perch.webp",
+          "type": "img",
+          "durationMs": 3.1999999284744263,
+          "transferBytes": 71630,
+          "encodedBytes": 71330,
+          "decodedBytes": 71330
+        },
+        {
+          "path": "/favicon.svg",
+          "type": "other",
+          "durationMs": 2.5,
+          "transferBytes": 704,
+          "encodedBytes": 404,
+          "decodedBytes": 404
+        }
+      ],
+      "resourcesTotalTransferBytes": 2827716,
+      "resourcesTotalEncodedBytes": 2824116,
+      "webglRenderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "scrollCadence": {
+        "callbacks": 310,
+        "sampleDurationMs": 2156.6,
+        "medianIntervalMs": 7,
+        "p95IntervalMs": 7.400000000000091,
+        "longestIntervalMs": 14.199999999999989,
+        "intervalsOver50Ms": 0,
+        "finalSceneProgress": "1.000"
+      }
+    }
+  ]
+}

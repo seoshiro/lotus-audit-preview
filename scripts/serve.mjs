@@ -4,6 +4,8 @@ import { resolve, extname, sep } from "node:path";
 const root = resolve("dist");
 const types = {
   ".json": "application/json",
+  ".glb": "model/gltf-binary",
+  ".png": "image/png",
   ".xml": "application/xml",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -31,7 +33,7 @@ createServer(async (req, res) => {
       "X-Content-Type-Options": "nosniff",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Content-Security-Policy":
-        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
     });
     res.end(data);
   } catch {

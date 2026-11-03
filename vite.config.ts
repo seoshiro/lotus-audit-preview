@@ -1,21 +1,12 @@
 import { defineConfig } from "vite";
 import { resolve } from "node:path";
+import { allPages } from './scripts/page-manifest.ts';
 export default defineConfig({
   base: "./",
   build: {
     target: "es2022",
     rollupOptions: {
-      input: {
-        home: resolve("index.html"),
-        orbit: resolve("projects/orbit.html"),
-        reson: resolve("projects/reson.html"),
-        lumen: resolve("projects/lumen.html"),
-        perch: resolve("projects/perch.html"),
-        forme: resolve("projects/forme.html"),
-        selvedge: resolve("projects/selvedge.html"),
-        guidecheck: resolve("projects/guidecheck.html"),
-        archiveguard: resolve("projects/archiveguard.html"),
-      },
+      input: Object.fromEntries(allPages.map(file => [file.replace(/[/.]/g, '_'), resolve(file)])),
     },
   },
 });
