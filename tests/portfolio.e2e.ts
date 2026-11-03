@@ -220,8 +220,9 @@ test("Work anchor bypasses the scene and project links drive a clear active sele
   await expect(page.locator("#work-title")).toBeInViewport();
 });
 
-test("Visible lotus petals select real projects through pointer raycasting", async ({ page }) => {
-  await page.setViewportSize(sizes[0]);
+for (const size of [sizes[0], { width: 1536, height: 776 }]) {
+test("Visible lotus petals select real projects through pointer raycasting at " + size.width + "×" + size.height, async ({ page }) => {
+  await page.setViewportSize(size);
   await openHome(page);
   await page.locator(".explore-link").click();
   await expect(page.locator("#work-title")).toBeInViewport();
@@ -230,11 +231,19 @@ test("Visible lotus petals select real projects through pointer raycasting", asy
   const viewport = page.locator(".lotus-viewport");
   const canvas = viewport.locator("canvas");
   const picked = new Set<string>();
+  let dragCancelled = false;
   for (let selection = 0; selection < 2; selection++) {
     await expect(canvas).toBeVisible();
     await expect(canvas).toBeInViewport();
     const box = (await canvas.boundingBox())!;
     const screen = page.viewportSize()!;
+    if (size.height < 820) {
+      const header = (await page.locator(".header").boundingBox())!;
+      const index = (await page.locator(".work-index").boundingBox())!;
+      expect(box.y).toBeGreaterThanOrEqual(header.y + header.height - 1);
+      expect(box.y + box.height).toBeLessThanOrEqual(size.height + 1);
+      expect(index.y + index.height).toBeLessThanOrEqual(size.height + 1);
+    }
     const visible = {
       left: Math.max(0, box.x),
       top: Math.max(0, box.y),
@@ -269,6 +278,16 @@ test("Visible lotus petals select real projects through pointer raycasting", asy
     }
     expect(hit, "Two distinct project petals must be reachable in the visible model.").not.toBeNull();
     await expect(canvas).toHaveCSS("cursor", "pointer");
+    const before = await body(page).getAttribute("data-active-project");
+    if (!dragCancelled && hit!.project !== before) {
+      await page.mouse.move(hit!.x, hit!.y);
+      await page.mouse.down();
+      await page.mouse.move(hit!.x + 16, hit!.y, { steps: 4 });
+      await page.mouse.up();
+      await settled(page);
+      await expect(body(page)).toHaveAttribute("data-active-project", before!);
+      dragCancelled = true;
+    }
     await page.mouse.click(hit!.x, hit!.y);
     await expect(body(page)).toHaveAttribute("data-active-project", hit!.project);
     await expect(page.locator('[data-select="' + hit!.project + '"]')).toHaveAttribute("aria-current", "true");
@@ -278,8 +297,10 @@ test("Visible lotus petals select real projects through pointer raycasting", asy
     picked.add(hit!.project);
   }
   expect(picked.size).toBe(2);
-  await screenshot(page, "petal-picking");
+  expect(dragCancelled).toBe(true);
+  await screenshot(page, size.height < 820 ? "petal-picking-short-wide" : "petal-picking");
 });
+}
 
 test("Full case and browser Back restore portfolio position and active project", async ({ page }) => {
   await openHome(page, "ru");

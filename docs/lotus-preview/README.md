@@ -14,6 +14,8 @@ Actual Chrome captures of the integrated site, with the live WebGL model and rea
 
 [Desktop scroll recording](lotus-1440x900.webm) · [Phone viewport recording](lotus-390x844.webm) · [Actual petal selection](petal-picking.png)
 
+[Short-window RU view](work-1536x776-ru.png) · [Short-window KK view](work-1440x768-kk.png) · [Short-window pointer selection](petal-picking-short-wide.png) · [Six layout and selection checks](short-wide-verification.json)
+
 [Browser checks and limits](../lotus-browser-tests.md) · [Local performance observations](performance.json) · [Editable model documentation](../lotus-model.md)
 
 The recordings include forward and reverse scrolling and project selection. Phone views are emulated Chrome viewports. Local performance measurements are not physical-device FPS, network benchmarks or a Lighthouse score. All generation and rendering used free local tools; service-credit expenditure was zero.

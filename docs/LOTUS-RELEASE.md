@@ -16,6 +16,8 @@ Local lint, TypeScript, nine content/transition tests, production build, all 40 
 
 The model audit checked watertight petals and no petal-petal triangle intersections in 63 sampled synchronous/staggered states. Hardware has intentional assembled overlap; this is an artistic mechanism. Browser checks additionally verify actual petal picking, not only the text navigation.
 
+Final live visual review exposed clipping on short desktop windows and a fractional-coordinate petal-edge mismatch. The accepted refinement fits the complete index at 1536 × 776 and 1440 × 768, removes the duplicate anchor offset, and uses a precision-preserving pointer gesture with drag/scroll cancellation. Six localized short-window checks and the full 31-test local browser suite pass. The earlier full release remains in history at `68f79d95d897fdcf0c74727214bfb2e1fde69ab4`.
+
 The final CI checks this repository's exact workflow revision and deploys only its verified `dist` artifact. The live `/version.json` and `portfolio-build` meta tag identify the published source revision. A successful local build alone is not a claim that Pages has deployed; the handoff reports the actual workflow/deployment status.
 
 ## Assets and measured limits

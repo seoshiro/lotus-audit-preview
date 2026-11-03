@@ -1,0 +1,1158 @@
+{
+  "target": "http://127.0.0.1:5317",
+  "recordedAt": "2026-11-03T21:24:36.643Z",
+  "phase": "local",
+  "scope": "Installed headless Chrome; desktop viewport checks only.",
+  "cases": [
+    {
+      "viewport": {
+        "width": 1536,
+        "height": 776
+      },
+      "locale": "ru",
+      "bounds": [
+        {
+          "label": "work anchor",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 129.59375,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 443.296875,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 443.296875,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 109.59375,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 423.296875,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 423.296875,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 3 / perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 109.59375,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 423.296875,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 423.296875,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 2 / forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 4 / selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 516.171875
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 413.703125,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        }
+      ],
+      "indexNavigation": [
+        "perch",
+        "selvedge",
+        "forme"
+      ],
+      "petalSelections": [
+        {
+          "x": 261.771875,
+          "y": 476.1671875,
+          "petal": 3,
+          "project": "perch"
+        },
+        {
+          "x": 352.871875,
+          "y": 503.6078125,
+          "petal": 2,
+          "project": "forme"
+        },
+        {
+          "x": 216.22187499999998,
+          "y": 511.8609375,
+          "petal": 4,
+          "project": "selvedge"
+        }
+      ],
+      "errors": [],
+      "status": "passed",
+      "screenshot": "work-1536x776-ru.png"
+    },
+    {
+      "viewport": {
+        "width": 1536,
+        "height": 776
+      },
+      "locale": "en",
+      "bounds": [
+        {
+          "label": "work anchor",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 129.59375,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 423.5,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 423.5,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 109.59375,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 3 / perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 109.59375,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 2 / forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 4 / selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        }
+      ],
+      "indexNavigation": [
+        "perch",
+        "selvedge",
+        "forme"
+      ],
+      "petalSelections": [
+        {
+          "x": 261.771875,
+          "y": 456.3703125,
+          "petal": 3,
+          "project": "perch"
+        },
+        {
+          "x": 352.871875,
+          "y": 483.8109375,
+          "petal": 2,
+          "project": "forme"
+        },
+        {
+          "x": 216.22187499999998,
+          "y": 492.0640625,
+          "petal": 4,
+          "project": "selvedge"
+        }
+      ],
+      "errors": [],
+      "status": "passed",
+      "screenshot": "work-1536x776-en.png"
+    },
+    {
+      "viewport": {
+        "width": 1536,
+        "height": 776
+      },
+      "locale": "kk",
+      "bounds": [
+        {
+          "label": "work anchor",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 129.59375,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 423.5,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 423.5,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 109.59375,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "index forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 3 / perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 109.59375,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 403.5,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 2 / forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        },
+        {
+          "label": "petal 4 / selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 76.796875,
+            "y": 100,
+            "width": 415.5,
+            "height": 496.375
+          },
+          ".work-model-anchor": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          },
+          ".lotus-viewport canvas": {
+            "x": 56.796875,
+            "y": 393.90625,
+            "width": 455.5,
+            "height": 178.46875
+          }
+        }
+      ],
+      "indexNavigation": [
+        "perch",
+        "selvedge",
+        "forme"
+      ],
+      "petalSelections": [
+        {
+          "x": 261.771875,
+          "y": 456.3703125,
+          "petal": 3,
+          "project": "perch"
+        },
+        {
+          "x": 352.871875,
+          "y": 483.8109375,
+          "petal": 2,
+          "project": "forme"
+        },
+        {
+          "x": 216.22187499999998,
+          "y": 492.0640625,
+          "petal": 4,
+          "project": "selvedge"
+        }
+      ],
+      "errors": [],
+      "status": "passed",
+      "screenshot": "work-1536x776-kk.png"
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 768
+      },
+      "locale": "ru",
+      "bounds": [
+        {
+          "label": "work anchor",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 129.796875,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 494.921875,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 494.921875,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 109.796875,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 474.921875,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 474.921875,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 3 / perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 109.796875,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 474.921875,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 474.921875,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 2 / forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 4 / selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 565.75
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 465.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        }
+      ],
+      "indexNavigation": [
+        "perch",
+        "selvedge",
+        "forme"
+      ],
+      "petalSelections": [
+        {
+          "x": 245.2890625,
+          "y": 526.94375,
+          "petal": 3,
+          "project": "perch"
+        },
+        {
+          "x": 331.1953125,
+          "y": 554.403125,
+          "petal": 2,
+          "project": "forme"
+        },
+        {
+          "x": 202.3359375,
+          "y": 562.26875,
+          "petal": 4,
+          "project": "selvedge"
+        }
+      ],
+      "errors": [],
+      "status": "passed",
+      "screenshot": "work-1440x768-ru.png"
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 768
+      },
+      "locale": "en",
+      "bounds": [
+        {
+          "label": "work anchor",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 129.796875,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 423.15625,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 423.15625,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 109.796875,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 403.15625,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 403.15625,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 3 / perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 109.796875,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 403.15625,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 403.15625,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 2 / forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 4 / selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 493.984375
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 393.359375,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        }
+      ],
+      "indexNavigation": [
+        "perch",
+        "selvedge",
+        "forme"
+      ],
+      "petalSelections": [
+        {
+          "x": 245.2890625,
+          "y": 455.178125,
+          "petal": 3,
+          "project": "perch"
+        },
+        {
+          "x": 331.1953125,
+          "y": 482.6375,
+          "petal": 2,
+          "project": "forme"
+        },
+        {
+          "x": 202.3359375,
+          "y": 490.503125,
+          "petal": 4,
+          "project": "selvedge"
+        }
+      ],
+      "errors": [],
+      "status": "passed",
+      "screenshot": "work-1440x768-en.png"
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 768
+      },
+      "locale": "kk",
+      "bounds": [
+        {
+          "label": "work anchor",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 129.796875,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 475.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 475.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 109.796875,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 455.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 455.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "index forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 3 / perch",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 109.796875,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 455.125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 455.125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 2 / forme",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        },
+        {
+          "label": "petal 4 / selvedge",
+          "headerBottom": 94,
+          ".work-index": {
+            "x": 72,
+            "y": 100,
+            "width": 389.53125,
+            "height": 545.953125
+          },
+          ".work-model-anchor": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          },
+          ".lotus-viewport canvas": {
+            "x": 52,
+            "y": 445.328125,
+            "width": 429.53125,
+            "height": 176.625
+          }
+        }
+      ],
+      "indexNavigation": [
+        "perch",
+        "selvedge",
+        "forme"
+      ],
+      "petalSelections": [
+        {
+          "x": 245.2890625,
+          "y": 507.146875,
+          "petal": 3,
+          "project": "perch"
+        },
+        {
+          "x": 331.1953125,
+          "y": 534.60625,
+          "petal": 2,
+          "project": "forme"
+        },
+        {
+          "x": 202.3359375,
+          "y": 542.471875,
+          "petal": 4,
+          "project": "selvedge"
+        }
+      ],
+      "errors": [],
+      "status": "passed",
+      "screenshot": "work-1440x768-kk.png"
+    }
+  ],
+  "baseCommit": "68f79d95d897fdcf0c74727214bfb2e1fde69ab4",
+  "sourceCSSSHA256": "f41969794c721c93f134bec5285913c04325904f3d52fed8090f8c09f721f7e1",
+  "chrome": "156.0.8078.76",
+  "status": "passed"
+}

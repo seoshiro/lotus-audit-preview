@@ -13,3 +13,5 @@
 
 .hero-ghost:before{content:"BEIBARS"}.phase-copy{color:#000}.phase-copy>p:not(.eyebrow){color:inherit}.unfold-sticky.is-dark .phase-copy{color:#fff}
 .legal-page .case-header{max-width:1080px;margin:auto}.legal-page .case-header>p,.legal-page .case-header>nav{margin-top:24px}.legal-page .case-header h1{font-size:clamp(52px,7vw,100px);max-width:14ch}.legal-page .case-header h2{font-size:38px;margin-top:48px}.legal-page .case-header a{text-decoration:underline;text-underline-offset:5px}
+@media(min-width:1101px) and (max-height:820px){.work-index{top:100px}.work-heading{margin-bottom:14px}.work-heading h2{font-size:clamp(44px,7.2vh,58px)}.work-index nav a{min-height:48px;font-size:19px}.work-model-anchor{height:clamp(110px,23vh,180px);margin-top:10px}.lotus-hint{font-size:10px}}
+.featured-project{scroll-margin-top:0}

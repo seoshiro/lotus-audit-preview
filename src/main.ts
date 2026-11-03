@@ -34,8 +34,10 @@ function activateProject(next:string){
 }
 function syncActiveProject(){
   if(selectionIntent){
-    const target=document.getElementById(`project-${selectionIntent.id}`)?.getBoundingClientRect();
-    if(target&&Math.abs(target.top-230)<12)selectionIntent=null;
+    const element=document.getElementById(`project-${selectionIntent.id}`);
+    const target=element?.getBoundingClientRect();
+    const offset=(parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0)+(element?parseFloat(getComputedStyle(element).scrollMarginTop)||0:0);
+    if(target&&Math.abs(target.top-offset)<12)selectionIntent=null;
     else if(performance.now()<selectionIntent.until)return;
     else selectionIntent=null;
   }

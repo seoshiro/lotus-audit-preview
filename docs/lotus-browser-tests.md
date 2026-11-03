@@ -48,7 +48,9 @@ Native browser zoom at 200% has not been verified by this suite. The suite check
 
 ## Current result
 
-The final corrected-build run passed **30 of 30 browser tests, with zero skips, in 2.1 minutes** on 3 November 2026 UTC. It includes all 33 canonical localized case routes, all 33 narrow-screen case checks, 22 enhanced legacy case redirects, and all 24 legacy locale pages without JavaScript. Both real petal selection and keyboard index activation passed. The required screenshots and both WebM recordings were refreshed from this build after scroll settlement.
+The final corrected-build run passed **31 of 31 browser tests, with zero skips, in 2.3 minutes** on 3 November 2026 UTC. It includes all 33 canonical localized case routes, all 33 narrow-screen case checks, 22 enhanced legacy case redirects, and all 24 legacy locale pages without JavaScript. Both real petal selection and keyboard index activation passed. The required screenshots and both WebM recordings were refreshed from this build after scroll settlement.
+
+The final refinement also passed six dedicated short-window checks: 1536 × 776 and 1440 × 768 in RU/EN/KK. Each checks the complete index and canvas within the viewport, all three text selections, and all three mapped project selections through real petal raycasting. The original fractional edge coordinate that exposed the click mismatch now passes without changing the hit coordinate. Pointer down/up retains that precision and cancels drags or scrolling; the 31-test suite checks drag cancellation at both 1440 × 900 and 1536 × 776. The layout correction avoids clipping and removes the duplicate project-anchor offset. Raw bounds and selections are retained in `docs/lotus-preview/short-wide-verification.json`.
 
 Test definitions and the measurement script passed targeted ESLint and full TypeScript checking. All three transition unit tests passed. The earlier two interaction regression traces remain under `evidence/lotus/regressions/`; no test assertions were removed to accept those failures.
 
@@ -58,7 +60,7 @@ After the full suite finished, `node scripts/measure-lotus.mjs` ran by itself ag
 
 | Viewport | First contentful paint | Load event end | Initial subresource transfer | rAF interval median / p95 | Longest observed interval |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 1440 × 900 | 308 ms | 228.6 ms | 2,790,454 bytes | 7.0 / 13.3 ms | 14.2 ms |
-| 390 × 844 | 172 ms | 250.3 ms | 2,827,716 bytes | 7.0 / 7.4 ms | 14.2 ms |
+| 1440 × 900 | 308 ms | 1085.8 ms | 2,791,315 bytes | 7.0 / 7.8 ms | 14.0 ms |
+| 390 × 844 | 164 ms | 253.9 ms | 2,828,577 bytes | 7.0 / 7.4 ms | 13.9 ms |
 
-The HTML navigation transfer was an additional 17,208 bytes for each viewport. Scroll sampling lasted about 2.2 seconds per viewport, with 298 and 310 rAF callbacks respectively, ending at scene progress 1.000. Neither sample contained a callback interval over 50 ms. These are single-session scheduling observations, not rendered FPS, a Lighthouse score, a guarantee of smoothness on other hardware, or evidence of public-network load speed. Raw navigation, paint, per-resource, GPU, and cadence values are retained in `evidence/lotus/performance.json`.
+The HTML navigation transfer was an additional 17,208 bytes for each viewport. Scroll sampling lasted about 2.2 seconds per viewport, with 299 and 305 rAF callbacks respectively, ending at scene progress 1.000. Neither sample contained a callback interval over 50 ms. These are single-session scheduling observations, not rendered FPS, a Lighthouse score, a guarantee of smoothness on other hardware, or evidence of public-network load speed. Raw navigation, paint, per-resource, GPU, and cadence values are retained in `docs/lotus-preview/performance.json`.

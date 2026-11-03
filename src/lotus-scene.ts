@@ -30,6 +30,7 @@ export async function startLotus(onSelect:(project:string)=>void):Promise<LotusS
   const group=new THREE.Group();scene.add(group);
   let disposed=false,contextLost=false,frame=0,progress=0,moving=true,frozenProgress=0,active='perch',hover=-1;
   let px=0,py=0,width=0,height=0,framesLeft=1;
+  let press:{pointer:number;petal:number;x:number;y:number;scroll:number}|null=null;
   const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
   let gltf;
   try{gltf=await new GLTFLoader().loadAsync(new URL('models/lotus.glb',window.location.href).href);}catch{environment.dispose();pmrem.dispose();renderer.dispose();renderer.forceContextLoss();return null;}
@@ -78,8 +79,12 @@ export async function startLotus(onSelect:(project:string)=>void):Promise<LotusS
   function request(){if(disposed)return;framesLeft=2;if(!frame)frame=requestAnimationFrame(draw);}
   function pick(e:PointerEvent){const rect=canvas.getBoundingClientRect();pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);ray.setFromCamera(pointer,camera);const hit=ray.intersectObjects(petals.flat(),false)[0];return typeof hit?.object.userData.petal==='number'?hit.object.userData.petal as number:-1;}
   canvas.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const rect=canvas.getBoundingClientRect();px=(e.clientX-rect.left)/rect.width-.5;py=(e.clientY-rect.top)/rect.height-.5;hover=pick(e);viewport.dataset.hoveredPetal=String(hover);canvas.style.cursor=progress>.75&&hover>=0?'pointer':'default';request();},{signal});
-  canvas.addEventListener('pointerleave',()=>{px=0;py=0;hover=-1;viewport.dataset.hoveredPetal='-1';request();},{signal});
-  canvas.addEventListener('click',e=>{if(progress<.75)return;const petal=pick(e as PointerEvent);if(petal>=0)onSelect(selectedIds[petal%3]);},{signal});
+  canvas.addEventListener('pointerleave',()=>{press=null;px=0;py=0;hover=-1;viewport.dataset.hoveredPetal='-1';request();},{signal});
+  // Native click coordinates may be floored while pointer coordinates retain
+  // fractions. Raycast the original pointer gesture so highlighted edges agree.
+  canvas.addEventListener('pointerdown',e=>{press=e.isPrimary&&e.button===0&&progress>=.75?{pointer:e.pointerId,petal:pick(e),x:e.clientX,y:e.clientY,scroll:window.scrollY}:null;},{signal});
+  canvas.addEventListener('pointerup',e=>{const start=press;press=null;if(!start||start.pointer!==e.pointerId||start.petal<0||Math.hypot(e.clientX-start.x,e.clientY-start.y)>8||Math.abs(window.scrollY-start.scroll)>8)return;if(pick(e)===start.petal)onSelect(selectedIds[start.petal%3]);},{signal});
+  canvas.addEventListener('pointercancel',()=>{press=null;},{signal});
   canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();contextLost=true;hideFallback();},{signal});
   document.addEventListener('visibilitychange',request,{signal});window.addEventListener('resize',request,{signal});
   request();
