@@ -41,6 +41,8 @@ boundary = [e for e in bm.edges if e.is_boundary]
 if boundary: bmesh.ops.holes_fill(bm, edges=boundary, sides=0)
 print('REMAINING_BOUNDARIES', [[list(v.co) for v in e.verts] for e in bm.edges if e.is_boundary])
 bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+for _ in range(5):
+    bmesh.ops.smooth_vert(bm,verts=list(bm.verts),factor=.28,use_axis_x=True,use_axis_y=True,use_axis_z=True)
 bm.to_mesh(master.data); bm.free(); master.data.update()
 profile_points=[v.co.copy() for v in master.data.vertices]
 if MOBILE:
@@ -48,13 +50,20 @@ if MOBILE:
     bpy.context.view_layer.objects.active=master
     bpy.ops.object.modifier_apply(modifier=modifier.name)
 source_points = [v.co.copy() for v in master.data.vertices]
+# Preserve the generated curvature while compressing the actual shell thickness.
+source_tree=BVHTree.FromPolygons(source_points,[list(p.vertices) for p in master.data.polygons],all_triangles=False)
+mid_surfaces=[]
+for p in source_points:
+    upper=source_tree.ray_cast(Vector((p.x*.997,p.y*.997,4)),Vector((0,0,-1)),8)[0]
+    lower=source_tree.ray_cast(Vector((p.x*.997,p.y*.997,-4)),Vector((0,0,1)),8)[0]
+    mid_surfaces.append((upper.z+lower.z)/2 if upper is not None and lower is not None else p.z)
 
 def clamp(x, a=0, b=1): return min(b, max(a, x))
 def smooth(a,b,x):
     s = clamp((x-a)/(b-a)); return s*s*(3-2*s)
 def linear(v): return v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4
 def color(hexcode): return tuple(linear(int(hexcode[i:i+2],16)/255) for i in (0,2,4))
-MILK, PINK, SAGE = color('F4EDE1'), color('C6828B'), color('AAA785')
+MILK, PINK, SAGE = color('FFF7E8'), color('D49EAA'), color('AAA977')
 
 # The imported Blender axis runs from the blunt base (-Y) to the raised tip (+Y).
 profiles = []
@@ -70,10 +79,12 @@ def profile(t):
 
 petal_mat = bpy.data.materials.new('Soft ivory petal with blush edge'); petal_mat.use_nodes=True
 shader = petal_mat.node_tree.nodes.get('Principled BSDF')
-shader.inputs['Roughness'].default_value=.87
+shader.inputs['Roughness'].default_value=.62
 shader.inputs['Metallic'].default_value=0
 shader.inputs['Coat Weight'].default_value=0
-shader.inputs['Specular IOR Level'].default_value=.2
+shader.inputs['Specular IOR Level'].default_value=.28
+shader.inputs['Subsurface Weight'].default_value=.16
+shader.inputs['Subsurface Radius'].default_value=(.24,.12,.06)
 vertex = petal_mat.node_tree.nodes.new('ShaderNodeVertexColor'); vertex.layer_name='PetalColor'
 petal_mat.node_tree.links.new(vertex.outputs['Color'],shader.inputs['Base Color'])
 
@@ -91,19 +102,23 @@ for index,(name,angle,width_var,length_var) in enumerate(specs):
     obj.parent=root; mesh.materials.clear(); mesh.materials.append(petal_mat)
     rotate=Matrix.Rotation(math.radians(angle),4,'Z')
     closed=[]; opened=[]; focused=[]; colors=[]
-    for p in source_points:
+    for p,mid_z in zip(source_points,mid_surfaces):
         t=clamp(p.y+.5); half,center_z=profile(t)
         u=clamp(p.x/max(half,.015),-1,1)
         # Keep the actual source's concavity and edge, with a tapered shared base.
-        r=.12+2.95*t*length_var
+        r=.055+3.08*t*length_var
         # Smooth the width cap so the silhouette stays rounded, not wedge-like.
         natural=3.25*width_var
         limit=r*math.tan(math.radians(35))*.98/max(half,.015)
         breadth=(natural**-6+limit**-6)**(-1/6)
-        x=p.x*breadth
-        lift=(.55,.15,.7,1.75,1.55)[index]
-        z=.18+.65*math.sin(math.pi*t*.5)+2.0*(p.z+.3-.64*t)+lift*t**1.8
-        z+=.035*math.sin(math.pi*t)*math.sin(index*1.7+u*1.2)
+        x=p.x*breadth*(1+.035*math.sin(index*2.1+t*2.8)*u)
+        thickness=(.25*(1-t)**1.4+.07)*(1-.65*abs(u)**3)
+        curvature=(mid_z+.3-.64*t)*(1-.92*smooth(.88,1,t))
+        shell_z=curvature+(p.z-mid_z)*thickness
+        lift=(.55,.10,.82,1.48,1.23)[index]
+        z=.14+.51*math.sin(math.pi*t*.5)+1.22*shell_z+lift*t**2.1
+        z+=.075*math.sin(math.pi*t)*math.sin(index*1.7+u*1.8)
+        z+=.045*math.sin(t*7+index)*abs(u)**3*math.sin(math.pi*t)
         opened.append(rotate@Vector((x,-r,z)))
         # Bend the same surface into a bud. This changes curvature across the
         # petal instead of rotating it as a rigid hinged shell.
@@ -113,8 +128,8 @@ for index,(name,angle,width_var,length_var) in enumerate(specs):
         closed.append(rotate@Vector((math.sin(theta)*radius,-math.cos(theta)*radius,.02+3.15*t+.018*index*t)))
         focused.append(closed[-1]+rotate@Vector((x*.06,-.30*t,.18*math.sin(math.pi*t*.7))))
         vein=.035*(.5+.5*math.cos(u*25+t*4))**12*math.sin(math.pi*t)
-        pink=clamp(.53*smooth(.64,1,t)+.32*abs(u)**5+vein)
-        sage=.38*(1-t)**2.5
+        pink=clamp(.24*smooth(.72,1,t)+.18*abs(u)**6+vein*.5)
+        sage=.25*(1-t)**3.5
         colors.append(tuple(MILK[k]*(1-pink-sage)+PINK[k]*pink+SAGE[k]*sage for k in range(3))+(1,))
     for v,point in zip(mesh.vertices,closed): v.co=point
     mesh.update()
@@ -124,12 +139,16 @@ for index,(name,angle,width_var,length_var) in enumerate(specs):
     for v,point in zip(focus.data,focused): v.co=point
     color_layer=mesh.color_attributes.new(name='PetalColor',type='FLOAT_COLOR',domain='POINT')
     for v,c in zip(color_layer.data,colors): v.color=c
+    optics=mesh.uv_layers.new(name='PetalOptics')
+    for loop in mesh.loops:
+        original=source_points[loop.vertex_index]; t=clamp(original.y+.5); half,_=profile(t)
+        optics.data[loop.index].uv=(t,clamp(abs(original.x)/max(half,.015)))
     for p in mesh.polygons: p.use_smooth=True
     if mesh.has_custom_normals: mesh.normals_split_custom_set([(0,0,0)]*len(mesh.loops))
     obj['semantic_id']=name; obj['source_geometry']='approved Tripo master petal'
     petals.append(obj); parts.append(obj)
     anchor=bpy.data.objects.new('Anchor_'+name,None); bpy.context.collection.objects.link(anchor); anchor.parent=root
-    anchor.location=rotate@Vector((0,-2.12*length_var,.9+(.55,.15,.7,1.75,1.55)[index]*.7))
+    anchor.location=rotate@Vector((0,-2.20*length_var,.72+(.55,.10,.82,1.48,1.23)[index]*.7))
     closed_anchor=rotate@Vector((0,-.98,1.95))
     anchor['closed_position_yup']=[closed_anchor.x,closed_anchor.z,-closed_anchor.y]
     anchor['selection_turn_degrees']=-38-angle
@@ -147,7 +166,7 @@ def sphere(name,loc,scale,material,segments=16,rings=8):
     o=bpy.context.object;o.name=name;o.scale=scale;o.data.materials.append(material)
     for p in o.data.polygons:p.use_smooth=True
     center_parts.append(o);return o
-sphere('Organic center',(0,0,.23),(.25,.25,.12),center_mat,24,12)
+sphere('Organic center',(0,0,.14),(.27,.27,.14),center_mat,24,12)
 for i in range(18):
     angle=i*math.tau/18; r=.2+.06*math.sin(i*2.7)
     base=Vector((r*math.cos(angle)*.6,r*math.sin(angle)*.6,.24))
@@ -199,6 +218,16 @@ for active in range(5):
             trees.append(BVHTree.FromPolygons(coords,[list(p.vertices) for p in o.data.polygons],all_triangles=False))
         hits=[{'pair':[specs[i][0],specs[j][0]],'triangle_pairs':len(trees[i].overlap(trees[j]))} for i in range(5) for j in range(i+1,5) if trees[i].overlap(trees[j])]
         audit['focus_poses'].append({'active':specs[active][0],'focus':focus_value,'intersections':hits})
+pose(1)
+decor_mesh=bpy.data.meshes.new_from_object(petals[0].evaluated_get(bpy.context.evaluated_depsgraph_get()))
+decor=bpy.data.objects.new('Decor_Petal',decor_mesh);bpy.context.collection.objects.link(decor);decor.parent=root
+bpy.context.view_layer.objects.active=decor
+modifier=decor.modifiers.new('Small falling petal surface','DECIMATE');modifier.ratio=.17 if MOBILE else .075
+bpy.ops.object.modifier_apply(modifier=modifier.name)
+decor_center=sum((Vector(corner) for corner in decor.bound_box),Vector())/8
+for vertex in decor.data.vertices:vertex.co-=decor_center
+decor.hide_render=True;decor['purpose']='Small independent decorative source; never a navigation petal'
+parts.append(decor)
 pose(0)
 bpy.ops.object.select_all(action='DESELECT')
 for o in parts:o.select_set(True)

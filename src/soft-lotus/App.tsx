@@ -82,10 +82,21 @@ export function App() {
   const labels = useRef<HTMLElement>(null);
   const runtime = useRef<SceneRuntime | null>(null);
   const preview = useRef<HTMLElement>(null);
+  const petalOrigin = useRef<{ image: DOMRect; title: DOMRect } | null>(null);
   const navigation = useRef<(event: SceneEvent, replace?: boolean) => void>(() => {});
   const c = copy[state.locale], s = sceneCopy[state.locale];
   const activeProject = isFeatured(state.active) ? projects.find(p => p.id === state.active)! : null;
   const activeCopy = activeProject ? c.project[activeProject.id] : null;
+
+  useEffect(() => {
+    if (state.model !== 'ready') return;
+    // Decode the three real product previews during the opening, without
+    // delaying model readiness or fetching any case/detail image.
+    for (const id of ['perch','selvedge','forme']) {
+      const image = new Image(); image.decoding = 'async'; image.fetchPriority = 'low'; image.src = `assets/${id}.webp`;
+      void image.decode().catch(() => { /* The visible image retains its thumbnail background. */ });
+    }
+  }, [state.model]);
 
   function navigate(event: SceneEvent, replace = false) {
     const next = sceneReducer(current.current, event);
@@ -112,7 +123,14 @@ export function App() {
     const visible = petal && petal.getClientRects().length > 0 && getComputedStyle(petal).visibility !== 'hidden';
     (visible ? petal : document.getElementById(`index-${id}`))?.focus({ preventScroll: true });
   }
-  function select(event: MouseEvent<HTMLButtonElement>, id: PetalId) { setWorkOpen(false); navigate({ type: 'select', id, source: event.currentTarget.id }); }
+  function rememberPetal(id: PetalId) {
+    const button = document.getElementById(`petal-${id}`);
+    const anchor = button?.getBoundingClientRect();
+    if (!anchor || anchor.width === 0) { petalOrigin.current = null; return; }
+    const image = button?.querySelector('img')?.getBoundingClientRect();
+    petalOrigin.current = { image: image?.width ? image : new DOMRect(anchor.x, anchor.y, 68, 42), title: button?.querySelector('span')?.getBoundingClientRect() || anchor };
+  }
+  function select(event: MouseEvent<HTMLButtonElement>, id: PetalId) { rememberPetal(id); setWorkOpen(false); navigate({ type: 'select', id, source: event.currentTarget.id }); }
 
   useEffect(() => {
     history.replaceState({ softLotus: true, softLotusDepth: Number(history.state?.softLotusDepth || 0) }, '', routeURL(new URL(location.href), current.current));
@@ -135,7 +153,7 @@ export function App() {
       navigation.current({ type: 'overview' });
       queueMicrotask(() => focusNavigation(source));
     }, { signal: controller.signal });
-    const instance = createRuntime(host.current!, labels.current!, id => navigation.current({ type: 'select', id, source: `petal-${id}` }), ready => dispatch({ type: 'model', status: ready ? 'ready' : 'failed' }), setLoadProgress);
+    const instance = createRuntime(host.current!, labels.current!, id => { rememberPetal(id); navigation.current({ type: 'select', id, source: `petal-${id}` }); }, ready => dispatch({ type: 'model', status: ready ? 'ready' : 'failed' }), setLoadProgress);
     runtime.current = instance; instance.update(current.current);
     return () => { controller.abort(); instance.dispose(); runtime.current = null; };
   }, []);
@@ -154,8 +172,23 @@ export function App() {
 
   useLayoutEffect(() => {
     if (!preview.current || state.view !== 'selected') return;
-    const tween = gsap.fromTo(preview.current, { opacity: 0, y: state.reducedMotion ? 0 : 14 }, { opacity: 1, y: 0, duration: state.reducedMotion ? 0 : 0.28, ease: 'power2.out' });
-    return () => { tween.kill(); };
+    const reduced = state.reducedMotion || document.documentElement.dataset.input === 'keyboard';
+    const context = gsap.context(() => {
+      gsap.fromTo(preview.current, { opacity: 0 }, { opacity: 1, duration: reduced ? 0 : .3, ease: 'power2.out' });
+      if (!reduced && petalOrigin.current && state.model === 'ready') {
+        preview.current!.dataset.transitioning = 'true';
+        gsap.delayedCall(.66, () => { if (preview.current) delete preview.current.dataset.transitioning; });
+        for (const [selector, origin] of [['.preview-product', petalOrigin.current.image], ['.preview-title', petalOrigin.current.title]] as const) {
+          const element = preview.current!.querySelector<HTMLElement>(selector);
+          if (!element) continue;
+          const target = element.getBoundingClientRect();
+          gsap.fromTo(element, { x: origin.x - target.x, y: origin.y - target.y, scaleX: origin.width / target.width, scaleY: origin.height / target.height, opacity: .55 }, { x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 1, duration: .65, ease: 'power3.inOut', clearProps: 'transform,opacity' });
+        }
+      }
+    }, preview);
+    petalOrigin.current = null;
+    const element = preview.current;
+    return () => { context.revert(); if (element) delete element.dataset.transitioning; };
   }, [state.active, state.view, state.reducedMotion]);
 
   const petalName = (id: PetalId) => isFeatured(id) ? id.toUpperCase() : s[id];
@@ -167,18 +200,32 @@ export function App() {
     <main id="main">
     {softLotusAsset.state !== 'accepted' && <p className="prototype-note">{state.locale === 'ru' ? 'Предпросмотр · проверка Tripo-модели' : state.locale === 'kk' ? 'Алдын ала көрініс · Tripo моделін тексеру' : 'Preview · Tripo model under review'}</p>}
       <div className="soft-stage" data-view={state.view} aria-busy={state.model === 'pending'}>
+        <div className="botanical-shadow" aria-hidden="true" />
         <div ref={host} className="soft-canvas" />
         <div className="paper-grain" aria-hidden="true" />
-        {state.model === 'ready' && !state.reducedMotion && state.view === 'overview' && <div className="petal-drift" aria-hidden="true"><i /><i /><i /></div>}
-        {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-desktop.png`} alt="" /></picture>}
+        {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-desktop.png`} alt="" /></picture>}
         <div className="scene-introduction" inert={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button id="hero-work" type="button" aria-expanded={workOpen} aria-controls="work-list" onClick={event => { workReturn.current = event.currentTarget; setWorkOpen(true); workSummary.current?.focus({ preventScroll: true }); }}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
         <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}-petal.webp`} alt="" width="320" height={Math.round(320 * dimensions[id].main[1] / dimensions[id].main[0])} />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
         {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => focusNavigation(id)); }}>{s.close}</button>
           <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(state.active)} reduced={state.reducedMotion} className="preview-title" />
-          {activeProject && activeCopy ? <><p className="preview-subtitle">{s[activeProject.id as FeaturedId]}</p><img className="preview-product" src={`assets/${activeProject.id}.webp`} width={dimensions[activeProject.id].main[0]} height={dimensions[activeProject.id].main[1]} alt={activeCopy.alt} /><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a className="primary-action" href={activeProject.live} target="_blank" rel="noreferrer">{s.demo} ↗</a></div></> : state.active === 'about' ? <><p>{s.aboutWork}</p></> : <><p>{s.contactText}</p><div className="contact-actions"><a className="primary-action" href="https://t.me/tserriednichs" target="_blank" rel="noreferrer">{s.discuss} · Telegram ↗</a><a href="mailto:beibars.ileskhan2405@gmail.com">beibars.ileskhan2405@gmail.com</a><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></div></>}
+          {activeProject && activeCopy ? <><p className="preview-subtitle">{s[activeProject.id as FeaturedId]}</p><img className="preview-product" style={{backgroundImage:`url(assets/${activeProject.id}-petal.webp)`,backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPosition:"center"}} src={`assets/${activeProject.id}.webp`} width={dimensions[activeProject.id].main[0]} height={dimensions[activeProject.id].main[1]} alt={activeCopy.alt} /><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a className="primary-action" href={activeProject.live} target="_blank" rel="noreferrer">{s.demo} ↗</a></div></> : state.active === 'about' ? <><p>{s.aboutWork}</p></> : <><p>{s.contactText}</p><div className="contact-actions"><a className="primary-action" href="https://t.me/tserriednichs" target="_blank" rel="noreferrer">{s.discuss} · Telegram ↗</a><a href="mailto:beibars.ileskhan2405@gmail.com">beibars.ileskhan2405@gmail.com</a><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></div></>}
         </aside>}
         {state.model === 'pending' && <div className="ink-loading" data-phase={loadProgress.phase}>
-          <svg viewBox="0 0 240 20" aria-hidden="true"><defs><clipPath id="ink-edge"><path d="M1 9Q9 6 19 8T41 7Q53 5 69 7T98 6Q114 4 131 7T158 6Q171 5 185 7T218 7L239 9 236 13Q224 12 211 14T185 13Q172 15 156 13T127 14Q112 15 97 13T71 14Q57 15 42 13T17 13L3 12Z"/></clipPath><linearGradient id="ink-density"><stop stopColor="#353a32" stopOpacity=".45"/><stop offset=".82" stopColor="#353a32" stopOpacity=".8"/><stop offset="1" stopColor="#242a23"/></linearGradient></defs><path className="ink-track" d="M3 10H237"/><g clipPath="url(#ink-edge)"><rect className="ink-fill" width={percent === undefined ? 240 : percent * 2.4} height="20"/><path className="ink-fibres" d="M0 8h240M0 12h240M0 15h240"/></g></svg>
+          <svg viewBox="0 0 260 30" aria-hidden="true">
+            <defs>
+              <filter id="ink-fray" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".07 .65" numOctaves="2" seed="9" result="fibres"/><feDisplacementMap in="SourceGraphic" in2="fibres" scale="2.1" xChannelSelector="R" yChannelSelector="G"/></filter>
+              <filter id="ink-bleed"><feGaussianBlur stdDeviation=".65"/></filter>
+              <clipPath id="ink-reveal"><rect className="ink-reveal" width={percent === undefined ? 260 : percent * 2.6} height="30"/></clipPath>
+              <linearGradient id="ink-density"><stop stopColor="#414537" stopOpacity=".48"/><stop offset=".6" stopColor="#30362b" stopOpacity=".76"/><stop offset="1" stopColor="#1d251d"/></linearGradient>
+              <path id="ink-stroke" d="M3 13Q12 8 24 11L48 9 69 11 85 8 104 9 126 7 143 10 162 8 179 10 202 8 225 10 247 9 258 12 256 18 240 19 222 17 203 20 185 18 164 20 145 18 124 20 106 18 85 20 66 18 44 20 23 18 5 19Z"/>
+            </defs>
+            <path className="ink-track" d="M4 15H256"/>
+            <g clipPath="url(#ink-reveal)">
+              <use href="#ink-stroke" fill="#525641" opacity=".22" filter="url(#ink-bleed)" className="ink-absorption"/>
+              <g filter="url(#ink-fray)"><use href="#ink-stroke" className="ink-fill"/><ellipse cx={percent === undefined ? 249 : Math.max(5,percent * 2.6-5)} cy="14" rx="7" ry="4.4" fill="#20281e" opacity=".6"/></g>
+              <path className="ink-fibres" d="M4 12L79 13 116 11 179 13 248 12M6 17L60 16 113 17 168 15 239 17"/>
+            </g>
+          </svg>
           <p role="status">{loadLabel}{percent !== undefined ? ` · ${percent}%` : ''}</p><progress className="scene-loading" aria-label={loadLabel} max={100} value={percent} />
         </div>}
         <div className="scene-bottom"><div><p role="status">{state.model === 'failed' ? s.fallback : state.model === 'ready' ? s.ready : ''}</p></div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>

@@ -36,20 +36,36 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const inspectionPose = inspectionValue !== null && Number.isFinite(Number(inspectionValue)) ? THREE.MathUtils.clamp(Number(inspectionValue), 0, 1) : null;
   const flower = new THREE.Group();
   scene.add(flower);
-  scene.add(new THREE.HemisphereLight(0xfff9ee, 0xaaa28f, 1.8));
-  const key = new THREE.DirectionalLight(0xfff1e1, 2.6);
-  key.position.set(-4, 7, 3); scene.add(key);
+  const decoration = new THREE.Group(); scene.add(decoration);
+  const drift = { elapsed: introduced ? 12 : 0 };
+  let driftTween: gsap.core.Tween | null = null;
+  let decorationGeometry: THREE.BufferGeometry | null = null;
+  const decorationCorners: THREE.Vector3[] = [];
+  const decorationPoint = new THREE.Vector3();
+  scene.add(new THREE.HemisphereLight(0xfffbf1, 0xc0b2a0, 1.1));
+  const key = new THREE.DirectionalLight(0xfff1df, 2.5);
+  key.position.set(-3, 9, -2); scene.add(key);
   key.castShadow = true; key.shadow.mapSize.set(512, 512);
   key.shadow.blurSamples = 8;
   Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 0.1, far: 20 });
   key.shadow.normalBias = 0.035;
-  key.shadow.radius = 4;
-  key.shadow.intensity = 0.6;
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.ShadowMaterial({ color: 0x776c59, opacity: 0.19 }));
+  key.shadow.radius = 5;
+  key.shadow.intensity = 0.55;
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.ShadowMaterial({ color: 0x766e5b, opacity: 0.075 }));
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.65; ground.receiveShadow = true; scene.add(ground);
-  const fill = new THREE.DirectionalLight(0xdfe9e7, 0.35);
-  fill.position.set(5, 2, -3); scene.add(fill);
-  const pose = { bloom: introduced ? 1 : 0, turn: 0, emphasis: 0, reading: 0 };
+  const shadowCanvas = document.createElement('canvas'); shadowCanvas.width = shadowCanvas.height = 128;
+  const shadowContext = shadowCanvas.getContext('2d')!;
+  const contactGradient = shadowContext.createRadialGradient(64, 64, 0, 64, 64, 64);
+  contactGradient.addColorStop(0, '#665d45aa'); contactGradient.addColorStop(.28, '#665d4555'); contactGradient.addColorStop(1, '#665d4500');
+  shadowContext.fillStyle = contactGradient; shadowContext.fillRect(0, 0, 128, 128);
+  const contactMap = new THREE.CanvasTexture(shadowCanvas);
+  const contact = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.2), new THREE.MeshBasicMaterial({ map: contactMap, transparent: true, opacity: .35, depthWrite: false }));
+  contact.rotation.x = -Math.PI / 2; scene.add(contact);
+  const fill = new THREE.DirectionalLight(0xe7eff1, 0.8);
+  fill.position.set(3, 4, 6); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xfff9eb, 1.1);
+  rim.position.set(5, 3, -3); scene.add(rim);
+  const pose = { bloom: introduced ? 1 : 0, turn: -0.18, emphasis: 0, reading: 0 };
   const petalFocus = petalIds.map(() => ({ value: 0 }));
   const petalHover = petalIds.map(() => ({ value: 0 }));
   const anchors: THREE.Object3D[] = [];
@@ -98,6 +114,51 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
         if (object.morphTargetDictionary?.[softLotusContract.morphTarget] !== undefined) morphMeshes.push(object);
       } });
       if (morphMeshes.length !== 5) throw Error('Each petal needs its own Bloom morph.');
+      morphMeshes.forEach(mesh => {
+        const optics = mesh.geometry.getAttribute('uv1');
+        if (optics) mesh.geometry.setAttribute('petalOptics', optics);
+        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        materials.forEach(material => {
+          if (!(material instanceof THREE.MeshStandardMaterial) || !optics) return;
+          material.roughness = 0.74;
+          if (material instanceof THREE.MeshPhysicalMaterial) material.specularIntensity = .25;
+          material.onBeforeCompile = shader => {
+            shader.vertexShader = 'attribute vec2 petalOptics; varying vec2 vPetalOptics;\n' + shader.vertexShader;
+            shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvPetalOptics = petalOptics;');
+            shader.fragmentShader = 'varying vec2 vPetalOptics;\n' + shader.fragmentShader;
+            shader.fragmentShader = shader.fragmentShader.replace('#include <lights_fragment_end>', `#include <lights_fragment_end>
+              float thinEdge = max(pow(vPetalOptics.y, 3.0), smoothstep(0.55, 1.0, vPetalOptics.x));
+              float throughLight = pow(max(0.0, dot(-normal, directionalLights[0].direction)), 1.35);
+              float grazingLight = pow(1.0 - abs(dot(normal, geometryViewDir)), 3.0);
+              reflectedLight.indirectDiffuse += diffuseColor.rgb * vec3(1.0, 0.77, 0.64) * ((0.18 + thinEdge * 0.65) * throughLight + thinEdge * grazingLight * 0.10);
+            `);
+          };
+          material.customProgramCacheKey = () => 'lotus-thin-petal-v1';
+          material.needsUpdate = true;
+        });
+      });
+      // Separate, non-interactive pieces use the same adapted source surface.
+      // The five navigation petals stay attached to the flower throughout.
+      const original = resource.getObjectByName('Decor_Petal') as THREE.Mesh;
+      if (!original?.isMesh) throw Error('Decorative source is missing.');
+      original.visible = false;
+      decorationGeometry = original.geometry.clone();
+      const decorationOptics = decorationGeometry.getAttribute('uv1');
+      if (decorationOptics) decorationGeometry.setAttribute('petalOptics', decorationOptics);
+      const positions = decorationGeometry.getAttribute('position');
+      const openBox = new THREE.Box3(); const point = new THREE.Vector3();
+      for (let i = 0; i < positions.count; i++) {
+        point.fromBufferAttribute(positions, i);
+        openBox.expandByPoint(point);
+      }
+      const center = openBox.getCenter(new THREE.Vector3());
+      decorationGeometry.translate(-center.x, -center.y, -center.z);
+      openBox.translate(center.negate());
+      for (const x of [openBox.min.x, openBox.max.x]) for (const y of [openBox.min.y, openBox.max.y]) for (const z of [openBox.min.z, openBox.max.z]) decorationCorners.push(new THREE.Vector3(x,y,z));
+      for (let i = 0; i < 3; i++) {
+        const piece = new THREE.Mesh(decorationGeometry, original.material);
+        piece.castShadow = true; piece.frustumCulled = false; decoration.add(piece);
+      }
       nodes.forEach((node, index) => node!.traverse(object => {
         if (object instanceof THREE.Mesh) { object.userData.petal = index; pickTargets.push(object); }
       }));
@@ -132,6 +193,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       host.dataset.asset = softLotusAsset.state;
       host.dataset.assetUrl = assetURL;
       onModel(true);
+      if (!introduced && !state?.reducedMotion) driftTween = gsap.to(drift, { elapsed: 12, duration: 12, ease: 'none', onUpdate: () => { dirty = true; } });
     } catch {
       if (disposed) return;
       if (resource) { flower.remove(resource); disposeObject(resource); resource = null; }
@@ -164,17 +226,42 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   function draw() {
     if (disposed || contextLost || document.hidden || !state || !width || !height || (state.model === 'pending' && !warming)) return;
     const frameState = state;
-    const moving = gsap.isTweening(pose) || gsap.isTweening(petalFocus) || gsap.isTweening(petalHover);
+    const flowerMoving = gsap.isTweening(pose) || gsap.isTweening(petalFocus) || gsap.isTweening(petalHover);
+    const moving = flowerMoving || gsap.isTweening(drift);
     if (!dirty && !moving) return;
     dirty = false;
     const started = performance.now();
     const narrow = width < 700;
     flower.rotation.y = pose.turn;
-    flower.position.set(narrow ? 0 : -pose.emphasis * 1.2 - pose.reading * 1.8, narrow ? (height < 700 ? -1.4 : -.9) * (1 - pose.emphasis) + pose.emphasis * 1.7 : (height < 650 ? -.65 : -.95) + pose.emphasis * .3, 0);
-    const mobileFit = Math.min(width / 390, height / 750) * 844 / height;
-    const scale = (narrow ? 0.46 * mobileFit * (1 - pose.reading * 0.55) : (0.70 + pose.emphasis * .14 - pose.reading * 0.2) * (height < 650 ? 0.85 : 1)) * (0.65 + 0.35 * pose.bloom);
+    flower.position.set(narrow ? 0 : 1.25 * (1 - pose.emphasis) - pose.emphasis * 1.25 - pose.reading * 1.2, narrow ? (height < 500 ? 0 : -0.7) : -.22, 0);
+    const scale = (narrow ? .95 * width / height * (1 - .10 * pose.emphasis) * (1 - pose.reading * .55) : (.79 + pose.emphasis * .04 - pose.reading * .2) * (height < 650 ? .82 : 1)) * (.65 + .35 * pose.bloom);
     flower.scale.setScalar(scale);
+    camera.position.set(0, 3.7 + pose.bloom * 1.45 + (narrow ? pose.emphasis * 1.9 : 0), narrow ? 12.3 : 10.4);
+    camera.lookAt(0, narrow ? .8 : .83, 0); camera.updateMatrixWorld();
+    if (narrow) {
+      const rail = width <= 360 || height <= 700 ? height * .27 : THREE.MathUtils.clamp(height * .32, 180, 310);
+      const targetY = THREE.MathUtils.lerp(height * .63, 64 + rail * .5, pose.emphasis);
+      projected.set(0, 1 - targetY / height * 2, .5).unproject(camera).sub(camera.position);
+      const distance = -camera.position.z / projected.z;
+      flower.position.set(0, camera.position.y + projected.y * distance - (1.5 - .4 * pose.bloom) * scale, 0);
+      host.dataset.contentBoundary = (64 + rail).toFixed(2);
+    }
     ground.position.y = flower.position.y + 0.015 * scale;
+    contact.position.set(flower.position.x, ground.position.y + .002, flower.position.z); contact.scale.setScalar(scale);
+    decoration.visible = frameState.model === 'ready' && frameState.view === 'overview' && !frameState.reducedMotion;
+    if (decoration.visible) decoration.children.forEach((piece, index) => {
+      const progress = THREE.MathUtils.clamp((drift.elapsed - index * 2.2) / 4.6, 0, 1);
+      const remaining = 1 - progress;
+      const size = (.12 + index * .012) * scale;
+      piece.scale.setScalar(size);
+      piece.rotation.set(.12 + Math.sin(progress * 9 + index) * remaining * .8, [-.5, 1.5, 2.4][index] + remaining * .8, .08 + Math.sin(progress * 13 + index) * remaining * .65);
+      let floorOffset = Infinity;
+      decorationCorners.forEach(corner => { decorationPoint.copy(corner).applyEuler(piece.rotation); floorOffset = Math.min(floorOffset, decorationPoint.y * size); });
+      piece.position.set(flower.position.x + ([-3.6, 3.5, 2.1][index] + Math.sin(progress * 5 + index) * remaining * .45) * scale,
+        ground.position.y - floorOffset + remaining ** 2 * 3.8 + .004,
+        ([2.4, 1.0, 3.4][index] + remaining * .3) * scale);
+      piece.visible = drift.elapsed > index * 2.2;
+    });
     morphMeshes.forEach(object => {
       if (object instanceof THREE.Mesh && object.morphTargetDictionary && object.morphTargetInfluences) {
         const index = object.morphTargetDictionary[softLotusContract.morphTarget];
@@ -183,8 +270,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
         if (focusIndex !== undefined) object.morphTargetInfluences[focusIndex] = ((petalFocus[object.userData.petal]?.value || 0) + (petalHover[object.userData.petal]?.value || 0)) * pose.bloom ** 3;
       }
     });
-    camera.position.set(0, 3.2 + pose.bloom * 2.5, narrow ? 12.8 : 10.6 - pose.emphasis * 0.4);
-    camera.lookAt(0, narrow ? 0.6 : 0.75, 0); camera.updateMatrixWorld(); flower.updateMatrixWorld(true);
+    flower.updateMatrixWorld(true);
     anchors.forEach((anchor, index) => {
       if (anchor.userData.closed_position_yup && anchor.userData.openPosition) {
         anchor.position.fromArray(anchor.userData.closed_position_yup).lerp(anchor.userData.openPosition, pose.bloom);
@@ -204,10 +290,11 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     });
     renderer?.render(scene, camera);
     host.dataset.bloom = pose.bloom.toFixed(3);
-    host.dataset.animating = String(moving);
+    host.dataset.animating = String(flowerMoving);
     host.dataset.renderCpuMs = (performance.now() - started).toFixed(2);
     host.dataset.drawCalls = String(renderer?.info.render.calls || 0);
     host.dataset.triangles = String(renderer?.info.render.triangles || 0);
+    host.dataset.decor = decoration.visible ? (drift.elapsed < 12 ? 'falling' : 'settled') : 'paused';
   }
   gsap.ticker.lagSmoothing(0);
   gsap.ticker.add(beforeTick, false, true);
@@ -255,6 +342,8 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   return {
     update(next) {
       state = next;
+      if (next.view !== 'overview' || next.reducedMotion) driftTween?.pause();
+      else driftTween?.resume();
       if (next.view !== 'overview' || next.reducedMotion) { gsap.killTweensOf(petalHover); petalHover.forEach(value => { value.value = 0; }); hovered = -1; }
       const index = next.active ? petalIds.indexOf(next.active) : 0;
       const angle = next.active && anchors[index]?.userData.selection_turn_degrees !== undefined
@@ -272,12 +361,12 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
           if (state?.model === 'ready') { introduced = true; try { sessionStorage.setItem('soft-lotus-intro-v2', '1'); } catch { /* Optional. */ } }
         } });
       dirty = true;
-      if (inspectionPose !== null) { gsap.killTweensOf(pose); pose.bloom = inspectionPose; pose.turn = 0; pose.reading = 0; dirty = true; }
+      if (inspectionPose !== null) { gsap.killTweensOf(pose); pose.bloom = inspectionPose; pose.turn = -.18; pose.reading = 0; dirty = true; }
     },
     dispose() {
       disposed = true; abort.abort(); loadingManager.abort(); observer.disconnect();
-      gsap.ticker.remove(beforeTick); gsap.ticker.remove(draw); gsap.killTweensOf(pose); gsap.killTweensOf(petalFocus); gsap.killTweensOf(petalHover);
-      disposeObject(flower); disposeObject(ground); key.shadow.dispose(); renderer?.dispose(); renderer?.forceContextLoss(); renderer?.domElement.remove();
+      gsap.ticker.remove(beforeTick); gsap.ticker.remove(draw); gsap.killTweensOf(pose); gsap.killTweensOf(petalFocus); gsap.killTweensOf(petalHover); driftTween?.kill(); decorationGeometry?.dispose();
+      disposeObject(flower); disposeObject(ground); disposeObject(contact); contactMap.dispose(); key.shadow.dispose(); renderer?.dispose(); renderer?.forceContextLoss(); renderer?.domElement.remove();
     },
   };
 }

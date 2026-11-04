@@ -226,7 +226,8 @@ test('Loading keeps the same bud and model failure retains useful navigation', a
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.locator('#preview-case-perch')).toBeFocused();
-  await expect(page.locator('.scene-poster img')).toHaveAttribute('src', /open-desktop/);
+  await expect(page.locator('.scene-poster img')).toHaveAttribute('src', /selected-desktop/);
+  await page.locator('.scene-poster img').evaluate(image => (image as HTMLImageElement).decode());
 });
 
 test('Mobile asset, all five projected controls and repeated selection remain usable', async ({ page }) => {
@@ -320,11 +321,38 @@ test('The actual petal surface selects SELVEDGE and a drag does not select', asy
   await page.goto(`${entry}?lang=en`);
   await expect(page.locator('.soft-canvas')).toHaveAttribute('data-bloom','1.000');
   // Bare front-right surface of the nearest petal, outside its HTML label.
-  await page.mouse.move(810,760);await page.mouse.down();await page.mouse.move(840,760);await page.mouse.up();
+  await page.mouse.move(970,710);await page.mouse.down();await page.mouse.move(995,710);await page.mouse.up();
   await expect(page.locator('body')).toHaveAttribute('data-view','overview');
-  await page.mouse.click(810,760);
+  await page.mouse.click(970,710);
   await expect(page.locator('body')).toHaveAttribute('data-petal','selvedge');
   await expect(page.locator('#preview-title')).toHaveText('SELVEDGE');
+});
+
+test('Touch selection preserves a separate flower area and readable project content in all languages', async ({browser,baseURL}) => {
+  const context = await browser.newContext({baseURL,viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:2,reducedMotion:'reduce'});
+  const page = await context.newPage();
+  try {
+    for (const locale of ['ru','en','kk']) {
+      await page.goto(`${entry}?lang=${locale}`);
+      await expect(page.locator('body')).toHaveAttribute('data-model','ready',{timeout:20000});
+      await expect(page.locator('.soft-canvas')).toHaveAttribute('data-decor','paused');
+      await page.locator('#petal-forme').tap();
+      for (const id of ['forme','perch','selvedge']) {
+        await page.locator(`#index-${id}`).tap();
+        await expect(page.locator('#preview-title')).toHaveText(id.toUpperCase());
+        const boundary = Number(await page.locator('.soft-canvas').getAttribute('data-content-boundary'));
+        const box = await page.locator('.petal-preview').boundingBox();
+        expect(box!.y).toBeGreaterThanOrEqual(boundary-1);
+        expect(await page.locator('.petal-preview').evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
+        await page.locator('.preview-product').evaluate(async image=>{await (image as HTMLImageElement).decode();});
+      }
+      await page.locator('#preview-case-selvedge').tap();
+      await expect(page.getByRole('dialog')).toBeVisible();
+      await page.getByRole('dialog').locator('.reader-top button').tap();
+      await expect(page.getByRole('dialog')).not.toBeVisible();
+      await expect(page.locator('body')).toHaveAttribute('data-petal','selvedge');
+    }
+  } finally { await context.close(); }
 });
 
 test('Fallback gives accurate directions, readable navigation and uncropped short previews', async ({page}) => {
