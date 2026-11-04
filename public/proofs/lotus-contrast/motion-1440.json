@@ -1,0 +1,41 @@
+{
+  "base": "http://127.0.0.1:5319/",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "mode": "calm",
+  "marks": [
+    {
+      "name": "ready",
+      "at": 2.443
+    },
+    {
+      "name": "catalog-open",
+      "at": 3.157
+    },
+    {
+      "name": "catalog-close",
+      "at": 4.86
+    },
+    {
+      "name": "select-perch",
+      "at": 6.382
+    },
+    {
+      "name": "reader-open",
+      "at": 7.834
+    },
+    {
+      "name": "reader-close",
+      "at": 9.404
+    },
+    {
+      "name": "return-home",
+      "at": 10.828
+    }
+  ],
+  "browser": "156.0.8078.76",
+  "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "conditions": "Continuous 25 fps installed Chrome recording on Windows with hardware WebGL. No CPU/network throttle. Mobile uses touch emulation. Video is a demonstration, not a frame-delivery benchmark; wall-time marks are approximate relative to the encoded video start."
+}

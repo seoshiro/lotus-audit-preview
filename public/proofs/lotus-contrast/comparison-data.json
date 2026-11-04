@@ -1,0 +1,579 @@
+{
+  "before": {
+    "label": "before",
+    "base": "https://seoshiro.github.io/lotus-audit-preview/",
+    "browser": "156.0.8078.76",
+    "conditions": "Installed headless Chrome, real AMD WebGL, reduced motion for identical stable camera and pose; mobile is touch emulation, not a physical phone.",
+    "results": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "overview",
+        "pose": [
+          1,
+          -0.18,
+          0,
+          0
+        ],
+        "bounds": [
+          487.43,
+          187.92,
+          1366.94,
+          744.7
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "perch",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          0
+        ],
+        "bounds": [
+          122.01,
+          178.72,
+          924.76,
+          719.42
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "perch-case",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          1
+        ],
+        "bounds": [
+          62.09,
+          348.34,
+          341.02,
+          516.65
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "selvedge",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          0
+        ],
+        "bounds": [
+          126.59,
+          181.23,
+          923.81,
+          711.74
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "selvedge-case",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          1
+        ],
+        "bounds": [
+          65.26,
+          351.08,
+          338.26,
+          513.89
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "forme",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          0
+        ],
+        "bounds": [
+          134.77,
+          188.11,
+          938.62,
+          662.34
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "forme-case",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          1
+        ],
+        "bounds": [
+          62.35,
+          357.12,
+          340.89,
+          507.72
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "overview",
+        "pose": [
+          1,
+          -0.18,
+          0,
+          0
+        ],
+        "bounds": [
+          -0.33,
+          386.67,
+          400.62,
+          638.53
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "perch",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          0
+        ],
+        "bounds": [
+          14.01,
+          66.93,
+          374.16,
+          286.6
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "perch-case",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          1
+        ],
+        "bounds": [
+          113.03,
+          140.37,
+          276.42,
+          236.8
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "selvedge",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          0
+        ],
+        "bounds": [
+          18.84,
+          68.03,
+          373.78,
+          284.79
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "selvedge-case",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          1
+        ],
+        "bounds": [
+          114.79,
+          140.85,
+          275.89,
+          236.11
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "forme",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          0
+        ],
+        "bounds": [
+          14.48,
+          71.01,
+          380.59,
+          270.03
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "forme-case",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          1
+        ],
+        "bounds": [
+          112.32,
+          142.15,
+          278.98,
+          230.21
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    ]
+  },
+  "after": {
+    "label": "after",
+    "base": "http://127.0.0.1:5319/",
+    "browser": "156.0.8078.76",
+    "conditions": "Installed headless Chrome, real AMD WebGL, reduced motion for identical stable camera and pose; mobile is touch emulation, not a physical phone.",
+    "results": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "overview",
+        "pose": [
+          1,
+          -0.18,
+          0,
+          0
+        ],
+        "bounds": [
+          487.43,
+          187.92,
+          1366.94,
+          744.7
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "perch",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          0
+        ],
+        "bounds": [
+          122.01,
+          178.72,
+          924.76,
+          719.42
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "perch-case",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          1
+        ],
+        "bounds": [
+          62.09,
+          348.34,
+          341.02,
+          516.65
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "selvedge",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          0
+        ],
+        "bounds": [
+          126.59,
+          181.23,
+          923.81,
+          711.74
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "selvedge-case",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          1
+        ],
+        "bounds": [
+          65.26,
+          351.08,
+          338.26,
+          513.89
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "forme",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          0
+        ],
+        "bounds": [
+          134.77,
+          188.11,
+          938.62,
+          662.34
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "state": "forme-case",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          1
+        ],
+        "bounds": [
+          62.35,
+          357.12,
+          340.89,
+          507.72
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "overview",
+        "pose": [
+          1,
+          -0.18,
+          0,
+          0
+        ],
+        "bounds": [
+          -0.33,
+          386.67,
+          400.62,
+          638.53
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "perch",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          0
+        ],
+        "bounds": [
+          14.01,
+          66.93,
+          374.16,
+          286.6
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "perch-case",
+        "pose": [
+          1,
+          0.59341,
+          1,
+          1
+        ],
+        "bounds": [
+          113.03,
+          140.37,
+          276.42,
+          236.8
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "selvedge",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          0
+        ],
+        "bounds": [
+          18.84,
+          68.03,
+          373.78,
+          284.79
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "selvedge-case",
+        "pose": [
+          1,
+          -0.66322,
+          1,
+          1
+        ],
+        "bounds": [
+          114.79,
+          140.85,
+          275.89,
+          236.11
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "forme",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          0
+        ],
+        "bounds": [
+          14.48,
+          71.01,
+          380.59,
+          270.03
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "state": "forme-case",
+        "pose": [
+          1,
+          -1.91986,
+          1,
+          1
+        ],
+        "bounds": [
+          112.32,
+          142.15,
+          278.98,
+          230.21
+        ],
+        "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    ]
+  },
+  "identicalPoseAndBounds": true
+}

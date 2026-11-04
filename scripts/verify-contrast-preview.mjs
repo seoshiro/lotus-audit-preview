@@ -1,0 +1,20 @@
+import fs from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+const sha=process.argv[2];if(!/^[0-9a-f]{40}$/.test(sha||''))throw Error('Pass the expected full commit SHA');
+const base='https://seoshiro.github.io/lotus-audit-preview/';
+const version=await globalThis.fetch(base+'version.json?revision='+sha).then(r=>r.json());
+if(version.commit!==sha)throw Error('Preview version mismatch: '+version.commit);
+const html=await globalThis.fetch(base+'?lang=ru&revision='+sha).then(r=>r.text());
+if(!html.includes(sha))throw Error('HTML revision mismatch');
+const dir='public/proofs/lotus-contrast',files=await fs.readdir(dir),checks=[];
+for(let i=0;i<files.length;i+=4)checks.push(...await Promise.all(files.slice(i,i+4).map(async file=>{
+ const local=await fs.readFile(dir+'/'+file),response=await globalThis.fetch(base+'proofs/lotus-contrast/'+file+'?revision='+sha);
+ if(!response.ok)throw Error(file+': HTTP '+response.status);
+ const remote=new Uint8Array(await response.arrayBuffer()),hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+ return {file,bytes:local.byteLength,match:hash(local)===hash(remote)};
+})));
+const production=await globalThis.fetch('https://seoshiro.github.io/version.json?check='+sha).then(r=>r.json());
+if(production.commit!=='6e18031700ae46a1689e48f23ee1ecb6149da860')throw Error('Unexpected production revision: '+production.commit);
+const result={base,version,htmlCommitMatches:true,production,checks};await fs.writeFile('evidence/lotus-contrast/public-verification.json',JSON.stringify(result,null,2));
+console.log({version,proofFiles:checks.length,allHashesMatch:checks.every(x=>x.match),production});
+if(checks.some(x=>!x.match))throw Error('Published proof file differs');

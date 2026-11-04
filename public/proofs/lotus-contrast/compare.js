@@ -1,0 +1,1 @@
+document.querySelectorAll('section').forEach(section=>{const input=section.querySelector('input');if(!input)return;input.addEventListener('input',()=>section.querySelector('.comparison').style.setProperty('--split',input.value+'%'));});

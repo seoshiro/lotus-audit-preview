@@ -332,6 +332,7 @@ export function App() {
     <main id="main">
     {softLotusAsset.state !== 'accepted' && <p className="prototype-note">{state.locale === 'ru' ? 'Предпросмотр · проверка Tripo-модели' : state.locale === 'kk' ? 'Алдын ала көрініс · Tripo моделін тексеру' : 'Preview · Tripo model under review'}</p>}
       <div className="soft-stage" data-view={state.view} data-work-open={workOpen} aria-busy={state.model === 'pending'} inert={state.view === 'case'}>
+        <div className="lotus-atmosphere" aria-hidden="true" />
         <div className="botanical-shadow" aria-hidden="true" />
         <div ref={host} className="soft-canvas" />
         <p className="reading-lotus-caption" aria-hidden="true">{previewId ? petalName(previewId) : ''}</p>

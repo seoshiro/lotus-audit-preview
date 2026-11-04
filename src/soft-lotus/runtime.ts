@@ -45,9 +45,9 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   let decorationGeometry: THREE.BufferGeometry | null = null;
   const decorationCorners: THREE.Vector3[] = [];
   const decorationPoint = new THREE.Vector3();
-  scene.add(new THREE.HemisphereLight(0xfffbf1, 0xc0b2a0, 1.1));
+  scene.add(new THREE.HemisphereLight(0xfffbf1, 0xaeb6b5, 0.95));
   const key = new THREE.DirectionalLight(0xfff1df, 2.5);
-  key.position.set(-3, 9, -2); scene.add(key);
+  key.position.set(-5, 9, -1.5); scene.add(key);
   key.castShadow = true; key.shadow.mapSize.set(512, 512);
   key.shadow.blurSamples = 8;
   Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 0.1, far: 20 });
@@ -64,7 +64,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const contactMap = new THREE.CanvasTexture(shadowCanvas);
   const contact = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 2.2), new THREE.MeshBasicMaterial({ map: contactMap, transparent: true, opacity: .35, depthWrite: false }));
   contact.rotation.x = -Math.PI / 2; scene.add(contact);
-  const fill = new THREE.DirectionalLight(0xe7eff1, 0.8);
+  const fill = new THREE.DirectionalLight(0xe7eff1, 0.7);
   fill.position.set(3, 4, 6); scene.add(fill);
   const rim = new THREE.DirectionalLight(0xfff9eb, 1.1);
   rim.position.set(5, 3, -3); scene.add(rim);
@@ -79,6 +79,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const pickTargets: THREE.Mesh[] = [];
   const readingCorners: THREE.Vector3[] = [];
   const readingLayout = createReadingLayout();
+  const atmosphere = host.parentElement?.querySelector<HTMLElement>('.lotus-atmosphere');
   const readingHighlights: { mesh: THREE.Mesh; amount: { value: number } }[] = [];
   const projected = new THREE.Vector3();
   const pointer = new THREE.Vector2();
@@ -339,6 +340,14 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     if (readingCorners.length) {
       const bounds = readingLayout.project(readingCorners, camera, flower.matrixWorld, width, height);
       host.dataset.flowerBounds = JSON.stringify([bounds.min.x, bounds.min.y, bounds.max.x, bounds.max.y].map(value => Number(value.toFixed(2))));
+      // One composited wash follows the same projected flower through every pose.
+      // Transform its fixed surface instead of repainting a gradient every frame.
+      if (atmosphere) {
+        const x = (bounds.min.x + bounds.max.x) / 2, y = (bounds.min.y + bounds.max.y) / 2;
+        const sx = (bounds.max.x - bounds.min.x) * 1.65 / 1000;
+        const sy = (bounds.max.y - bounds.min.y) * 2.0 / 700;
+        atmosphere.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${sx.toFixed(4)},${sy.toFixed(4)})`;
+      }
     }
     anchors.forEach((anchor, index) => {
       if (anchor.userData.closed_position_yup && anchor.userData.openPosition) {
@@ -355,7 +364,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       el.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) translate(-50%,-50%)`;
       el.style.visibility = pose.bloom > 0.6 && frameState.view !== 'case' ? 'visible' : 'hidden';
       el.dataset.active = String(frameState.active === petalIds[index]);
-      el.style.opacity = frameState.active && frameState.active !== petalIds[index] ? '0.48' : String(THREE.MathUtils.smoothstep(pose.bloom, 0.65, 1));
+      el.style.opacity = String(THREE.MathUtils.smoothstep(pose.bloom, 0.65, 1));
     });
     renderer?.render(scene, camera);
     host.dataset.bloom = pose.bloom.toFixed(3);
