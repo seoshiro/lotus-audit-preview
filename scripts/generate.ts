@@ -3,7 +3,7 @@ import { copy, projects, type ProjectId } from "../src/content.ts";
 import { renderPage, escape } from "../src/render.ts";
 import { dirname } from 'node:path';
 import { aliases, creditPages, allPages } from './page-manifest.ts';
-import { softPage } from './soft-page.ts';
+import { softPage, softBootSource } from './soft-page.ts';
 const soft = process.argv.includes('--soft');
 const template = (id: ProjectId | null) => `<!doctype html>
 <html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f4f1e9"><meta name="description" content="${escape(id ? copy.ru.project[id].summary : copy.ru.description)}"><meta name="color-scheme" content="light dark"><meta name="referrer" content="strict-origin-when-cross-origin"><meta property="og:type" content="website"><meta property="og:title" content="${escape(id ? `${projects.find((p) => p.id === id)!.name} — Beibars Ileskhan` : copy.ru.title)}"><meta property="og:description" content="${escape(id ? copy.ru.project[id].summary : copy.ru.description)}"><meta name="twitter:card" content="summary"><link rel="icon" href="${id ? "../" : ""}favicon.svg" type="image/svg+xml"><title>${escape(id ? `${projects.find((p) => p.id === id)!.name} — Beibars Ileskhan` : copy.ru.title)}</title><link rel="stylesheet" href="${id ? "../" : ""}src/style.css"><script type="module" src="${id ? "../" : ""}src/main.ts"></script></head><body data-project="${id || ""}"><div id="app">${renderPage("ru", id)}</div><noscript><style>html{scroll-behavior:auto}.languages,.motion-toggle,.menu-toggle{display:none}.unfold{height:100svh;min-height:650px}.unfold-sticky{position:relative}.header nav{display:flex}</style></noscript></body></html>`;
@@ -53,3 +53,5 @@ if (soft) {
 }
 writeFileSync('404.html', staticPage('en', 'Page not found', '<p class="eyebrow">404</p><h1>Page not found.</h1><p><a href="https://seoshiro.github.io/">Return to the portfolio ↗</a></p>', '', '<meta name="robots" content="noindex">'));
 console.log(`Generated ${allPages.length} HTML pages: home, ${projects.length} cases, locale compatibility routes, credits and 404.`);
+
+if (soft) writeFileSync('public/locale-boot.js', softBootSource());

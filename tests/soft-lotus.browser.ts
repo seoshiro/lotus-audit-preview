@@ -9,6 +9,19 @@ import { copy, projects, dimensions } from '../src/content.ts';
 import { sceneCopy } from '../src/soft-lotus/copy.ts';
 import { caseNotes } from '../src/case-notes.ts';
 
+test('Early static shell honors language while the 3D application bundle is unavailable', async ({page}) => {
+  await page.setViewportSize({width:360,height:800});
+  await page.route('**/assets/*.js', route=>route.abort());
+  for(const locale of ['en','kk','ru'] as const){
+    await page.goto(`${entry}?lang=${locale}`);
+    await expect(page.locator('html')).toHaveAttribute('lang',locale);
+    await expect(page.locator('.scene-introduction h1')).toHaveText(sceneCopy[locale].headline);
+    await expect(page.locator('.hero-offer')).toHaveText(sceneCopy[locale].intro);
+    await expect(page.locator('.scene-index>a').first()).toHaveAttribute('href',new RegExp(`projects/perch.html\\?lang=${locale}$`));
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+  }
+});
+
 test('Legacy section routes, standalone case links and confirmed contacts work in every language', async ({page}) => {
   test.setTimeout(90000);
   await page.emulateMedia({reducedMotion:'reduce'});
