@@ -179,6 +179,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   document.addEventListener('visibilitychange', () => { dirty = true; }, { signal: abort.signal });
 
   function pick(event: PointerEvent) {
+    if (contextLost || state?.model !== 'ready') return -1;
     const rect = host.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
     ray.setFromCamera(pointer, camera);

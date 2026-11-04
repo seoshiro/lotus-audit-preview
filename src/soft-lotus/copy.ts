@@ -4,6 +4,7 @@ export const sceneCopy = {
   ru: {
     prototype: 'Рабочий макет интерфейса · финальная модель ещё не подключена',
     headline: 'Идеи расцветают.', hint: 'Выбери лепесток', close: 'Вернуться к цветку',
+    fallbackHint: 'Выбери проект или раздел в меню внизу',
     all: 'Все проекты', scene: 'Навигация по лепесткам', loading: 'Подготавливаем сцену…',
     fallback: 'Доступна лёгкая навигация. Все проекты можно открыть обычными ссылками.',
     read: 'Открыть кейс', return: 'Назад к лепестку', preview: 'Исследовать',
@@ -14,6 +15,7 @@ export const sceneCopy = {
   en: {
     prototype: 'Interface prototype · the final model is not connected yet',
     headline: 'Ideas in bloom.', hint: 'Choose a petal', close: 'Return to the flower',
+    fallbackHint: 'Choose a project or section from the menu below',
     all: 'All projects', scene: 'Petal navigation', loading: 'Preparing the scene…',
     fallback: 'Lightweight navigation is available. Every project has an ordinary link.',
     read: 'Read the case', return: 'Back to the petal', preview: 'Explore',
@@ -24,6 +26,7 @@ export const sceneCopy = {
   kk: {
     prototype: 'Интерфейс макеті · соңғы модель әлі қосылмаған',
     headline: 'Идеялар гүлдейді.', hint: 'Күлтені таңдаңыз', close: 'Гүлге оралу',
+    fallbackHint: 'Төмендегі мәзірден жобаны немесе бөлімді таңдаңыз',
     all: 'Барлық жобалар', scene: 'Күлтелер арқылы навигация', loading: 'Сахна дайындалуда…',
     fallback: 'Жеңіл навигация қолжетімді. Барлық жобаны қарапайым сілтемемен ашуға болады.',
     read: 'Жобаны оқу', return: 'Күлтеге оралу', preview: 'Зерттеу',

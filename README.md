@@ -30,7 +30,7 @@ The ordinary preview serves `dist` on localhost:5317. Release browser tests serv
 - `scripts/soft-page.ts`: useful static homepage; `scripts/generate.ts`: all 40 HTML routes.
 - `art/soft-lotus/`: unchanged Tripo master, editable Blender source, preparation and geometry audits.
 - `public/models/soft-lotus-*.glb`: compressed desktop/mobile models; same-model posters for loading/failure.
-- `tests/soft-lotus.browser.ts`: 13 complete browser scenarios, including all legacy cases and actual mesh picking.
+- `tests/soft-lotus.browser.ts`: 14 complete browser scenarios, including all legacy cases and actual mesh picking.
 - `.github/workflows/publish.yml`: checks the exact source revision before publishing to GitHub Pages.
 
 [Implementation, provenance and budget](docs/soft-lotus-v2/README.md) · [Model](docs/soft-lotus-v2/MODEL.md) · [Verification and limitations](docs/soft-lotus-v2/QA.md)

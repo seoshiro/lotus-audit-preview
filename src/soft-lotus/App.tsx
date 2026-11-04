@@ -90,6 +90,11 @@ export function App() {
     if (history.state?.softLotus && history.state.softLotusDepth > 0) history.back();
     else navigate({ type: 'back' }, true);
   }
+  function focusNavigation(id: PetalId | null) {
+    const petal = document.getElementById(`petal-${id}`);
+    const visible = petal && petal.getClientRects().length > 0 && getComputedStyle(petal).visibility !== 'hidden';
+    (visible ? petal : document.getElementById(`index-${id}`))?.focus({ preventScroll: true });
+  }
   function select(event: MouseEvent<HTMLButtonElement>, id: PetalId) { navigate({ type: 'select', id, source: event.currentTarget.id }); }
 
   useEffect(() => {
@@ -104,7 +109,7 @@ export function App() {
       if (event.key !== 'Escape' || current.current.view !== 'selected') return;
       const source = current.current.active;
       navigation.current({ type: 'overview' });
-      queueMicrotask(() => document.getElementById(`petal-${source}`)?.focus({ preventScroll: true }));
+      queueMicrotask(() => focusNavigation(source));
     }, { signal: controller.signal });
     const instance = createRuntime(host.current!, labels.current!, id => navigation.current({ type: 'select', id, source: `petal-${id}` }), ready => dispatch({ type: 'model', status: ready ? 'ready' : 'failed' }));
     runtime.current = instance; instance.update(current.current);
@@ -114,7 +119,7 @@ export function App() {
   useLayoutEffect(() => {
     runtime.current?.update(state);
     document.documentElement.lang = state.locale;
-    document.title = `Lotus V2 preview — ${c.name}`;
+    document.title = `${c.name} — ${s.headline}`;
     document.body.dataset.view = state.view;
     document.body.dataset.petal = state.active || '';
     document.body.dataset.model = state.model;
@@ -136,9 +141,9 @@ export function App() {
       <div className="soft-stage" data-view={state.view} aria-busy={state.model === 'pending'}>
         <div ref={host} className="soft-canvas" />
         {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-desktop.png`} alt="" /></picture>}
-        <div className="scene-introduction" aria-hidden={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p>{s.hint}</p></div>
+        <div className="scene-introduction" aria-hidden={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p>{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
         <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}.webp`} alt="" width="144" height="88" />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
-        {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => document.getElementById(`petal-${id}`)?.focus({ preventScroll: true })); }}>{s.close}</button>
+        {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => focusNavigation(id)); }}>{s.close}</button>
           <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(state.active)} reduced={state.reducedMotion} className="preview-title" />
           {activeProject && activeCopy ? <><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a href={activeProject.live} target="_blank" rel="noreferrer">{c.live} ↗</a></div></> : state.active === 'about' ? <><p>{c.aboutText}</p><p>{c.roleText}</p></> : <><p>{s.contactText}</p><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></>}
         </aside>}

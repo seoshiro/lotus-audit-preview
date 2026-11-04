@@ -36,6 +36,7 @@ test('All five draft entries retain their state across three languages', async (
     for (const locale of ['ru', 'kk', 'en']) {
       await page.locator(`.soft-languages button[lang="${locale}"]`).click();
       await expect(page.locator('html')).toHaveAttribute('lang', locale);
+      await expect(page).toHaveTitle(`${copy[locale as 'ru'|'en'|'kk'].name} — ${sceneCopy[locale as 'ru'|'en'|'kk'].headline}`);
       await expect(page.locator('body')).toHaveAttribute('data-petal', id);
       await expect(page.locator('.petal-preview')).toBeVisible();
       await expect(page.locator('#preview-title')).toHaveText(['perch','selvedge','forme'].includes(id) ? id.toUpperCase() : sceneCopy[locale as 'ru'|'en'|'kk'][id as 'about'|'contact']);
@@ -238,4 +239,37 @@ test('The actual petal surface selects SELVEDGE and a drag does not select', asy
   await page.mouse.click(810,760);
   await expect(page.locator('body')).toHaveAttribute('data-petal','selvedge');
   await expect(page.locator('#preview-title')).toHaveText('SELVEDGE');
+});
+
+test('Fallback gives accurate directions, readable navigation and uncropped short previews', async ({page}) => {
+  test.setTimeout(60000);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.addInitScript(()=>{
+    const original=HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext=function(this:HTMLCanvasElement,type:string,...args:unknown[]){
+      return type.startsWith('webgl')?null:Reflect.apply(original,this,[type,...args]);
+    } as typeof original;
+  });
+  for(const viewport of [{width:1165,height:747},{width:390,height:844},{width:320,height:640}]) {
+    await page.setViewportSize(viewport);
+    for(const locale of ['ru','en','kk'] as const) {
+      await page.goto(`${entry}?lang=${locale}`);
+      await expect(page.locator('body')).toHaveAttribute('data-model','failed');
+      await expect(page).toHaveTitle(`${copy[locale].name} — ${sceneCopy[locale].headline}`);
+      await expect(page.locator('.scene-introduction')).toContainText(sceneCopy[locale].fallbackHint);
+      await expect(page.locator('.scene-poster')).toHaveCSS('opacity','1');
+      for(const id of ['perch','selvedge','forme','contact']) {
+        await page.locator(`#index-${id}`).click();
+        expect(await page.locator('.petal-preview').evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
+        expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+        if(locale==='ru'&&id==='perch') {
+          await mkdir('evidence/lotus-v2/fallback-review',{recursive:true});
+          await page.screenshot({path:`evidence/lotus-v2/fallback-review/perch-${viewport.width}.png`});
+          expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
+        }
+        await page.locator('.preview-close').click();
+        await expect(page.locator(`#index-${id}`)).toBeFocused();
+      }
+    }
+  }
 });

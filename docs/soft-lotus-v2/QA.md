@@ -27,3 +27,13 @@ Desktop GLB: 61,954 triangles, 2,024,228 bytes. Mobile: 24,614 triangles, 847,49
 Physical phone testing, Safari/Firefox and actual browser 200% zoom have not been claimed. The narrow/short layout was tested directly at 720x450 in addition to phone viewports. Automated accessibility checks do not replace assistive-technology user testing.
 
 Current proof captures are in `proofs/`. Detailed local frame records are in `evidence/lotus-v2/release-review/performance.json`; source and geometry audits are under `art/soft-lotus/`. Publication and exact deployed revision are recorded in the final handoff, not inferred from these local tests.
+
+## Independent review follow-up
+
+The production React title still contained `Lotus V2 preview`; it now uses the owner's name and localized headline, with a browser assertion after every language change. The static page title was already a portfolio title.
+
+WebGL-disabled fallback at 1165x747 had faded artwork, an inaccurate petal-selection hint and an unnecessarily constrained preview. The fallback now keeps the poster at full opacity, presents a stronger semantic menu, explicitly directs visitors to that menu, hides inactive projected controls and disables mesh picking. Short previews fit without internal scrolling at 1165x747, 390x844 and 320x640. Mobile fallback positions the artwork above a taller text panel; closing a preview returns keyboard focus to its visible menu control. Normal 3D navigation remains separate from this failure state.
+
+The four short entries (three projects and Contact) are covered in RU/EN/KK at all three sizes, including axe and exact focus return. The suite now has 14 browser scenarios. Screenshots are in `proofs/fallback-*.png`.
+
+Contact review: the supplied original and V2 briefs and the pre-lotus content source provide GitHub as the confirmed channel. No direct email, telephone or messenger contact was established from those materials. Git author metadata is not treated as permission to publish a contact address. The Contact entry therefore retains the existing GitHub link.
