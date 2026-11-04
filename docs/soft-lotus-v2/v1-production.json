@@ -1,0 +1,98 @@
+{
+  "recordedAt": "2026-11-04T07:11:50.706Z",
+  "source": "81da4e53946c62f37ecc71ccd59ab11161f4fc19 local production build",
+  "environment": {
+    "browser": "156.0.8078.76",
+    "os": "10.0.26200",
+    "cpu": "AMD Ryzen 5 7535HS with Radeon Graphics        ",
+    "physicalPhone": false
+  },
+  "measurements": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "gpu": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "webglReady": true,
+      "measurements": [
+        {
+          "name": "opening",
+          "durationMs": 1576,
+          "canvasDimensionAssignments": 0,
+          "layoutReads": 224,
+          "longTasks": [],
+          "rAF": {
+            "samples": 215,
+            "medianMs": 7,
+            "p95Ms": 7.699999999999818,
+            "maxMs": 14.200000000000273,
+            "over50ms": 0
+          },
+          "endProgress": "1.000"
+        },
+        {
+          "name": "canvas-transfer-to-index",
+          "durationMs": 1579,
+          "canvasDimensionAssignments": 26,
+          "layoutReads": 230,
+          "longTasks": [],
+          "rAF": {
+            "samples": 214,
+            "medianMs": 7,
+            "p95Ms": 13.599999999999909,
+            "maxMs": 14.299999999999727,
+            "over50ms": 0
+          },
+          "endProgress": "1.000"
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "gpu": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "webglReady": true,
+      "measurements": [
+        {
+          "name": "opening",
+          "durationMs": 1577,
+          "canvasDimensionAssignments": 0,
+          "layoutReads": 224,
+          "longTasks": [],
+          "rAF": {
+            "samples": 225,
+            "medianMs": 7,
+            "p95Ms": 7.2999999999999545,
+            "maxMs": 13.900000000000034,
+            "over50ms": 0
+          },
+          "endProgress": "1.000"
+        },
+        {
+          "name": "canvas-transfer-to-index",
+          "durationMs": 1555,
+          "canvasDimensionAssignments": 24,
+          "layoutReads": 224,
+          "longTasks": [],
+          "rAF": {
+            "samples": 211,
+            "medianMs": 7,
+            "p95Ms": 13.400000000000091,
+            "maxMs": 14.599999999999909,
+            "over50ms": 0
+          },
+          "endProgress": "1.000"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Instrumentation counts canvas backing-store dimension assignments and main-thread layout reads.",
+    "rAF intervals describe callback scheduling, not verified rendered FPS.",
+    "Single-session local Chrome measurements do not reproduce or diagnose the user’s unnamed physical device conclusively.",
+    "V2 wireframes are not a valid performance comparison with a finished model."
+  ]
+}
