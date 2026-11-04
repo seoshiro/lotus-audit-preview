@@ -2,12 +2,15 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 const origin=process.argv[2]||'http://127.0.0.1:5319/';
-const dir='evidence/lotus-audit/performance';await fs.mkdir(dir,{recursive:true});
+const variant=process.env.LOTUS_PROFILE_VARIANT;
+const dir=variant?`evidence/lotus-audit/performance-followup/${variant}`:'evidence/lotus-audit/performance';await fs.mkdir(dir,{recursive:true});
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 const reports=[];
 try {
  for(const viewport of [{width:1440,height:900},{width:390,height:844}]) {
   const context=await browser.newContext({viewport});const page=await context.newPage();
+  const diagnosticCSS=variant==='no-labels'?'.petal-labels{display:none!important}':variant==='no-thumbnails'?'.petal-labels img{display:none!important}':variant==='no-thumbnail-effects'?'.petal-labels img{transform:none!important;box-shadow:none!important;border-radius:0!important}':variant==='no-decor'?'.petal-drift{display:none!important}':'';
+  if(diagnosticCSS)await page.addInitScript(css=>document.addEventListener('DOMContentLoaded',()=>{const style=document.createElement('style');style.textContent=css;document.head.append(style);}),diagnosticCSS);
   const cdp=await context.newCDPSession(page);
   await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
   await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:40,downloadThroughput:1250000,uploadThroughput:625000});

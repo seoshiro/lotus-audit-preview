@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-const dir='evidence/lotus-audit/performance';const report=JSON.parse(await fs.readFile(`${dir}/report.json`,'utf8'));
+const dir=process.argv[2]||'evidence/lotus-audit/performance';const report=JSON.parse(await fs.readFile(`${dir}/report.json`,'utf8'));
 for(const r of report.reports){
  const t=JSON.parse(await fs.readFile(`${dir}/trace-${r.viewport.width}.json`,'utf8')).traceEvents;
  const mark=name=>t.find(e=>e.name===name&&e.cat==='blink.user_timing');

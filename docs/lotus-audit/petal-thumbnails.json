@@ -1,0 +1,26 @@
+[
+  {
+    "source": "docs/originals/perch.png",
+    "sourceSHA256": "7c48a1f9e696accdca4eb765f9c5a4cb36f97898bc5595598177b04b95e9202d",
+    "file": "public/assets/perch-petal.webp",
+    "width": 320,
+    "height": 222,
+    "bytes": 10204
+  },
+  {
+    "source": "docs/originals/selvedge.png",
+    "sourceSHA256": "339c5251a2951a726e317712a1df364b33d2c07ace6e669d6fe62fd5376369e7",
+    "file": "public/assets/selvedge-petal.webp",
+    "width": 320,
+    "height": 222,
+    "bytes": 7218
+  },
+  {
+    "source": "docs/originals/forme.png",
+    "sourceSHA256": "3716a92763f13049515981ba5eb8dd971eaaeec17ce68d1607d6be3227114de0",
+    "file": "public/assets/forme-petal.webp",
+    "width": 320,
+    "height": 192,
+    "bytes": 12008
+  }
+]

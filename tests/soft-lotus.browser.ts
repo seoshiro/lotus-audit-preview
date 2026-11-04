@@ -17,9 +17,34 @@ test('Early static shell honors language while the 3D application bundle is unav
     await expect(page.locator('html')).toHaveAttribute('lang',locale);
     await expect(page.locator('.scene-introduction h1')).toHaveText(sceneCopy[locale].headline);
     await expect(page.locator('.hero-offer')).toHaveText(sceneCopy[locale].intro);
+    await expect(page.locator('.hero-actions a').first()).toHaveAttribute('href',new RegExp(`projects/perch.html\\?lang=${locale}$`));
     await expect(page.locator('.scene-index>a').first()).toHaveAttribute('href',new RegExp(`projects/perch.html\\?lang=${locale}$`));
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
   }
+});
+
+test('Main work action opens a visible project list and returns keyboard focus in every language', async ({page}) => {
+  test.setTimeout(60000);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  for(const locale of ['ru','en','kk'] as const){
+    await page.goto(`${entry}?lang=${locale}`);
+    const action=page.locator('#hero-work'),list=page.locator('#work-list'),summary=page.locator('.scene-index summary');
+    await action.focus();await page.keyboard.press('Enter');
+    await expect(action).toHaveAttribute('aria-expanded','true');await expect(list).toBeVisible();await expect(summary).toBeFocused();
+    await expect(list.locator('a')).toHaveCount(11);
+    await page.keyboard.press('Tab');await expect(list.locator('a').first()).toBeFocused();
+    await page.keyboard.press('Escape');await expect(list).toBeHidden();await expect(action).toBeFocused();
+    await page.keyboard.press('Space');await expect(list).toBeVisible();
+    await list.locator(`a[href*="projects/perch.html"]`).click();await expect(page).toHaveURL(new RegExp(`projects/perch.html\\?lang=${locale}$`));
+  }
+  await page.route('**/models/*.glb',route=>route.abort());
+  for(const viewport of [{width:390,height:844},{width:320,height:640}]){
+    await page.setViewportSize(viewport);
+    await page.goto(`${entry}?lang=kk`);await expect(page.locator('body')).toHaveAttribute('data-model','failed');
+    await page.locator('#hero-work').click();await expect(page.locator('#work-list')).toBeVisible();
+    expect(await page.locator('#work-list').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight;})).toBe(true);
+  }
+  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
 });
 
 test('Legacy section routes, standalone case links and confirmed contacts work in every language', async ({page}) => {

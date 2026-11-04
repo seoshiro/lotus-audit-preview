@@ -8,7 +8,7 @@ body{min-height:100svh}.soft-stage{background:radial-gradient(ellipse at 50% 61%
 .scene-introduction .hero-offer{max-width:55ch;margin:auto;font-size:14px;line-height:1.6;color:var(--ink)}.hero-actions{display:flex;justify-content:center;gap:26px;margin-top:7px;pointer-events:auto;font-size:11px}.hero-actions button{padding:5px 0;text-decoration:underline;text-underline-offset:5px}.scene-introduction .scene-hint{font-size:10px;margin-top:3px;color:var(--muted)}
 .petal-labels button{border:0;background:transparent;box-shadow:none;min-width:112px;text-align:center;padding:6px;transition:transform 160ms var(--ease-out)}.petal-labels button:active{transform:scale(.97)}
 .petal-labels button>span{font-family:SoftSerif,Georgia,serif;font-size:16px;font-weight:600;letter-spacing:.14em;display:block;text-transform:uppercase;padding:7px 0;text-shadow:0 1px 5px #f4f1ea}.petal-labels button>span>span{display:none}
-.petal-labels img{width:134px;height:80px;object-fit:cover;margin:0 auto;transform:perspective(600px) rotateX(14deg);border-radius:2px;box-shadow:0 8px 18px #50443918}.petal-labels button[aria-pressed=true]{outline:none}.petal-labels button[aria-pressed=true]:focus-visible{outline:2px solid #75554a}
+.petal-labels img{width:134px;height:80px;object-fit:cover;margin:0 auto;transform:none;border-radius:0;box-shadow:none}.petal-labels button[aria-pressed=true]{outline:none}.petal-labels button[aria-pressed=true]:focus-visible{outline:2px solid #75554a}
 .petal-labels>div[data-active=true] button>span{font-size:23px}.soft-stage[data-view=selected] .petal-labels img{display:none}
 .petal-preview{top:90px;right:5%;width:min(32vw,420px);max-height:calc(100svh - 205px);border:0;background:#f4f1eae8;box-shadow:none;padding:0 4px 12px;overflow:auto;scrollbar-width:thin;overscroll-behavior:contain}
 .preview-close{position:static;padding:0;display:block;font-size:11px;min-height:44px;margin:0 0 4px;text-align:left}.preview-close::before{content:'←';margin-right:10px}.petal-preview>.eyebrow{display:none}.preview-title{font-size:clamp(36px,4vw,56px);letter-spacing:-.025em;line-height:1;margin:0 0 8px}
@@ -46,3 +46,4 @@ body[data-reduced-motion=true] .petal-drift{display:none}body[data-reduced-motio
 .hero-actions a{display:inline-flex;align-items:center;font-size:inherit}.static-languages{pointer-events:auto}
 
 @media(max-width:700px){body[data-model=failed] .scene-bottom{bottom:132px}}
+@media(max-width:700px){.scene-index details>div{position:fixed;left:20px;right:20px;bottom:128px;min-width:0;max-width:none;max-height:calc(100svh - 220px)}}

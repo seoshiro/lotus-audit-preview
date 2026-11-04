@@ -3,13 +3,14 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 const origin=process.argv[2],commit=process.argv[3];if(!origin||!commit)throw Error('Usage: node scripts/verify-audit-live.mjs URL SHA');
-const dir='evidence/lotus-audit/live';await fs.mkdir(dir,{recursive:true});
+const preview=process.argv[4]!=='production';
+const dir=preview?'evidence/lotus-audit/live':'evidence/lotus-audit/production';await fs.mkdir(dir,{recursive:true});
 const html=await(await globalThis.fetch(new URL('index.html',origin))).text();const version=await(await globalThis.fetch(new URL('version.json',origin))).json();
 if(version.commit!==commit||!html.includes(`name="portfolio-build" content="${commit}"`))throw Error('Published source revision mismatch');
-if(!html.includes('noindex,nofollow'))throw Error('Preview must not be indexed');
+if(preview?!html.includes('noindex,nofollow'):html.includes('noindex'))throw Error('Incorrect indexing policy for this deployment');
 const records=[];
-for(const file of ['soft-lotus-candidate.glb','soft-lotus-mobile.glb','soft-lotus-open-desktop.png','soft-lotus-open-mobile.png']){
- const remote=await(await globalThis.fetch(new URL(`models/${file}`,origin))).arrayBuffer();const local=await fs.readFile(`public/models/${file}`);
+for(const file of ['models/soft-lotus-candidate.glb','models/soft-lotus-mobile.glb','models/soft-lotus-open-desktop.png','models/soft-lotus-open-mobile.png','assets/perch-petal.webp','assets/selvedge-petal.webp','assets/forme-petal.webp']){
+ const remote=await(await globalThis.fetch(new URL(file,origin))).arrayBuffer();const local=await fs.readFile(`public/${file}`);
  const hash=b=>createHash('sha256').update(Buffer.from(b)).digest('hex');
  if(hash(remote)!==hash(local))throw Error('Asset mismatch '+file);records.push({file,bytes:local.length,sha256:hash(local)});
 }

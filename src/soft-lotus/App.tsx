@@ -72,6 +72,9 @@ function Reader({ state, onBack, onReturnFocus }: { state: SceneState; onBack: (
 }
 
 export function App() {
+  const [workOpen, setWorkOpen] = useState(false);
+  const workSummary = useRef<HTMLElement>(null);
+  const workReturn = useRef<HTMLElement | null>(null);
   const [loadProgress, setLoadProgress] = useState<LoadProgress>({ phase: 'transfer', loaded: 0, total: null });
   const [state, dispatch] = useReducer(sceneReducer, undefined, () => createSceneState(routeFromURL(new URL(location.href), preferredLocale()), matchMedia('(prefers-reduced-motion: reduce)').matches));
   const current = useRef(state); current.current = state;
@@ -109,7 +112,7 @@ export function App() {
     const visible = petal && petal.getClientRects().length > 0 && getComputedStyle(petal).visibility !== 'hidden';
     (visible ? petal : document.getElementById(`index-${id}`))?.focus({ preventScroll: true });
   }
-  function select(event: MouseEvent<HTMLButtonElement>, id: PetalId) { navigate({ type: 'select', id, source: event.currentTarget.id }); }
+  function select(event: MouseEvent<HTMLButtonElement>, id: PetalId) { setWorkOpen(false); navigate({ type: 'select', id, source: event.currentTarget.id }); }
 
   useEffect(() => {
     history.replaceState({ softLotus: true, softLotusDepth: Number(history.state?.softLotusDepth || 0) }, '', routeURL(new URL(location.href), current.current));
@@ -138,6 +141,7 @@ export function App() {
   }, []);
 
   useLayoutEffect(() => {
+    if (state.view !== 'overview') setWorkOpen(false);
     runtime.current?.update(state);
     document.documentElement.lang = state.locale;
     document.title = `${c.name} — ${s.headline}`;
@@ -167,8 +171,8 @@ export function App() {
         <div className="paper-grain" aria-hidden="true" />
         {state.model === 'ready' && !state.reducedMotion && state.view === 'overview' && <div className="petal-drift" aria-hidden="true"><i /><i /><i /></div>}
         {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-desktop.png`} alt="" /></picture>}
-        <div className="scene-introduction" inert={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button type="button" onClick={() => { document.getElementById('index-perch')?.focus(); }}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
-        <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}.webp`} alt="" width="144" height="88" />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
+        <div className="scene-introduction" inert={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button id="hero-work" type="button" aria-expanded={workOpen} aria-controls="work-list" onClick={event => { workReturn.current = event.currentTarget; setWorkOpen(true); workSummary.current?.focus({ preventScroll: true }); }}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
+        <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}-petal.webp`} alt="" width="320" height={Math.round(320 * dimensions[id].main[1] / dimensions[id].main[0])} />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
         {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => focusNavigation(id)); }}>{s.close}</button>
           <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(state.active)} reduced={state.reducedMotion} className="preview-title" />
           {activeProject && activeCopy ? <><p className="preview-subtitle">{s[activeProject.id as FeaturedId]}</p><img className="preview-product" src={`assets/${activeProject.id}.webp`} width={dimensions[activeProject.id].main[0]} height={dimensions[activeProject.id].main[1]} alt={activeCopy.alt} /><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a className="primary-action" href={activeProject.live} target="_blank" rel="noreferrer">{s.demo} ↗</a></div></> : state.active === 'about' ? <><p>{s.aboutWork}</p></> : <><p>{s.contactText}</p><div className="contact-actions"><a className="primary-action" href="https://t.me/tserriednichs" target="_blank" rel="noreferrer">{s.discuss} · Telegram ↗</a><a href="mailto:beibars.ileskhan2405@gmail.com">beibars.ileskhan2405@gmail.com</a><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></div></>}
@@ -179,7 +183,7 @@ export function App() {
         </div>}
         <div className="scene-bottom"><div><p role="status">{state.model === 'failed' ? s.fallback : state.model === 'ready' ? s.ready : ''}</p></div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>
       </div>
-      <nav id="scene-index" className="scene-index" aria-label={`${s.scene} — ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<details><summary>{s.all}</summary><div>{projects.map(p => <a key={p.id} href={pageHref(p.id, state.locale, false)}><strong>{p.name} ↗</strong><small>{projectLabels[state.locale][p.id]}</small></a>)}</div></details></nav>
+      <nav id="scene-index" className="scene-index" aria-label={`${s.scene} — ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<details open={workOpen} onToggle={event => setWorkOpen(event.currentTarget.open)} onKeyDown={event => { if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); setWorkOpen(false); (workReturn.current || workSummary.current)?.focus({ preventScroll: true }); } }}><summary ref={workSummary} onClick={() => { workReturn.current = workSummary.current; }}>{s.all}</summary><div id="work-list">{projects.map(p => <a key={p.id} href={pageHref(p.id, state.locale, false)}><strong>{p.name} ↗</strong><small>{projectLabels[state.locale][p.id]}</small></a>)}</div></details></nav>
       {activeProject && <Reader state={state} onBack={back} onReturnFocus={restoreFocus} />}
     </main>
   </>;
