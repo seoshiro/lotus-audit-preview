@@ -30,3 +30,19 @@
 }
 body[data-reduced-motion=true] .ink-reveal,body[data-reduced-motion=true] .ink-absorption{animation:none;transition:none}
 @media(prefers-reduced-motion:reduce){.ink-reveal,.ink-absorption{animation:none;transition:none}}
+
+/* All projects is its own reading surface, never a popover over the lotus. */
+.soft-stage[data-work-open=true]{visibility:hidden}
+.work-browser{position:fixed;inset:0;margin:0;width:100vw;height:100svh;max-width:none;max-height:none;padding:0;border:0;background:var(--paper);color:var(--ink);overscroll-behavior:contain}
+.work-browser::backdrop{background:var(--paper)}
+.work-browser-shell{width:min(100%,1120px);margin:auto;padding:0 40px 48px}
+.work-browser-header{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 0 24px;background:var(--paper);border-bottom:1px solid #91857338}
+.work-browser-header h2{font-size:clamp(36px,4vw,58px);line-height:1.1}
+.work-browser-close{display:flex;align-items:center;gap:16px;font-size:12px;min-height:44px;padding:8px 0;white-space:nowrap}.work-browser-close span{font-size:26px;font-weight:400}
+#work-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px}
+#work-list>a{display:flex;align-items:center;gap:20px;min-height:120px;padding:18px 0;text-decoration:none;border-bottom:1px solid #91857338}
+#work-list>a>img{width:132px;height:82px;object-fit:contain;background:#e8e3d7;flex:0 0 auto}
+#work-list>a>span{min-width:0}#work-list strong{display:block;font-family:SoftSerif,Georgia,serif;font-size:24px;font-weight:500;letter-spacing:.02em}#work-list strong span{font-size:15px;margin-left:8px}#work-list small{display:block;font-size:12px;line-height:1.5;color:var(--muted);margin-top:5px}
+#work-list>a:hover strong{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+@media(max-width:700px){.work-browser-shell{padding:0 24px 30px}.work-browser-header{padding:20px 0 18px;gap:16px;align-items:flex-start}.work-browser-header h2{font-size:34px}.work-browser-close{font-size:11px;gap:8px;white-space:normal;text-align:right}.work-browser-close span{font-size:24px}#work-list{grid-template-columns:1fr}#work-list>a{min-height:106px;gap:16px;padding:16px 0}#work-list>a>img{width:112px;height:72px}#work-list strong{font-size:23px}#work-list small{font-size:11px}}
+@media(max-width:360px){.work-browser-shell{padding-left:20px;padding-right:20px}.work-browser-header h2{font-size:30px}#work-list>a>img{width:92px;height:64px}#work-list>a{gap:13px}}

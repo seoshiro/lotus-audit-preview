@@ -2,6 +2,7 @@ import type { Locale } from '../content.ts';
 
 export const sceneCopy = {
   ru: {
+    closeWork: 'Закрыть список',
     intro: 'Я Бейбарс. Создаю интерактивные сайты и прототипы веб-продуктов с помощью ИИ.',
     discuss: 'Обсудить проект', work: 'Посмотреть работы', demo: 'Открыть демо',
     aboutWork: 'Беру на себя постановку задачи, выбор инструментов и визуальное направление. Сравниваю результат с брифом, уточняю сценарий и направляю доработку. Код создаю с помощью ИИ; продолжаю учиться писать и понимать его самостоятельно.',
@@ -18,6 +19,7 @@ export const sceneCopy = {
     skip: 'Перейти к проектам', motion: 'Уменьшить движение', direct: 'Отдельная страница кейса',
   },
   en: {
+    closeWork: 'Close project list',
     intro: 'I’m Beibars. I create interactive websites and web-product prototypes with AI assistance.',
     discuss: 'Discuss a project', work: 'Explore the work', demo: 'Open demo',
     aboutWork: 'I define the task, choose tools and shape the visual direction. I compare the result with the brief, refine the workflow and guide revisions. I create code with AI assistance and continue learning to write and understand it independently.',
@@ -34,6 +36,7 @@ export const sceneCopy = {
     skip: 'Skip to projects', motion: 'Reduce motion', direct: 'Standalone case page',
   },
   kk: {
+    closeWork: 'Жобалар тізімін жабу',
     intro: 'Мен Бейбарспын. ИИ көмегімен интерактивті сайттар мен веб-өнім прототиптерін жасаймын.',
     discuss: 'Жобаны талқылау', work: 'Жұмыстарды көру', demo: 'Демоны ашу',
     aboutWork: 'Міндетті анықтап, құралдар мен визуалды бағытты таңдаймын. Нәтижені брифпен салыстырып, сценарийді нақтылаймын және түзетулерді бағыттаймын. Кодты ИИ көмегімен жасаймын, оны өз бетімше жазу мен түсінуді үйреніп жүрмін.',

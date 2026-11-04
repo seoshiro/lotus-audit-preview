@@ -28,9 +28,9 @@ test('Main work action opens a visible project list and returns keyboard focus i
   await page.emulateMedia({reducedMotion:'reduce'});
   for(const locale of ['ru','en','kk'] as const){
     await page.goto(`${entry}?lang=${locale}`);
-    const action=page.locator('#hero-work'),list=page.locator('#work-list'),summary=page.locator('.scene-index summary');
+    const action=page.locator('#hero-work'),list=page.locator('#work-list'),close=page.locator('.work-browser-close');
     await action.focus();await page.keyboard.press('Enter');
-    await expect(action).toHaveAttribute('aria-expanded','true');await expect(list).toBeVisible();await expect(summary).toBeFocused();
+    await expect(action).toHaveAttribute('aria-expanded','true');await expect(list).toBeVisible();await expect(close).toBeFocused();
     await expect(list.locator('a')).toHaveCount(11);
     await page.keyboard.press('Tab');await expect(list.locator('a').first()).toBeFocused();
     await page.keyboard.press('Escape');await expect(list).toBeHidden();await expect(action).toBeFocused();
@@ -42,7 +42,7 @@ test('Main work action opens a visible project list and returns keyboard focus i
     await page.setViewportSize(viewport);
     await page.goto(`${entry}?lang=kk`);await expect(page.locator('body')).toHaveAttribute('data-model','failed');
     await page.locator('#hero-work').click();await expect(page.locator('#work-list')).toBeVisible();
-    expect(await page.locator('#work-list').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight;})).toBe(true);
+    expect(await page.locator('#work-browser').evaluate(el=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight&&el.scrollWidth<=el.clientWidth;})).toBe(true);
   }
   expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
 });
@@ -71,6 +71,48 @@ test('Legacy section routes, standalone case links and confirmed contacts work i
     await page.evaluate(()=>{location.hash='about';});
     // Explicit query wins over an unrelated hash; legacy links without it migrate.
     await expect(page.locator('body')).toHaveAttribute('data-petal','contact');
+  }
+});
+
+test('All-project catalog excludes the selected card and restores selection and focus on close', async ({page}) => {
+  test.setTimeout(120000);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  for(const viewport of [{width:1440,height:900},{width:390,height:844},{width:320,height:640}]) {
+    await page.setViewportSize(viewport);
+    for(const locale of ['ru','en','kk']) {
+      await page.goto(`${entry}?lang=${locale}`);
+      await expect(page.locator('body')).toHaveAttribute('data-model','ready',{timeout:20000});
+      await page.locator('#index-selvedge').click();
+      const selectedURL=page.url(),trigger=page.locator('#index-all'),dialog=page.locator('#work-browser'),close=page.locator('.work-browser-close'),links=page.locator('#work-list>a');
+      await trigger.focus();await page.keyboard.press('Enter');
+      await expect(dialog).toBeVisible();await expect(close).toBeFocused();
+      await expect(page.locator('.petal-preview')).toBeHidden();await expect(page.locator('.petal-labels')).toBeHidden();
+      await expect(page.locator('.soft-canvas')).toHaveAttribute('data-decor','paused');
+      expect(page.url()).toBe(selectedURL);await expect(links).toHaveCount(11);
+      await page.keyboard.press('Tab');await expect(links.first()).toBeFocused();
+      await page.keyboard.press('Shift+Tab');await expect(close).toBeFocused();
+      await page.keyboard.press('Shift+Tab');await expect(links.last()).toBeFocused();
+      await page.keyboard.press('Tab');await expect(close).toBeFocused();
+      expect(await dialog.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
+      if(locale==='ru') {
+        await links.locator('img').evaluateAll(images=>Promise.all(images.map(img=>(img as HTMLImageElement).decode())));
+        await mkdir('evidence/project-list',{recursive:true});
+        await page.screenshot({path:`evidence/project-list/after-${viewport.width}.png`});
+        expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
+      }
+      await page.keyboard.press('Escape');await expect(dialog).toBeHidden();await expect(trigger).toBeFocused();
+      await expect(page.locator('#preview-title')).toHaveText('SELVEDGE');await expect(page.locator('.petal-preview')).toBeVisible();expect(page.url()).toBe(selectedURL);
+      await page.locator('#index-forme').click();await trigger.click();await close.click();
+      await expect(dialog).toBeHidden();await expect(trigger).toBeFocused();await expect(page.locator('#preview-title')).toHaveText('FORME');
+      // Escape outside the catalog still returns to the flower; hero entry uses the same catalog.
+      await page.keyboard.press('Escape');await expect(page.locator('body')).toHaveAttribute('data-view','overview');
+      await page.locator('#hero-work').click();await expect(dialog).toBeVisible();await close.click();await expect(page.locator('#hero-work')).toBeFocused();
+      // Real project links keep the locale, and browser Back cannot reopen two competing panels.
+      await page.locator('#index-selvedge').click();await trigger.click();
+      await links.locator('strong').filter({hasText:'PERCH'}).click();await expect(page).toHaveURL(new RegExp(`projects/perch.html\\?lang=${locale}$`));
+      await page.goBack();await expect(page.locator('body')).toHaveAttribute('data-petal','selvedge');
+      await expect(dialog).toBeHidden();await expect(page.locator('.petal-preview')).toBeVisible();
+    }
   }
 });
 
@@ -175,7 +217,7 @@ test('Direct case route remains readable and keyboard-contained without WebGL', 
   await expect(page.locator('html')).toHaveAttribute('lang', 'kk');
   for (let i = 0; i < 12; i++) {
     await page.keyboard.press('Tab');
-    expect(await page.evaluate(() => document.querySelector('dialog')?.contains(document.activeElement))).toBe(true);
+    expect(await page.evaluate(() => document.querySelector('dialog[open]')?.contains(document.activeElement))).toBe(true);
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   await page.keyboard.press('Escape');
@@ -351,6 +393,12 @@ test('Touch selection preserves a separate flower area and readable project cont
       await page.getByRole('dialog').locator('.reader-top button').tap();
       await expect(page.getByRole('dialog')).not.toBeVisible();
       await expect(page.locator('body')).toHaveAttribute('data-petal','selvedge');
+      await page.locator('#index-all').tap();
+      await expect(page.locator('#work-browser')).toBeVisible();
+      await expect(page.locator('.petal-preview')).toBeHidden();
+      await page.locator('.work-browser-close').tap();
+      await expect(page.locator('#work-browser')).toBeHidden();
+      await expect(page.locator('#preview-title')).toHaveText('SELVEDGE');
     }
   } finally { await context.close(); }
 });
