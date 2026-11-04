@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { gsap } from 'gsap';
-import Lenis from 'lenis';
 import { softLotusAsset, softLotusContract } from './asset.ts';
 import { petalIds, type PetalId, type SceneState } from './state.ts';
 
@@ -10,11 +9,12 @@ export interface SceneRuntime {
   update(state: SceneState): void;
   dispose(): void;
 }
+export type LoadProgress = { phase: 'transfer' | 'prepare'; loaded: number; total: number | null };
 
 // One GSAP ticker owns scroll input, animation and rendering. There is no
 // renderer RAF loop and no continuously changing value in React state.
 export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: (id: PetalId) => void,
-  onModel: (ready: boolean) => void): SceneRuntime {
+  onModel: (ready: boolean) => void, onProgress: (progress: LoadProgress) => void): SceneRuntime {
   let disposed = false;
   let contextLost = false;
   let introduced = false;
@@ -24,9 +24,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   let height = 1;
   let hovered = -1;
   let hoverEvent: PointerEvent | null = null;
-  let scroll = 0;
   let state: SceneState | null = null;
-  let previousView = 'overview';
   let resource: THREE.Object3D | null = null;
   let press: { index: number; x: number; y: number; scroll: number; pointer: number } | null = null;
   const abort = new AbortController();
@@ -37,20 +35,22 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const inspectionPose = inspectionValue !== null && Number.isFinite(Number(inspectionValue)) ? THREE.MathUtils.clamp(Number(inspectionValue), 0, 1) : null;
   const flower = new THREE.Group();
   scene.add(flower);
-  scene.add(new THREE.HemisphereLight(0xfffbf5, 0xc5bcae, 2.6));
-  const key = new THREE.DirectionalLight(0xfff8f3, 2.0);
-  key.position.set(-3, 9, 4); scene.add(key);
-  key.castShadow = true; key.shadow.mapSize.set(1024, 1024);
+  scene.add(new THREE.HemisphereLight(0xfff9ee, 0xaaa28f, 1.8));
+  const key = new THREE.DirectionalLight(0xfff1e1, 2.6);
+  key.position.set(-4, 7, 3); scene.add(key);
+  key.castShadow = true; key.shadow.mapSize.set(512, 512);
+  key.shadow.blurSamples = 8;
   Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 0.1, far: 20 });
   key.shadow.normalBias = 0.035;
   key.shadow.radius = 4;
   key.shadow.intensity = 0.6;
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.ShadowMaterial({ color: 0x8b7d70, opacity: 0.12 }));
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.ShadowMaterial({ color: 0x776c59, opacity: 0.19 }));
   ground.rotation.x = -Math.PI / 2; ground.position.y = -0.65; ground.receiveShadow = true; scene.add(ground);
-  const fill = new THREE.DirectionalLight(0xe8eeed, 0.7);
+  const fill = new THREE.DirectionalLight(0xdfe9e7, 0.35);
   fill.position.set(5, 2, -3); scene.add(fill);
   const pose = { bloom: introduced ? 1 : 0, turn: 0, emphasis: 0, reading: 0 };
   const petalFocus = petalIds.map(() => ({ value: 0 }));
+  const petalHover = petalIds.map(() => ({ value: 0 }));
   const anchors: THREE.Object3D[] = [];
   const labelElements = petalIds.map(id => labels.querySelector<HTMLElement>(`[data-anchor="${id}"]`));
   const morphMeshes: THREE.Mesh[] = [];
@@ -64,20 +64,28 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 1.25 : 1.5));
     renderer.setClearColor(0, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.VSMShadowMap;
     renderer.domElement.setAttribute('aria-hidden', 'true');
     host.append(renderer.domElement);
   } catch { host.dataset.webgl = 'unavailable'; }
 
   async function load() {
     if (!renderer || !softLotusAsset.url) { host.dataset.asset = 'fallback'; onModel(false); return; }
-    const timeout = window.setTimeout(() => loadingManager.abort(), 20000);
+    let timedOut = false;
+    const timeout = window.setTimeout(() => {
+      if (disposed) return;
+      timedOut = true; loadingManager.abort(); flower.visible = false;
+      host.dataset.asset = 'fallback'; onModel(false); dirty = true;
+    }, 20000);
     try {
       const assetURL = innerWidth < 700 ? softLotusAsset.mobileUrl || softLotusAsset.url : softLotusAsset.url;
       const gltf = await new GLTFLoader(loadingManager).setMeshoptDecoder(MeshoptDecoder).loadAsync(assetURL, event => {
-        if (!disposed) host.dataset.loadBytes = event.lengthComputable ? `${event.loaded}/${event.total}` : 'unknown-total';
+        if (!disposed && !timedOut && !contextLost) {
+          host.dataset.loadBytes = event.lengthComputable ? `${event.loaded}/${event.total}` : 'unknown-total';
+          onProgress({ phase: event.lengthComputable && event.loaded >= event.total ? 'prepare' : 'transfer', loaded: event.loaded, total: event.lengthComputable ? event.total : null });
+        }
       });
-      if (disposed) { disposeObject(gltf.scene); return; }
+      if (disposed || timedOut || contextLost) { disposeObject(gltf.scene); return; }
       const nodes = softLotusContract.petalNodes.map(name => gltf.scene.getObjectByName(name));
       const anchorNodes = softLotusContract.anchorNodes.map(name => gltf.scene.getObjectByName(name));
       if (nodes.some(n => !n) || anchorNodes.some(n => !n)) { disposeObject(gltf.scene); throw Error('The candidate does not satisfy the five-petal asset contract.'); }
@@ -94,8 +102,29 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       }));
       anchors.push(...anchorNodes as THREE.Object3D[]);
       anchors.forEach(anchor => { anchor.userData.openPosition = anchor.position.clone(); });
+      onProgress({ phase: 'prepare', loaded: 0, total: null });
       await renderer.compileAsync(scene, camera);
       if (disposed) return;
+      if (timedOut || contextLost) throw Error('Scene preparation was interrupted.');
+      // The shadow pass has its own programs. Submit it while the matching bud
+      // poster is still visible, then wait for actual GPU completion rather
+      // than moving that first-frame cost into the opening animation.
+      renderer.render(scene, camera);
+      const context = renderer.getContext();
+      const gl = context instanceof WebGL2RenderingContext ? context : null;
+      const fence = gl?.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+      if (gl && fence) {
+        gl.flush();
+        await new Promise<void>(resolve => {
+          const check = () => {
+            if (disposed || timedOut || contextLost || gl.clientWaitSync(fence, 0, 0) !== gl.TIMEOUT_EXPIRED) { gl.deleteSync(fence); resolve(); }
+            else window.setTimeout(check, 4);
+          };
+          check();
+        });
+      }
+      if (disposed) return;
+      if (timedOut || contextLost) throw Error('GPU preparation was interrupted.');
       host.dataset.asset = softLotusAsset.state;
       host.dataset.assetUrl = assetURL;
       onModel(true);
@@ -108,9 +137,8 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     dirty = true;
   }
 
-  const lenis = new Lenis({ autoRaf: false, smoothWheel: true, syncTouch: false, lerp: 0.15,
-    prevent: node => node.closest('[data-native-scroll]') !== null });
-  lenis.on('scroll', event => { scroll = event.progress; dirty = true; });
+  // This scene is one screen. Readers use native scrolling; no artificial
+  // document height or Lenis instance exists solely to rotate the flower.
 
   function resize() {
     width = host.clientWidth; height = host.clientHeight;
@@ -120,23 +148,27 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   }
   const observer = new ResizeObserver(resize); observer.observe(host); resize();
 
-  function beforeTick(time: number) {
+  function beforeTick() {
     if (disposed || document.hidden) return;
-    lenis.raf(time * 1000);
-    if (hoverEvent) { hovered = pick(hoverEvent); hoverEvent = null; host.style.cursor = hovered >= 0 ? 'pointer' : ''; }
+    if (hoverEvent) { setHover(pick(hoverEvent)); hoverEvent = null; }
+  }
+  function setHover(index: number) {
+    if (hovered === index) return;
+    hovered = index; host.style.cursor = index >= 0 ? 'pointer' : '';
+    gsap.to(petalHover, { value: (i: number) => !state?.reducedMotion && state?.view === 'overview' && i === index ? .16 : 0, duration: .25, overwrite: true, onUpdate: () => { dirty = true; } });
   }
   function draw() {
     if (disposed || contextLost || document.hidden || !state || !width || !height) return;
     const frameState = state;
-    const moving = gsap.isTweening(pose) || gsap.isTweening(petalFocus);
-    if (!dirty && !moving && !lenis.isScrolling) return;
+    const moving = gsap.isTweening(pose) || gsap.isTweening(petalFocus) || gsap.isTweening(petalHover);
+    if (!dirty && !moving) return;
     dirty = false;
     const started = performance.now();
     const narrow = width < 700;
-    flower.rotation.y = pose.turn + (state.view === 'overview' && !state.reducedMotion && !narrow ? scroll * 0.12 : 0);
-    flower.position.set(narrow ? 0 : -pose.emphasis * 1.2 - pose.reading * 1.8, narrow ? 0.7 + pose.emphasis * 1.0 : height < 650 ? -0.35 : -0.65, 0);
+    flower.rotation.y = pose.turn;
+    flower.position.set(narrow ? 0 : -pose.emphasis * 1.2 - pose.reading * 1.8, narrow ? (height < 700 ? -1.4 : -.9) * (1 - pose.emphasis) + pose.emphasis * 1.7 : (height < 650 ? -.65 : -.95) + pose.emphasis * .3, 0);
     const mobileFit = Math.min(width / 390, height / 750) * 844 / height;
-    const scale = (narrow ? 0.46 * mobileFit * (1 - pose.reading * 0.55) : (0.88 - pose.reading * 0.2) * (height < 650 ? 0.85 : 1)) * (0.65 + 0.35 * pose.bloom);
+    const scale = (narrow ? 0.46 * mobileFit * (1 - pose.reading * 0.55) : (0.70 + pose.emphasis * .14 - pose.reading * 0.2) * (height < 650 ? 0.85 : 1)) * (0.65 + 0.35 * pose.bloom);
     flower.scale.setScalar(scale);
     ground.position.y = flower.position.y + 0.015 * scale;
     morphMeshes.forEach(object => {
@@ -144,15 +176,15 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
         const index = object.morphTargetDictionary[softLotusContract.morphTarget];
         if (index !== undefined) object.morphTargetInfluences[index] = pose.bloom;
         const focusIndex = object.morphTargetDictionary.Focus;
-        if (focusIndex !== undefined) object.morphTargetInfluences[focusIndex] = petalFocus[object.userData.petal]?.value * pose.bloom ** 3 || 0;
+        if (focusIndex !== undefined) object.morphTargetInfluences[focusIndex] = ((petalFocus[object.userData.petal]?.value || 0) + (petalHover[object.userData.petal]?.value || 0)) * pose.bloom ** 3;
       }
     });
-    camera.position.set(0, 3.2 + pose.bloom * 4.3, narrow ? 12.8 : 10.6 - pose.emphasis * 0.4);
+    camera.position.set(0, 3.2 + pose.bloom * 2.5, narrow ? 12.8 : 10.6 - pose.emphasis * 0.4);
     camera.lookAt(0, narrow ? 0.6 : 0.75, 0); camera.updateMatrixWorld(); flower.updateMatrixWorld(true);
     anchors.forEach((anchor, index) => {
       if (anchor.userData.closed_position_yup && anchor.userData.openPosition) {
         anchor.position.fromArray(anchor.userData.closed_position_yup).lerp(anchor.userData.openPosition, pose.bloom);
-        const focus = petalFocus[index].value * pose.bloom ** 3;
+        const focus = (petalFocus[index].value + petalHover[index].value) * pose.bloom ** 3;
         anchor.position.x *= 1 + focus * 0.18; anchor.position.z *= 1 + focus * 0.18; anchor.position.y += focus * 0.12;
         anchor.updateMatrixWorld();
       }
@@ -189,6 +221,13 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     if (event.pointerType === 'touch' || state?.view === 'case') return;
     hoverEvent = event;
   }, { signal: abort.signal });
+  host.addEventListener('pointerleave', () => setHover(-1), { signal: abort.signal });
+  labels.addEventListener('pointerover', event => {
+    if (event.pointerType === 'touch') return;
+    const id = (event.target as HTMLElement).closest<HTMLElement>('[data-anchor]')?.dataset.anchor;
+    setHover(petalIds.indexOf(id as PetalId));
+  }, { signal: abort.signal });
+  labels.addEventListener('pointerleave', () => setHover(-1), { signal: abort.signal });
   host.addEventListener('pointerdown', event => {
     if (!event.isPrimary || event.button !== 0 || state?.view === 'case') return;
     press = { index: pick(event), x: event.clientX, y: event.clientY, scroll: window.scrollY, pointer: event.pointerId };
@@ -211,11 +250,8 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   }
   return {
     update(next) {
-      if (state?.reducedMotion !== next.reducedMotion) {
-        lenis.options.smoothWheel = !next.reducedMotion;
-        if (next.reducedMotion) lenis.scrollTo(window.scrollY, { immediate: true, force: true });
-      }
       state = next;
+      if (next.view !== 'overview' || next.reducedMotion) { gsap.killTweensOf(petalHover); petalHover.forEach(value => { value.value = 0; }); hovered = -1; }
       const index = next.active ? petalIds.indexOf(next.active) : 0;
       const angle = next.active && anchors[index]?.userData.selection_turn_degrees !== undefined
         ? THREE.MathUtils.degToRad(anchors[index].userData.selection_turn_degrees) : -index * Math.PI * 2 / 5;
@@ -231,13 +267,12 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
           dirty = true;
           if (state?.model === 'ready') { introduced = true; try { sessionStorage.setItem('soft-lotus-intro-v2', '1'); } catch { /* Optional. */ } }
         } });
-      if (next.view === 'case') lenis.stop(); else if (previousView === 'case') lenis.start();
-      previousView = next.view; dirty = true;
+      dirty = true;
       if (inspectionPose !== null) { gsap.killTweensOf(pose); pose.bloom = inspectionPose; pose.turn = 0; pose.reading = 0; dirty = true; }
     },
     dispose() {
-      disposed = true; abort.abort(); loadingManager.abort(); observer.disconnect(); lenis.destroy();
-      gsap.ticker.remove(beforeTick); gsap.ticker.remove(draw); gsap.killTweensOf(pose); gsap.killTweensOf(petalFocus);
+      disposed = true; abort.abort(); loadingManager.abort(); observer.disconnect();
+      gsap.ticker.remove(beforeTick); gsap.ticker.remove(draw); gsap.killTweensOf(pose); gsap.killTweensOf(petalFocus); gsap.killTweensOf(petalHover);
       disposeObject(flower); disposeObject(ground); key.shadow.dispose(); renderer?.dispose(); renderer?.forceContextLoss(); renderer?.domElement.remove();
     },
   };

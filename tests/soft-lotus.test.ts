@@ -4,6 +4,18 @@ import { createSceneState, sceneReducer, routeFromURL, routeURL } from '../src/s
 
 const initial = () => createSceneState({ locale: 'ru', view: 'overview', active: null });
 
+test('Legacy section links migrate without losing language or poisoning later navigation', () => {
+  for (const lang of ['ru', 'en', 'kk'] as const) for (const id of ['contact', 'about'] as const) {
+    const old = new URL(`https://example.test/index.html?lang=${lang}#${id}`);
+    const route = routeFromURL(old, 'ru');
+    assert.deepEqual(route, { locale: lang, view: 'selected', active: id });
+    const migrated = routeURL(old, route);
+    assert.equal(migrated.hash, '');
+    assert.equal(migrated.searchParams.get('petal'), id);
+    assert.equal(routeFromURL(routeURL(migrated, { ...route, active: null, view: 'overview' }), 'ru').active, null);
+  }
+});
+
 test('An early project selection survives late model readiness and failure', () => {
   for (const status of ['ready', 'failed'] as const) {
     const selected = sceneReducer(initial(), { type: 'select', id: 'perch', source: 'petal-perch' });

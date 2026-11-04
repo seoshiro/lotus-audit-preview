@@ -54,7 +54,7 @@ def smooth(a,b,x):
     s = clamp((x-a)/(b-a)); return s*s*(3-2*s)
 def linear(v): return v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4
 def color(hexcode): return tuple(linear(int(hexcode[i:i+2],16)/255) for i in (0,2,4))
-MILK, PINK, SAGE = color('F4F0E7'), color('CD8B91'), color('BBC2A3')
+MILK, PINK, SAGE = color('F4EDE1'), color('C6828B'), color('AAA785')
 
 # The imported Blender axis runs from the blunt base (-Y) to the raised tip (+Y).
 profiles = []
@@ -95,13 +95,14 @@ for index,(name,angle,width_var,length_var) in enumerate(specs):
         t=clamp(p.y+.5); half,center_z=profile(t)
         u=clamp(p.x/max(half,.015),-1,1)
         # Keep the actual source's concavity and edge, with a tapered shared base.
-        r=.22+3.35*t*length_var
+        r=.12+2.95*t*length_var
         # Smooth the width cap so the silhouette stays rounded, not wedge-like.
-        natural=3.7*width_var
+        natural=3.25*width_var
         limit=r*math.tan(math.radians(35))*.98/max(half,.015)
         breadth=(natural**-6+limit**-6)**(-1/6)
         x=p.x*breadth
-        z=.25+.8*math.sin(math.pi*t*.5)+1.8*(p.z+.3-.64*t)
+        lift=(.55,.15,.7,1.75,1.55)[index]
+        z=.18+.65*math.sin(math.pi*t*.5)+2.0*(p.z+.3-.64*t)+lift*t**1.8
         z+=.035*math.sin(math.pi*t)*math.sin(index*1.7+u*1.2)
         opened.append(rotate@Vector((x,-r,z)))
         # Bend the same surface into a bud. This changes curvature across the
@@ -110,10 +111,10 @@ for index,(name,angle,width_var,length_var) in enumerate(specs):
         radius=.18*(1-t)+1.03*max(0,math.sin(math.pi*t))**.84+.035*t
         radius+=(p.z-center_z)*.16+u*.035*math.sin(math.pi*t)
         closed.append(rotate@Vector((math.sin(theta)*radius,-math.cos(theta)*radius,.02+3.15*t+.018*index*t)))
-        focused.append(closed[-1]+rotate@Vector((x*.07,-.46*t,.16*math.sin(math.pi*t*.7))))
+        focused.append(closed[-1]+rotate@Vector((x*.06,-.30*t,.18*math.sin(math.pi*t*.7))))
         vein=.035*(.5+.5*math.cos(u*25+t*4))**12*math.sin(math.pi*t)
         pink=clamp(.53*smooth(.64,1,t)+.32*abs(u)**5+vein)
-        sage=.19*(1-t)**3
+        sage=.38*(1-t)**2.5
         colors.append(tuple(MILK[k]*(1-pink-sage)+PINK[k]*pink+SAGE[k]*sage for k in range(3))+(1,))
     for v,point in zip(mesh.vertices,closed): v.co=point
     mesh.update()
@@ -128,7 +129,7 @@ for index,(name,angle,width_var,length_var) in enumerate(specs):
     obj['semantic_id']=name; obj['source_geometry']='approved Tripo master petal'
     petals.append(obj); parts.append(obj)
     anchor=bpy.data.objects.new('Anchor_'+name,None); bpy.context.collection.objects.link(anchor); anchor.parent=root
-    anchor.location=rotate@Vector((0,-2.35*length_var,.9 if name in ('perch','selvedge','forme') else 1.04))
+    anchor.location=rotate@Vector((0,-2.12*length_var,.9+(.55,.15,.7,1.75,1.55)[index]*.7))
     closed_anchor=rotate@Vector((0,-.98,1.95))
     anchor['closed_position_yup']=[closed_anchor.x,closed_anchor.z,-closed_anchor.y]
     anchor['selection_turn_degrees']=-38-angle
@@ -139,18 +140,18 @@ def plain(name,hexcode,rough=.68):
     m=bpy.data.materials.new(name);m.use_nodes=True
     p=m.node_tree.nodes.get('Principled BSDF');p.inputs['Base Color'].default_value=(*color(hexcode),1);p.inputs['Roughness'].default_value=rough
     return m
-center_mat=plain('Quiet sage center','C7CCAD'); stamen_mat=plain('Cream stamens','EAE0BE')
+center_mat=plain('Quiet sage center','9C9F73'); stamen_mat=plain('Cream stamens','D0B987')
 center_parts=[]
 def sphere(name,loc,scale,material,segments=16,rings=8):
     bpy.ops.mesh.primitive_uv_sphere_add(segments=segments,ring_count=rings,location=loc)
     o=bpy.context.object;o.name=name;o.scale=scale;o.data.materials.append(material)
     for p in o.data.polygons:p.use_smooth=True
     center_parts.append(o);return o
-sphere('Organic center',(0,0,.39),(.34,.34,.19),center_mat,24,12)
+sphere('Organic center',(0,0,.23),(.25,.25,.12),center_mat,24,12)
 for i in range(18):
     angle=i*math.tau/18; r=.2+.06*math.sin(i*2.7)
-    base=Vector((r*math.cos(angle)*.7,r*math.sin(angle)*.7,.41))
-    tip=Vector((r*math.cos(angle)*1.55,r*math.sin(angle)*1.55,.74+.1*math.sin(i*2.1)))
+    base=Vector((r*math.cos(angle)*.6,r*math.sin(angle)*.6,.24))
+    tip=Vector((r*math.cos(angle)*1.15,r*math.sin(angle)*1.15,.51+.08*math.sin(i*2.1)))
     curve=bpy.data.curves.new('Stamen stem','CURVE');curve.dimensions='3D';curve.bevel_depth=.012;curve.bevel_resolution=1;curve.resolution_u=3
     spline=curve.splines.new('BEZIER');spline.bezier_points.add(2)
     for point,co in zip(spline.bezier_points,[base,(base+tip)*.5+Vector((0,0,.04)),tip]):
