@@ -123,7 +123,10 @@ export function App() {
     if (document.activeElement === element) pendingFocus.current = null;
   }
   function restoreFocus() {
-    pendingFocus.current = current.current.returnFocus || `index-${current.current.active || 'perch'}`;
+    const source = current.current.returnFocus;
+    // A direct URL has a synthetic petal source, which can be absent in the
+    // no-WebGL/mobile view. The semantic index is its reliable destination.
+    pendingFocus.current = source && !source.startsWith('petal-') ? source : `index-${current.current.active || 'perch'}`;
     flushPendingFocus();
   }
   function back() {

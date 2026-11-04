@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:52772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\soft-lotus.browser.ts:162:1 тА║ Focus restoration follows visible controls under CPU throttling (10.5s)
+  ok 2 tests\soft-lotus.browser.ts:194:1 тА║ Draft PERCH flow preserves real content, Back, Escape and exact trigger focus (2.9s)
+  ok 3 tests\soft-lotus.browser.ts:264:1 тА║ Direct case route remains readable and keyboard-contained without WebGL (1.2s)
+  ok 4 tests\soft-lotus.browser.ts:314:1 тА║ Loading keeps the same bud and model failure retains useful navigation (1.3s)
+  ok 5 tests\soft-lotus.browser.ts:335:1 тА║ Mobile asset, all five projected controls and repeated selection remain usable (4.8s)
+
+  5 passed (22.3s)
