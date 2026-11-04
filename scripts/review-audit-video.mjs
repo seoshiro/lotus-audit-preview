@@ -18,6 +18,19 @@ try {
     const figure=document.createElement('figure');figure.style='margin:0;background:white;display:flex;flex-direction:column;align-items:center';figure.append(canvas);const caption=document.createElement('figcaption');caption.textContent=time.toFixed(2)+' s';figure.append(caption);document.querySelector('main').append(figure);
    }
   },width);
-  await page.screenshot({path:`${dir}/review-${width}.png`,fullPage:true});await page.close();
+  await page.screenshot({path:`${dir}/review-${width}.png`,fullPage:true});
+  const marks=JSON.parse(await fs.readFile(`${dir}/flow-${width}.json`,'utf8'));
+  await page.evaluate(async ({width,ready,open})=>{
+   const video=document.querySelector('video');document.querySelector('main').replaceChildren();
+   const start=Math.max(0,ready-.4),end=Math.min(video.duration-.02,open+.4);
+   for(let i=0;i<24;i++){
+    const time=start+(end-start)*i/23;
+    await new Promise(resolve=>{video.onseeked=resolve;video.currentTime=time;});
+    const canvas=document.createElement('canvas');canvas.width=width===1440?356:135;canvas.height=width===1440?223:292;
+    canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
+    const figure=document.createElement('figure');figure.style='margin:0;background:white;display:flex;flex-direction:column;align-items:center';figure.append(canvas);const caption=document.createElement('figcaption');caption.textContent=time.toFixed(2)+' s';figure.append(caption);document.querySelector('main').append(figure);
+   }
+  },{width,...marks});
+  await page.screenshot({path:`${dir}/opening-${width}.png`,fullPage:true});await page.close();
  }
 }finally{await browser.close();}

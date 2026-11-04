@@ -11,7 +11,7 @@ export interface SceneRuntime {
 }
 export type LoadProgress = { phase: 'transfer' | 'prepare'; loaded: number; total: number | null };
 
-// One GSAP ticker owns scroll input, animation and rendering. There is no
+// One GSAP ticker owns pointer updates, animation and rendering. There is no
 // renderer RAF loop and no continuously changing value in React state.
 export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: (id: PetalId) => void,
   onModel: (ready: boolean) => void, onProgress: (progress: LoadProgress) => void): SceneRuntime {
@@ -109,7 +109,8 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       // The shadow pass has its own programs. Submit it while the matching bud
       // poster is still visible, then wait for actual GPU completion rather
       // than moving that first-frame cost into the opening animation.
-      renderer.render(scene, camera);
+      dirty = true;
+      draw();
       const context = renderer.getContext();
       const gl = context instanceof WebGL2RenderingContext ? context : null;
       const fence = gl?.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);

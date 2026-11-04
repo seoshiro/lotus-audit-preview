@@ -191,6 +191,7 @@ test('Loading keeps the same bud and model failure retains useful navigation', a
   await page.goto(`${entry}?lang=en`);
   await expect(page.locator('.scene-poster img')).toHaveAttribute('src', /bud-desktop/);
   await expect(page.locator('.ink-loading')).toBeVisible();
+  await expect(page.locator('.soft-canvas')).toBeHidden();
   await expect(page.locator('progress')).not.toHaveAttribute('value', '100');
   await page.locator('#index-perch').click();
   await page.locator('#preview-case-perch').click();
