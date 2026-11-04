@@ -1,0 +1,216 @@
+{
+  "origin": "http://127.0.0.1:5319/",
+  "browser": "156.0.8078.76",
+  "os": "Windows 11 Home",
+  "cpu": "AMD Ryzen 5 7535HS with Radeon Graphics        ",
+  "logicalCores": 12,
+  "memoryGiB": 15,
+  "conditions": "Installed headless Chrome on Windows hardware; cold browser cache; simulated 10 Mbps down / 5 Mbps up / 40 ms latency; no CPU throttle; phone viewport emulation, not a physical phone. Trace records compositor and GPU pipeline as well as main thread. No screenshot tracing during timed pass.",
+  "reports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "longTasks": [
+        {
+          "start": 1382.7000000476837,
+          "duration": 235
+        },
+        {
+          "start": 3717.399999976158,
+          "duration": 122
+        }
+      ],
+      "marks": [
+        {
+          "name": "model-ready",
+          "at": 3862.5
+        },
+        {
+          "name": "opening-complete",
+          "at": 4853.299999952316
+        },
+        {
+          "name": "rapid-start",
+          "at": 4855
+        },
+        {
+          "name": "rapid-complete",
+          "at": 6467.600000023842
+        }
+      ],
+      "lcp": [
+        {
+          "start": 440,
+          "size": 57380
+        }
+      ],
+      "cls": 0.001217034669308342,
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "resources": [
+        {
+          "url": "http://127.0.0.1:5319/models/soft-lotus-candidate.glb",
+          "duration": 1915.6000000238419,
+          "transfer": 2282256
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 3.5,
+          "domReady": 1346.3999999761581
+        }
+      ],
+      "presentation": [
+        {
+          "phase": "startup",
+          "durationMs": 3862.4,
+          "presentedAnimationFrames": 283,
+          "presentationIntervalMs": {
+            "p50": 6.946,
+            "p95": 7.71,
+            "max": 484.453,
+            "over33ms": 9
+          },
+          "drawFrames": 312,
+          "dropSignals": 63,
+          "partialUpdateSignals": 16,
+          "longTasks": [
+            {
+              "start": 1382.7000000476837,
+              "duration": 235
+            },
+            {
+              "start": 3717.399999976158,
+              "duration": 122
+            }
+          ]
+        },
+        {
+          "phase": "opening",
+          "durationMs": 990.897,
+          "presentedAnimationFrames": 141,
+          "presentationIntervalMs": {
+            "p50": 6.955,
+            "p95": 6.999,
+            "max": 7.188,
+            "over33ms": 0
+          },
+          "drawFrames": 143,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "rapid-selection",
+          "durationMs": 1612.653,
+          "presentedAnimationFrames": 220,
+          "presentationIntervalMs": {
+            "p50": 6.958,
+            "p95": 7.178,
+            "max": 34.658,
+            "over33ms": 1
+          },
+          "drawFrames": 226,
+          "dropSignals": 8,
+          "partialUpdateSignals": 6,
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "longTasks": [],
+      "marks": [
+        {
+          "name": "model-ready",
+          "at": 2383.100000023842
+        },
+        {
+          "name": "opening-complete",
+          "at": 3381.399999976158
+        },
+        {
+          "name": "rapid-start",
+          "at": 3382.7000000476837
+        },
+        {
+          "name": "rapid-complete",
+          "at": 4939.899999976158
+        }
+      ],
+      "lcp": [
+        {
+          "start": 464,
+          "size": 20956
+        }
+      ],
+      "cls": 0.0061005024201881974,
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "resources": [
+        {
+          "url": "http://127.0.0.1:5319/models/soft-lotus-mobile.glb",
+          "duration": 847.1999999284744,
+          "transfer": 963892
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 2.899999976158142,
+          "domReady": 1332.3999999761581
+        }
+      ],
+      "presentation": [
+        {
+          "phase": "startup",
+          "durationMs": 2383,
+          "presentedAnimationFrames": 134,
+          "presentationIntervalMs": {
+            "p50": 6.956,
+            "p95": 30.607,
+            "max": 474.438,
+            "over33ms": 6
+          },
+          "drawFrames": 149,
+          "dropSignals": 12,
+          "partialUpdateSignals": 11,
+          "longTasks": []
+        },
+        {
+          "phase": "opening",
+          "durationMs": 998.303,
+          "presentedAnimationFrames": 142,
+          "presentationIntervalMs": {
+            "p50": 6.957,
+            "p95": 7.167,
+            "max": 7.255,
+            "over33ms": 0
+          },
+          "drawFrames": 144,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "rapid-selection",
+          "durationMs": 1557.096,
+          "presentedAnimationFrames": 215,
+          "presentationIntervalMs": {
+            "p50": 6.96,
+            "p95": 7.207,
+            "max": 20.879,
+            "over33ms": 0
+          },
+          "drawFrames": 220,
+          "dropSignals": 4,
+          "partialUpdateSignals": 4,
+          "longTasks": []
+        }
+      ]
+    }
+  ],
+  "method": "Chrome trace AnimationFrame::Presentation feedback scoped to the page renderer and marked phases; unique DrawFrame / DroppedFrame sequence IDs also counted. Partial-update signals are reported separately and are not silently treated as entirely missed frames. Startup includes deliberately idle network waiting and is not a steady-state FPS score. Headless compositor measurements, not a physical-screen or physical-phone certification. Raw traces retained locally."
+}

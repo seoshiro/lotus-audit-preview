@@ -1,0 +1,216 @@
+{
+  "origin": "https://seoshiro.github.io/lotus-audit-preview/",
+  "browser": "156.0.8078.76",
+  "os": "Windows 11 Home",
+  "cpu": "AMD Ryzen 5 7535HS with Radeon Graphics        ",
+  "logicalCores": 12,
+  "memoryGiB": 15,
+  "conditions": "Installed headless Chrome on Windows hardware; cold browser cache; simulated 10 Mbps down / 5 Mbps up / 40 ms latency; no CPU throttle; phone viewport emulation, not a physical phone. Trace records compositor and GPU pipeline as well as main thread. No screenshot tracing during timed pass.",
+  "reports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "longTasks": [
+        {
+          "start": 1023.2999999523163,
+          "duration": 274
+        },
+        {
+          "start": 3147,
+          "duration": 115
+        }
+      ],
+      "marks": [
+        {
+          "name": "model-ready",
+          "at": 3286.1999999284744
+        },
+        {
+          "name": "opening-complete",
+          "at": 4270.299999952316
+        },
+        {
+          "name": "rapid-start",
+          "at": 4272.199999928474
+        },
+        {
+          "name": "rapid-complete",
+          "at": 5870.600000023842
+        }
+      ],
+      "lcp": [
+        {
+          "start": 604,
+          "size": 107920
+        }
+      ],
+      "cls": 0.0014118457433127572,
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "resources": [
+        {
+          "url": "https://seoshiro.github.io/lotus-audit-preview/models/soft-lotus-candidate.glb",
+          "duration": 1658.2999999523163,
+          "transfer": 1913007
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 243.5,
+          "domReady": 986.1999999284744
+        }
+      ],
+      "presentation": [
+        {
+          "phase": "startup",
+          "durationMs": 3286.1,
+          "presentedAnimationFrames": 240,
+          "presentationIntervalMs": {
+            "p50": 6.957,
+            "p95": 27.83,
+            "max": 350.971,
+            "over33ms": 10
+          },
+          "drawFrames": 271,
+          "dropSignals": 74,
+          "partialUpdateSignals": 16,
+          "longTasks": [
+            {
+              "start": 1023.2999999523163,
+              "duration": 274
+            },
+            {
+              "start": 3147,
+              "duration": 115
+            }
+          ]
+        },
+        {
+          "phase": "opening",
+          "durationMs": 984.054,
+          "presentedAnimationFrames": 140,
+          "presentationIntervalMs": {
+            "p50": 6.955,
+            "p95": 7.165,
+            "max": 7.267,
+            "over33ms": 0
+          },
+          "drawFrames": 142,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "rapid-selection",
+          "durationMs": 1598.238,
+          "presentedAnimationFrames": 217,
+          "presentationIntervalMs": {
+            "p50": 6.956,
+            "p95": 7.2,
+            "max": 34.749,
+            "over33ms": 1
+          },
+          "drawFrames": 222,
+          "dropSignals": 10,
+          "partialUpdateSignals": 7,
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "longTasks": [],
+      "marks": [
+        {
+          "name": "model-ready",
+          "at": 1951.5
+        },
+        {
+          "name": "opening-complete",
+          "at": 2942.5
+        },
+        {
+          "name": "rapid-start",
+          "at": 2943.7999999523163
+        },
+        {
+          "name": "rapid-complete",
+          "at": 4501.399999976158
+        }
+      ],
+      "lcp": [
+        {
+          "start": 556,
+          "size": 38410
+        }
+      ],
+      "cls": 0.017852383021747447,
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "resources": [
+        {
+          "url": "https://seoshiro.github.io/lotus-audit-preview/models/soft-lotus-mobile.glb",
+          "duration": 745.7000000476837,
+          "transfer": 771161
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 262,
+          "domReady": 995.6000000238419
+        }
+      ],
+      "presentation": [
+        {
+          "phase": "startup",
+          "durationMs": 1951.5,
+          "presentedAnimationFrames": 126,
+          "presentationIntervalMs": {
+            "p50": 6.959,
+            "p95": 34.53,
+            "max": 282.735,
+            "over33ms": 8
+          },
+          "drawFrames": 139,
+          "dropSignals": 15,
+          "partialUpdateSignals": 14,
+          "longTasks": []
+        },
+        {
+          "phase": "opening",
+          "durationMs": 990.992,
+          "presentedAnimationFrames": 141,
+          "presentationIntervalMs": {
+            "p50": 6.955,
+            "p95": 7.169,
+            "max": 7.247,
+            "over33ms": 0
+          },
+          "drawFrames": 143,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "rapid-selection",
+          "durationMs": 1557.633,
+          "presentedAnimationFrames": 216,
+          "presentationIntervalMs": {
+            "p50": 6.957,
+            "p95": 7.169,
+            "max": 20.872,
+            "over33ms": 0
+          },
+          "drawFrames": 220,
+          "dropSignals": 5,
+          "partialUpdateSignals": 4,
+          "longTasks": []
+        }
+      ]
+    }
+  ],
+  "method": "Chrome trace AnimationFrame::Presentation feedback scoped to the page renderer and marked phases; unique DrawFrame / DroppedFrame sequence IDs also counted. Partial-update signals are reported separately and are not silently treated as entirely missed frames. Startup includes deliberately idle network waiting and is not a steady-state FPS score. Headless compositor measurements, not a physical-screen or physical-phone certification. Raw traces retained locally."
+}

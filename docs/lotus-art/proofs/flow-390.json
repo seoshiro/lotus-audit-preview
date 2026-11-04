@@ -1,0 +1,32 @@
+{
+  "origin": "https://seoshiro.github.io/lotus-audit-preview/",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "ready": 2.454,
+  "open": 3.549,
+  "selections": [
+    {
+      "id": "perch",
+      "at": 15.64
+    },
+    {
+      "id": "selvedge",
+      "at": 17.092
+    },
+    {
+      "id": "forme",
+      "at": 18.547
+    },
+    {
+      "id": "about",
+      "at": 20
+    },
+    {
+      "id": "contact",
+      "at": 21.454
+    }
+  ],
+  "conditions": "Continuous 25 fps browser capture; cold cache; 10 Mbps down / 5 Mbps up / 40 ms latency. Marker times relative to page creation; not a frame-time benchmark."
+}

@@ -31,6 +31,7 @@ try {
     const figure=document.createElement('figure');figure.style='margin:0;background:white;display:flex;flex-direction:column;align-items:center';figure.append(canvas);const caption=document.createElement('figcaption');caption.textContent=time.toFixed(2)+' s';figure.append(caption);document.querySelector('main').append(figure);
    }
   },{width,...marks});
-  await page.screenshot({path:`${dir}/opening-${width}.png`,fullPage:true});await page.close();
+  await page.screenshot({path:`${dir}/opening-${width}.png`,fullPage:true});
+  await page.close();
  }
 }finally{await browser.close();}

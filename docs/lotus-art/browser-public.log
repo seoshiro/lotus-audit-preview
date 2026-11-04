@@ -1,0 +1,24 @@
+
+Running 19 tests using 1 worker
+
+  ok  1 tests\soft-lotus.browser.ts:12:1 › Early static shell honors language while the 3D application bundle is unavailable (1.9s)
+  ok  2 tests\soft-lotus.browser.ts:26:1 › Main work action opens a visible project list and returns keyboard focus in every language (5.9s)
+  ok  3 tests\soft-lotus.browser.ts:50:1 › Legacy section routes, standalone case links and confirmed contacts work in every language (5.6s)
+  ok  4 tests\soft-lotus.browser.ts:77:1 › Cached revisit skips the opening delay and share errors expose a selectable link (5.0s)
+  ok  5 tests\soft-lotus.browser.ts:92:1 › Draft PERCH flow preserves real content, Back, Escape and exact trigger focus (3.5s)
+  ok  6 tests\soft-lotus.browser.ts:115:1 › All five draft entries retain their state across three languages (6.4s)
+  ok  7 tests\soft-lotus.browser.ts:137:1 › Phone draft case has accessible controls and a constrained reader (2.7s)
+  ok  8 tests\soft-lotus.browser.ts:153:1 › No JavaScript still exposes the real case URLs (1.3s)
+  ok  9 tests\soft-lotus.browser.ts:162:1 › Direct case route remains readable and keyboard-contained without WebGL (1.5s)
+  ok 10 tests\soft-lotus.browser.ts:189:1 › One-screen navigation has no empty scroll and never captures the wheel (2.2s)
+  ok 11 tests\soft-lotus.browser.ts:212:1 › Loading keeps the same bud and model failure retains useful navigation (1.7s)
+  ok 12 tests\soft-lotus.browser.ts:233:1 › Mobile asset, all five projected controls and repeated selection remain usable (4.5s)
+  ok 13 tests\soft-lotus.browser.ts:255:1 › Overview and selected content remain accessible at small and large viewports (6.2s)
+  ok 14 tests\soft-lotus.browser.ts:269:1 › WebGL context loss leaves all content reachable (2.3s)
+  ok 15 tests\soft-lotus.browser.ts:281:1 › All eleven cases preserve real evidence and EN/RU/KK at 360px (12.4s)
+  ok 16 tests\soft-lotus.browser.ts:297:1 › Legacy locale URLs keep translated cases and home, with and without JavaScript (16.3s)
+  ok 17 tests\soft-lotus.browser.ts:318:1 › The actual petal surface selects SELVEDGE and a drag does not select (2.3s)
+  ok 18 tests\soft-lotus.browser.ts:331:1 › Touch selection preserves a separate flower area and readable project content in all languages (4.0s)
+  ok 19 tests\soft-lotus.browser.ts:358:1 › Fallback gives accurate directions, readable navigation and uncropped short previews (10.3s)
+
+  19 passed (1.6m)

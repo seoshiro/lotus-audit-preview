@@ -13,6 +13,8 @@ try{
   const url=new URL(origin);url.searchParams.set('lang','ru');await page.goto(url.href);
   await page.waitForFunction(()=>document.body.dataset.model==='ready');
   await page.evaluate(async()=>{await document.fonts.ready;const url=window.getComputedStyle(document.querySelector('.botanical-shadow')).backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1];if(url){const img=new window.Image();img.src=url;await img.decode();}});
+  // Let the decoded SVG background be painted before capturing the whole composition.
+  await page.waitForTimeout(150);
   await page.screenshot({path:`${dir}/overview-${viewport.width}.png`});
   for(const id of ['perch','selvedge','forme','about','contact']){
    await page.locator(`#index-${id}`).click();

@@ -1,0 +1,70 @@
+{
+  "origin": "https://seoshiro.github.io/lotus-audit-preview/",
+  "commit": "800eb6c8a523742bc69919ea97c408ede7346724",
+  "production": {
+    "commit": "6e18031700ae46a1689e48f23ee1ecb6149da860"
+  },
+  "assets": [
+    {
+      "file": "models/soft-lotus-candidate.glb",
+      "bytes": 2281956,
+      "sha256": "76ca041f5adfab707329effdc884a975fabcdd5cf6d872f912fc58aedf02a54e"
+    },
+    {
+      "file": "models/soft-lotus-mobile.glb",
+      "bytes": 963592,
+      "sha256": "49483d748100ecca9070da6ef798d1e011bf600ddb61444e5a633cc8744055d2"
+    },
+    {
+      "file": "models/soft-lotus-bud-desktop.png",
+      "bytes": 62670,
+      "sha256": "ecce65d47f3e10a8c31a44e96ec7d36d8364ec5f2063a4167aa307f3474fc0ca"
+    },
+    {
+      "file": "models/soft-lotus-bud-mobile.png",
+      "bytes": 20190,
+      "sha256": "d6709d02f9de1a55a107cdf53000e9c8c78218415a5498eff0c4b119de5d4e0b"
+    },
+    {
+      "file": "models/soft-lotus-open-desktop.png",
+      "bytes": 180515,
+      "sha256": "afbcd29d2142423da97b116b22fec874d425531e3ae6cac3bd98b3fbb9a5807c"
+    },
+    {
+      "file": "models/soft-lotus-open-mobile.png",
+      "bytes": 60042,
+      "sha256": "ba01820d41c1d737bac64a9563e51107e2851f003af9e10648626d123e97482a"
+    },
+    {
+      "file": "models/soft-lotus-selected-desktop.png",
+      "bytes": 161057,
+      "sha256": "2395fcc4fb1661d1005514cab32664f91e376730bc31dc6487df4645c260c95e"
+    },
+    {
+      "file": "models/soft-lotus-selected-mobile.png",
+      "bytes": 36571,
+      "sha256": "c797453d753d94e2dd7fb77d7be7a5fa42ada3949a529162d2652c3d9d6bfbf2"
+    },
+    {
+      "file": "models/botanical-shadow.svg",
+      "bytes": 571,
+      "sha256": "2eab8e1f8c73a2f250dfa9adc897a8b4cf9a5fdc870b1f000b8afe6a5ef148e4"
+    },
+    {
+      "file": "assets/perch-petal.webp",
+      "bytes": 10204,
+      "sha256": "8cb079e8d4ff5c7d963c679bb403aee6c28f01f3a7ad3dd33a44638ca69c4c54"
+    },
+    {
+      "file": "assets/selvedge-petal.webp",
+      "bytes": 7218,
+      "sha256": "eca701e1d87d68a2af7ca43d10b5d22e4a0a12033c2fc1fbb4e66a13dba2fc80"
+    },
+    {
+      "file": "assets/forme-petal.webp",
+      "bytes": 12008,
+      "sha256": "9332c2dec59296a305930a5d0ee79f65a632da8b47d536ab3d5e36f5c358e3d1"
+    }
+  ],
+  "errors": []
+}
