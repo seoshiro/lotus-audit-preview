@@ -39,14 +39,21 @@ function Reader({ state, onBack, onReturnFocus }: { state: SceneState; onBack: (
   }
   useLayoutEffect(() => {
     const el = dialog.current!;
-    const reduced = state.reducedMotion || document.documentElement.dataset.input === 'keyboard';
+    const reduced = state.reducedMotion;
     gsap.killTweensOf(el);
     if (open) {
-      if (!el.open) { el.showModal(); gsap.set(el, { opacity: 0, y: reduced ? 0 : 24 }); }
+      const fresh = !el.open;
+      if (el.open && !el.matches(':modal')) el.close();
+      if (!el.open) el.showModal();
+      el.inert = false; el.removeAttribute('aria-hidden');
+      if (fresh) gsap.set(el, { opacity: reduced ? 0 : 1, xPercent: reduced ? 0 : 100, y: 0 });
       heading.current?.focus({ preventScroll: true });
-      gsap.to(el, { opacity: 1, y: 0, duration: reduced ? 0 : 0.28, ease: 'power3.out' });
+      gsap.to(el, { opacity: 1, xPercent: 0, y: 0, duration: reduced ? .14 : .55, ease: 'power3.inOut' });
     } else if (el.open) {
-      gsap.to(el, { opacity: 0, y: reduced ? 0 : 18, duration: reduced ? 0 : 0.2, ease: 'power3.out', onComplete: () => { el.close(); focusRef.current(); } });
+      el.inert = true; el.setAttribute('aria-hidden', 'true');
+      if (el.matches(':modal')) { el.close(); el.show(); }
+      focusRef.current();
+      gsap.to(el, { opacity: reduced ? 0 : 1, xPercent: reduced ? 0 : 100, y: 0, duration: reduced ? .14 : .55, ease: 'power3.inOut', onComplete: () => { el.close(); focusRef.current(); } });
     }
     return () => { gsap.killTweensOf(el); };
   }, [open, state.reducedMotion]);
@@ -86,6 +93,7 @@ export function App() {
   const labels = useRef<HTMLElement>(null);
   const runtime = useRef<SceneRuntime | null>(null);
   const preview = useRef<HTMLElement>(null);
+  const previewMotion = useRef<gsap.core.Tween[]>([]);
   const lastPreview = useRef<PetalId | null>(state.active);
   if (state.active) lastPreview.current = state.active;
   const previewId = state.active || lastPreview.current;
@@ -176,6 +184,7 @@ export function App() {
     runtime.current?.setCatalog(workOpen, reduced);
     const timeline = gsap.timeline();
     if (workOpen) {
+      stage.dataset.catalogPhase = 'opening';
       const fresh = !dialog.open;
       if (dialog.open && !dialog.matches(':modal')) dialog.close();
       if (!dialog.open) dialog.showModal();
@@ -187,10 +196,11 @@ export function App() {
       }
       workClose.current?.focus({ preventScroll: true });
       timeline.to(dialog, { opacity: 1, duration: reduced ? .14 : .48, ease: 'power2.inOut' }, 0)
-        .to(header, { opacity: 1, y: 0, duration: reduced ? .14 : .32, ease: 'power2.out' }, reduced ? 0 : .04)
-        .to(rows, { opacity: 1, y: 0, duration: reduced ? .14 : .32, stagger: reduced ? 0 : { amount: .16 }, ease: 'power2.out' }, reduced ? 0 : .12)
-        .call(() => { if (workOpenRef.current) { dialog.dataset.phase = 'open'; stage.dataset.workSettled = 'true'; } });
+        .to(header, { opacity: 1, y: 0, duration: reduced ? .07 : .28, ease: 'power2.out' }, reduced ? .07 : .16)
+        .to(rows, { opacity: 1, y: 0, duration: reduced ? .07 : .26, stagger: reduced ? 0 : { amount: .12 }, ease: 'power2.out' }, reduced ? .07 : .22)
+        .call(() => { if (workOpenRef.current) { dialog.dataset.phase = 'open'; stage.dataset.catalogPhase = 'open'; stage.dataset.workSettled = 'true'; } });
     } else if (dialog.open) {
+      stage.dataset.catalogPhase = 'closing';
       // Release the native modal immediately, leaving a non-interactive visual
       // exit. A second click can reverse the current tween without a reset.
       dialog.inert = true; dialog.setAttribute('aria-hidden', 'true'); dialog.dataset.phase = 'closing';
@@ -199,13 +209,13 @@ export function App() {
       const available = target && !target.closest('[inert]') && target.getClientRects().length > 0;
       pendingFocus.current = available ? target.id : 'index-all';
       flushPendingFocus();
-      timeline.to(dialog, { opacity: 0, duration: reduced ? .14 : .36, ease: 'power2.inOut' }, 0)
-        .to([header, ...rows], { opacity: 0, y: reduced ? 0 : 8, duration: reduced ? .14 : .24, ease: 'power2.in' }, 0)
+      timeline.to([header, ...rows], { opacity: 0, y: reduced ? 0 : 8, duration: reduced ? .07 : .16, ease: 'power2.in' }, 0)
+        .to(dialog, { opacity: 0, duration: reduced ? .14 : .34, ease: 'power2.inOut' }, reduced ? 0 : .10)
         .call(() => {
           if (workOpenRef.current) return;
           const active = document.activeElement as HTMLElement | null;
           const keep = active && active !== document.body && !dialog.contains(active) ? active : null;
-          dialog.close(); dialog.dataset.phase = 'closed';
+          dialog.close(); dialog.dataset.phase = 'closed'; stage.dataset.catalogPhase = 'closed';
           // Native close can restore its previous focus. Retain any newer user
           // choice, otherwise restore the now-visible invoking control.
           const destination = keep || (available ? target : document.getElementById('index-all'));
@@ -266,47 +276,65 @@ export function App() {
     const labelView = state.view === 'overview' ? 'overview' : 'selected';
     stage.dataset.labelView ||= labelView;
     const changingLabels = stage.dataset.labelView !== labelView;
+    const readerLeaving = stage.dataset.uiView === 'case' && state.view === 'selected';
+    stage.dataset.uiView = state.view;
     if (changingLabels && home && innerWidth <= 700) gsap.set(labels.current, { '--labels-reveal': 0 });
     const timeline = gsap.timeline({ onUpdate: flushPendingFocus, onComplete: flushPendingFocus });
-    timeline.to(intro, { autoAlpha: home ? 1 : 0, y: reduced || home ? 0 : -8, duration: reduced ? .14 : .25, ease: 'power2.out' }, home && !workOpen && previewId && !workDialog.current?.open && !reduced ? .34 : 0);
+    const catalogLeaving = stage.dataset.catalogPhase === 'closing';
+    const revealAt = catalogLeaving ? reduced ? .07 : .20 : home && previewId && !reduced ? .34 : 0;
+    timeline.to(intro, { autoAlpha: home ? 1 : 0, y: reduced || home ? 0 : -8, duration: reduced ? home ? .14 : .07 : home ? .25 : .16, ease: 'power2.out' }, home ? revealAt : 0);
     if (changingLabels) timeline.to(labels.current, { '--labels-reveal': 0, duration: reduced ? 0 : .12 }, 0)
       .call(() => { stage.dataset.labelView = labelView; }, [], reduced ? 0 : .12);
-    timeline.to(labels.current, { '--labels-reveal': workOpen || state.view === 'case' ? 0 : 1, duration: reduced ? .14 : .3 }, changingLabels && !reduced ? home ? .3 : .13 : 0);
-    if (preview.current) timeline.to(preview.current, { autoAlpha: selected ? 1 : 0, y: reduced || selected ? 0 : 8, duration: reduced ? .14 : selected ? .3 : .2, ease: 'power2.out' }, 0);
+    timeline.to(labels.current, { '--labels-reveal': workOpen || state.view === 'case' ? 0 : 1, duration: reduced ? workOpen ? .07 : .14 : workOpen ? .16 : .3 }, readerLeaving && !reduced ? .2 : catalogLeaving ? revealAt : changingLabels && !reduced ? home ? .3 : .13 : 0);
+    const emphasis = JSON.parse(host.current?.dataset.pose || '[0,0,0,0]')[2] as number;
+    const needsLift = selected && state.model === 'ready' && innerWidth <= 700 && !reduced && emphasis < .88;
+    const previewAt = Math.max(selected && catalogLeaving ? revealAt : 0, needsLift ? .36 : 0, readerLeaving && !reduced ? .2 : 0);
+    const previewDuration = reduced ? .14 : !selected ? .2 : innerWidth <= 700 ? .24 : .3;
+    if (preview.current) timeline.to(preview.current, { autoAlpha: selected ? 1 : 0, y: reduced || selected ? 0 : 8, duration: previewDuration, ease: 'power2.out' }, previewAt);
     return () => { timeline.kill(); };
-  }, [state.view, state.active, state.reducedMotion, workOpen, previewId]);
+  }, [state.view, state.active, state.model, state.reducedMotion, workOpen, previewId]);
 
   useLayoutEffect(() => {
-    if (!preview.current || state.view !== 'selected') return;
+    if (!preview.current) return;
     const reduced = state.reducedMotion || document.documentElement.dataset.input === 'keyboard';
-    const context = gsap.context(() => {
-      if (!reduced && petalOrigin.current && state.model === 'ready') {
-        preview.current!.dataset.transitioning = 'true';
-        gsap.delayedCall(.66, () => { if (preview.current) delete preview.current.dataset.transitioning; });
-        for (const [selector, origin] of [['.preview-product', petalOrigin.current.image], ['.preview-title', petalOrigin.current.title]] as const) {
-          const element = preview.current!.querySelector<HTMLElement>(selector);
-          if (!element) continue;
-          const target = element.getBoundingClientRect();
-          gsap.fromTo(element, { x: origin.x - target.x, y: origin.y - target.y, scaleX: origin.width / target.width, scaleY: origin.height / target.height, opacity: .55 }, { x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 1, duration: .65, ease: 'power3.inOut', clearProps: 'transform,opacity' });
-        }
+    const interrupted = previewMotion.current.some(tween => tween.isActive());
+    previewMotion.current.forEach(tween => tween.kill());
+    previewMotion.current = [];
+    const panel = preview.current;
+    panel.dataset.transitioning = 'true';
+    for (const selector of ['.preview-product', '.preview-title'] as const) {
+      const element = panel.querySelector<HTMLElement>(selector);
+      if (!element) continue;
+      const origin = selector === '.preview-product' ? petalOrigin.current?.image : petalOrigin.current?.title;
+      if (!reduced && origin && !interrupted && state.model === 'ready') {
+        const rect = element.getBoundingClientRect();
+        const x = rect.x - Number(gsap.getProperty(element, 'x'));
+        const y = rect.y - Number(gsap.getProperty(element, 'y'));
+        // A single scale preserves the product's aspect ratio. Its thumbnail may
+        // have a different crop; it must never stretch the image or its title.
+        const scale = Math.min(origin.width / element.offsetWidth, origin.height / element.offsetHeight);
+        gsap.set(element, { x: origin.x + (origin.width - element.offsetWidth * scale) / 2 - x, y: origin.y + (origin.height - element.offsetHeight * scale) / 2 - y, scale, opacity: .55 });
       }
-    }, preview);
+      previewMotion.current.push(gsap.to(element, { x: 0, y: 0, scale: 1, opacity: 1, duration: reduced ? 0 : .65, ease: 'power3.inOut', clearProps: 'transform,opacity', onComplete: () => { delete panel.dataset.transitioning; } }));
+    }
     petalOrigin.current = null;
-    const element = preview.current;
-    return () => { context.kill(false); if (element) delete element.dataset.transitioning; };
-  }, [state.active, state.view, state.reducedMotion]);
+    // Opening the HTML reader does not kill the in-flight image tween. A rapid
+    // return therefore finds either its current pose or the completed image.
+  }, [state.active, state.reducedMotion, state.model, previewId]);
+  useLayoutEffect(() => () => { previewMotion.current.forEach(tween => tween.kill()); }, []);
 
   const petalName = (id: PetalId) => isFeatured(id) ? id.toUpperCase() : s[id];
   const percent = loadProgress.phase === 'transfer' && loadProgress.total ? Math.min(99, Math.floor(loadProgress.loaded / loadProgress.total * 100)) : undefined;
   const loadLabel = loadProgress.phase === 'prepare' ? s.prepare : s.transfer;
   return <>
     <a className="soft-skip" href="#scene-index">{s.skip}</a>
-    <header className="soft-header"><a href={`?lang=${state.locale}`} className="signature" onClick={goHome}>BEIBARS</a><div className="soft-languages" role="group" aria-label={c.language}>{(['ru', 'en', 'kk'] as Locale[]).map(locale => <button key={locale} type="button" lang={locale} aria-pressed={locale === state.locale} onClick={() => navigate({ type: 'locale', locale }, true)}>{locale.toUpperCase()}</button>)}</div></header>
+    <header className="soft-header" inert={state.view === 'case'}><a href={`?lang=${state.locale}`} className="signature" onClick={goHome}>BEIBARS</a><div className="soft-languages" role="group" aria-label={c.language}>{(['ru', 'en', 'kk'] as Locale[]).map(locale => <button key={locale} type="button" lang={locale} aria-pressed={locale === state.locale} onClick={() => navigate({ type: 'locale', locale }, true)}>{locale.toUpperCase()}</button>)}</div></header>
     <main id="main">
     {softLotusAsset.state !== 'accepted' && <p className="prototype-note">{state.locale === 'ru' ? 'Предпросмотр · проверка Tripo-модели' : state.locale === 'kk' ? 'Алдын ала көрініс · Tripo моделін тексеру' : 'Preview · Tripo model under review'}</p>}
-      <div className="soft-stage" data-view={state.view} data-work-open={workOpen} aria-busy={state.model === 'pending'}>
+      <div className="soft-stage" data-view={state.view} data-work-open={workOpen} aria-busy={state.model === 'pending'} inert={state.view === 'case'}>
         <div className="botanical-shadow" aria-hidden="true" />
         <div ref={host} className="soft-canvas" />
+        <p className="reading-lotus-caption" aria-hidden="true">{previewId ? petalName(previewId) : ''}</p>
         <div className="paper-grain" aria-hidden="true" />
         {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-desktop.png`} alt="" /></picture>}
         <div className="scene-introduction" inert={state.view !== 'overview' || workOpen}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button id="hero-work" type="button" aria-expanded={workOpen} aria-controls="work-browser" aria-haspopup="dialog" onClick={event => openWork(event.currentTarget)}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
@@ -335,7 +363,7 @@ export function App() {
         </div>}
         <div className="scene-bottom"><div><p role="status">{state.model === 'failed' ? s.fallback : state.model === 'ready' ? s.ready : ''}</p></div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>
       </div>
-      <nav id="scene-index" className="scene-index" aria-label={`${s.scene} — ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<button id="index-all" type="button" aria-haspopup="dialog" aria-expanded={workOpen} aria-controls="work-browser" onClick={event => openWork(event.currentTarget)}>{s.all}</button></nav>
+      <nav id="scene-index" className="scene-index" inert={state.view === 'case'} aria-label={`${s.scene} - ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<button id="index-all" type="button" aria-haspopup="dialog" aria-expanded={workOpen} aria-controls="work-browser" onClick={event => openWork(event.currentTarget)}>{s.all}</button></nav>
       <dialog ref={workDialog} id="work-browser" className="work-browser" aria-labelledby="work-browser-title" data-native-scroll onKeyDown={containWorkTab} onCancel={event => { event.preventDefault(); event.stopPropagation(); setWorkOpen(false); }} onClose={event => { if (!event.currentTarget.open && !workOpenRef.current) setWorkOpen(false); }}>
         <div className="work-browser-shell">
           <header className="work-browser-header"><h2 id="work-browser-title">{s.all}</h2><button ref={workClose} type="button" className="work-browser-close" onClick={() => setWorkOpen(false)}>{s.closeWork} <span aria-hidden="true">×</span></button></header>

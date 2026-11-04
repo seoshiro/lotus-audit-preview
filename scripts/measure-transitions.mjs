@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 const origin=process.argv[2]||'http://127.0.0.1:5319/';
 const variant=undefined;
-const dir='evidence/lotus-transitions/performance';await fs.mkdir(dir,{recursive:true});
+const dir=process.argv[3]||'evidence/lotus-transitions/performance';await fs.mkdir(dir,{recursive:true});
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
 const reports=[];
 try {
@@ -35,6 +35,9 @@ try {
   await mark('reversals-start');
   for(let i=0;i<3;i++){await page.locator('#index-all').click();await page.waitForTimeout(120);await page.keyboard.press('Escape');await page.waitForTimeout(80);}
   await page.waitForFunction(()=>document.querySelector('.soft-canvas')?.dataset.animating==='false');await mark('reversals-end');
+  await page.locator('#index-perch').click();await page.locator('#preview-case-perch').click();await page.waitForTimeout(150);
+  await mark('reader-return-start');await page.keyboard.press('Escape');
+  await page.waitForFunction(()=>document.querySelector('.soft-canvas')?.dataset.animating==='false'&&window.getComputedStyle(document.querySelector('.preview-product')).transform==='none');await mark('reader-return-end');
   const completed=new Promise(resolve=>cdp.once('Tracing.tracingComplete',resolve));await cdp.send('Tracing.end');const {stream}=await completed;
   let trace='';for(;;){const part=await cdp.send('IO.read',{handle:stream});trace+=part.data;if(part.eof)break;}await cdp.send('IO.close',{handle:stream});
   await fs.writeFile(`${dir}/trace-${viewport.width}.json`,trace);

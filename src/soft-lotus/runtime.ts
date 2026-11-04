@@ -2,8 +2,10 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { gsap } from 'gsap';
+import { ConvexGeometry } from 'three/addons/geometries/ConvexGeometry.js';
 import { softLotusAsset, softLotusContract } from './asset.ts';
 import { petalIds, type PetalId, type SceneState } from './state.ts';
+import { createReadingLayout } from './reading-layout.ts';
 
 export interface SceneRuntime {
   update(state: SceneState): void;
@@ -75,6 +77,9 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const labelElements = petalIds.map(id => labels.querySelector<HTMLElement>(`[data-anchor="${id}"]`));
   const morphMeshes: THREE.Mesh[] = [];
   const pickTargets: THREE.Mesh[] = [];
+  const readingCorners: THREE.Vector3[] = [];
+  const readingLayout = createReadingLayout();
+  const readingHighlights: { mesh: THREE.Mesh; amount: { value: number } }[] = [];
   const projected = new THREE.Vector3();
   const pointer = new THREE.Vector2();
   const ray = new THREE.Raycaster();
@@ -120,15 +125,20 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       morphMeshes.forEach(mesh => {
         const optics = mesh.geometry.getAttribute('uv1');
         if (optics) mesh.geometry.setAttribute('petalOptics', optics);
-        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        const materials = (Array.isArray(mesh.material) ? mesh.material : [mesh.material]).map(material => material.clone());
+        mesh.material = Array.isArray(mesh.material) ? materials : materials[0];
         materials.forEach(material => {
           if (!(material instanceof THREE.MeshStandardMaterial) || !optics) return;
           material.roughness = 0.74;
           if (material instanceof THREE.MeshPhysicalMaterial) material.specularIntensity = .25;
+          const readingSelection = { value: 0 };
+          readingHighlights.push({ mesh, amount: readingSelection });
           material.onBeforeCompile = shader => {
+            shader.uniforms.readingSelection = readingSelection;
             shader.vertexShader = 'attribute vec2 petalOptics; varying vec2 vPetalOptics;\n' + shader.vertexShader;
             shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvPetalOptics = petalOptics;');
-            shader.fragmentShader = 'varying vec2 vPetalOptics;\n' + shader.fragmentShader;
+            shader.fragmentShader = 'uniform float readingSelection; varying vec2 vPetalOptics;\n' + shader.fragmentShader;
+            shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', '#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.52, 0.35, 0.19), readingSelection * 0.40);');
             shader.fragmentShader = shader.fragmentShader.replace('#include <lights_fragment_end>', `#include <lights_fragment_end>
               float thinEdge = max(pow(vPetalOptics.y, 3.0), smoothstep(0.55, 1.0, vPetalOptics.x));
               float throughLight = pow(max(0.0, dot(-normal, directionalLights[0].direction)), 1.35);
@@ -136,7 +146,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
               reflectedLight.indirectDiffuse += diffuseColor.rgb * vec3(1.0, 0.77, 0.64) * ((0.18 + thinEdge * 0.65) * throughLight + thinEdge * grazingLight * 0.10);
             `);
           };
-          material.customProgramCacheKey = () => 'lotus-thin-petal-v1';
+          material.customProgramCacheKey = () => 'lotus-thin-petal-reading-v2';
           material.needsUpdate = true;
         });
       });
@@ -167,6 +177,32 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       }));
       anchors.push(...anchorNodes as THREE.Object3D[]);
       anchors.forEach(anchor => { anchor.userData.openPosition = anchor.position.clone(); });
+      // Build one convex envelope from the actual closed/open focused surfaces.
+      // Its compact boundary avoids both oversized box fits and per-frame scans.
+      flower.updateMatrixWorld(true);
+      const envelopePoints: THREE.Vector3[] = [], vertex = new THREE.Vector3();
+      const inverse = flower.matrixWorld.clone().invert(), localMatrix = new THREE.Matrix4();
+      resource.traverse(object => {
+        if (!(object instanceof THREE.Mesh) || object === original) return;
+        const saved = object.morphTargetInfluences?.slice();
+        localMatrix.multiplyMatrices(inverse, object.matrixWorld);
+        for (const bloom of [0, 1]) {
+          if (object.morphTargetDictionary && object.morphTargetInfluences) {
+            object.morphTargetInfluences[object.morphTargetDictionary.Bloom] = bloom;
+            if (object.morphTargetDictionary.Focus !== undefined) object.morphTargetInfluences[object.morphTargetDictionary.Focus] = 1;
+          }
+          for (let i = 0; i < object.geometry.getAttribute('position').count; i++) envelopePoints.push(object.getVertexPosition(i, vertex).applyMatrix4(localMatrix).clone());
+        }
+        if (saved && object.morphTargetInfluences) object.morphTargetInfluences.splice(0, saved.length, ...saved);
+      });
+      const envelope = new ConvexGeometry(envelopePoints), boundary = envelope.getAttribute('position');
+      const unique = new Set<string>();
+      for (let i = 0; i < boundary.count; i++) {
+        vertex.fromBufferAttribute(boundary, i);
+        const key = `${vertex.x},${vertex.y},${vertex.z}`;
+        if (!unique.has(key)) { unique.add(key); readingCorners.push(vertex.clone()); }
+      }
+      envelope.dispose();
       onProgress({ phase: 'prepare', loaded: 0, total: null });
       await renderer.compileAsync(scene, camera);
       if (disposed) return;
@@ -237,21 +273,44 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     if (!dirty && !moving) return;
     dirty = false;
     const started = performance.now();
-    const narrow = width < 700;
+    const narrow = width <= 700;
     flower.rotation.y = pose.turn;
-    flower.position.set(narrow ? 0 : 1.25 * (1 - pose.emphasis) - pose.emphasis * 1.25 - pose.reading * 1.2, narrow ? (height < 500 ? 0 : -0.7) : -.22, 0);
-    const scale = (narrow ? .95 * width / height * (1 - .10 * pose.emphasis) * (1 - pose.reading * .55) : (.79 + pose.emphasis * .04 - pose.reading * .2) * (height < 650 ? .82 : 1)) * (.65 + .35 * pose.bloom);
+    flower.position.set(narrow ? 0 : 1.25 * (1 - pose.emphasis) - pose.emphasis * 1.25, narrow ? (height < 500 ? 0 : -0.7) : -.22, 0);
+    let scale = (narrow ? .95 * (width <= 360 ? 1.06 : 1.09) * width / height * (1 - .10 * pose.emphasis) * (1 - pose.reading * .55) : (.79 + pose.emphasis * .01) * (height < 650 ? .82 : 1)) * (.65 + .35 * pose.bloom);
     flower.scale.setScalar(scale);
     camera.position.set(0, 3.7 + pose.bloom * 1.45 + (narrow ? pose.emphasis * 1.9 : 0), (narrow ? 12.3 : 10.4) + catalog.depth * .8);
     camera.lookAt(0, narrow ? .8 : .83, 0); camera.updateMatrixWorld();
     if (narrow) {
       const rail = width <= 360 || height <= 700 ? height * .27 : THREE.MathUtils.clamp(height * .32, 180, 310);
-      const targetY = THREE.MathUtils.lerp(height * .63, 64 + rail * .5, pose.emphasis);
+      const targetY = THREE.MathUtils.lerp(height * .62, 64 + rail * .5, pose.emphasis);
       projected.set(0, 1 - targetY / height * 2, .5).unproject(camera).sub(camera.position);
       const distance = -camera.position.z / projected.z;
-      flower.position.set(0, camera.position.y + projected.y * distance - (1.5 - .4 * pose.bloom) * scale, 0);
+      flower.position.set(.10 * (1 - pose.emphasis), camera.position.y + projected.y * distance - (1.5 - .4 * pose.bloom) * scale, 0);
       host.dataset.contentBoundary = (64 + rail).toFixed(2);
     }
+    if (!narrow && readingCorners.length && pose.emphasis > 0) {
+      // A tall desktop viewport also needs a whole selected flower beside the
+      // preview. Blend this constraint in before the reader starts its motion.
+      const compact = THREE.MathUtils.smoothstep(1.45 - width / height, 0, .25) * pose.emphasis;
+      if (compact > 0) {
+        const fit = readingLayout.fit(readingCorners, camera, pose.turn, width, height, width * .36);
+        flower.position.lerp(fit.position, compact);
+        scale = THREE.MathUtils.lerp(scale, fit.scale, compact);
+        flower.scale.setScalar(scale);
+      }
+    }
+    if (!narrow && readingCorners.length && pose.reading > 0) {
+      const reader = document.querySelector<HTMLElement>('.case-reader');
+      const panelWidth = reader?.offsetWidth || Math.min(width * .72, 1040);
+      const fit = readingLayout.fit(readingCorners, camera, pose.turn, width, height, panelWidth);
+      flower.position.lerp(fit.position, pose.reading);
+      scale = THREE.MathUtils.lerp(scale, fit.scale, pose.reading);
+      flower.scale.setScalar(scale);
+      host.parentElement?.style.setProperty('--reading-caption-y', `${fit.captionY}px`);
+      host.parentElement?.style.setProperty('--reading-column', `${fit.column}px`);
+    }
+    host.parentElement?.style.setProperty('--reading-progress', String(THREE.MathUtils.smoothstep(pose.reading, .85, 1)));
+    readingHighlights.forEach(({ mesh, amount }) => { amount.value = pose.reading * (petalFocus[mesh.userData.petal]?.value || 0); });
     ground.position.y = flower.position.y + 0.015 * scale;
     contact.position.set(flower.position.x, ground.position.y + .002, flower.position.z); contact.scale.setScalar(scale);
     decoration.visible = frameState.model === 'ready' && frameState.view === 'overview' && !frameState.reducedMotion;
@@ -277,6 +336,10 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       }
     });
     flower.updateMatrixWorld(true);
+    if (readingCorners.length) {
+      const bounds = readingLayout.project(readingCorners, camera, flower.matrixWorld, width, height);
+      host.dataset.flowerBounds = JSON.stringify([bounds.min.x, bounds.min.y, bounds.max.x, bounds.max.y].map(value => Number(value.toFixed(2))));
+    }
     anchors.forEach((anchor, index) => {
       if (anchor.userData.closed_position_yup && anchor.userData.openPosition) {
         anchor.position.fromArray(anchor.userData.closed_position_yup).lerp(anchor.userData.openPosition, pose.bloom);
@@ -310,7 +373,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   document.addEventListener('visibilitychange', () => { dirty = true; }, { signal: abort.signal });
 
   function pick(event: PointerEvent) {
-    if (contextLost || catalogOpen || state?.model !== 'ready') return -1;
+    if (contextLost || catalogOpen || state?.view === 'case' || state?.model !== 'ready') return -1;
     const rect = host.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
     ray.setFromCamera(pointer, camera);
