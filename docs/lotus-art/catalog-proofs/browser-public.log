@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ok 1 tests\soft-lotus.browser.ts:26:1 › Main work action opens a visible project list and returns keyboard focus in every language (11.5s)
+  ok 2 tests\soft-lotus.browser.ts:77:1 › All-project catalog excludes the selected card and restores selection and focus on close (22.5s)
+  ok 3 tests\soft-lotus.browser.ts:373:1 › Touch selection preserves a separate flower area and readable project content in all languages (4.8s)
+
+  3 passed (41.4s)

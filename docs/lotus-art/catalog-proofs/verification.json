@@ -1,0 +1,38 @@
+{
+  "origin": "https://seoshiro.github.io/lotus-audit-preview/",
+  "version": {
+    "commit": "cd2ad1f502c22ea1fe1ac1cfd57b4b41c5142f02"
+  },
+  "production": {
+    "commit": "6e18031700ae46a1689e48f23ee1ecb6149da860"
+  },
+  "records": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "exclusive": true,
+      "restored": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "exclusive": true,
+      "restored": true,
+      "errors": []
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 640
+      },
+      "exclusive": true,
+      "restored": true,
+      "errors": []
+    }
+  ]
+}

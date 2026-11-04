@@ -11,3 +11,7 @@
 Геометрия, материалы, контакты, тексты кейсов и реальные адреса проектов не менялись. Платных операций нет. Резервная ветка перед исправлением: `backup/pre-project-catalog-2026-11-04` (`be78c1b`). Production остаётся на `6e18031700ae46a1689e48f23ee1ecb6149da860`.
 
 Локально прошли lint, TypeScript, 11 тестов контента/состояния, production-сборка, проверка 40 HTML-страниц и все 20 браузерных сценариев. Прогон выполнен в установленном Chrome на Windows; мобильные проверки — эмуляция viewport и касаний, не физические устройства.
+
+Публичный preview обновлён до `cd2ad1f502c22ea1fe1ac1cfd57b4b41c5142f02`. [CI preview и публикация](https://github.com/seoshiro/lotus-audit-preview/actions/runs/41859727110) и [CI PR](https://github.com/seoshiro/seoshiro.github.io/actions/runs/41859716324) успешны. На публичном адресе повторно прошли три целевых сценария: оба входа в каталог, весь регрессионный маршрут в трёх языках/размерах и касания. [Проверка точной версии и восстановления состояния](catalog-proofs/verification.json) не выявила page errors и подтвердила неизменный production.
+
+Публичные кадры: каталог [1440 px](catalog-proofs/catalog-1440.png), [390 px](catalog-proofs/catalog-390.png), [320 px](catalog-proofs/catalog-320.png); возврат к SELVEDGE [desktop](catalog-proofs/return-1440.png), [mobile](catalog-proofs/return-390.png). Нативная прокрутка длинного каталога остаётся внутри отдельного экрана; это больше не выпадающий список поверх цветка.
