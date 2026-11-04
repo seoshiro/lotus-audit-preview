@@ -4,7 +4,7 @@ const origin = "https://seoshiro.github.io";
 const commit =
   process.env.GITHUB_SHA || process.env.PORTFOLIO_COMMIT || "local-development";
 const policy =
-  "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'";
+  "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'";
 for (const file of allPages) {
   const alias = aliases.find(p => p.file === file);
   const canonical = alias ? new URL(alias.target, `${origin}/${file}`).href : `${origin}/${file === 'index.html' ? '' : file}`;

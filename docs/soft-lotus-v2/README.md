@@ -1,48 +1,36 @@
-# Soft Lotus V2 — preparation, not a finished release
+# Soft Lotus V2
 
-Working branch: `feat/soft-lotus-v2`. Production still uses `81da4e53946c62f37ecc71ccd59ab11161f4fc19`. A separate `soft-lotus.html` entry is built only in the `soft-preview` mode and is not included in the normal release.
+Working branch: `feat/soft-lotus-v2`. Production builds now use the actual Tripo flower. The execution agent accepted the actual model after visual review and local fixes; independent parent QA is recorded separately.
 
-The main V2 brief was read completely through Library (148 lines, 34,922 bytes). The archive has not yet been unpacked: the current required Library helper failed on Windows with `AttributeError: module 'os' has no attribute 'setxattr'`. Neither target file was installed. Library cannot render ZIP text, and the named source document/storyboard were not found as standalone Library files. No existing WSL distribution was available. The helper was not patched, its metadata requirements were not bypassed, and no raw signed-URL download was substituted.
+## Sources and implementation
 
-Consequently `SOURCES_AND_SETUP.md` and `SOFT_LOTUS_STORYBOARD.png` still require supported access. The current layout is provisional; it is not a visual interpretation accepted against the unseen storyboard.
+The full V2 brief (148 lines) and extracted setup (62 lines) were read through Library. The actual 1536 x 1024 storyboard was viewed in Chrome's normal Space viewer. The archive's required Windows helper failed with `os.setxattr`; no helper or metadata bypass was used. Parent-supplied standalone copies resolved setup and storyboard access.
 
-## What exists
+All seven approved skill directions were installed from pinned commits with Git blob hash validation, read and applied. See [sources and budget](SOURCES-AND-COSTS.md), [storyboard observations](STORYBOARD-REVIEW.md), [design profile](design-dna.json) and [model provenance](MODEL.md).
 
-- Separate React scene shell and state reducer for overview, selected petal and one case reader.
-- All five entries: PERCH, SELVEDGE, FORME, About and Contact. Three complete readers reuse real copy, screenshots, source/evidence URLs and explicit AI-assisted role from the existing content model.
-- RU/EN/KK, retained direct case links, ordinary alternative navigation, native dialog focus containment, Escape, browser Back and focus restoration.
-- Discrete state remains independent of late asset readiness, failure and continuous animation.
-- One GSAP ticker coordinates Lenis before scene/anchor rendering. No per-frame React state. Canvas dimensions change through ResizeObserver, not during the transition between page sections.
-- Reviewed, narrow adaptation of the official React Bits SplitText registry for word entrances, font readiness and cleanup. No hover springs, extra RAF loop or looping letters.
-- Explicit temporary wireframe markers and a visible prototype label. `src/soft-lotus/asset.ts` has no final URL or generation ID. The old metallic model is not reused as the new model.
+One Tripo master was repaired locally in Blender and made into five continuous Bloom/Focus petals. Desktop: 61,954 triangles / 2,024,228 bytes. Mobile: 24,614 triangles / 847,496 bytes. Editable Blender source and unchanged generated source are retained. One generation cost 6 of the authorized 60 credits; no additional paid operation was launched.
+
+## Behavior
+
+- Loading, bloom, petal selection, case reading and return share one flower and one GSAP frame clock.
+- PERCH, SELVEDGE, FORME, About and Contact all work; actual screenshots, live/source/evidence links and honest AI-assisted role are retained.
+- RU/EN/KK, browser Back, Escape, focus restoration, reduced motion, native dialogs, failed assets, lost WebGL context and no-JavaScript navigation are supported.
+- All eleven standalone cases and legacy English/Kazakh addresses remain available.
 
 ## Run and verify
 
 ```sh
 npm ci --ignore-scripts
-npm run build:soft-preview
-npm run preview:soft
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run test:browser
+node scripts/serve.mjs dist 5319
 ```
 
-Open `http://127.0.0.1:5318/soft-lotus.html?lang=ru`.
+For fixed bloom samples, build `npm run build:soft-preview`, serve `dist-soft` on 5318 and run `node scripts/capture-soft-lotus.mjs`. The pose inspector is absent from production. `node scripts/measure-soft-flow.mjs` records real production transitions and all five selections at four viewport sizes. Phone viewports are emulated, not physical devices.
 
-```sh
-npm run test:soft-state
-node node_modules/@playwright/test/cli.js test --config playwright.soft.config.ts
-```
+[QA.md](QA.md) records local checks separately from independent parent visual review. Current browser screenshots are in `proofs/`. Older `art/soft-lotus/proofs/candidate-*.png` document a superseded local iteration.
 
-Four state checks and five Chrome browser checks pass, including the first PERCH route, all five entries in three languages, mobile case reading, axe, no-JavaScript direct case access and a direct Kazakh case route at 320px without WebGL. The latter found and verified fixes for Tab containment and focus restoration when projected labels are not yet visible. Nine existing content/pose unit checks and all 40 production HTML artifact checks also pass. Lint, typecheck, normal production build and the separate preview build pass. No V2 CI or deployment has been run.
-
-These verify the free interface scaffold only. The two accompanying screenshots were visually inspected for readable real content and controls. Their wireframe and panels are provisional, not an accepted design. These checks do not accept a soft model, its loading handoff, five bloom samples, final camera composition or production performance. Those checks require the real generated asset.
-
-## Required before release
-
-1. Read the archive source/setup document and inspect the storyboard.
-2. Install the seven specifically approved skill sources only after the pending authorization, then apply their relevant instructions. Do not run React Bits `rb-add.mjs` or Design DNA scripts.
-3. Receive the single approved Higgsfield/Tripo master petal and its job ID, exact settings, original output and actual charge. No generation has been launched here.
-4. Inspect the source geometry and prepare five distinct petals, soft deformation, anchors, UV/normals, editable Blender source and optimized desktop/mobile GLBs.
-5. Evaluate that actual model in this scene at closed, 25%, 50%, 75%, open and selected states, then record the complete scenario. Correct a specific defect before considering any further generation.
-6. Finish spatial preview transitions, mobile composition, loading/fallback, typography and motion against the approved reference. Profile the final production asset on named hardware and explicitly distinguish phone emulation.
-7. Complete full desktop/mobile, fallback, slow loading, language, keyboard, zoom, links, build and CI checks before switching the production entry or deploying.
-
-Backup: remote `backup/pre-soft-lotus-v2-2026-11-04` at `81da4e53946c62f37ecc71ccd59ab11161f4fc19`, plus verified complete-history `../portfolio-before-soft-lotus-v2.bundle`. No other project repository was changed.
+Rollback: remote `backup/pre-soft-lotus-v2-2026-11-04` at `81da4e53946c62f37ecc71ccd59ab11161f4fc19`, plus verified complete-history `../portfolio-before-soft-lotus-v2.bundle`. No neighboring project was changed.

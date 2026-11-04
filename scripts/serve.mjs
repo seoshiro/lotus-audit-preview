@@ -1,7 +1,8 @@
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { resolve, extname, sep } from "node:path";
-const root = resolve("dist");
+const root = resolve(process.argv[2] || 'dist');
+const port = Number(process.argv[3] || 5317);
 const types = {
   ".json": "application/json",
   ".glb": "model/gltf-binary",
@@ -33,13 +34,13 @@ createServer(async (req, res) => {
       "X-Content-Type-Options": "nosniff",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Content-Security-Policy":
-        "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+        "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
     });
     res.end(data);
   } catch {
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("Page not found. Return to /index.html");
   }
-}).listen(5317, "127.0.0.1", () =>
-  console.log("Portfolio preview: http://127.0.0.1:5317"),
+}).listen(port, "127.0.0.1", () =>
+  console.log(`Portfolio preview: http://127.0.0.1:${port}`),
 );

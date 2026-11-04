@@ -30,13 +30,14 @@ function Reader({ state, onBack, onReturnFocus }: { state: SceneState; onBack: (
   }
   useLayoutEffect(() => {
     const el = dialog.current!;
+    const reduced = state.reducedMotion || document.documentElement.dataset.input === 'keyboard';
     gsap.killTweensOf(el);
     if (open) {
-      if (!el.open) el.showModal();
+      if (!el.open) { el.showModal(); gsap.set(el, { opacity: 0, y: reduced ? 0 : 24 }); }
       heading.current?.focus({ preventScroll: true });
-      gsap.fromTo(el, { opacity: 0, y: state.reducedMotion ? 0 : 24 }, { opacity: 1, y: 0, duration: state.reducedMotion ? 0 : 0.28, ease: 'power2.out' });
+      gsap.to(el, { opacity: 1, y: 0, duration: reduced ? 0 : 0.28, ease: 'power3.out' });
     } else if (el.open) {
-      gsap.to(el, { opacity: 0, y: state.reducedMotion ? 0 : 18, duration: state.reducedMotion ? 0 : 0.22, ease: 'power2.in', onComplete: () => { el.close(); focusRef.current(); } });
+      gsap.to(el, { opacity: 0, y: reduced ? 0 : 18, duration: reduced ? 0 : 0.2, ease: 'power3.out', onComplete: () => { el.close(); focusRef.current(); } });
     }
     return () => { gsap.killTweensOf(el); };
   }, [open, state.reducedMotion]);
@@ -94,6 +95,8 @@ export function App() {
   useEffect(() => {
     history.replaceState({ softLotus: true, softLotusDepth: Number(history.state?.softLotusDepth || 0) }, '', routeURL(new URL(location.href), current.current));
     const controller = new AbortController();
+    document.addEventListener('keydown', () => { document.documentElement.dataset.input = 'keyboard'; }, { signal: controller.signal });
+    document.addEventListener('pointerdown', () => { document.documentElement.dataset.input = 'pointer'; }, { signal: controller.signal });
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     media.addEventListener('change', event => dispatch({ type: 'motion', reduced: event.matches }), { signal: controller.signal });
     window.addEventListener('popstate', () => dispatch({ type: 'route', route: routeFromURL(new URL(location.href), current.current.locale) }), { signal: controller.signal });
@@ -116,7 +119,7 @@ export function App() {
     document.body.dataset.petal = state.active || '';
     document.body.dataset.model = state.model;
     try { localStorage.setItem('seoshiro-portfolio-language-v1', state.locale); } catch { /* Optional. */ }
-  }, [state, c.name]);
+  }, [state, c.name, s.headline]);
 
   useLayoutEffect(() => {
     if (!preview.current || state.view !== 'selected') return;
@@ -127,20 +130,21 @@ export function App() {
   const petalName = (id: PetalId) => isFeatured(id) ? id.toUpperCase() : s[id];
   return <>
     <a className="soft-skip" href="#scene-index">{s.skip}</a>
-    <header className="soft-header"><a href="soft-lotus.html" className="signature">BEIBARS</a><div className="soft-languages" role="group" aria-label={c.language}>{(['ru', 'en', 'kk'] as Locale[]).map(locale => <button key={locale} type="button" lang={locale} aria-pressed={locale === state.locale} onClick={() => navigate({ type: 'locale', locale }, true)}>{locale.toUpperCase()}</button>)}</div></header>
-    {softLotusAsset.state !== 'accepted' && <p className="prototype-note">{s.prototype}</p>}
-    <main id="soft-main">
-      <div className="soft-stage" data-view={state.view}>
+    <header className="soft-header"><a href={`?lang=${state.locale}`} className="signature">BEIBARS</a><div className="soft-languages" role="group" aria-label={c.language}>{(['ru', 'en', 'kk'] as Locale[]).map(locale => <button key={locale} type="button" lang={locale} aria-pressed={locale === state.locale} onClick={() => navigate({ type: 'locale', locale }, true)}>{locale.toUpperCase()}</button>)}</div></header>
+    <main id="main">
+    {softLotusAsset.state !== 'accepted' && <p className="prototype-note">{state.locale === 'ru' ? 'Предпросмотр · проверка Tripo-модели' : state.locale === 'kk' ? 'Алдын ала көрініс · Tripo моделін тексеру' : 'Preview · Tripo model under review'}</p>}
+      <div className="soft-stage" data-view={state.view} aria-busy={state.model === 'pending'}>
         <div ref={host} className="soft-canvas" />
+        {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? 'open' : 'bud'}-desktop.png`} alt="" /></picture>}
         <div className="scene-introduction" aria-hidden={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p>{s.hint}</p></div>
         <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}.webp`} alt="" width="144" height="88" />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
-        {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => document.getElementById(`petal-${id}`)?.focus({ preventScroll: true })); }}>×</button>
+        {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => document.getElementById(`petal-${id}`)?.focus({ preventScroll: true })); }}>{s.close}</button>
           <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(state.active)} reduced={state.reducedMotion} className="preview-title" />
-          {activeProject && activeCopy ? <><img src={`assets/${activeProject.id}.webp`} alt={activeCopy.alt} width={dimensions[activeProject.id].main[0]} height={dimensions[activeProject.id].main[1]} /><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a href={activeProject.live} target="_blank" rel="noreferrer">{c.live} ↗</a></div></> : state.active === 'about' ? <><p>{c.aboutText}</p><p>{c.roleText}</p></> : <><p>{s.contactText}</p><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></>}
+          {activeProject && activeCopy ? <><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a href={activeProject.live} target="_blank" rel="noreferrer">{c.live} ↗</a></div></> : state.active === 'about' ? <><p>{c.aboutText}</p><p>{c.roleText}</p></> : <><p>{s.contactText}</p><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></>}
         </aside>}
         <div className="scene-bottom"><div><p role="status">{state.model === 'pending' ? s.loading : state.model === 'failed' ? s.fallback : s.ready}</p>{state.model === 'pending' && <progress className="scene-loading" aria-label={s.loading} />}</div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>
       </div>
-      <nav id="scene-index" className="scene-index" aria-label={s.scene}>{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<details><summary>{s.all}</summary><div>{projects.map(p => <a key={p.id} href={pageHref(p.id, state.locale, false)}>{p.name} ↗</a>)}</div></details></nav>
+      <nav id="scene-index" className="scene-index" aria-label={`${s.scene} — ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<details><summary>{s.all}</summary><div>{projects.map(p => <a key={p.id} href={pageHref(p.id, state.locale, false)}>{p.name} ↗</a>)}</div></details></nav>
       <div className="scene-scroll-space" aria-hidden="true" />
       {activeProject && <Reader state={state} onBack={back} onReturnFocus={restoreFocus} />}
     </main>

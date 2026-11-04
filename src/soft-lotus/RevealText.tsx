@@ -34,5 +34,7 @@ export function RevealText({ text, reduced, tag: Tag = 'h1', className = '', id 
     });
     return () => { active = false; context?.revert(); split?.revert(); };
   }, [text, reduced]);
-  return <Tag ref={ref} id={id} className={className}>{text}</Tag>;
+  // SplitText's revert restores the old DOM. A new text value gets a new node,
+  // so cleanup cannot overwrite React's newly committed project/language label.
+  return <Tag key={text} ref={ref} id={id} className={className}>{text}</Tag>;
 }

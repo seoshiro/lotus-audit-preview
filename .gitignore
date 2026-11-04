@@ -6,3 +6,4 @@ playwright-report/
 evidence/
 .npm-cache/
 .DS_Store
+.agents/skills/

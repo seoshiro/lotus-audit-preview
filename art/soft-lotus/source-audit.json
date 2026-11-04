@@ -1,0 +1,39 @@
+{
+  "source": "tripo-4ccf52ab-original.glb",
+  "bytes": 369380,
+  "sha256": "e68a7f0d8c5391c0f5fe73bd52abe9569a5aba675716a893dbd1fb7c5d43edb0",
+  "objects": [
+    {
+      "name": "tripo_node_0f29fd1d-1e9b-454f-9338-ecf44b3d14f2",
+      "vertices": 5843,
+      "triangles": 11674,
+      "dimensions": [
+        0.7439747452735901,
+        1.0,
+        0.7103549242019653
+      ],
+      "bounds": [
+        [
+          -0.37198737263679504,
+          0.37198737263679504
+        ],
+        [
+          -0.5,
+          0.5
+        ],
+        [
+          -0.35517746210098267,
+          0.35517746210098267
+        ]
+      ],
+      "boundary_edges": 8,
+      "nonmanifold_edges": 8,
+      "components_vertices": [
+        5839,
+        4
+      ],
+      "volume": 0.02362677365161349,
+      "uv_layers": 1
+    }
+  ]
+}

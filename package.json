@@ -5,17 +5,18 @@
   "type": "module",
   "scripts": {
     "generate": "node --experimental-strip-types scripts/generate.ts",
-    "dev": "node --experimental-strip-types scripts/generate.ts && node node_modules/vite/bin/vite.js --configLoader native --host 127.0.0.1 --port 5317 --strictPort",
-    "build": "node --experimental-strip-types scripts/generate.ts && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --configLoader native && node scripts/harden.mjs && node scripts/verify-artifact.mjs",
+    "dev": "node --experimental-strip-types scripts/generate.ts --soft && node node_modules/vite/bin/vite.js --configLoader native --host 127.0.0.1 --port 5317 --strictPort",
+    "build": "node --experimental-strip-types scripts/generate.ts --soft && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --configLoader native && node scripts/harden.mjs && node scripts/verify-artifact.mjs",
     "preview": "node scripts/serve.mjs",
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "lint": "node node_modules/eslint/bin/eslint.js src scripts tests",
-    "test": "node --experimental-strip-types --test tests/content.test.ts tests/lotus.test.ts",
-    "test:browser": "node node_modules/@playwright/test/cli.js test",
+    "test": "node --experimental-strip-types --test tests/content.test.ts tests/soft-lotus.test.ts",
+    "test:browser": "node scripts/test-release-browser.mjs",
     "check:artifact": "node scripts/verify-artifact.mjs",
-    "build:soft-preview": "node --experimental-strip-types scripts/generate.ts && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --mode soft-preview --configLoader native",
+    "build:soft-preview": "node --experimental-strip-types scripts/generate.ts --soft && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --mode soft-preview --configLoader native",
     "preview:soft": "node node_modules/vite/bin/vite.js preview --outDir dist-soft --host 127.0.0.1 --port 5318 --strictPort",
-    "test:soft-state": "node --experimental-strip-types --test tests/soft-lotus.test.ts"
+    "test:soft-state": "node --experimental-strip-types --test tests/soft-lotus.test.ts",
+    "test:legacy-browser": "node node_modules/@playwright/test/cli.js test"
   },
   "dependencies": {
     "gsap": "3.15.1",

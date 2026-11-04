@@ -1,0 +1,352 @@
+[
+  {
+    "repository": "Philotheephilix/reactbits.dev-skill",
+    "ref": "d02e4b346b9297c411235cb564b3b6179bff44b6",
+    "source": "react-bits/SKILL.md",
+    "destination": "react-bits/SKILL.md",
+    "sha": "98fc847c2935ba83815a2422fc32ce92d63f61fd"
+  },
+  {
+    "repository": "Philotheephilix/reactbits.dev-skill",
+    "ref": "d02e4b346b9297c411235cb564b3b6179bff44b6",
+    "source": "react-bits/references/catalog.md",
+    "destination": "react-bits/references/catalog.md",
+    "sha": "692df6a466cf2f54778d29136e403ff0874e6209"
+  },
+  {
+    "repository": "Philotheephilix/reactbits.dev-skill",
+    "ref": "d02e4b346b9297c411235cb564b3b6179bff44b6",
+    "source": "react-bits/scripts/gen-catalog.mjs",
+    "destination": "react-bits/scripts/gen-catalog.mjs",
+    "sha": "949e1983ab674e04d848580d86c7c92067940e75"
+  },
+  {
+    "repository": "Philotheephilix/reactbits.dev-skill",
+    "ref": "d02e4b346b9297c411235cb564b3b6179bff44b6",
+    "source": "react-bits/scripts/rb-add.mjs",
+    "destination": "react-bits/scripts/rb-add.mjs",
+    "sha": "df1bd28246778863d7f8223a4a78a5cb493eac28"
+  },
+  {
+    "repository": "MengTo/Skills",
+    "ref": "1de14e21b2ba8937c0f7f6ddca581cf7cd9d94af",
+    "source": "agent-skills/web-design/cinematic-gsap-lenis-motion-system/REFERENCES.md",
+    "destination": "cinematic-gsap-lenis-motion-system/REFERENCES.md",
+    "sha": "0fcc6ca5daa209ecd3e483384a3c8cb2be00eeb5"
+  },
+  {
+    "repository": "MengTo/Skills",
+    "ref": "1de14e21b2ba8937c0f7f6ddca581cf7cd9d94af",
+    "source": "agent-skills/web-design/cinematic-gsap-lenis-motion-system/SKILL.md",
+    "destination": "cinematic-gsap-lenis-motion-system/SKILL.md",
+    "sha": "1aa69da8460ce0db325765de5ff14c1d6b92960f"
+  },
+  {
+    "repository": "MengTo/Skills",
+    "ref": "1de14e21b2ba8937c0f7f6ddca581cf7cd9d94af",
+    "source": "agent-skills/web-design/cinematic-gsap-lenis-motion-system/demo/PROMPT.md",
+    "destination": "cinematic-gsap-lenis-motion-system/demo/PROMPT.md",
+    "sha": "fcfdd088df05f47984dcc764581e9c00d7dae3ee"
+  },
+  {
+    "repository": "MengTo/Skills",
+    "ref": "1de14e21b2ba8937c0f7f6ddca581cf7cd9d94af",
+    "source": "agent-skills/web-design/cinematic-gsap-lenis-motion-system/demo/index.html",
+    "destination": "cinematic-gsap-lenis-motion-system/demo/index.html",
+    "sha": "33182228a5e412add7fa333de31baaf7b083081b"
+  },
+  {
+    "repository": "MengTo/Skills",
+    "ref": "1de14e21b2ba8937c0f7f6ddca581cf7cd9d94af",
+    "source": "agent-skills/web-design/cinematic-gsap-lenis-motion-system/demo/preview.jpg",
+    "destination": "cinematic-gsap-lenis-motion-system/demo/preview.jpg",
+    "sha": "a153f85004d72ac346c2574de5fdf177ec5e48ce"
+  },
+  {
+    "repository": "greensock/gsap-skills",
+    "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+    "source": "skills/gsap-core/SKILL.md",
+    "destination": "gsap-core/SKILL.md",
+    "sha": "98639432f4112b664aa5e53cf5d8ea1a4697eff9"
+  },
+  {
+    "repository": "greensock/gsap-skills",
+    "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+    "source": "skills/gsap-performance/SKILL.md",
+    "destination": "gsap-performance/SKILL.md",
+    "sha": "05792acf5b0ea7fd30042cdc5e91282e8e047898"
+  },
+  {
+    "repository": "greensock/gsap-skills",
+    "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+    "source": "skills/gsap-react/SKILL.md",
+    "destination": "gsap-react/SKILL.md",
+    "sha": "e2e51805457943cd4982fe792b858c14fa2c3c8f"
+  },
+  {
+    "repository": "greensock/gsap-skills",
+    "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+    "source": "skills/gsap-scrolltrigger/SKILL.md",
+    "destination": "gsap-scrolltrigger/SKILL.md",
+    "sha": "6d8c09f2136c108595c9e0db859c4a39460e99cf"
+  },
+  {
+    "repository": "greensock/gsap-skills",
+    "ref": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+    "source": "skills/gsap-timeline/SKILL.md",
+    "destination": "gsap-timeline/SKILL.md",
+    "sha": "1fed372b0e5276b2a207d80bc23f81180a0dff55"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-animation/SKILL.md",
+    "destination": "threejs-animation/SKILL.md",
+    "sha": "88fed204523e82cebf2953b9c14944001d43cc31"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-asset-pipeline/SKILL.md",
+    "destination": "threejs-asset-pipeline/SKILL.md",
+    "sha": "9515e85dac0dd16a3d8fac9b00263af8c217517f"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-fundamentals/SKILL.md",
+    "destination": "threejs-fundamentals/SKILL.md",
+    "sha": "85c223750c222dc91edd2c08383a6b3f7e7b85fe"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-geometry/SKILL.md",
+    "destination": "threejs-geometry/SKILL.md",
+    "sha": "7c1f17b11aa345f94face1ec7033c45b560dc8b2"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-interaction/SKILL.md",
+    "destination": "threejs-interaction/SKILL.md",
+    "sha": "bdd56b384eb0df0cc883057dd456136ec2c5d768"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-lighting/SKILL.md",
+    "destination": "threejs-lighting/SKILL.md",
+    "sha": "49370e6e1c9a73096e3089c78246b826fb572cdf"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-loaders/SKILL.md",
+    "destination": "threejs-loaders/SKILL.md",
+    "sha": "ce7100526666340c37a3996e5e3ab3ff7cb7893e"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-materials/SKILL.md",
+    "destination": "threejs-materials/SKILL.md",
+    "sha": "550a83cd4febc2ee458962deb0da4d67da3b9d13"
+  },
+  {
+    "repository": "CloudAI-X/threejs-skills",
+    "ref": "0e181866f095b5f06d005133876e926515390d95",
+    "source": "skills/threejs-performance/SKILL.md",
+    "destination": "threejs-performance/SKILL.md",
+    "sha": "fcc6a5f992030449736b2a83702a4f79229e9ff2"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "SKILL.md",
+    "destination": "design-dna/SKILL.md",
+    "sha": "56044cee680e0128f2df07802b4cc87ee520cef7"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "references/generation-guide.md",
+    "destination": "design-dna/references/generation-guide.md",
+    "sha": "29fd737cc0091f8e40c36d6c2fd2cb9664dd796d"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "references/schema.md",
+    "destination": "design-dna/references/schema.md",
+    "sha": "85e899cd7d76696c40db09446ffcd4b0e4b0c294"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "scripts/color-math.mjs",
+    "destination": "design-dna/scripts/color-math.mjs",
+    "sha": "3be24a067fb21d3d956109c155a075cf3113cffd"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "scripts/measure-colors.mjs",
+    "destination": "design-dna/scripts/measure-colors.mjs",
+    "sha": "c53537deefb57ac4b20d961327ae7a9bb333c141"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "scripts/package.json",
+    "destination": "design-dna/scripts/package.json",
+    "sha": "efe937ea6af96daaf4d9703220e11f5e9eaa43b2"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "scripts/test/color-measurement.test.mjs",
+    "destination": "design-dna/scripts/test/color-measurement.test.mjs",
+    "sha": "eccc9b46b2b8467f1460f34722e5e111ff3a4479"
+  },
+  {
+    "repository": "zanwei/design-dna",
+    "ref": "593e39bc9e3652734653bd75544a333d7d43615e",
+    "source": "scripts/verify.mjs",
+    "destination": "design-dna/scripts/verify.mjs",
+    "sha": "e4aced36852a97ae71b8f021cd162994a4745a03"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/SKILL.md",
+    "destination": "motion-design/SKILL.md",
+    "sha": "9b5e2df492752a8343f21a6782a16c97ca5d8f9f"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/choreography.md",
+    "destination": "motion-design/director/choreography.md",
+    "sha": "8b0322efe715247e4e120c561d2023308d2273a2"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/context-adaptation.md",
+    "destination": "motion-design/director/context-adaptation.md",
+    "sha": "97bc36ee57deb70b2c721caaad41b76191a066dd"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/core-philosophy.md",
+    "destination": "motion-design/director/core-philosophy.md",
+    "sha": "b48ea367dca840ec251b4cc36adbdc6df34c243f"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/decision-framework.md",
+    "destination": "motion-design/director/decision-framework.md",
+    "sha": "040e1ed776993ea0071388425143e39bc7664d0b"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/disney-principles.md",
+    "destination": "motion-design/director/disney-principles.md",
+    "sha": "4e573031d960aaf69aeea9aa42a2d00a1985afcc"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/emotion-mapping.md",
+    "destination": "motion-design/director/emotion-mapping.md",
+    "sha": "3a923b76b405231074881f5f27415a7ec8978fd6"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/motion-personality.md",
+    "destination": "motion-design/director/motion-personality.md",
+    "sha": "63e319397123f15169af44e3da904d32fd8a34c9"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/director/narrative-structure.md",
+    "destination": "motion-design/director/narrative-structure.md",
+    "sha": "c989603d1e8749220e66d7273f349bb69db72b82"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/patterns/ambient-continuous.md",
+    "destination": "motion-design/patterns/ambient-continuous.md",
+    "sha": "17d6533571b39a1e8a171b6366623bf8df6c1e1b"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/patterns/entrance-exit.md",
+    "destination": "motion-design/patterns/entrance-exit.md",
+    "sha": "4f3dc318565fce5ae410da5c95448bc786d1407f"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/patterns/multi-element.md",
+    "destination": "motion-design/patterns/multi-element.md",
+    "sha": "68aab1c0ccfd08a535a59bc01b3d39ad4823dc72"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/patterns/state-feedback.md",
+    "destination": "motion-design/patterns/state-feedback.md",
+    "sha": "8efb7209986ee450a11df829c413a943ff156de7"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/reference/property-selection.md",
+    "destination": "motion-design/reference/property-selection.md",
+    "sha": "21e8594a4eb360093b22aa3ed3146dbb513618ce"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/reference/quality-checklist.md",
+    "destination": "motion-design/reference/quality-checklist.md",
+    "sha": "a3d7033f744256e3b6d45468b64a3f19b48ebb6e"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/reference/timing-easing-tables.md",
+    "destination": "motion-design/reference/timing-easing-tables.md",
+    "sha": "810de35c9923d8f43ffc37aeef70faebb7e5bbfc"
+  },
+  {
+    "repository": "LottieFiles/motion-design-skill",
+    "ref": "f9a8a041b85185ee4881b3471d3415e939aac772",
+    "source": "skills/motion-design/reference/troubleshooting.md",
+    "destination": "motion-design/reference/troubleshooting.md",
+    "sha": "dbae0ebed28c920893393d9210661c1c4e27bf64"
+  },
+  {
+    "repository": "emilkowalski/skills",
+    "ref": "f1090bec277140d02ed202440185ad9d02ac1490",
+    "source": "skills/animate/RECIPES.md",
+    "destination": "animate/RECIPES.md",
+    "sha": "6744891261bdf0bb0473d77f2cc706f2d78b574e"
+  },
+  {
+    "repository": "emilkowalski/skills",
+    "ref": "f1090bec277140d02ed202440185ad9d02ac1490",
+    "source": "skills/animate/SKILL.md",
+    "destination": "animate/SKILL.md",
+    "sha": "2d3b63acc5e2afcbf54b5ba59792e69fa51bcb0d"
+  }
+]

@@ -1,15 +1,16 @@
-// Final asset remains deliberately unset until the approved Higgsfield/Tripo
-// result has been imported, inspected in this site and accepted.
+// Actual Tripo master, repaired in Blender and inspected throughout the site flow.
 export const softLotusAsset: {
   state: 'awaiting-generation' | 'candidate' | 'accepted';
   url: string | null;
+  mobileUrl: string | null;
   poster: string | null;
   sourceJobId: string | null;
 } = {
-  state: 'awaiting-generation',
-  url: null,
+  state: 'accepted',
+  url: 'models/soft-lotus-candidate.glb',
+  mobileUrl: 'models/soft-lotus-mobile.glb',
   poster: null,
-  sourceJobId: null,
+  sourceJobId: '4ccf52ab-d439-444b-ad96-3011e8a11578',
 };
 
 export const softLotusContract = {

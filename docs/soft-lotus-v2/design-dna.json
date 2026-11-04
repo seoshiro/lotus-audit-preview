@@ -1,0 +1,404 @@
+{
+  "meta": {
+    "name": "Soft Lotus / Beibars",
+    "description": "Implementation tokens derived qualitatively from the supplied storyboard. Hex values are authored choices, not sampled measurements; external measurement scripts were not run.",
+    "source_references": [
+      "libfile_44e3b0b91ed48191988c89ec0945d5a3",
+      "libfile_5240580055e08191a3db78f6da52546b"
+    ],
+    "created_at": "2026-11-04"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "analogous",
+      "primary": {
+        "hex": "#38332F",
+        "role": "readable text"
+      },
+      "secondary": {
+        "hex": "#71655F",
+        "role": "secondary text"
+      },
+      "accent": {
+        "hex": "#BB7F80",
+        "role": "subtle blush"
+      },
+      "neutral": {
+        "scale": [
+          "#F7F3ED",
+          "#EEE6DD",
+          "#D9CFC4",
+          "#71655F",
+          "#38332F"
+        ],
+        "usage": "warm paper with dark readable text"
+      },
+      "semantic": {
+        "success": null,
+        "warning": null,
+        "error": "#805D4D",
+        "info": "#71655F"
+      },
+      "surface": {
+        "background": "#F7F3ED",
+        "card": "transparent",
+        "elevated": "#F7F3ED"
+      },
+      "contrast_strategy": "dark-on-light; body AA, visible keyboard outlines"
+    },
+    "typography": {
+      "type_scale": {
+        "display": {
+          "size": "clamp(58px,6.4vw,100px)",
+          "weight": 400,
+          "line_height": "1.05",
+          "tracking": "-.035em"
+        },
+        "heading_1": {
+          "size": "76px",
+          "weight": 400,
+          "line_height": "1.05",
+          "tracking": "-.025em"
+        },
+        "heading_2": {
+          "size": "64px",
+          "weight": 400,
+          "line_height": "1.1",
+          "tracking": "-.02em"
+        },
+        "heading_3": {
+          "size": "34px",
+          "weight": 400,
+          "line_height": "1.2",
+          "tracking": "0"
+        },
+        "body": {
+          "size": "16px",
+          "weight": 400,
+          "line_height": "1.8",
+          "tracking": "0"
+        },
+        "body_small": {
+          "size": "14px",
+          "weight": 400,
+          "line_height": "1.75",
+          "tracking": "0"
+        },
+        "caption": {
+          "size": "11px",
+          "weight": 400,
+          "line_height": "1.6",
+          "tracking": ".02em"
+        },
+        "overline": {
+          "size": "10px",
+          "weight": 400,
+          "line_height": "1.4",
+          "tracking": ".16em"
+        }
+      },
+      "font_families": {
+        "heading": "Cormorant Garamond",
+        "body": "IBM Plex Sans",
+        "mono": null
+      },
+      "font_style_notes": "expressive italic display; spaced serif petal labels; quiet sans controls"
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": [
+        4,
+        8,
+        12,
+        16,
+        24,
+        32,
+        48,
+        64
+      ],
+      "content_density": "spacious",
+      "section_rhythm": "flower occupies center; case reading has generous section breaks"
+    },
+    "layout": {
+      "grid_system": "radial 3D anchors plus HTML reader",
+      "max_content_width": "1440px scene / 1100px reader",
+      "columns": "five semantic petals",
+      "gutter": "4vw / 24px mobile",
+      "breakpoints": [
+        "700px",
+        "height 650px"
+      ],
+      "alignment_tendency": "radial overview, asymmetric selected project"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "2px",
+        "medium": "4px",
+        "large": "0",
+        "pill": "999px"
+      },
+      "border_usage": "only controls and reader dividers",
+      "divider_style": "1px warm neutral"
+    },
+    "elevation": {
+      "shadow_style": "soft diffused",
+      "levels": {
+        "low": "subtle screenshot contact",
+        "medium": "flower contact shadow",
+        "high": "none"
+      },
+      "depth_cues": [
+        "real concavity",
+        "occlusion",
+        "soft shadow",
+        "selected petal focus morph"
+      ]
+    },
+    "iconography": {
+      "style": "typographic arrows",
+      "stroke_weight": "font weight",
+      "size_scale": [
+        12,
+        16
+      ],
+      "preferred_set": "none"
+    },
+    "motion": {
+      "easing": {
+        "out": ".23,1,.32,1",
+        "inOut": ".77,0,.175,1"
+      },
+      "duration_scale": {
+        "micro": "160ms",
+        "normal": "200–280ms",
+        "macro": "550ms selection / 1100ms first bloom"
+      },
+      "entrance_pattern": "same bud opens; text follows primary action",
+      "exit_pattern": "retarget current pose; reader ease-out",
+      "philosophy": "calm spatial continuity; keyboard instant; reduced motion static"
+    },
+    "components": {
+      "button_style": "unframed petal labels; underline text actions",
+      "input_style": "not used",
+      "card_style": "none in overview",
+      "navigation_pattern": "five mesh targets with equivalent HTML buttons and a static index",
+      "modal_style": "native accessible case reader",
+      "list_style": "simple real-project links",
+      "component_notes": "ordinary routes for every real case; no invented project art"
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": [
+        "calm",
+        "organic",
+        "warm",
+        "editorial"
+      ],
+      "visual_metaphor": "ideas unfolding from a living flower",
+      "era_influence": "contemporary botanical editorial",
+      "genre": "creative portfolio",
+      "personality_traits": [
+        "thoughtful",
+        "precise",
+        "quiet"
+      ],
+      "adjectives": [
+        "soft",
+        "airy",
+        "tactile"
+      ]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "subtle veins and blush edges",
+      "whitespace_usage": "generous",
+      "visual_weight_distribution": "flower first, typography second",
+      "focal_strategy": "single hero element",
+      "contrast_level": "quiet surfaces, readable text",
+      "texture_usage": "faint vein color on actual 3D geometry"
+    },
+    "composition": {
+      "hierarchy_method": "scale and spatial isolation",
+      "balance_type": "radial",
+      "flow_direction": "bud → bloom → selected petal → readable case → same petal",
+      "grouping_strategy": "project material attached to petal",
+      "negative_space_role": "breathing room around the flower"
+    },
+    "imagery": {
+      "photo_treatment": "actual repository screenshots",
+      "illustration_style": "generated master petal adapted in Blender",
+      "graphic_elements": "thin arrows only",
+      "pattern_usage": "none",
+      "image_shape": "real screenshot within concave petal"
+    },
+    "interaction_feel": {
+      "feedback_style": "direct selection and mild lift",
+      "hover_behavior": "fine pointer only, 3px label lift",
+      "transition_personality": "smooth glide without overshoot",
+      "loading_style": "same model bud plus truthful indeterminate preparation state",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "clear and restrained",
+      "formality": "neutral",
+      "cta_style": "friendly invitation",
+      "empty_state_approach": "actual project links",
+      "error_tone": "plain useful fallback"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "heavy-immersive",
+      "performance_tier": "heavy",
+      "fallback_strategy": "static same-flower poster and semantic links",
+      "primary_technology": "Three.js + GSAP + Lenis"
+    },
+    "background_effects": {
+      "type": "static gradient",
+      "description": "warm paper",
+      "technology": "CSS",
+      "params": {
+        "color_palette": [
+          "#F7F3ED",
+          "#EEE6DD"
+        ],
+        "speed": 0,
+        "density": 0,
+        "opacity": 1,
+        "blend_mode": "normal"
+      }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "technology": null,
+      "params": {
+        "count": 0,
+        "shape": null,
+        "size_range": null,
+        "movement_pattern": null,
+        "color_behavior": null,
+        "interaction": null,
+        "spawn_area": null
+      }
+    },
+    "3d_elements": {
+      "enabled": true,
+      "type": "interactive hero model",
+      "description": "five copies of one approved Tripo master; local repairs, Bloom and Focus morphs",
+      "technology": "Three.js",
+      "params": {
+        "renderer": "WebGLRenderer",
+        "lighting": "hemisphere, key, fill",
+        "camera": "responsive perspective",
+        "materials": "matte ivory with blush vertex colors",
+        "geometry": "real Tripo surface; mobile decimated copy",
+        "post_processing": [],
+        "interaction_model": "raycast pointer plus semantic HTML"
+      }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "built-in material shading only",
+      "technology": null,
+      "params": {
+        "uniforms": [],
+        "vertex_manipulation": "glTF morph targets",
+        "fragment_output": null,
+        "noise_type": null,
+        "distortion": 0
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": false,
+        "layers": 0,
+        "depth_range": 0,
+        "speed_curve": null
+      },
+      "scroll_triggered_animations": {
+        "enabled": false,
+        "trigger_points": [],
+        "animation_type": null,
+        "scrub_behavior": null
+      },
+      "scroll_morphing": {
+        "enabled": false,
+        "description": "bloom is readiness-driven, not scroll-gated"
+      }
+    },
+    "text_effects": {
+      "type": "split-word reveal",
+      "description": "manual React Bits adapter",
+      "technology": "GSAP SplitText",
+      "params": {
+        "split_strategy": "by-word",
+        "animation_per_unit": "transform + opacity",
+        "stagger": "45ms",
+        "effect_style": "word mask"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "native cursor",
+      "params": {
+        "shape": null,
+        "size": null,
+        "blend_mode": null,
+        "trail": false,
+        "interaction_zone": null
+      }
+    },
+    "image_effects": {
+      "type": "anchored reveal",
+      "description": "real screenshots follow petal anchors",
+      "technology": "HTML/CSS",
+      "params": {
+        "filter_pipeline": [],
+        "hover_transform": "translateY(-3px)",
+        "reveal_animation": "opacity from bloom pose",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false,
+      "style": "none",
+      "params": {
+        "blur_radius": 0,
+        "transparency": 0,
+        "border_treatment": null,
+        "shadow_type": null,
+        "light_source_angle": null
+      }
+    },
+    "canvas_drawings": {
+      "enabled": false,
+      "type": "none",
+      "description": "3D canvas only",
+      "technology": null,
+      "params": {
+        "draw_method": null,
+        "animation_loop": null,
+        "color_scheme": null,
+        "responsiveness": null,
+        "interaction": null
+      }
+    },
+    "svg_animations": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "params": {
+        "animation_method": null,
+        "path_morphing": false,
+        "stroke_animation": false,
+        "filter_effects": []
+      }
+    },
+    "composite_notes": "A static storyboard cannot prove motion. Candidate acceptance requires actual browser playback and snapshots. No external Design DNA scripts executed, no measured-palette claim. GSAP owns the frame loop despite generic skill examples suggesting separate RAF. No custom cursor or additional libraries."
+  }
+}
