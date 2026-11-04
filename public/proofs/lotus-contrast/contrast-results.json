@@ -7,8 +7,8 @@
       "status": "passed",
       "states": 27,
       "measuredTextElements": 300,
-      "minimum": 4.827,
-      "petalMinimum": 4.827,
+      "minimum": 4.953,
+      "petalMinimum": 5.38,
       "failures": 0
     },
     {
@@ -17,7 +17,7 @@
       "states": 27,
       "measuredTextElements": 300,
       "minimum": 4.908,
-      "petalMinimum": 4.96,
+      "petalMinimum": 5.529,
       "failures": 0
     },
     {
@@ -26,7 +26,7 @@
       "states": 27,
       "measuredTextElements": 195,
       "minimum": 4.953,
-      "petalMinimum": 5.118,
+      "petalMinimum": 5.704,
       "failures": 0
     },
     {
@@ -34,8 +34,8 @@
       "status": "passed",
       "states": 27,
       "measuredTextElements": 183,
-      "minimum": 4.632,
-      "petalMinimum": 4.632,
+      "minimum": 4.803,
+      "petalMinimum": 5.162,
       "failures": 0
     }
   ],
@@ -72,7 +72,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -82,7 +82,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 6.955,
+              "minimum": 7.752,
               "samples": 222,
               "worstBackground": [
                 220,
@@ -93,7 +93,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -103,8 +103,8 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.648,
-              "samples": 310,
+              "minimum": 8.524,
+              "samples": 308,
               "worstBackground": [
                 229,
                 225,
@@ -114,7 +114,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -124,7 +124,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 6.98,
+              "minimum": 7.78,
               "samples": 226,
               "worstBackground": [
                 222,
@@ -135,7 +135,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -145,8 +145,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5,
-              "samples": 283,
+              "minimum": 5.572,
+              "samples": 285,
               "worstBackground": [
                 191,
                 182,
@@ -156,7 +156,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -166,8 +166,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.114,
-              "samples": 283,
+              "minimum": 6.815,
+              "samples": 282,
               "worstBackground": [
                 208,
                 202,
@@ -351,7 +351,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -361,7 +361,7 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.641,
+              "minimum": 7.401,
               "samples": 679,
               "worstBackground": [
                 216,
@@ -372,7 +372,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -382,8 +382,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.309,
-              "samples": 442,
+              "minimum": 8.146,
+              "samples": 440,
               "worstBackground": [
                 225,
                 220,
@@ -393,7 +393,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -403,8 +403,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.091,
-              "samples": 319,
+              "minimum": 6.789,
+              "samples": 317,
               "worstBackground": [
                 206,
                 202,
@@ -414,7 +414,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -424,8 +424,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.266,
-              "samples": 310,
+              "minimum": 5.87,
+              "samples": 308,
               "worstBackground": [
                 193,
                 188,
@@ -435,7 +435,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -445,8 +445,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.239,
-              "samples": 327,
+              "minimum": 5.839,
+              "samples": 326,
               "worstBackground": [
                 194,
                 187,
@@ -783,7 +783,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -793,8 +793,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.489,
-              "samples": 239,
+              "minimum": 6.118,
+              "samples": 240,
               "worstBackground": [
                 199,
                 191,
@@ -804,7 +804,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -814,8 +814,8 @@
                 "width": 133.79685974121094,
                 "height": 42
               },
-              "minimum": 7.211,
-              "samples": 987,
+              "minimum": 8.037,
+              "samples": 985,
               "worstBackground": [
                 226,
                 218,
@@ -825,7 +825,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -835,8 +835,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.515,
-              "samples": 279,
+              "minimum": 8.376,
+              "samples": 278,
               "worstBackground": [
                 228,
                 223,
@@ -846,7 +846,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -856,7 +856,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.325,
+              "minimum": 5.935,
               "samples": 298,
               "worstBackground": [
                 197,
@@ -867,7 +867,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -877,7 +877,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.119,
+              "minimum": 6.819,
               "samples": 401,
               "worstBackground": [
                 208,
@@ -1215,7 +1215,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1225,8 +1225,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.739,
-              "samples": 270,
+              "minimum": 6.396,
+              "samples": 269,
               "worstBackground": [
                 204,
                 195,
@@ -1236,7 +1236,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1246,8 +1246,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.662,
-              "samples": 331,
+              "minimum": 6.31,
+              "samples": 330,
               "worstBackground": [
                 202,
                 194,
@@ -1257,7 +1257,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -1267,8 +1267,8 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.758,
-              "samples": 665,
+              "minimum": 7.533,
+              "samples": 666,
               "worstBackground": [
                 217,
                 212,
@@ -1278,7 +1278,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1288,7 +1288,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.35,
+              "minimum": 7.078,
               "samples": 397,
               "worstBackground": [
                 214,
@@ -1299,7 +1299,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1309,8 +1309,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.683,
-              "samples": 386,
+              "minimum": 7.449,
+              "samples": 382,
               "worstBackground": [
                 216,
                 211,
@@ -1647,7 +1647,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1657,7 +1657,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.758,
+              "minimum": 7.533,
               "samples": 286,
               "worstBackground": [
                 217,
@@ -1668,7 +1668,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1678,8 +1678,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.661,
-              "samples": 416,
+              "minimum": 7.424,
+              "samples": 415,
               "worstBackground": [
                 218,
                 210,
@@ -1689,7 +1689,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1699,8 +1699,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.534,
-              "samples": 282,
+              "minimum": 6.168,
+              "samples": 283,
               "worstBackground": [
                 199,
                 192,
@@ -1710,7 +1710,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -1720,8 +1720,8 @@
                 "width": 125.21875,
                 "height": 42
               },
-              "minimum": 5.955,
-              "samples": 918,
+              "minimum": 6.637,
+              "samples": 915,
               "worstBackground": [
                 204,
                 200,
@@ -1731,7 +1731,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1741,8 +1741,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.53,
-              "samples": 355,
+              "minimum": 6.164,
+              "samples": 356,
               "worstBackground": [
                 199,
                 192,
@@ -1926,7 +1926,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1936,8 +1936,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.746,
-              "samples": 245,
+              "minimum": 7.519,
+              "samples": 244,
               "worstBackground": [
                 220,
                 211,
@@ -1947,7 +1947,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1957,8 +1957,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.423,
-              "samples": 364,
+              "minimum": 6.044,
+              "samples": 362,
               "worstBackground": [
                 198,
                 190,
@@ -1968,7 +1968,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1978,8 +1978,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.468,
-              "samples": 311,
+              "minimum": 6.095,
+              "samples": 309,
               "worstBackground": [
                 198,
                 191,
@@ -1989,7 +1989,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -1999,8 +1999,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.304,
-              "samples": 386,
+              "minimum": 7.026,
+              "samples": 385,
               "worstBackground": [
                 211,
                 205,
@@ -2010,7 +2010,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -2020,7 +2020,7 @@
                 "width": 130.43751525878906,
                 "height": 42
               },
-              "minimum": 6.58,
+              "minimum": 7.334,
               "samples": 924,
               "worstBackground": [
                 216,
@@ -2226,7 +2226,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2236,7 +2236,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 6.955,
+              "minimum": 7.752,
               "samples": 222,
               "worstBackground": [
                 220,
@@ -2247,7 +2247,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2257,8 +2257,8 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.648,
-              "samples": 310,
+              "minimum": 8.524,
+              "samples": 308,
               "worstBackground": [
                 229,
                 225,
@@ -2268,7 +2268,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2278,7 +2278,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 6.98,
+              "minimum": 7.78,
               "samples": 226,
               "worstBackground": [
                 222,
@@ -2289,7 +2289,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2299,7 +2299,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.07,
+              "minimum": 5.651,
               "samples": 199,
               "worstBackground": [
                 191,
@@ -2310,7 +2310,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2320,7 +2320,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.102,
+              "minimum": 6.801,
               "samples": 266,
               "worstBackground": [
                 210,
@@ -2505,7 +2505,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -2515,7 +2515,7 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.641,
+              "minimum": 7.401,
               "samples": 679,
               "worstBackground": [
                 216,
@@ -2526,7 +2526,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2536,8 +2536,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.309,
-              "samples": 442,
+              "minimum": 8.146,
+              "samples": 440,
               "worstBackground": [
                 225,
                 220,
@@ -2547,7 +2547,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2557,8 +2557,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.091,
-              "samples": 319,
+              "minimum": 6.789,
+              "samples": 317,
               "worstBackground": [
                 206,
                 202,
@@ -2568,7 +2568,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2578,7 +2578,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.287,
+              "minimum": 5.892,
               "samples": 220,
               "worstBackground": [
                 194,
@@ -2589,7 +2589,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2599,8 +2599,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.419,
-              "samples": 308,
+              "minimum": 6.04,
+              "samples": 306,
               "worstBackground": [
                 198,
                 190,
@@ -2937,7 +2937,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2947,8 +2947,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.489,
-              "samples": 239,
+              "minimum": 6.118,
+              "samples": 240,
               "worstBackground": [
                 199,
                 191,
@@ -2958,7 +2958,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -2968,8 +2968,8 @@
                 "width": 133.79685974121094,
                 "height": 42
               },
-              "minimum": 7.211,
-              "samples": 987,
+              "minimum": 8.037,
+              "samples": 985,
               "worstBackground": [
                 226,
                 218,
@@ -2979,7 +2979,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -2989,8 +2989,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.515,
-              "samples": 279,
+              "minimum": 8.376,
+              "samples": 278,
               "worstBackground": [
                 228,
                 223,
@@ -3000,7 +3000,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3010,7 +3010,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.46,
+              "minimum": 6.086,
               "samples": 209,
               "worstBackground": [
                 198,
@@ -3021,7 +3021,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3031,12 +3031,12 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.687,
-              "samples": 371,
+              "minimum": 6.789,
+              "samples": 369,
               "worstBackground": [
-                201,
-                195,
-                185
+                206,
+                202,
+                193
               ]
             },
             {
@@ -3369,7 +3369,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3379,8 +3379,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.739,
-              "samples": 270,
+              "minimum": 6.396,
+              "samples": 269,
               "worstBackground": [
                 204,
                 195,
@@ -3390,7 +3390,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3400,8 +3400,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.662,
-              "samples": 331,
+              "minimum": 6.31,
+              "samples": 330,
               "worstBackground": [
                 202,
                 194,
@@ -3411,7 +3411,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -3421,8 +3421,8 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.758,
-              "samples": 665,
+              "minimum": 7.533,
+              "samples": 666,
               "worstBackground": [
                 217,
                 212,
@@ -3432,7 +3432,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3442,7 +3442,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.35,
+              "minimum": 7.078,
               "samples": 288,
               "worstBackground": [
                 214,
@@ -3453,7 +3453,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3463,8 +3463,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.749,
-              "samples": 359,
+              "minimum": 7.522,
+              "samples": 357,
               "worstBackground": [
                 217,
                 212,
@@ -3801,7 +3801,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3811,7 +3811,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.758,
+              "minimum": 7.533,
               "samples": 286,
               "worstBackground": [
                 217,
@@ -3822,7 +3822,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3832,8 +3832,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.661,
-              "samples": 416,
+              "minimum": 7.424,
+              "samples": 415,
               "worstBackground": [
                 218,
                 210,
@@ -3843,7 +3843,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3853,8 +3853,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.534,
-              "samples": 282,
+              "minimum": 6.168,
+              "samples": 283,
               "worstBackground": [
                 199,
                 192,
@@ -3864,7 +3864,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -3874,8 +3874,8 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.025,
-              "samples": 673,
+              "minimum": 6.715,
+              "samples": 674,
               "worstBackground": [
                 205,
                 201,
@@ -3885,7 +3885,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -3895,8 +3895,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.53,
-              "samples": 321,
+              "minimum": 6.164,
+              "samples": 320,
               "worstBackground": [
                 199,
                 192,
@@ -4080,7 +4080,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4090,8 +4090,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.746,
-              "samples": 245,
+              "minimum": 7.519,
+              "samples": 244,
               "worstBackground": [
                 220,
                 211,
@@ -4101,7 +4101,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4111,8 +4111,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.423,
-              "samples": 364,
+              "minimum": 6.044,
+              "samples": 362,
               "worstBackground": [
                 198,
                 190,
@@ -4122,7 +4122,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4132,8 +4132,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.468,
-              "samples": 311,
+              "minimum": 6.095,
+              "samples": 309,
               "worstBackground": [
                 198,
                 191,
@@ -4143,7 +4143,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4153,7 +4153,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.487,
+              "minimum": 7.23,
               "samples": 270,
               "worstBackground": [
                 213,
@@ -4164,7 +4164,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -4174,8 +4174,8 @@
                 "width": 130.95314025878906,
                 "height": 42
               },
-              "minimum": 6.566,
-              "samples": 728,
+              "minimum": 7.318,
+              "samples": 729,
               "worstBackground": [
                 215,
                 209,
@@ -4380,7 +4380,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4390,7 +4390,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 6.955,
+              "minimum": 7.752,
               "samples": 222,
               "worstBackground": [
                 220,
@@ -4401,7 +4401,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4411,8 +4411,8 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.648,
-              "samples": 310,
+              "minimum": 8.524,
+              "samples": 308,
               "worstBackground": [
                 229,
                 225,
@@ -4422,7 +4422,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4432,7 +4432,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 6.98,
+              "minimum": 7.78,
               "samples": 226,
               "worstBackground": [
                 222,
@@ -4443,7 +4443,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4453,7 +4453,7 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 4.995,
+              "minimum": 5.567,
               "samples": 402,
               "worstBackground": [
                 188,
@@ -4464,7 +4464,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4474,7 +4474,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.116,
+              "minimum": 6.816,
               "samples": 345,
               "worstBackground": [
                 211,
@@ -4659,7 +4659,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -4669,7 +4669,7 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.641,
+              "minimum": 7.401,
               "samples": 679,
               "worstBackground": [
                 216,
@@ -4680,7 +4680,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4690,8 +4690,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.309,
-              "samples": 442,
+              "minimum": 8.146,
+              "samples": 440,
               "worstBackground": [
                 225,
                 220,
@@ -4701,7 +4701,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4711,8 +4711,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.091,
-              "samples": 319,
+              "minimum": 6.789,
+              "samples": 317,
               "worstBackground": [
                 206,
                 202,
@@ -4722,7 +4722,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4732,7 +4732,7 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 5.283,
+              "minimum": 5.888,
               "samples": 431,
               "worstBackground": [
                 194,
@@ -4743,7 +4743,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -4753,8 +4753,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.074,
-              "samples": 401,
+              "minimum": 5.655,
+              "samples": 400,
               "worstBackground": [
                 191,
                 184,
@@ -5091,7 +5091,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5101,8 +5101,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.489,
-              "samples": 239,
+              "minimum": 6.118,
+              "samples": 240,
               "worstBackground": [
                 199,
                 191,
@@ -5112,7 +5112,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -5122,8 +5122,8 @@
                 "width": 133.79685974121094,
                 "height": 42
               },
-              "minimum": 7.211,
-              "samples": 987,
+              "minimum": 8.037,
+              "samples": 985,
               "worstBackground": [
                 226,
                 218,
@@ -5133,7 +5133,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5143,8 +5143,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.515,
-              "samples": 279,
+              "minimum": 8.376,
+              "samples": 278,
               "worstBackground": [
                 228,
                 223,
@@ -5154,7 +5154,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5164,8 +5164,8 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 4.976,
-              "samples": 437,
+              "minimum": 5.546,
+              "samples": 438,
               "worstBackground": [
                 190,
                 182,
@@ -5175,7 +5175,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5185,7 +5185,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.091,
+              "minimum": 6.789,
               "samples": 471,
               "worstBackground": [
                 206,
@@ -5523,7 +5523,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5533,8 +5533,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.739,
-              "samples": 270,
+              "minimum": 6.396,
+              "samples": 269,
               "worstBackground": [
                 204,
                 195,
@@ -5544,7 +5544,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5554,8 +5554,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.662,
-              "samples": 331,
+              "minimum": 6.31,
+              "samples": 330,
               "worstBackground": [
                 202,
                 194,
@@ -5565,7 +5565,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -5575,8 +5575,8 @@
                 "width": 100,
                 "height": 42
               },
-              "minimum": 6.758,
-              "samples": 665,
+              "minimum": 7.533,
+              "samples": 666,
               "worstBackground": [
                 217,
                 212,
@@ -5586,7 +5586,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5596,8 +5596,8 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 6.35,
-              "samples": 574,
+              "minimum": 7.078,
+              "samples": 573,
               "worstBackground": [
                 214,
                 205,
@@ -5607,7 +5607,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5617,8 +5617,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.505,
-              "samples": 467,
+              "minimum": 7.25,
+              "samples": 465,
               "worstBackground": [
                 214,
                 208,
@@ -5955,7 +5955,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5965,7 +5965,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.758,
+              "minimum": 7.533,
               "samples": 286,
               "worstBackground": [
                 217,
@@ -5976,7 +5976,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -5986,8 +5986,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.661,
-              "samples": 416,
+              "minimum": 7.424,
+              "samples": 415,
               "worstBackground": [
                 218,
                 210,
@@ -5997,7 +5997,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6007,8 +6007,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.534,
-              "samples": 282,
+              "minimum": 6.168,
+              "samples": 283,
               "worstBackground": [
                 199,
                 192,
@@ -6018,7 +6018,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -6028,8 +6028,8 @@
                 "width": 189.796875,
                 "height": 42
               },
-              "minimum": 4.827,
-              "samples": 1261,
+              "minimum": 5.38,
+              "samples": 1258,
               "worstBackground": [
                 184,
                 180,
@@ -6039,7 +6039,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6049,7 +6049,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.552,
+              "minimum": 6.187,
               "samples": 432,
               "worstBackground": [
                 200,
@@ -6234,7 +6234,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6244,8 +6244,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.746,
-              "samples": 245,
+              "minimum": 7.519,
+              "samples": 244,
               "worstBackground": [
                 220,
                 211,
@@ -6255,7 +6255,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6265,8 +6265,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.423,
-              "samples": 364,
+              "minimum": 6.044,
+              "samples": 362,
               "worstBackground": [
                 198,
                 190,
@@ -6276,7 +6276,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6286,8 +6286,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.468,
-              "samples": 311,
+              "minimum": 6.095,
+              "samples": 309,
               "worstBackground": [
                 198,
                 191,
@@ -6297,7 +6297,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6307,8 +6307,8 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 5.649,
-              "samples": 533,
+              "minimum": 6.296,
+              "samples": 531,
               "worstBackground": [
                 201,
                 194,
@@ -6318,7 +6318,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -6328,8 +6328,8 @@
                 "width": 157.92189025878906,
                 "height": 42
               },
-              "minimum": 6.043,
-              "samples": 1097,
+              "minimum": 6.735,
+              "samples": 1102,
               "worstBackground": [
                 206,
                 201,
@@ -6540,7 +6540,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6550,7 +6550,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.21,
+              "minimum": 8.036,
               "samples": 210,
               "worstBackground": [
                 223,
@@ -6561,7 +6561,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6571,8 +6571,8 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.617,
-              "samples": 308,
+              "minimum": 8.49,
+              "samples": 307,
               "worstBackground": [
                 230,
                 224,
@@ -6582,7 +6582,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6592,7 +6592,7 @@
                 "width": 118.00006103515625,
                 "height": 31
               },
-              "minimum": 6.937,
+              "minimum": 7.731,
               "samples": 238,
               "worstBackground": [
                 222,
@@ -6603,7 +6603,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6613,8 +6613,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 4.98,
-              "samples": 278,
+              "minimum": 5.55,
+              "samples": 279,
               "worstBackground": [
                 190,
                 182,
@@ -6624,7 +6624,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6634,7 +6634,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.058,
+              "minimum": 6.752,
               "samples": 286,
               "worstBackground": [
                 210,
@@ -6819,7 +6819,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -6829,8 +6829,8 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 6.636,
-              "samples": 438,
+              "minimum": 7.396,
+              "samples": 437,
               "worstBackground": [
                 216,
                 210,
@@ -6840,7 +6840,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6850,8 +6850,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.245,
-              "samples": 440,
+              "minimum": 8.075,
+              "samples": 438,
               "worstBackground": [
                 225,
                 219,
@@ -6861,7 +6861,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6871,8 +6871,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.419,
-              "samples": 282,
+              "minimum": 7.154,
+              "samples": 279,
               "worstBackground": [
                 215,
                 206,
@@ -6882,7 +6882,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6892,8 +6892,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.27,
-              "samples": 403,
+              "minimum": 5.874,
+              "samples": 401,
               "worstBackground": [
                 193,
                 188,
@@ -6903,7 +6903,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -6913,8 +6913,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.087,
-              "samples": 382,
+              "minimum": 5.669,
+              "samples": 384,
               "worstBackground": [
                 192,
                 184,
@@ -7251,7 +7251,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7261,8 +7261,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.511,
-              "samples": 296,
+              "minimum": 6.142,
+              "samples": 295,
               "worstBackground": [
                 201,
                 191,
@@ -7272,7 +7272,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -7282,8 +7282,8 @@
                 "width": 108.4375,
                 "height": 36
               },
-              "minimum": 7.284,
-              "samples": 699,
+              "minimum": 8.118,
+              "samples": 697,
               "worstBackground": [
                 224,
                 220,
@@ -7293,7 +7293,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7303,8 +7303,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.459,
-              "samples": 305,
+              "minimum": 8.314,
+              "samples": 303,
               "worstBackground": [
                 227,
                 222,
@@ -7314,7 +7314,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7324,8 +7324,8 @@
                 "width": 100,
                 "height": 31.000015258789062
               },
-              "minimum": 4.976,
-              "samples": 350,
+              "minimum": 5.546,
+              "samples": 349,
               "worstBackground": [
                 190,
                 182,
@@ -7335,7 +7335,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7345,7 +7345,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.7,
+              "minimum": 6.353,
               "samples": 411,
               "worstBackground": [
                 202,
@@ -7683,7 +7683,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7693,8 +7693,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.704,
-              "samples": 262,
+              "minimum": 6.358,
+              "samples": 260,
               "worstBackground": [
                 202,
                 195,
@@ -7704,7 +7704,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7714,8 +7714,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.589,
-              "samples": 435,
+              "minimum": 6.23,
+              "samples": 433,
               "worstBackground": [
                 200,
                 193,
@@ -7725,7 +7725,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -7735,8 +7735,8 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 6.758,
-              "samples": 534,
+              "minimum": 7.533,
+              "samples": 513,
               "worstBackground": [
                 217,
                 212,
@@ -7746,7 +7746,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7756,7 +7756,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.382,
+              "minimum": 7.113,
               "samples": 396,
               "worstBackground": [
                 213,
@@ -7767,7 +7767,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -7777,8 +7777,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.552,
-              "samples": 391,
+              "minimum": 7.302,
+              "samples": 387,
               "worstBackground": [
                 214,
                 209,
@@ -8115,7 +8115,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8125,7 +8125,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.759,
+              "minimum": 7.534,
               "samples": 295,
               "worstBackground": [
                 218,
@@ -8136,7 +8136,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8146,8 +8146,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.589,
-              "samples": 332,
+              "minimum": 7.344,
+              "samples": 331,
               "worstBackground": [
                 216,
                 209,
@@ -8157,7 +8157,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8167,7 +8167,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.012,
+              "minimum": 5.586,
               "samples": 271,
               "worstBackground": [
                 192,
@@ -8178,7 +8178,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -8188,8 +8188,8 @@
                 "width": 101.484375,
                 "height": 36
               },
-              "minimum": 5.649,
-              "samples": 657,
+              "minimum": 6.296,
+              "samples": 656,
               "worstBackground": [
                 201,
                 194,
@@ -8199,7 +8199,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8209,8 +8209,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.576,
-              "samples": 353,
+              "minimum": 6.215,
+              "samples": 354,
               "worstBackground": [
                 199,
                 193,
@@ -8394,7 +8394,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8404,7 +8404,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.77,
+              "minimum": 7.545,
               "samples": 282,
               "worstBackground": [
                 219,
@@ -8415,7 +8415,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8425,7 +8425,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.457,
+              "minimum": 6.082,
               "samples": 364,
               "worstBackground": [
                 200,
@@ -8436,7 +8436,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8446,8 +8446,8 @@
                 "width": 99.99998474121094,
                 "height": 31
               },
-              "minimum": 5.548,
-              "samples": 277,
+              "minimum": 6.183,
+              "samples": 275,
               "worstBackground": [
                 200,
                 192,
@@ -8457,7 +8457,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8467,8 +8467,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.339,
-              "samples": 394,
+              "minimum": 7.066,
+              "samples": 395,
               "worstBackground": [
                 210,
                 206,
@@ -8478,7 +8478,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -8488,8 +8488,8 @@
                 "width": 105.71875,
                 "height": 36
               },
-              "minimum": 6.562,
-              "samples": 695,
+              "minimum": 7.313,
+              "samples": 692,
               "worstBackground": [
                 215,
                 209,
@@ -8694,7 +8694,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8704,7 +8704,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.21,
+              "minimum": 8.036,
               "samples": 210,
               "worstBackground": [
                 223,
@@ -8715,7 +8715,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8725,8 +8725,8 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.617,
-              "samples": 308,
+              "minimum": 8.49,
+              "samples": 307,
               "worstBackground": [
                 230,
                 224,
@@ -8736,7 +8736,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8746,7 +8746,7 @@
                 "width": 118.00006103515625,
                 "height": 31
               },
-              "minimum": 6.937,
+              "minimum": 7.731,
               "samples": 238,
               "worstBackground": [
                 222,
@@ -8757,7 +8757,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8767,8 +8767,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.007,
-              "samples": 202,
+              "minimum": 5.58,
+              "samples": 203,
               "worstBackground": [
                 189,
                 183,
@@ -8778,7 +8778,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -8788,7 +8788,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.058,
+              "minimum": 6.752,
               "samples": 261,
               "worstBackground": [
                 210,
@@ -8973,7 +8973,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -8983,8 +8983,8 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 6.636,
-              "samples": 438,
+              "minimum": 7.396,
+              "samples": 437,
               "worstBackground": [
                 216,
                 210,
@@ -8994,7 +8994,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9004,8 +9004,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.245,
-              "samples": 440,
+              "minimum": 8.075,
+              "samples": 438,
               "worstBackground": [
                 225,
                 219,
@@ -9015,7 +9015,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9025,8 +9025,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.419,
-              "samples": 282,
+              "minimum": 7.154,
+              "samples": 279,
               "worstBackground": [
                 215,
                 206,
@@ -9036,7 +9036,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9046,7 +9046,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.27,
+              "minimum": 5.874,
               "samples": 282,
               "worstBackground": [
                 193,
@@ -9057,7 +9057,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9067,8 +9067,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.087,
-              "samples": 348,
+              "minimum": 5.669,
+              "samples": 347,
               "worstBackground": [
                 192,
                 184,
@@ -9405,7 +9405,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9415,8 +9415,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.511,
-              "samples": 296,
+              "minimum": 6.142,
+              "samples": 295,
               "worstBackground": [
                 201,
                 191,
@@ -9426,7 +9426,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -9436,8 +9436,8 @@
                 "width": 108.4375,
                 "height": 36
               },
-              "minimum": 7.284,
-              "samples": 699,
+              "minimum": 8.118,
+              "samples": 697,
               "worstBackground": [
                 224,
                 220,
@@ -9447,7 +9447,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9457,8 +9457,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.459,
-              "samples": 305,
+              "minimum": 8.314,
+              "samples": 303,
               "worstBackground": [
                 227,
                 222,
@@ -9468,7 +9468,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9478,8 +9478,8 @@
                 "width": 100,
                 "height": 31.000015258789062
               },
-              "minimum": 5.353,
-              "samples": 247,
+              "minimum": 5.966,
+              "samples": 246,
               "worstBackground": [
                 198,
                 188,
@@ -9489,7 +9489,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9499,8 +9499,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.7,
-              "samples": 382,
+              "minimum": 6.353,
+              "samples": 380,
               "worstBackground": [
                 202,
                 195,
@@ -9837,7 +9837,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9847,8 +9847,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.704,
-              "samples": 262,
+              "minimum": 6.358,
+              "samples": 260,
               "worstBackground": [
                 202,
                 195,
@@ -9858,7 +9858,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9868,8 +9868,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.589,
-              "samples": 435,
+              "minimum": 6.23,
+              "samples": 433,
               "worstBackground": [
                 200,
                 193,
@@ -9879,7 +9879,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -9889,8 +9889,8 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 6.758,
-              "samples": 534,
+              "minimum": 7.533,
+              "samples": 513,
               "worstBackground": [
                 217,
                 212,
@@ -9900,7 +9900,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9910,7 +9910,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.382,
+              "minimum": 7.113,
               "samples": 272,
               "worstBackground": [
                 213,
@@ -9921,7 +9921,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -9931,7 +9931,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.552,
+              "minimum": 7.302,
               "samples": 365,
               "worstBackground": [
                 214,
@@ -10269,7 +10269,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10279,7 +10279,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.759,
+              "minimum": 7.534,
               "samples": 295,
               "worstBackground": [
                 218,
@@ -10290,7 +10290,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10300,8 +10300,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.589,
-              "samples": 332,
+              "minimum": 7.344,
+              "samples": 331,
               "worstBackground": [
                 216,
                 209,
@@ -10311,7 +10311,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10321,7 +10321,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.012,
+              "minimum": 5.586,
               "samples": 271,
               "worstBackground": [
                 192,
@@ -10332,7 +10332,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -10342,7 +10342,7 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 5.649,
+              "minimum": 6.296,
               "samples": 466,
               "worstBackground": [
                 201,
@@ -10353,7 +10353,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10363,8 +10363,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.555,
-              "samples": 342,
+              "minimum": 6.192,
+              "samples": 341,
               "worstBackground": [
                 198,
                 193,
@@ -10548,7 +10548,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10558,7 +10558,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.77,
+              "minimum": 7.545,
               "samples": 282,
               "worstBackground": [
                 219,
@@ -10569,7 +10569,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10579,7 +10579,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.457,
+              "minimum": 6.082,
               "samples": 364,
               "worstBackground": [
                 200,
@@ -10590,7 +10590,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10600,8 +10600,8 @@
                 "width": 99.99998474121094,
                 "height": 31
               },
-              "minimum": 5.548,
-              "samples": 277,
+              "minimum": 6.183,
+              "samples": 275,
               "worstBackground": [
                 200,
                 192,
@@ -10611,7 +10611,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10621,8 +10621,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.422,
-              "samples": 284,
+              "minimum": 7.158,
+              "samples": 274,
               "worstBackground": [
                 212,
                 207,
@@ -10632,7 +10632,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -10642,8 +10642,8 @@
                 "width": 106.125,
                 "height": 36
               },
-              "minimum": 6.562,
-              "samples": 638,
+              "minimum": 7.313,
+              "samples": 636,
               "worstBackground": [
                 215,
                 209,
@@ -10848,7 +10848,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10858,7 +10858,7 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.21,
+              "minimum": 8.036,
               "samples": 210,
               "worstBackground": [
                 223,
@@ -10869,7 +10869,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10879,8 +10879,8 @@
                 "width": 118,
                 "height": 31
               },
-              "minimum": 7.617,
-              "samples": 308,
+              "minimum": 8.49,
+              "samples": 307,
               "worstBackground": [
                 230,
                 224,
@@ -10890,7 +10890,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10900,7 +10900,7 @@
                 "width": 118.00006103515625,
                 "height": 31
               },
-              "minimum": 6.937,
+              "minimum": 7.731,
               "samples": 238,
               "worstBackground": [
                 222,
@@ -10911,7 +10911,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10921,8 +10921,8 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 4.973,
-              "samples": 396,
+              "minimum": 5.542,
+              "samples": 397,
               "worstBackground": [
                 190,
                 182,
@@ -10932,7 +10932,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -10942,8 +10942,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.116,
-              "samples": 358,
+              "minimum": 6.816,
+              "samples": 357,
               "worstBackground": [
                 211,
                 201,
@@ -11127,7 +11127,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -11137,8 +11137,8 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 6.636,
-              "samples": 438,
+              "minimum": 7.396,
+              "samples": 437,
               "worstBackground": [
                 216,
                 210,
@@ -11148,7 +11148,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11158,8 +11158,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.245,
-              "samples": 440,
+              "minimum": 8.075,
+              "samples": 438,
               "worstBackground": [
                 225,
                 219,
@@ -11169,7 +11169,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11179,8 +11179,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.419,
-              "samples": 282,
+              "minimum": 7.154,
+              "samples": 279,
               "worstBackground": [
                 215,
                 206,
@@ -11190,7 +11190,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11200,7 +11200,7 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 5.27,
+              "minimum": 5.874,
               "samples": 569,
               "worstBackground": [
                 193,
@@ -11211,7 +11211,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11221,8 +11221,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.074,
-              "samples": 463,
+              "minimum": 5.655,
+              "samples": 460,
               "worstBackground": [
                 191,
                 184,
@@ -11559,7 +11559,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11569,8 +11569,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.511,
-              "samples": 296,
+              "minimum": 6.142,
+              "samples": 295,
               "worstBackground": [
                 201,
                 191,
@@ -11580,7 +11580,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -11590,8 +11590,8 @@
                 "width": 108.4375,
                 "height": 36
               },
-              "minimum": 7.284,
-              "samples": 699,
+              "minimum": 8.118,
+              "samples": 697,
               "worstBackground": [
                 224,
                 220,
@@ -11601,7 +11601,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11611,8 +11611,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 7.459,
-              "samples": 305,
+              "minimum": 8.314,
+              "samples": 303,
               "worstBackground": [
                 227,
                 222,
@@ -11622,7 +11622,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11632,8 +11632,8 @@
                 "width": 113.953125,
                 "height": 31.000015258789062
               },
-              "minimum": 4.96,
-              "samples": 494,
+              "minimum": 5.529,
+              "samples": 493,
               "worstBackground": [
                 189,
                 182,
@@ -11643,7 +11643,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -11653,8 +11653,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.465,
-              "samples": 502,
+              "minimum": 7.205,
+              "samples": 499,
               "worstBackground": [
                 215,
                 207,
@@ -11991,7 +11991,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12001,8 +12001,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.704,
-              "samples": 262,
+              "minimum": 6.358,
+              "samples": 260,
               "worstBackground": [
                 202,
                 195,
@@ -12012,7 +12012,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12022,8 +12022,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.589,
-              "samples": 435,
+              "minimum": 6.23,
+              "samples": 433,
               "worstBackground": [
                 200,
                 193,
@@ -12033,7 +12033,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -12043,8 +12043,8 @@
                 "width": 100,
                 "height": 36
               },
-              "minimum": 6.758,
-              "samples": 534,
+              "minimum": 7.533,
+              "samples": 513,
               "worstBackground": [
                 217,
                 212,
@@ -12054,7 +12054,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12064,7 +12064,7 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 6.4,
+              "minimum": 7.133,
               "samples": 558,
               "worstBackground": [
                 214,
@@ -12075,7 +12075,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12085,7 +12085,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.723,
+              "minimum": 6.378,
               "samples": 484,
               "worstBackground": [
                 204,
@@ -12423,7 +12423,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12433,7 +12433,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.759,
+              "minimum": 7.534,
               "samples": 295,
               "worstBackground": [
                 218,
@@ -12444,7 +12444,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12454,8 +12454,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.589,
-              "samples": 332,
+              "minimum": 7.344,
+              "samples": 331,
               "worstBackground": [
                 216,
                 209,
@@ -12465,7 +12465,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12475,7 +12475,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.012,
+              "minimum": 5.586,
               "samples": 271,
               "worstBackground": [
                 192,
@@ -12486,7 +12486,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -12496,8 +12496,8 @@
                 "width": 153.82810974121094,
                 "height": 36
               },
-              "minimum": 6.221,
-              "samples": 924,
+              "minimum": 6.934,
+              "samples": 917,
               "worstBackground": [
                 208,
                 204,
@@ -12507,7 +12507,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12517,8 +12517,8 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.548,
-              "samples": 424,
+              "minimum": 6.183,
+              "samples": 422,
               "worstBackground": [
                 200,
                 192,
@@ -12702,7 +12702,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12712,7 +12712,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 6.77,
+              "minimum": 7.545,
               "samples": 282,
               "worstBackground": [
                 219,
@@ -12723,7 +12723,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12733,7 +12733,7 @@
                 "width": 100,
                 "height": 31
               },
-              "minimum": 5.457,
+              "minimum": 6.082,
               "samples": 364,
               "worstBackground": [
                 200,
@@ -12744,7 +12744,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12754,8 +12754,8 @@
                 "width": 99.99998474121094,
                 "height": 31
               },
-              "minimum": 5.548,
-              "samples": 277,
+              "minimum": 6.183,
+              "samples": 275,
               "worstBackground": [
                 200,
                 192,
@@ -12765,7 +12765,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -12775,8 +12775,8 @@
                 "width": 113.953125,
                 "height": 31
               },
-              "minimum": 5.738,
-              "samples": 546,
+              "minimum": 6.395,
+              "samples": 543,
               "worstBackground": [
                 201,
                 196,
@@ -12786,7 +12786,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "700",
               "decoration": "none",
@@ -12796,8 +12796,8 @@
                 "width": 127.98435974121094,
                 "height": 36
               },
-              "minimum": 5.794,
-              "samples": 859,
+              "minimum": 6.457,
+              "samples": 856,
               "worstBackground": [
                 202,
                 197,
@@ -13008,7 +13008,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -13018,7 +13018,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.879,
+              "minimum": 7.666,
               "samples": 150,
               "worstBackground": [
                 219,
@@ -13029,7 +13029,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -13039,8 +13039,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 7.664,
-              "samples": 212,
+              "minimum": 8.542,
+              "samples": 211,
               "worstBackground": [
                 231,
                 225,
@@ -13050,7 +13050,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -13060,7 +13060,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.84,
+              "minimum": 7.623,
               "samples": 156,
               "worstBackground": [
                 219,
@@ -13071,7 +13071,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -13081,7 +13081,7 @@
                 "width": 54.6875,
                 "height": 29
               },
-              "minimum": 5.13,
+              "minimum": 5.718,
               "samples": 197,
               "worstBackground": [
                 192,
@@ -13092,7 +13092,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -13102,7 +13102,7 @@
                 "width": 57.34375,
                 "height": 29
               },
-              "minimum": 6.258,
+              "minimum": 6.975,
               "samples": 200,
               "worstBackground": [
                 211,
@@ -14427,7 +14427,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -14437,7 +14437,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.879,
+              "minimum": 7.666,
               "samples": 150,
               "worstBackground": [
                 219,
@@ -14448,7 +14448,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -14458,8 +14458,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 7.664,
-              "samples": 212,
+              "minimum": 8.542,
+              "samples": 211,
               "worstBackground": [
                 231,
                 225,
@@ -14469,7 +14469,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -14479,7 +14479,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.84,
+              "minimum": 7.623,
               "samples": 156,
               "worstBackground": [
                 219,
@@ -14490,7 +14490,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -14500,7 +14500,7 @@
                 "width": 54,
                 "height": 29
               },
-              "minimum": 5.182,
+              "minimum": 5.776,
               "samples": 140,
               "worstBackground": [
                 193,
@@ -14511,7 +14511,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -14521,7 +14521,7 @@
                 "width": 57.78125,
                 "height": 29
               },
-              "minimum": 6.249,
+              "minimum": 6.964,
               "samples": 187,
               "worstBackground": [
                 210,
@@ -15846,7 +15846,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -15856,7 +15856,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.879,
+              "minimum": 7.666,
               "samples": 150,
               "worstBackground": [
                 219,
@@ -15867,7 +15867,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -15877,8 +15877,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 7.664,
-              "samples": 212,
+              "minimum": 8.542,
+              "samples": 211,
               "worstBackground": [
                 231,
                 225,
@@ -15888,7 +15888,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -15898,7 +15898,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.84,
+              "minimum": 7.623,
               "samples": 156,
               "worstBackground": [
                 219,
@@ -15909,7 +15909,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -15919,8 +15919,8 @@
                 "width": 82.28125,
                 "height": 29
               },
-              "minimum": 5.118,
-              "samples": 282,
+              "minimum": 5.704,
+              "samples": 283,
               "worstBackground": [
                 191,
                 185,
@@ -15930,7 +15930,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -15940,7 +15940,7 @@
                 "width": 69.390625,
                 "height": 29
               },
-              "minimum": 5.302,
+              "minimum": 5.91,
               "samples": 258,
               "worstBackground": [
                 192,
@@ -17250,7 +17250,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -17260,7 +17260,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 7.329,
+              "minimum": 8.169,
               "samples": 141,
               "worstBackground": [
                 224,
@@ -17271,7 +17271,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -17281,8 +17281,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 4.632,
-              "samples": 212,
+              "minimum": 5.162,
+              "samples": 211,
               "worstBackground": [
                 190,
                 174,
@@ -17292,7 +17292,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -17302,8 +17302,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.087,
-              "samples": 162,
+              "minimum": 6.785,
+              "samples": 161,
               "worstBackground": [
                 213,
                 200,
@@ -17313,7 +17313,7 @@
             {
               "text": "Обо мне ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -17323,7 +17323,7 @@
                 "width": 54.68750762939453,
                 "height": 29
               },
-              "minimum": 5.114,
+              "minimum": 5.7,
               "samples": 201,
               "worstBackground": [
                 191,
@@ -17334,7 +17334,7 @@
             {
               "text": "Контакт ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -17344,7 +17344,7 @@
                 "width": 57.34376525878906,
                 "height": 29
               },
-              "minimum": 5.266,
+              "minimum": 5.869,
               "samples": 203,
               "worstBackground": [
                 192,
@@ -18585,7 +18585,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -18595,7 +18595,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 7.329,
+              "minimum": 8.169,
               "samples": 141,
               "worstBackground": [
                 224,
@@ -18606,7 +18606,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -18616,8 +18616,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 4.632,
-              "samples": 212,
+              "minimum": 5.162,
+              "samples": 211,
               "worstBackground": [
                 190,
                 174,
@@ -18627,7 +18627,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -18637,8 +18637,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.087,
-              "samples": 162,
+              "minimum": 6.785,
+              "samples": 161,
               "worstBackground": [
                 213,
                 200,
@@ -18648,7 +18648,7 @@
             {
               "text": "About ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -18658,7 +18658,7 @@
                 "width": 54.00000762939453,
                 "height": 29
               },
-              "minimum": 5.17,
+              "minimum": 5.762,
               "samples": 146,
               "worstBackground": [
                 192,
@@ -18669,7 +18669,7 @@
             {
               "text": "Contact ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -18679,7 +18679,7 @@
                 "width": 57.78126525878906,
                 "height": 29
               },
-              "minimum": 6.23,
+              "minimum": 6.944,
               "samples": 191,
               "worstBackground": [
                 209,
@@ -19920,7 +19920,7 @@
             {
               "text": "PERCH ↗",
               "id": "petal-perch",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -19930,7 +19930,7 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 7.329,
+              "minimum": 8.169,
               "samples": 141,
               "worstBackground": [
                 224,
@@ -19941,7 +19941,7 @@
             {
               "text": "SELVEDGE ↗",
               "id": "petal-selvedge",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -19951,8 +19951,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 4.632,
-              "samples": 212,
+              "minimum": 5.162,
+              "samples": 211,
               "worstBackground": [
                 190,
                 174,
@@ -19962,7 +19962,7 @@
             {
               "text": "FORME ↗",
               "id": "petal-forme",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -19972,8 +19972,8 @@
                 "width": 68,
                 "height": 29
               },
-              "minimum": 6.087,
-              "samples": 162,
+              "minimum": 6.785,
+              "samples": 161,
               "worstBackground": [
                 213,
                 200,
@@ -19983,7 +19983,7 @@
             {
               "text": "Өзім туралы ↗",
               "id": "petal-about",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -19993,8 +19993,8 @@
                 "width": 82.28125762939453,
                 "height": 29
               },
-              "minimum": 5.118,
-              "samples": 280,
+              "minimum": 5.704,
+              "samples": 282,
               "worstBackground": [
                 191,
                 185,
@@ -20004,7 +20004,7 @@
             {
               "text": "Байланыс ↗",
               "id": "petal-contact",
-              "color": "rgb(74, 65, 58)",
+              "color": "rgb(67, 58, 51)",
               "opacity": 1,
               "weight": "500",
               "decoration": "none",
@@ -20014,8 +20014,8 @@
                 "width": 69.39064025878906,
                 "height": 29
               },
-              "minimum": 6.181,
-              "samples": 254,
+              "minimum": 6.889,
+              "samples": 252,
               "worstBackground": [
                 209,
                 203,

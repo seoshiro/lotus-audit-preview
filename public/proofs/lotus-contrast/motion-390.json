@@ -8,11 +8,11 @@
   "marks": [
     {
       "name": "ready",
-      "at": 1.591
+      "at": 1.599
     },
     {
       "name": "catalog-open",
-      "at": 2.3
+      "at": 2.303
     },
     {
       "name": "catalog-close",
@@ -20,19 +20,19 @@
     },
     {
       "name": "select-perch",
-      "at": 5.437
+      "at": 5.438
     },
     {
       "name": "reader-open",
-      "at": 6.794
+      "at": 6.815
     },
     {
       "name": "reader-close",
-      "at": 8.369
+      "at": 8.379
     },
     {
       "name": "return-home",
-      "at": 9.815
+      "at": 9.835
     }
   ],
   "browser": "156.0.8078.76",

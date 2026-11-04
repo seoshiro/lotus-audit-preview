@@ -1,0 +1,1151 @@
+[
+  {
+    "width": 1165,
+    "height": 747,
+    "locale": "kk",
+    "selected": "forme",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "rows": [
+      {
+        "text": "PERCH ↗",
+        "id": "petal-perch",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 394.760009765625,
+          "y": 298.3900146484375,
+          "width": 100,
+          "height": 31
+        },
+        "minimum": 6.109,
+        "samples": 291,
+        "worstBackground": [
+          199,
+          191,
+          182
+        ]
+      },
+      {
+        "text": "SELVEDGE ↗",
+        "id": "petal-selvedge",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 163.6300048828125,
+          "y": 376.510009765625,
+          "width": 100,
+          "height": 31
+        },
+        "minimum": 6.281,
+        "samples": 327,
+        "worstBackground": [
+          200,
+          194,
+          186
+        ]
+      },
+      {
+        "text": "FORME ↗",
+        "id": "petal-forme",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "700",
+        "decoration": "none",
+        "rect": {
+          "x": 147.89999389648438,
+          "y": 438.510009765625,
+          "width": 100,
+          "height": 36
+        },
+        "minimum": 7.533,
+        "samples": 472,
+        "worstBackground": [
+          217,
+          212,
+          205
+        ]
+      },
+      {
+        "text": "Өзім туралы ↗",
+        "id": "petal-about",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 584.8734130859375,
+          "y": 291.2900085449219,
+          "width": 113.953125,
+          "height": 31
+        },
+        "minimum": 7.133,
+        "samples": 530,
+        "worstBackground": [
+          214,
+          206,
+          197
+        ]
+      },
+      {
+        "text": "Байланыс ↗",
+        "id": "petal-contact",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 487.67999267578125,
+          "y": 410.2900085449219,
+          "width": 100,
+          "height": 31
+        },
+        "minimum": 4.835,
+        "samples": 508,
+        "worstBackground": [
+          179,
+          170,
+          156
+        ]
+      },
+      {
+        "text": "Мудбордтар мен дизайн жинақтары",
+        "id": "preview-subtitle",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 737.96875,
+          "y": 204.046875,
+          "width": 353.140625,
+          "height": 18
+        },
+        "minimum": 4.94,
+        "samples": 890,
+        "worstBackground": [
+          231,
+          227,
+          222
+        ]
+      },
+      {
+        "text": "Зерттеуге дайын",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 81.546875,
+          "y": 640.5,
+          "width": 79.265625,
+          "height": 13
+        },
+        "minimum": 5.242,
+        "samples": 309,
+        "worstBackground": [
+          239,
+          233,
+          228
+        ]
+      },
+      {
+        "text": "Қозғалысты азайту",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "underline",
+        "rect": {
+          "x": 955.921875,
+          "y": 625,
+          "width": 127.53125,
+          "height": 44
+        },
+        "minimum": 5.383,
+        "samples": 520,
+        "worstBackground": [
+          241,
+          236,
+          233
+        ]
+      },
+      {
+        "text": "01 PERCH",
+        "id": "index-perch",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 323.859375,
+          "y": 685,
+          "width": 50.625,
+          "height": 44
+        },
+        "minimum": 11.081,
+        "samples": 170,
+        "worstBackground": [
+          236,
+          232,
+          223
+        ]
+      },
+      {
+        "text": "02 SELVEDGE",
+        "id": "index-selvedge",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 398.484375,
+          "y": 685,
+          "width": 68.1875,
+          "height": 44
+        },
+        "minimum": 10.93,
+        "samples": 243,
+        "worstBackground": [
+          236,
+          230,
+          222
+        ]
+      },
+      {
+        "text": "03 FORME",
+        "id": "index-forme",
+        "color": "rgb(113, 82, 68)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "underline",
+        "rect": {
+          "x": 490.671875,
+          "y": 685,
+          "width": 52.140625,
+          "height": 44
+        },
+        "minimum": 5.724,
+        "samples": 212,
+        "worstBackground": [
+          235,
+          232,
+          222
+        ]
+      },
+      {
+        "text": "04 Өзім туралы",
+        "id": "index-about",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 566.8125,
+          "y": 685,
+          "width": 79.609375,
+          "height": 44
+        },
+        "minimum": 11.169,
+        "samples": 270,
+        "worstBackground": [
+          237,
+          233,
+          222
+        ]
+      },
+      {
+        "text": "05 Байланыс",
+        "id": "index-contact",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 670.421875,
+          "y": 685,
+          "width": 67.40625,
+          "height": 44
+        },
+        "minimum": 11.19,
+        "samples": 229,
+        "worstBackground": [
+          237,
+          233,
+          225
+        ]
+      },
+      {
+        "text": "Барлық жобалар",
+        "id": "index-all",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 761.828125,
+          "y": 685,
+          "width": 103.296875,
+          "height": 44
+        },
+        "minimum": 11.41,
+        "samples": 394,
+        "worstBackground": [
+          239,
+          235,
+          229
+        ]
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 640,
+    "locale": "ru",
+    "selected": null,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "rows": [
+      {
+        "text": "PERCH ↗",
+        "id": "petal-perch",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 29.979999542236328,
+          "y": 408.6400146484375,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 8.186,
+        "samples": 146,
+        "worstBackground": [
+          225,
+          221,
+          211
+        ]
+      },
+      {
+        "text": "SELVEDGE ↗",
+        "id": "petal-selvedge",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 115.13999938964844,
+          "y": 463.8800048828125,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 4.976,
+        "samples": 212,
+        "worstBackground": [
+          186,
+          171,
+          159
+        ]
+      },
+      {
+        "text": "FORME ↗",
+        "id": "petal-forme",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 231.760009765625,
+          "y": 414.3800048828125,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 6.834,
+        "samples": 161,
+        "worstBackground": [
+          213,
+          201,
+          190
+        ]
+      },
+      {
+        "text": "Обо мне ↗",
+        "id": "petal-about",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 97.78624725341797,
+          "y": 319.0899963378906,
+          "width": 54.68750762939453,
+          "height": 29
+        },
+        "minimum": 5.7,
+        "samples": 200,
+        "worstBackground": [
+          191,
+          185,
+          176
+        ]
+      },
+      {
+        "text": "Контакт ↗",
+        "id": "petal-contact",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 212.0281219482422,
+          "y": 335.1099853515625,
+          "width": 57.34376525878906,
+          "height": 29
+        },
+        "minimum": 6.597,
+        "samples": 215,
+        "worstBackground": [
+          204,
+          199,
+          190
+        ]
+      },
+      {
+        "text": "Можно исследовать",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 20,
+          "y": 500.5,
+          "width": 84.875,
+          "height": 11
+        },
+        "minimum": 4.97,
+        "samples": 323,
+        "worstBackground": [
+          231,
+          228,
+          221
+        ]
+      },
+      {
+        "text": "Уменьшить движение",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "underline",
+        "rect": {
+          "x": 187.328125,
+          "y": 484,
+          "width": 112.671875,
+          "height": 44
+        },
+        "minimum": 4.803,
+        "samples": 449,
+        "worstBackground": [
+          226,
+          225,
+          215
+        ]
+      },
+      {
+        "text": "01 PERCH",
+        "id": "index-perch",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 47.03125,
+          "y": 535,
+          "width": 38.328125,
+          "height": 44
+        },
+        "minimum": 11.197,
+        "samples": 117,
+        "worstBackground": [
+          237,
+          233,
+          226
+        ]
+      },
+      {
+        "text": "02 SELVEDGE",
+        "id": "index-selvedge",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 87.359375,
+          "y": 535,
+          "width": 52.703125,
+          "height": 44
+        },
+        "minimum": 10.945,
+        "samples": 175,
+        "worstBackground": [
+          237,
+          230,
+          221
+        ]
+      },
+      {
+        "text": "03 FORME",
+        "id": "index-forme",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 142.0625,
+          "y": 535,
+          "width": 39.578125,
+          "height": 44
+        },
+        "minimum": 11.053,
+        "samples": 118,
+        "worstBackground": [
+          238,
+          231,
+          223
+        ]
+      },
+      {
+        "text": "04 Обо мне",
+        "id": "index-about",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 183.640625,
+          "y": 535,
+          "width": 45.109375,
+          "height": 44
+        },
+        "minimum": 11.168,
+        "samples": 130,
+        "worstBackground": [
+          236,
+          233,
+          225
+        ]
+      },
+      {
+        "text": "05 Контакт",
+        "id": "index-contact",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 230.75,
+          "y": 535,
+          "width": 44.203125,
+          "height": 44
+        },
+        "minimum": 11.314,
+        "samples": 132,
+        "worstBackground": [
+          238,
+          234,
+          229
+        ]
+      },
+      {
+        "text": "Все проекты",
+        "id": "index-all",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 128.25,
+          "y": 581,
+          "width": 63.5,
+          "height": 44
+        },
+        "minimum": 11.117,
+        "samples": 205,
+        "worstBackground": [
+          237,
+          232,
+          225
+        ]
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 640,
+    "locale": "en",
+    "selected": null,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "rows": [
+      {
+        "text": "PERCH ↗",
+        "id": "petal-perch",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 29.979999542236328,
+          "y": 408.6400146484375,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 8.186,
+        "samples": 146,
+        "worstBackground": [
+          225,
+          221,
+          211
+        ]
+      },
+      {
+        "text": "SELVEDGE ↗",
+        "id": "petal-selvedge",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 115.13999938964844,
+          "y": 463.8800048828125,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 4.976,
+        "samples": 212,
+        "worstBackground": [
+          186,
+          171,
+          159
+        ]
+      },
+      {
+        "text": "FORME ↗",
+        "id": "petal-forme",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 231.760009765625,
+          "y": 414.3800048828125,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 6.834,
+        "samples": 161,
+        "worstBackground": [
+          213,
+          201,
+          190
+        ]
+      },
+      {
+        "text": "About ↗",
+        "id": "petal-about",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 98.12999725341797,
+          "y": 319.0899963378906,
+          "width": 54.00000762939453,
+          "height": 29
+        },
+        "minimum": 5.766,
+        "samples": 147,
+        "worstBackground": [
+          192,
+          186,
+          178
+        ]
+      },
+      {
+        "text": "Contact ↗",
+        "id": "petal-contact",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 211.8093719482422,
+          "y": 335.1099853515625,
+          "width": 57.78126525878906,
+          "height": 29
+        },
+        "minimum": 6.964,
+        "samples": 191,
+        "worstBackground": [
+          210,
+          204,
+          196
+        ]
+      },
+      {
+        "text": "Ready to explore",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 20,
+          "y": 500.5,
+          "width": 67.8125,
+          "height": 11
+        },
+        "minimum": 5.05,
+        "samples": 276,
+        "worstBackground": [
+          232,
+          230,
+          222
+        ]
+      },
+      {
+        "text": "Reduce motion",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "underline",
+        "rect": {
+          "x": 219.09375,
+          "y": 484,
+          "width": 80.90625,
+          "height": 44
+        },
+        "minimum": 5.033,
+        "samples": 306,
+        "worstBackground": [
+          233,
+          229,
+          224
+        ]
+      },
+      {
+        "text": "01 PERCH",
+        "id": "index-perch",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 25.0625,
+          "y": 581,
+          "width": 38.328125,
+          "height": 44
+        },
+        "minimum": 11.396,
+        "samples": 117,
+        "worstBackground": [
+          239,
+          235,
+          227
+        ]
+      },
+      {
+        "text": "02 SELVEDGE",
+        "id": "index-selvedge",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 65.390625,
+          "y": 581,
+          "width": 52.703125,
+          "height": 44
+        },
+        "minimum": 11.279,
+        "samples": 173,
+        "worstBackground": [
+          238,
+          234,
+          224
+        ]
+      },
+      {
+        "text": "03 FORME",
+        "id": "index-forme",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 120.09375,
+          "y": 581,
+          "width": 39.578125,
+          "height": 44
+        },
+        "minimum": 11.198,
+        "samples": 118,
+        "worstBackground": [
+          238,
+          233,
+          223
+        ]
+      },
+      {
+        "text": "04 About",
+        "id": "index-about",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 161.671875,
+          "y": 581,
+          "width": 34.3125,
+          "height": 44
+        },
+        "minimum": 11.308,
+        "samples": 101,
+        "worstBackground": [
+          239,
+          234,
+          225
+        ]
+      },
+      {
+        "text": "05 Contact",
+        "id": "index-contact",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 197.984375,
+          "y": 581,
+          "width": 41.40625,
+          "height": 44
+        },
+        "minimum": 11.41,
+        "samples": 126,
+        "worstBackground": [
+          239,
+          235,
+          229
+        ]
+      },
+      {
+        "text": "All projects",
+        "id": "index-all",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 241.390625,
+          "y": 581,
+          "width": 55.53125,
+          "height": 44
+        },
+        "minimum": 11.544,
+        "samples": 180,
+        "worstBackground": [
+          241,
+          236,
+          231
+        ]
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 640,
+    "locale": "kk",
+    "selected": null,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "rows": [
+      {
+        "text": "PERCH ↗",
+        "id": "petal-perch",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 29.979999542236328,
+          "y": 408.6400146484375,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 8.186,
+        "samples": 146,
+        "worstBackground": [
+          225,
+          221,
+          211
+        ]
+      },
+      {
+        "text": "SELVEDGE ↗",
+        "id": "petal-selvedge",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 115.13999938964844,
+          "y": 463.8800048828125,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 4.976,
+        "samples": 212,
+        "worstBackground": [
+          186,
+          171,
+          159
+        ]
+      },
+      {
+        "text": "FORME ↗",
+        "id": "petal-forme",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 231.760009765625,
+          "y": 414.3800048828125,
+          "width": 68,
+          "height": 29
+        },
+        "minimum": 6.834,
+        "samples": 161,
+        "worstBackground": [
+          213,
+          201,
+          190
+        ]
+      },
+      {
+        "text": "Өзім туралы ↗",
+        "id": "petal-about",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 83.98937225341797,
+          "y": 319.0899963378906,
+          "width": 82.28125762939453,
+          "height": 29
+        },
+        "minimum": 5.704,
+        "samples": 286,
+        "worstBackground": [
+          191,
+          185,
+          177
+        ]
+      },
+      {
+        "text": "Байланыс ↗",
+        "id": "petal-contact",
+        "color": "rgb(67, 58, 51)",
+        "opacity": 1,
+        "weight": "500",
+        "decoration": "none",
+        "rect": {
+          "x": 206.0046844482422,
+          "y": 335.1099853515625,
+          "width": 69.39064025878906,
+          "height": 29
+        },
+        "minimum": 6.905,
+        "samples": 253,
+        "worstBackground": [
+          210,
+          203,
+          194
+        ]
+      },
+      {
+        "text": "Зерттеуге дайын",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 20,
+          "y": 500.5,
+          "width": 71.34375,
+          "height": 11
+        },
+        "minimum": 5.03,
+        "samples": 278,
+        "worstBackground": [
+          233,
+          229,
+          223
+        ]
+      },
+      {
+        "text": "Қозғалысты азайту",
+        "id": "",
+        "color": "rgb(101, 95, 87)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "underline",
+        "rect": {
+          "x": 198.5625,
+          "y": 484,
+          "width": 101.4375,
+          "height": 44
+        },
+        "minimum": 4.953,
+        "samples": 398,
+        "worstBackground": [
+          229,
+          228,
+          222
+        ]
+      },
+      {
+        "text": "01 PERCH",
+        "id": "index-perch",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 34.640625,
+          "y": 535,
+          "width": 38.328125,
+          "height": 44
+        },
+        "minimum": 11.293,
+        "samples": 111,
+        "worstBackground": [
+          238,
+          234,
+          226
+        ]
+      },
+      {
+        "text": "02 SELVEDGE",
+        "id": "index-selvedge",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 74.96875,
+          "y": 535,
+          "width": 52.703125,
+          "height": 44
+        },
+        "minimum": 11.016,
+        "samples": 176,
+        "worstBackground": [
+          236,
+          231,
+          224
+        ]
+      },
+      {
+        "text": "03 FORME",
+        "id": "index-forme",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 129.671875,
+          "y": 535,
+          "width": 39.578125,
+          "height": 44
+        },
+        "minimum": 11.024,
+        "samples": 123,
+        "worstBackground": [
+          237,
+          231,
+          222
+        ]
+      },
+      {
+        "text": "04 Өзім туралы",
+        "id": "index-about",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 171.25,
+          "y": 535,
+          "width": 62.046875,
+          "height": 44
+        },
+        "minimum": 11.095,
+        "samples": 200,
+        "worstBackground": [
+          236,
+          232,
+          225
+        ]
+      },
+      {
+        "text": "05 Байланыс",
+        "id": "index-contact",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 235.296875,
+          "y": 535,
+          "width": 52.0625,
+          "height": 44
+        },
+        "minimum": 11.278,
+        "samples": 185,
+        "worstBackground": [
+          237,
+          234,
+          227
+        ]
+      },
+      {
+        "text": "Барлық жобалар",
+        "id": "index-all",
+        "color": "rgb(48, 46, 42)",
+        "opacity": 1,
+        "weight": "400",
+        "decoration": "none",
+        "rect": {
+          "x": 119.28125,
+          "y": 581,
+          "width": 81.421875,
+          "height": 44
+        },
+        "minimum": 11.117,
+        "samples": 288,
+        "worstBackground": [
+          237,
+          232,
+          225
+        ]
+      }
+    ]
+  }
+]

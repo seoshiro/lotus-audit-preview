@@ -12,7 +12,8 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Includes browser installation and the expanded four-viewport pixel checks.
+    timeout-minutes: 20
     env:
       PORTFOLIO_COMMIT: ${{ github.sha }}
       PORTFOLIO_PREVIEW: ${{ github.repository == 'seoshiro/lotus-audit-preview' && '1' || '0' }}
