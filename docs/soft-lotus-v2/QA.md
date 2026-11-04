@@ -1,5 +1,7 @@
 # V2 verification record
 
+Historical V2 baseline. The subsequent [LOTUS audit revision](../lotus-audit/QA.md) supersedes the layout, performance and contact status described here; the owner has since confirmed Telegram and email for the isolated audit preview.
+
 2026-11-04. This records execution-agent checks. Independent parent visual QA is separate and is not claimed here.
 
 ## Visual inspection and decisions

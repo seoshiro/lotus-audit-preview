@@ -38,7 +38,8 @@ export function isFeatured(value: unknown): value is FeaturedId {
 
 export function routeFromURL(url: URL, fallback: Locale): SceneRoute {
   const value = url.searchParams.get('petal');
-  const active = isPetal(value) ? value : null;
+  const legacy = url.hash.slice(1);
+  const active = isPetal(value) ? value : legacy === 'contact' || legacy === 'about' ? legacy : null;
   return {
     locale: validLocale(url.searchParams.get('lang')) || fallback,
     active,
@@ -48,6 +49,8 @@ export function routeFromURL(url: URL, fallback: Locale): SceneRoute {
 
 export function routeURL(url: URL, state: SceneRoute): URL {
   const next = new URL(url);
+  if (['#contact', '#about', '#work'].includes(next.hash)) next.hash = '';
+  next.searchParams.delete('return');
   next.searchParams.set('lang', state.locale);
   if (state.active) next.searchParams.set('petal', state.active);
   else next.searchParams.delete('petal');

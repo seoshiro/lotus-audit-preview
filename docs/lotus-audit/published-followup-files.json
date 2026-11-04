@@ -1,0 +1,45 @@
+{
+  "origin": "https://seoshiro.github.io/lotus-audit-preview/",
+  "commit": "9e5f9469c0d8dff34fc7480b6b3fb199b40f90dd",
+  "production": {
+    "commit": "6d94ef874c2f4e8a6ec4b8de7b92b88c6a5b7078"
+  },
+  "assets": [
+    {
+      "file": "models/soft-lotus-candidate.glb",
+      "bytes": 2037816,
+      "sha256": "7a43dcf25212b40a2d7eb0f9705a4a36eb353668b8228ebcf6c24d389f31fccd"
+    },
+    {
+      "file": "models/soft-lotus-mobile.glb",
+      "bytes": 853848,
+      "sha256": "982489ef82f88d6570a31372563404aca5522368268ca56243df1053e4fd8a9c"
+    },
+    {
+      "file": "models/soft-lotus-open-desktop.png",
+      "bytes": 177225,
+      "sha256": "95104b40dd4faef948efbca6b0a59d82f5444e97d72cbe0289a9edc64428dd71"
+    },
+    {
+      "file": "models/soft-lotus-open-mobile.png",
+      "bytes": 66108,
+      "sha256": "202f0d6feae44739e7d6fdbfab063a71b819c3e59637e14228b5084c5ec6748e"
+    },
+    {
+      "file": "assets/perch-petal.webp",
+      "bytes": 10204,
+      "sha256": "8cb079e8d4ff5c7d963c679bb403aee6c28f01f3a7ad3dd33a44638ca69c4c54"
+    },
+    {
+      "file": "assets/selvedge-petal.webp",
+      "bytes": 7218,
+      "sha256": "eca701e1d87d68a2af7ca43d10b5d22e4a0a12033c2fc1fbb4e66a13dba2fc80"
+    },
+    {
+      "file": "assets/forme-petal.webp",
+      "bytes": 12008,
+      "sha256": "9332c2dec59296a305930a5d0ee79f65a632da8b47d536ab3d5e36f5c358e3d1"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "project": "orbit",
+    "status": 200,
+    "url": "https://seoshiro.github.io/orbit-studio/"
+  },
+  {
+    "project": "reson",
+    "status": 200,
+    "url": "https://seoshiro.github.io/reson-studio/"
+  },
+  {
+    "project": "lumen",
+    "status": 200,
+    "url": "https://seoshiro.github.io/lumen-lens/"
+  },
+  {
+    "project": "perch",
+    "status": 200,
+    "url": "https://seoshiro.github.io/perch-studio/"
+  },
+  {
+    "project": "forme",
+    "status": 200,
+    "url": "https://forme-studio-coral.vercel.app/"
+  },
+  {
+    "project": "selvedge",
+    "status": 200,
+    "url": "https://seoshiro.github.io/selvedge-studio/"
+  },
+  {
+    "project": "guidecheck",
+    "status": 200,
+    "url": "https://seoshiro.github.io/guidecheck/"
+  },
+  {
+    "project": "archiveguard",
+    "status": 200,
+    "url": "https://seoshiro.github.io/archiveguard/"
+  },
+  {
+    "project": "iter",
+    "status": 200,
+    "url": "https://iter-navigator.vercel.app/"
+  },
+  {
+    "project": "ayqyn",
+    "status": 200,
+    "url": "https://seoshiro.github.io/ayqyn-local/replay/"
+  },
+  {
+    "project": "sidereal",
+    "status": 200,
+    "url": "https://seoshiro.github.io/sidereal/"
+  }
+]

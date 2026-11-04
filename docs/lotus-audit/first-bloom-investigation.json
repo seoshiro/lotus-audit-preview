@@ -1,0 +1,469 @@
+{
+  "baselineRuntime": "b46d69d9e1492e8252829c6c319eb42b5a493ba9",
+  "finalSource": "9e5f9469c0d8dff34fc7480b6b3fb199b40f90dd",
+  "method": "Sequential local diagnostic passes in installed Chrome on the same Windows/AMD GPU with simulated cold-cache 10 Mbps / 40 ms conditions. CSS exclusions are diagnostic only. First three variants use original large thumbnail images; later variants use resized real project captures. This is controlled component isolation, not a multi-device statistical benchmark.",
+  "variants": [
+    {
+      "name": "full",
+      "reports": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 998.334,
+            "presentedAnimationFrames": 130,
+            "presentationIntervalMs": {
+              "p50": 6.955,
+              "p95": 7.035,
+              "max": 83.508,
+              "over33ms": 1
+            },
+            "drawFrames": 136,
+            "dropSignals": 11,
+            "partialUpdateSignals": 6,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1604.298,
+            "presentedAnimationFrames": 216,
+            "presentationIntervalMs": {
+              "p50": 6.958,
+              "p95": 7.201,
+              "max": 35.024,
+              "over33ms": 2
+            },
+            "drawFrames": 231,
+            "dropSignals": 8,
+            "partialUpdateSignals": 8,
+            "longTasks": []
+          }
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 992.379,
+            "presentedAnimationFrames": 133,
+            "presentationIntervalMs": {
+              "p50": 6.956,
+              "p95": 7.192,
+              "max": 55.65,
+              "over33ms": 1
+            },
+            "drawFrames": 141,
+            "dropSignals": 6,
+            "partialUpdateSignals": 5,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1528.951,
+            "presentedAnimationFrames": 216,
+            "presentationIntervalMs": {
+              "p50": 6.959,
+              "p95": 7.169,
+              "max": 13.948,
+              "over33ms": 0
+            },
+            "drawFrames": 220,
+            "dropSignals": 1,
+            "partialUpdateSignals": 1,
+            "longTasks": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "no-labels",
+      "reports": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 998.166,
+            "presentedAnimationFrames": 141,
+            "presentationIntervalMs": {
+              "p50": 6.955,
+              "p95": 6.99,
+              "max": 13.882,
+              "over33ms": 0
+            },
+            "drawFrames": 144,
+            "dropSignals": 0,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1604.357,
+            "presentedAnimationFrames": 220,
+            "presentationIntervalMs": {
+              "p50": 6.954,
+              "p95": 7.187,
+              "max": 41.398,
+              "over33ms": 1
+            },
+            "drawFrames": 227,
+            "dropSignals": 8,
+            "partialUpdateSignals": 8,
+            "longTasks": []
+          }
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 999.648,
+            "presentedAnimationFrames": 141,
+            "presentationIntervalMs": {
+              "p50": 6.958,
+              "p95": 7.16,
+              "max": 7.191,
+              "over33ms": 0
+            },
+            "drawFrames": 144,
+            "dropSignals": 1,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1591.76,
+            "presentedAnimationFrames": 217,
+            "presentationIntervalMs": {
+              "p50": 6.96,
+              "p95": 7.183,
+              "max": 27.843,
+              "over33ms": 0
+            },
+            "drawFrames": 226,
+            "dropSignals": 7,
+            "partialUpdateSignals": 7,
+            "longTasks": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "no-thumbnails",
+      "reports": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 998.786,
+            "presentedAnimationFrames": 141,
+            "presentationIntervalMs": {
+              "p50": 6.955,
+              "p95": 7.005,
+              "max": 13.93,
+              "over33ms": 0
+            },
+            "drawFrames": 144,
+            "dropSignals": 0,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1631.31,
+            "presentedAnimationFrames": 218,
+            "presentationIntervalMs": {
+              "p50": 6.957,
+              "p95": 13.874,
+              "max": 27.78,
+              "over33ms": 0
+            },
+            "drawFrames": 229,
+            "dropSignals": 10,
+            "partialUpdateSignals": 9,
+            "longTasks": []
+          }
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 998.417,
+            "presentedAnimationFrames": 141,
+            "presentationIntervalMs": {
+              "p50": 6.956,
+              "p95": 7.16,
+              "max": 7.512,
+              "over33ms": 0
+            },
+            "drawFrames": 144,
+            "dropSignals": 0,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1529.128,
+            "presentedAnimationFrames": 209,
+            "presentationIntervalMs": {
+              "p50": 6.957,
+              "p95": 7.178,
+              "max": 27.781,
+              "over33ms": 0
+            },
+            "drawFrames": 217,
+            "dropSignals": 7,
+            "partialUpdateSignals": 7,
+            "longTasks": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "optimized",
+      "reports": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 998.241,
+            "presentedAnimationFrames": 132,
+            "presentationIntervalMs": {
+              "p50": 6.956,
+              "p95": 7.18,
+              "max": 69.601,
+              "over33ms": 1
+            },
+            "drawFrames": 136,
+            "dropSignals": 9,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1618.076,
+            "presentedAnimationFrames": 217,
+            "presentationIntervalMs": {
+              "p50": 6.958,
+              "p95": 7.404,
+              "max": 41.931,
+              "over33ms": 1
+            },
+            "drawFrames": 229,
+            "dropSignals": 11,
+            "partialUpdateSignals": 11,
+            "longTasks": []
+          }
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 999.882,
+            "presentedAnimationFrames": 138,
+            "presentationIntervalMs": {
+              "p50": 6.958,
+              "p95": 7.157,
+              "max": 34.759,
+              "over33ms": 1
+            },
+            "drawFrames": 142,
+            "dropSignals": 3,
+            "partialUpdateSignals": 1,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1549.599,
+            "presentedAnimationFrames": 212,
+            "presentationIntervalMs": {
+              "p50": 6.958,
+              "p95": 7.636,
+              "max": 20.857,
+              "over33ms": 0
+            },
+            "drawFrames": 217,
+            "dropSignals": 10,
+            "partialUpdateSignals": 8,
+            "longTasks": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "no-thumbnail-effects",
+      "reports": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 993.823,
+            "presentedAnimationFrames": 139,
+            "presentationIntervalMs": {
+              "p50": 6.956,
+              "p95": 7.169,
+              "max": 20.857,
+              "over33ms": 0
+            },
+            "drawFrames": 142,
+            "dropSignals": 1,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1646.033,
+            "presentedAnimationFrames": 221,
+            "presentationIntervalMs": {
+              "p50": 6.956,
+              "p95": 13.855,
+              "max": 34.575,
+              "over33ms": 1
+            },
+            "drawFrames": 231,
+            "dropSignals": 13,
+            "partialUpdateSignals": 12,
+            "longTasks": []
+          }
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 1000.533,
+            "presentedAnimationFrames": 141,
+            "presentationIntervalMs": {
+              "p50": 6.955,
+              "p95": 7.169,
+              "max": 7.311,
+              "over33ms": 0
+            },
+            "drawFrames": 144,
+            "dropSignals": 1,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1570.09,
+            "presentedAnimationFrames": 219,
+            "presentationIntervalMs": {
+              "p50": 6.96,
+              "p95": 7.184,
+              "max": 14.079,
+              "over33ms": 0
+            },
+            "drawFrames": 224,
+            "dropSignals": 5,
+            "partialUpdateSignals": 5,
+            "longTasks": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "final-local",
+      "reports": [
+        {
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 998.841,
+            "presentedAnimationFrames": 139,
+            "presentationIntervalMs": {
+              "p50": 6.956,
+              "p95": 7.167,
+              "max": 20.91,
+              "over33ms": 0
+            },
+            "drawFrames": 143,
+            "dropSignals": 1,
+            "partialUpdateSignals": 0,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1631.822,
+            "presentedAnimationFrames": 219,
+            "presentationIntervalMs": {
+              "p50": 6.958,
+              "p95": 13.85,
+              "max": 21.055,
+              "over33ms": 0
+            },
+            "drawFrames": 228,
+            "dropSignals": 10,
+            "partialUpdateSignals": 10,
+            "longTasks": []
+          }
+        },
+        {
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "opening": {
+            "phase": "opening",
+            "durationMs": 999.909,
+            "presentedAnimationFrames": 142,
+            "presentationIntervalMs": {
+              "p50": 6.959,
+              "p95": 7.156,
+              "max": 7.212,
+              "over33ms": 0
+            },
+            "drawFrames": 144,
+            "dropSignals": 1,
+            "partialUpdateSignals": 1,
+            "longTasks": []
+          },
+          "rapid": {
+            "phase": "rapid-selection",
+            "durationMs": 1578.212,
+            "presentedAnimationFrames": 219,
+            "presentationIntervalMs": {
+              "p50": 6.961,
+              "p95": 7.186,
+              "max": 14.191,
+              "over33ms": 0
+            },
+            "drawFrames": 225,
+            "dropSignals": 4,
+            "partialUpdateSignals": 4,
+            "longTasks": []
+          }
+        }
+      ]
+    }
+  ]
+}

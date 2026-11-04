@@ -6,8 +6,8 @@ try {
     for (const [name,pose] of [['bud',0],['open',1]]) {
       await page.goto(`http://127.0.0.1:5318/soft-lotus.html?pose=${pose}`);
       await page.waitForFunction(value => document.querySelector('.soft-canvas')?.getAttribute('data-asset') === 'accepted' && document.querySelector('.soft-canvas')?.getAttribute('data-bloom') === value.toFixed(3), pose);
-      await page.addStyleTag({ content: '.soft-header,.prototype-note,.scene-introduction,.petal-labels,.petal-preview,.scene-bottom,.scene-index,.scene-poster{visibility:hidden!important}' });
-      await page.locator('.soft-stage').screenshot({ path:`public/models/soft-lotus-${name}-${kind}.png` });
+      await page.addStyleTag({ content: '.soft-header,.prototype-note,.scene-introduction,.petal-labels,.petal-preview,.scene-bottom,.scene-index,.scene-poster,.paper-grain,.petal-drift,.ink-loading{display:none!important}.soft-stage,html,body{background:transparent!important}' });
+      await page.locator('.soft-stage').screenshot({ path:`public/models/soft-lotus-${name}-${kind}.png`, omitBackground:true });
     }
     await page.close();
   }

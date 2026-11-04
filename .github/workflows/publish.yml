@@ -15,6 +15,7 @@ jobs:
     timeout-minutes: 15
     env:
       PORTFOLIO_COMMIT: ${{ github.sha }}
+      PORTFOLIO_PREVIEW: ${{ github.repository == 'seoshiro/lotus-audit-preview' && '1' || '0' }}
     steps:
       - name: Check out the verified portfolio source
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6

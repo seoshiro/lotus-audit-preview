@@ -1,6 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { allPages, aliases, contentPages, creditPages } from './page-manifest.ts';
 const origin = "https://seoshiro.github.io";
+const preview = process.env.PORTFOLIO_PREVIEW === '1';
 const commit =
   process.env.GITHUB_SHA || process.env.PORTFOLIO_COMMIT || "local-development";
 const policy =
@@ -19,7 +20,7 @@ for (const file of allPages) {
     html
       .replace(
         "<head>",
-        `<head><link rel="canonical" href="${canonical}"><meta property="og:url" content="${canonical}"><meta name="portfolio-build" content="${commit}">`,
+        `<head>${preview ? '<meta name="robots" content="noindex,nofollow">' : ''}<link rel="canonical" href="${canonical}"><meta property="og:url" content="${canonical}"><meta name="portfolio-build" content="${commit}">`,
       )
       .replace(
         '<meta charset="UTF-8">',
@@ -30,7 +31,7 @@ for (const file of allPages) {
 await writeFile("dist/version.json", JSON.stringify({ commit }));
 await writeFile(
   "dist/robots.txt",
-  `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`,
+  preview ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`,
 );
 await writeFile(
   "dist/sitemap.xml",

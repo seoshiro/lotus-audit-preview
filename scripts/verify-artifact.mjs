@@ -13,7 +13,7 @@ for (const file of allPages) {
   if (alias && !html.includes(`data-redirect="${alias.target}"`)) throw Error(`Missing legacy redirect: ${file}`);
   const urls = [...html.matchAll(/(?:src|href)="([^"]+)"/g)]
     .map((m) => m[1])
-    .filter((url) => !url.startsWith("https:") && !url.startsWith("#"));
+    .filter((url) => !url.startsWith("https:") && !url.startsWith("mailto:") && !url.startsWith("#"));
   for (const url of urls) {
     const resolved = new URL(url, `https://example.test/portfolio/${file}`);
     const root404 = file === '404.html' && url.startsWith('/');
