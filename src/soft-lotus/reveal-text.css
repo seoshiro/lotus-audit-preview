@@ -1,0 +1,6 @@
+/* The italic ink extends outside its tight line box. Expand only the clip
+   surface: equal negative margins preserve word positions, wrapping and leading.
+   Padding works without relying on overflow-clip-margin browser support. */
+.reveal-text{overflow-wrap:anywhere}
+.reveal-word{max-width:100%}
+.reveal-word-mask{box-sizing:content-box;max-width:100%;padding:.16em .18em .22em;margin:-.16em -.18em -.22em}

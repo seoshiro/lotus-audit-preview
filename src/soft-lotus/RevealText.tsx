@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+import './reveal-text.css';
 
 // Focused adaptation of React Bits SplitText (David Haz, 2026), fetched from
 // https://reactbits.dev/r/SplitText-TS-CSS.json on 2026-11-04.
@@ -25,7 +26,7 @@ export function RevealText({ text, reduced, tag: Tag = 'h1', className = '', id 
       if (!active || !ref.current || reduced) return;
       context = gsap.context(() => {
         split = SplitText.create(ref.current!, {
-          type: 'words,lines', autoSplit: true, mask: 'words',
+          type: 'words,lines', autoSplit: true, mask: 'words', wordsClass: 'reveal-word',
           onSplit: self => gsap.fromTo(self.words,
             { yPercent: 105, opacity: 0 },
             { yPercent: 0, opacity: 1, duration: 0.62, stagger: 0.045, ease: 'power3.out', clearProps: 'transform,opacity' }),
@@ -36,5 +37,5 @@ export function RevealText({ text, reduced, tag: Tag = 'h1', className = '', id 
   }, [text, reduced]);
   // SplitText's revert restores the old DOM. A new text value gets a new node,
   // so cleanup cannot overwrite React's newly committed project/language label.
-  return <Tag key={text} ref={ref} id={id} className={className}>{text}</Tag>;
+  return <Tag key={text} ref={ref} id={id} className={`reveal-text ${className}`.trim()}>{text}</Tag>;
 }

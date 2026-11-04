@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 const release=process.env.PORTFOLIO_RELEASE==='1';
 const remote=process.env.PORTFOLIO_BASE_URL;
 export default defineConfig({
-  testDir: 'tests', testMatch: 'soft-lotus.browser.ts', workers: 1, retries: 0, timeout: 30000,
+  testDir: 'tests', testMatch: ['soft-lotus.browser.ts', 'lotus-type.browser.ts'], workers: 1, retries: 0, timeout: 30000,
   use: { baseURL: remote || (release ? 'http://127.0.0.1:5319' : 'http://127.0.0.1:5318'), headless: true,
     launchOptions: process.env.CI ? {} : { executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' },
     trace: 'retain-on-failure' },

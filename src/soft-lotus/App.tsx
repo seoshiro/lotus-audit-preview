@@ -5,6 +5,7 @@ import { sceneCopy } from './copy.ts';
 import { caseLabels, caseNotes, projectLabels } from '../case-notes.ts';
 import { softLotusAsset } from './asset.ts';
 import { RevealText } from './RevealText.tsx';
+import { useIntroReflow } from './useIntroReflow.ts';
 import { createRuntime, type SceneRuntime, type LoadProgress } from './runtime.ts';
 import { createSceneState, isFeatured, petalIds, routeFromURL, routeURL, sceneReducer, type FeaturedId, type PetalId, type SceneEvent, type SceneState } from './state.ts';
 
@@ -81,6 +82,7 @@ export function App() {
   const [state, dispatch] = useReducer(sceneReducer, undefined, () => createSceneState(routeFromURL(new URL(location.href), preferredLocale()), matchMedia('(prefers-reduced-motion: reduce)').matches));
   const current = useRef(state); current.current = state;
   const host = useRef<HTMLDivElement>(null);
+  useIntroReflow(host, state.locale);
   const labels = useRef<HTMLElement>(null);
   const runtime = useRef<SceneRuntime | null>(null);
   const preview = useRef<HTMLElement>(null);
