@@ -1,5 +1,7 @@
 # LOTUS audit preview verification — 4 November 2026
 
+Historical preview record for `b46d69d`. The [independent-review follow-up](FOLLOWUP.md) supersedes the work CTA behavior and first-opening limitation below and records the later release verification. Production status in this record refers to that preview checkpoint.
+
 This is an isolated review build, not an announcement that production was replaced or that every device is certified.
 
 ## Revision and rollback

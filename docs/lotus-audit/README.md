@@ -1,4 +1,6 @@
-# LOTUS audit revision — isolated preview
+# LOTUS audit revision
+
+The [independent-review follow-up](FOLLOWUP.md) records the final work CTA, first-opening investigation and publication verification. The earlier [QA record](QA.md) preserves the initial preview measurements and their limitations.
 
 The complete owner audit dated 4 November 2026 was read, including the acceptance criteria and the distinction between fallback observations and unverified 3D behavior.
 
@@ -19,11 +21,11 @@ Backup: `backup/pre-lotus-audit-2026-11-04`; a verified full-history bundle is r
 
 ## Evidence and boundaries
 
-Verification baseline: 11 content/state tests, 17 browser scenarios, typecheck, lint, production build and all 40 artifact pages. Browser checks include legacy routes in all languages, early static localization before the application loads, actual mesh picking, rapid input, all eleven standalone cases, no-JavaScript content, model failure, context loss, fallback sizing, clipboard failure and focus restoration. Axe checks cover the tested overview, selected and reader states; they do not establish complete accessibility conformance. Exact public revision and results are recorded in [QA.md](QA.md).
+Verification baseline: 11 content/state tests, 18 browser scenarios, typecheck, lint, production build and all 40 artifact pages. Browser checks include legacy routes in all languages, early static localization before the application loads, actual mesh picking, rapid input, all eleven standalone cases, no-JavaScript content, model failure, context loss, fallback sizing, clipboard failure and focus restoration. Axe checks cover the tested overview, selected and reader states; they do not establish complete accessibility conformance. Exact final public revision and results are recorded in [FOLLOWUP.md](FOLLOWUP.md).
 
 Both Blender audits check 21 opening samples and 25 focused samples, with zero inter-petal intersections. Each mesh has zero boundary or nonmanifold edges. Desktop: 61,954 triangles / 2,037,816 bytes; mobile: 24,614 triangles / 853,848 bytes. The original GLB remains unchanged (SHA-256 `e68a7f0d8c5391c0f5fe73bd52abe9569a5aba675716a893dbd1fb7c5d43edb0`). Editable `.blend`, export scripts and both GLBs are retained.
 
-The five actual in-browser opening poses were inspected after model readiness, not by relying on the loading poster. Final published-preview measurements and continuous-motion review are recorded in `QA.md` after deployment. CPU render-call time and RAF intervals alone are not treated as frame-delivery measurements. Physical phones, Safari and assistive-technology certification are outside the available test environment.
+The five actual in-browser opening poses were inspected after model readiness, not by relying on the loading poster. Final published-preview measurements and continuous-motion review are recorded in `FOLLOWUP.md` after deployment. CPU render-call time and RAF intervals alone are not treated as frame-delivery measurements. Physical phones, Safari and assistive-technology certification are outside the available test environment.
 
 Known layout boundary: at a very short 720 × 450 landscape viewport the selected content uses a real internal scroll area. At 320 × 640, 390 × 844, 1165 × 747 and 1440 × 900 the tested short previews fit without a redundant scrollbar.
 
