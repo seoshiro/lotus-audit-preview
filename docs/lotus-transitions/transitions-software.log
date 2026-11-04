@@ -1,0 +1,11 @@
+
+Running 4 tests using 1 worker
+
+(node:70336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\soft-lotus.browser.ts:26:1 тА║ Main work action opens a visible project list and returns keyboard focus in every language (11.6s)
+  ok 2 tests\soft-lotus.browser.ts:119:1 тА║ Catalog reversals preserve the live pose and home navigation reuses the loaded scene (20.1s)
+  ok 3 tests\soft-lotus.browser.ts:314:1 тА║ Loading keeps the same bud and model failure retains useful navigation (2.5s)
+  ok 4 tests\soft-lotus.browser.ts:335:1 тА║ Mobile asset, all five projected controls and repeated selection remain usable (6.1s)
+
+  4 passed (44.0s)

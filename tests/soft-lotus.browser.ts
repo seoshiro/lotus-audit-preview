@@ -159,6 +159,23 @@ test('Catalog reversals preserve the live pose and home navigation reuses the lo
   await page.keyboard.press('Escape');await expect(dialog).toBeHidden();await expect(page.locator('#hero-work')).toBeFocused();
 });
 
+test('Focus restoration follows visible controls under CPU throttling', async ({page}) => {
+  test.setTimeout(60000);
+  const cdp=await page.context().newCDPSession(page);
+  await cdp.send('Emulation.setCPUThrottlingRate',{rate:6});
+  await page.route('**/models/*.glb',route=>route.abort());
+  for(const reducedMotion of ['reduce','no-preference'] as const) {
+    await page.emulateMedia({reducedMotion});
+    await page.goto(`${entry}?lang=kk`);await expect(page.locator('body')).toHaveAttribute('data-model','failed');
+    const hero=page.locator('#hero-work');
+    await hero.focus();await page.keyboard.press('Enter');await expect(page.locator('#work-browser')).toHaveAttribute('data-phase','open');
+    await page.keyboard.press('Tab');await page.keyboard.press('Escape');
+    await expect(page.locator('#work-browser')).toBeHidden();await expect(hero).toBeFocused();
+    await page.locator('#index-perch').click();await page.locator('#preview-case-perch').click();
+    await page.keyboard.press('Escape');await expect(page.locator('#preview-case-perch')).toBeFocused();
+  }
+});
+
 test('Cached revisit skips the opening delay and share errors expose a selectable link', async ({page}) => {
   await page.goto(`${entry}?lang=en`);
   await expect(page.locator('body')).toHaveAttribute('data-model','ready', { timeout: 20000 });

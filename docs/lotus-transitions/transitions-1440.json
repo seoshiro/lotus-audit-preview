@@ -7,55 +7,55 @@
   "marks": [
     {
       "name": "ready",
-      "at": 2.643
+      "at": 2.419
     },
     {
       "name": "overview-to-catalog",
-      "at": 3.449
+      "at": 3.224
     },
     {
       "name": "catalog-to-overview",
-      "at": 4.772
+      "at": 4.562
     },
     {
       "name": "select-selvedge",
-      "at": 5.907
+      "at": 5.705
     },
     {
       "name": "selected-to-catalog",
-      "at": 7.175
+      "at": 6.937
     },
     {
       "name": "catalog-to-selected",
-      "at": 8.239
+      "at": 7.997
     },
     {
       "name": "beibars-to-overview",
-      "at": 9.365
+      "at": 9.114
     },
     {
       "name": "select-forme",
-      "at": 10.721
+      "at": 10.471
     },
     {
       "name": "return-to-flower",
-      "at": 11.756
+      "at": 11.466
     },
     {
       "name": "rapid-reversals",
-      "at": 12.895
+      "at": 12.607
     },
     {
       "name": "case-and-back",
-      "at": 15.567
+      "at": 15.211
     },
     {
       "name": "history-back",
-      "at": 17.995
+      "at": 17.497
     },
     {
       "name": "reduced-motion",
-      "at": 19.006
+      "at": 18.515
     }
   ],
   "browser": "156.0.8078.76",

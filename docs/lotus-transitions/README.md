@@ -10,12 +10,13 @@ The existing full-screen eleven-project catalog is preserved. Its 600 ms overlap
 
 BEIBARS now handles an ordinary unmodified click through the existing URL/history state. Its real href remains available for modified clicks, new tabs and no-JavaScript use. Both BEIBARS and the preview return control reuse the loaded canvas and GLB. The panel fades out, the flower returns to the overview orientation/position over 650 ms, then the introduction and labels reappear. The retained preview is inert and hidden from assistive technology while leaving. Labels change their thumbnail layout while faded out.
 
-Interrupted tweens are killed without reverting their values. The native catalog releases modality at the start of its visual exit, so rapid reopening can reverse the current state. Focus returns on the first visible frame, including a keyboard dismissal of the HTML reader. Reduced motion uses a 140 ms fade and no camera retreat or row translation.
+Interrupted tweens are killed without reverting their values. The native catalog releases modality at the start of its visual exit, so rapid reopening can reverse the current state. Focus returns when the destination is actually visible and non-inert, including a keyboard dismissal of the HTML reader; it does not rely on a millisecond delay. Scene-settled diagnostics are invalidated synchronously when a new pose is requested. Reduced motion uses a 140 ms fade and no camera retreat or row translation.
 
 ## Evidence and checks
 
 - ESLint, TypeScript, eleven content/state tests, production build and all forty page artifact checks passed.
 - All 21 browser tests passed on installed Chrome, including RU/EN/KK, 320/390/1440 widths, touch, focus, Escape, Back/Forward, direct URLs, model failure, context loss, no JavaScript and accessibility checks.
+- CI then exposed a timing-dependent focus return and stale scene-completion diagnostic on its slower renderer. Both were corrected without weakening assertions. Six affected scenarios passed again on the final local build, including a new focus regression with 6× CPU throttling, both motion preferences and model failure. The suite now contains 22 scenarios.
 - New regression checks verify exact base pose before/under/after the catalog, three interrupted reopen cycles, one canvas identity, unchanged performance time origin, one GLB request, no loader on either return action, restored overview angle, and reduced-motion camera depth zero.
 - The two continuous 25 fps recordings include all three transitions, selected-project preservation, rapid reversals, HTML case return, browser Back and reduced motion. The recordings were inspected as successive frames sampled every 65 ms around each transition. Recording is separate from performance measurement.
 - Existing Tripo geometry, real project content, contacts, language routes and the production site are preserved. This task spent no generation credits; known cumulative spend remains 6 of 60.

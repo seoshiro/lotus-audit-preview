@@ -89,6 +89,7 @@ export function App() {
   const previewId = state.active || lastPreview.current;
   const petalOrigin = useRef<{ image: DOMRect; title: DOMRect } | null>(null);
   const navigation = useRef<(event: SceneEvent, replace?: boolean) => void>(() => {});
+  const pendingFocus = useRef<string | null>(null);
   const c = copy[state.locale], s = sceneCopy[state.locale];
   const activeProject = isFeatured(state.active) ? projects.find(p => p.id === state.active)! : null;
   const previewProject = isFeatured(previewId) ? projects.find(p => p.id === previewId)! : null;
@@ -105,6 +106,7 @@ export function App() {
   }, [state.model]);
 
   function navigate(event: SceneEvent, replace = false) {
+    pendingFocus.current = null;
     setWorkOpen(false);
     const next = sceneReducer(current.current, event);
     const depth = Number(history.state?.softLotusDepth || 0);
@@ -113,16 +115,16 @@ export function App() {
     dispatch(event);
   }
   navigation.current = navigate;
+  function flushPendingFocus() {
+    if (!pendingFocus.current || workOpenRef.current || document.querySelector('dialog:modal')) return;
+    const element = document.getElementById(pendingFocus.current);
+    if (!element || element.closest('[inert]') || getComputedStyle(element).visibility === 'hidden') return;
+    element.focus({ preventScroll: true });
+    if (document.activeElement === element) pendingFocus.current = null;
+  }
   function restoreFocus() {
-    // A keyboard dismissal can finish before the parent's layout effect has
-    // revealed the retained preview. Restore on its first visible frame.
-    gsap.delayedCall(.04, () => {
-      if (current.current.view !== 'selected' || workOpenRef.current) return;
-      const target = current.current.returnFocus;
-      const element = target ? document.getElementById(target) : null;
-      const visible = element && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
-      (visible ? element : document.getElementById(`index-${current.current.active || 'perch'}`))?.focus({ preventScroll: true });
-    });
+    pendingFocus.current = current.current.returnFocus || `index-${current.current.active || 'perch'}`;
+    flushPendingFocus();
   }
   function back() {
     if (history.state?.softLotus && history.state.softLotusDepth > 0) history.back();
@@ -143,6 +145,7 @@ export function App() {
   function select(event: MouseEvent<HTMLButtonElement>, id: PetalId) { rememberPetal(id); setWorkOpen(false); navigate({ type: 'select', id, source: event.currentTarget.id }); }
 
   function openWork(trigger: HTMLElement) {
+    pendingFocus.current = null;
     workReturn.current = trigger;
     setWorkOpen(true);
   }
@@ -185,20 +188,27 @@ export function App() {
     } else if (dialog.open) {
       // Release the native modal immediately, leaving a non-interactive visual
       // exit. A second click can reverse the current tween without a reset.
-      if (dialog.matches(':modal')) { dialog.close(); dialog.show(); }
       dialog.inert = true; dialog.setAttribute('aria-hidden', 'true'); dialog.dataset.phase = 'closing';
+      if (dialog.matches(':modal')) { dialog.close(); dialog.show(); }
       const target = workReturn.current;
       const available = target && !target.closest('[inert]') && target.getClientRects().length > 0;
-      (available ? target : document.getElementById('index-all'))?.focus({ preventScroll: true });
+      pendingFocus.current = available ? target.id : 'index-all';
+      flushPendingFocus();
       timeline.to(dialog, { opacity: 0, duration: reduced ? .14 : .36, ease: 'power2.inOut' }, 0)
         .to([header, ...rows], { opacity: 0, y: reduced ? 0 : 8, duration: reduced ? .14 : .24, ease: 'power2.in' }, 0)
         .call(() => {
-          // The hero becomes focusable on the first fade-in frame. Do not
-          // steal focus if the user already chose another visible control.
-          if (!workOpenRef.current && (document.activeElement === document.body || dialog.contains(document.activeElement)))
-            (available ? target : document.getElementById('index-all'))?.focus({ preventScroll: true });
-        }, [], .04)
-        .call(() => { if (!workOpenRef.current) { dialog.close(); dialog.dataset.phase = 'closed'; } });
+          if (workOpenRef.current) return;
+          const active = document.activeElement as HTMLElement | null;
+          const keep = active && active !== document.body && !dialog.contains(active) ? active : null;
+          dialog.close(); dialog.dataset.phase = 'closed';
+          // Native close can restore its previous focus. Retain any newer user
+          // choice, otherwise restore the now-visible invoking control.
+          const destination = keep || (available ? target : document.getElementById('index-all'));
+          if (destination && !destination.closest('[inert]')) {
+            if (keep) { keep.focus({ preventScroll: true }); pendingFocus.current = null; }
+            else { pendingFocus.current = destination.id; flushPendingFocus(); }
+          }
+        });
     }
     return () => { timeline.kill(); };
   }, [workOpen, state.reducedMotion]);
@@ -211,6 +221,7 @@ export function App() {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     media.addEventListener('change', event => dispatch({ type: 'motion', reduced: event.matches }), { signal: controller.signal });
     const restoreRoute = () => {
+      pendingFocus.current = null;
       setWorkOpen(false);
       const route = routeFromURL(new URL(location.href), current.current.locale);
       history.replaceState(history.state, '', routeURL(new URL(location.href), route));
@@ -251,7 +262,7 @@ export function App() {
     stage.dataset.labelView ||= labelView;
     const changingLabels = stage.dataset.labelView !== labelView;
     if (changingLabels && home && innerWidth <= 700) gsap.set(labels.current, { '--labels-reveal': 0 });
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({ onUpdate: flushPendingFocus, onComplete: flushPendingFocus });
     timeline.to(intro, { autoAlpha: home ? 1 : 0, y: reduced || home ? 0 : -8, duration: reduced ? .14 : .25, ease: 'power2.out' }, home && !workOpen && previewId && !workDialog.current?.open && !reduced ? .34 : 0);
     if (changingLabels) timeline.to(labels.current, { '--labels-reveal': 0, duration: reduced ? 0 : .12 }, 0)
       .call(() => { stage.dataset.labelView = labelView; }, [], reduced ? 0 : .12);

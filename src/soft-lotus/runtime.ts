@@ -350,6 +350,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   return {
     setCatalog(open, reduced) {
       catalogOpen = open;
+      host.dataset.animating = 'true';
       // Freeze the base pose instead of completing its tweens. The independent
       // camera offset can reverse without altering bloom, selection or rotation.
       for (const tween of gsap.getTweensOf([pose, ...petalFocus, ...petalHover])) {
@@ -363,6 +364,9 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     },
     update(next) {
       state = next;
+      // Invalidate synchronously: observers must not mistake the previous
+      // settled frame for completion of a newly requested pose.
+      host.dataset.animating = 'true';
       if (catalogOpen || next.view !== 'overview' || next.reducedMotion) driftTween?.pause();
       else driftTween?.resume();
       if (next.view !== 'overview' || next.reducedMotion) { gsap.killTweensOf(petalHover); petalHover.forEach(value => { value.value = 0; }); hovered = -1; }
