@@ -19,7 +19,7 @@ Backup: `backup/pre-lotus-audit-2026-11-04`; a verified full-history bundle is r
 
 ## Evidence and boundaries
 
-Local baseline: 11 content/state tests, 16 browser tests, typecheck, lint, production build and all 40 artifact pages. Browser checks include legacy routes in all languages, actual mesh picking, rapid input, all eleven standalone cases, no-JavaScript content, model failure, context loss, fallback sizing, clipboard failure and focus restoration. Axe checks cover the tested overview, selected and reader states; they do not establish complete accessibility conformance.
+Verification baseline: 11 content/state tests, 17 browser scenarios, typecheck, lint, production build and all 40 artifact pages. Browser checks include legacy routes in all languages, early static localization before the application loads, actual mesh picking, rapid input, all eleven standalone cases, no-JavaScript content, model failure, context loss, fallback sizing, clipboard failure and focus restoration. Axe checks cover the tested overview, selected and reader states; they do not establish complete accessibility conformance. Exact public revision and results are recorded in [QA.md](QA.md).
 
 Both Blender audits check 21 opening samples and 25 focused samples, with zero inter-petal intersections. Each mesh has zero boundary or nonmanifold edges. Desktop: 61,954 triangles / 2,037,816 bytes; mobile: 24,614 triangles / 853,848 bytes. The original GLB remains unchanged (SHA-256 `e68a7f0d8c5391c0f5fe73bd52abe9569a5aba675716a893dbd1fb7c5d43edb0`). Editable `.blend`, export scripts and both GLBs are retained.
 

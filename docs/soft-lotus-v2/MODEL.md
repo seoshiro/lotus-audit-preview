@@ -1,5 +1,7 @@
 # Soft lotus: source and editable model
 
+This documents the initial V2 preparation. The [subsequent audit revision](../lotus-audit/README.md) records the current geometry, staging and exported sizes while retaining the same original Tripo master.
+
 The flower uses the actual Tripo H3.1 master petal from job `4ccf52ab-d439-444b-ad96-3011e8a11578` (12k, untextured). One generation cost 6 Higgsfield credits. No additional generation was needed for this candidate. The project allowance is 60 credits including these 6; the parent coordinates the ledger and future operations.
 
 Original, unchanged: `art/soft-lotus/source/tripo-4ccf52ab-original.glb`, 369,380 bytes. SHA-256: `e68a7f0d8c5391c0f5fe73bd52abe9569a5aba675716a893dbd1fb7c5d43edb0`.

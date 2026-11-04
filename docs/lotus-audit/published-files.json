@@ -1,0 +1,30 @@
+{
+  "origin": "https://seoshiro.github.io/lotus-audit-preview/",
+  "commit": "b46d69d9e1492e8252829c6c319eb42b5a493ba9",
+  "production": {
+    "commit": "6d94ef874c2f4e8a6ec4b8de7b92b88c6a5b7078"
+  },
+  "assets": [
+    {
+      "file": "soft-lotus-candidate.glb",
+      "bytes": 2037816,
+      "sha256": "7a43dcf25212b40a2d7eb0f9705a4a36eb353668b8228ebcf6c24d389f31fccd"
+    },
+    {
+      "file": "soft-lotus-mobile.glb",
+      "bytes": 853848,
+      "sha256": "982489ef82f88d6570a31372563404aca5522368268ca56243df1053e4fd8a9c"
+    },
+    {
+      "file": "soft-lotus-open-desktop.png",
+      "bytes": 177225,
+      "sha256": "95104b40dd4faef948efbca6b0a59d82f5444e97d72cbe0289a9edc64428dd71"
+    },
+    {
+      "file": "soft-lotus-open-mobile.png",
+      "bytes": 66108,
+      "sha256": "202f0d6feae44739e7d6fdbfab063a71b819c3e59637e14228b5084c5ec6748e"
+    }
+  ],
+  "errors": []
+}
