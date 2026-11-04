@@ -13,7 +13,7 @@ export default ts.config(
   js.configs.recommended,
   ...ts.configs.recommended,
   {
-    files: ["**/*.{ts,mjs}"],
+    files: ["**/*.{ts,tsx,mjs}"],
     languageOptions: {
       globals: {
         document: "readonly",

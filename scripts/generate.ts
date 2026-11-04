@@ -1,12 +1,15 @@
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { copy, projects, type ProjectId } from "../src/content.ts";
 import { renderPage, escape } from "../src/render.ts";
 import { dirname } from 'node:path';
 import { aliases, creditPages, allPages } from './page-manifest.ts';
+import { softPage } from './soft-page.ts';
+const soft = process.argv.includes('--soft');
 const template = (id: ProjectId | null) => `<!doctype html>
 <html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f4f1e9"><meta name="description" content="${escape(id ? copy.ru.project[id].summary : copy.ru.description)}"><meta name="color-scheme" content="light dark"><meta name="referrer" content="strict-origin-when-cross-origin"><meta property="og:type" content="website"><meta property="og:title" content="${escape(id ? `${projects.find((p) => p.id === id)!.name} — Beibars Ileskhan` : copy.ru.title)}"><meta property="og:description" content="${escape(id ? copy.ru.project[id].summary : copy.ru.description)}"><meta name="twitter:card" content="summary"><link rel="icon" href="${id ? "../" : ""}favicon.svg" type="image/svg+xml"><title>${escape(id ? `${projects.find((p) => p.id === id)!.name} — Beibars Ileskhan` : copy.ru.title)}</title><link rel="stylesheet" href="${id ? "../" : ""}src/style.css"><script type="module" src="${id ? "../" : ""}src/main.ts"></script></head><body data-project="${id || ""}"><div id="app">${renderPage("ru", id)}</div><noscript><style>html{scroll-behavior:auto}.languages,.motion-toggle,.menu-toggle{display:none}.unfold{height:100svh;min-height:650px}.unfold-sticky{position:relative}.header nav{display:flex}</style></noscript></body></html>`;
 mkdirSync("projects", { recursive: true });
-writeFileSync("index.html", template(null));
+writeFileSync("index.html", soft ? softPage('ru') : template(null));
+if (soft) writeFileSync('soft-lotus.html',softPage('ru','','',true));
 for (const p of projects)
   writeFileSync(`projects/${p.id}.html`, template(p.id));
 const staticPage = (locale: string, title: string, body: string, prefix = '', head = '') => `<!doctype html>
@@ -16,6 +19,7 @@ for (const alias of aliases) {
   const nested = alias.file.includes('/projects/');
   const prefix = nested ? '../../' : '../';
   const id = nested ? alias.file.split('/').at(-1)!.replace('.html', '') as ProjectId : null;
+  if (soft && !id) { writeFileSync(alias.file,softPage(alias.locale,prefix,alias.target)); continue; }
   const normalFile = id ? `projects/${id}.html` : 'index.html';
   const title = id ? `${projects.find(p => p.id === id)!.name} · Beibars Ileskhan` : copy[alias.locale].title;
   const translated = renderPage(alias.locale, id).replace(/(href|src)="([^"]+)"/g, (match, key, url: string) => {
@@ -35,6 +39,17 @@ for (const { file, locale, prefix } of creditPages) {
   mkdirSync(dirname(file), { recursive: true });
   const c = creditCopy[locale];
   writeFileSync(file, staticPage(locale, c.title, `<p class="eyebrow">BEIBARS / CREDITS</p><h1>${c.title}</h1><p class="case-summary">${c.intro}</p><div class="case-actions"><a href="${prefix}index.html?lang=${locale}#work">${c.back} ↗</a></div><p><a href="https://github.com/seoshiro/seoshiro.github.io/blob/main/docs/lotus-model.md">${c.model} ↗</a></p><p><a href="https://github.com/seoshiro/seoshiro.github.io/blob/main/docs/PROVENANCE.md">${c.sources} ↗</a></p><h2>${c.fonts}</h2><p><a href="${prefix}fonts/CormorantGaramond-OFL.txt">Cormorant Garamond · SIL OFL 1.1</a></p><p><a href="${prefix}fonts/IBMPlexSans-LICENSE.txt">IBM Plex Sans · SIL OFL 1.1</a></p><p><a href="${prefix}licenses/three-MIT.txt">Three.js · MIT</a></p><nav aria-label="Language"><a href="${prefix}credits.html" lang="ru">RU</a> · <a href="${prefix}en/credits.html" lang="en">EN</a> · <a href="${prefix}kk/credits.html" lang="kk">KK</a></nav>`, prefix));
+}
+if (soft) {
+  const modelNote = {
+    ru: 'Лотос собран из одного лепестка, созданного Tripo H3.1 по AI-референсу. Геометрия, пять копий, материалы и плавные деформации доработаны в Blender. Скриншоты проектов — настоящие.',
+    en: 'The lotus uses one petal generated with Tripo H3.1 from an AI reference. Geometry repairs, five copies, materials and continuous morphs were completed in Blender. Project screenshots are real.',
+    kk: 'Лотос AI референсі бойынша Tripo H3.1 жасаған бір күлтеден құрастырылды. Геометрия, бес көшірме, материалдар және бірқалыпты деформациялар Blender-де өңделді. Жоба скриншоттары шынайы.',
+  };
+  for (const {file,locale} of creditPages) {
+    const html=readFileSync(file,'utf8').replace('docs/lotus-model.md','docs/soft-lotus-v2/MODEL.md').replace('<h2>',`<p>${modelNote[locale]}</p><h2>`);
+    writeFileSync(file,html);
+  }
 }
 writeFileSync('404.html', staticPage('en', 'Page not found', '<p class="eyebrow">404</p><h1>Page not found.</h1><p><a href="https://seoshiro.github.io/">Return to the portfolio ↗</a></p>', '', '<meta name="robots" content="noindex">'));
 console.log(`Generated ${allPages.length} HTML pages: home, ${projects.length} cases, locale compatibility routes, credits and 404.`);

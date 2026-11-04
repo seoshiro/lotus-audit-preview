@@ -1,7 +1,9 @@
 node_modules/
+dist-soft/
 dist/
 test-results/
 playwright-report/
 evidence/
 .npm-cache/
 .DS_Store
+.agents/skills/

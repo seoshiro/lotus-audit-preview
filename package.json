@@ -5,16 +5,24 @@
   "type": "module",
   "scripts": {
     "generate": "node --experimental-strip-types scripts/generate.ts",
-    "dev": "node --experimental-strip-types scripts/generate.ts && node node_modules/vite/bin/vite.js --configLoader native --host 127.0.0.1 --port 5317 --strictPort",
-    "build": "node --experimental-strip-types scripts/generate.ts && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --configLoader native && node scripts/harden.mjs && node scripts/verify-artifact.mjs",
+    "dev": "node --experimental-strip-types scripts/generate.ts --soft && node node_modules/vite/bin/vite.js --configLoader native --host 127.0.0.1 --port 5317 --strictPort",
+    "build": "node --experimental-strip-types scripts/generate.ts --soft && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --configLoader native && node scripts/harden.mjs && node scripts/verify-artifact.mjs",
     "preview": "node scripts/serve.mjs",
     "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
     "lint": "node node_modules/eslint/bin/eslint.js src scripts tests",
-    "test": "node --experimental-strip-types --test tests/content.test.ts tests/lotus.test.ts",
-    "test:browser": "node node_modules/@playwright/test/cli.js test",
-    "check:artifact": "node scripts/verify-artifact.mjs"
+    "test": "node --experimental-strip-types --test tests/content.test.ts tests/soft-lotus.test.ts",
+    "test:browser": "node scripts/test-release-browser.mjs",
+    "check:artifact": "node scripts/verify-artifact.mjs",
+    "build:soft-preview": "node --experimental-strip-types scripts/generate.ts --soft && node node_modules/typescript/bin/tsc --noEmit && node node_modules/vite/bin/vite.js build --mode soft-preview --configLoader native",
+    "preview:soft": "node node_modules/vite/bin/vite.js preview --outDir dist-soft --host 127.0.0.1 --port 5318 --strictPort",
+    "test:soft-state": "node --experimental-strip-types --test tests/soft-lotus.test.ts",
+    "test:legacy-browser": "node node_modules/@playwright/test/cli.js test"
   },
   "dependencies": {
+    "gsap": "3.15.1",
+    "lenis": "1.3.27",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "three": "0.186.1"
   },
   "devDependencies": {
@@ -22,6 +30,8 @@
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.63.0",
     "@types/node": "24.19.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "@types/three": "0.186.0",
     "eslint": "10.11.0",
     "typescript": "5.9.3",

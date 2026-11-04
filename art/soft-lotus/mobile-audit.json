@@ -1,0 +1,299 @@
+{
+  "source_job_id": "4ccf52ab-d439-444b-ad96-3011e8a11578",
+  "source_sha256": "e68a7f0d8c5391c0f5fe73bd52abe9569a5aba675716a893dbd1fb7c5d43edb0",
+  "removed_loose_vertices": 4,
+  "repaired_boundary_edges": 6,
+  "topology": [
+    {
+      "name": "Petal_perch",
+      "vertices": 2101,
+      "triangles": 4198,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Petal_selvedge",
+      "vertices": 2101,
+      "triangles": 4198,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Petal_forme",
+      "vertices": 2101,
+      "triangles": 4198,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Petal_about",
+      "vertices": 2101,
+      "triangles": 4198,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    },
+    {
+      "name": "Petal_contact",
+      "vertices": 2101,
+      "triangles": 4198,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0
+    }
+  ],
+  "poses": [
+    {
+      "bloom": 0.0,
+      "min_z": 0.019999999552965164,
+      "max_z": 3.242000102996826,
+      "intersections": []
+    },
+    {
+      "bloom": 0.05,
+      "min_z": 0.03316628560423851,
+      "max_z": 3.132178544998169,
+      "intersections": []
+    },
+    {
+      "bloom": 0.1,
+      "min_z": 0.045777998864650726,
+      "max_z": 3.022357225418091,
+      "intersections": []
+    },
+    {
+      "bloom": 0.15,
+      "min_z": 0.05827255919575691,
+      "max_z": 2.9125359058380127,
+      "intersections": []
+    },
+    {
+      "bloom": 0.2,
+      "min_z": 0.07076713442802429,
+      "max_z": 2.8027145862579346,
+      "intersections": []
+    },
+    {
+      "bloom": 0.25,
+      "min_z": 0.08326170593500137,
+      "max_z": 2.6928930282592773,
+      "intersections": []
+    },
+    {
+      "bloom": 0.3,
+      "min_z": 0.09575627744197845,
+      "max_z": 2.583071708679199,
+      "intersections": []
+    },
+    {
+      "bloom": 0.35,
+      "min_z": 0.10582911968231201,
+      "max_z": 2.473250389099121,
+      "intersections": []
+    },
+    {
+      "bloom": 0.4,
+      "min_z": 0.11481942236423492,
+      "max_z": 2.3645057678222656,
+      "intersections": []
+    },
+    {
+      "bloom": 0.45,
+      "min_z": 0.12380972504615784,
+      "max_z": 2.2568249702453613,
+      "intersections": []
+    },
+    {
+      "bloom": 0.5,
+      "min_z": 0.13102078437805176,
+      "max_z": 2.149144172668457,
+      "intersections": []
+    },
+    {
+      "bloom": 0.55,
+      "min_z": 0.13777033984661102,
+      "max_z": 2.0414633750915527,
+      "intersections": []
+    },
+    {
+      "bloom": 0.6,
+      "min_z": 0.1432950347661972,
+      "max_z": 1.935607671737671,
+      "intersections": []
+    },
+    {
+      "bloom": 0.65,
+      "min_z": 0.14799831807613373,
+      "max_z": 1.8303067684173584,
+      "intersections": []
+    },
+    {
+      "bloom": 0.7,
+      "min_z": 0.15270160138607025,
+      "max_z": 1.7250057458877563,
+      "intersections": []
+    },
+    {
+      "bloom": 0.75,
+      "min_z": 0.15740489959716797,
+      "max_z": 1.6197047233581543,
+      "intersections": []
+    },
+    {
+      "bloom": 0.8,
+      "min_z": 0.1621081829071045,
+      "max_z": 1.5144035816192627,
+      "intersections": []
+    },
+    {
+      "bloom": 0.85,
+      "min_z": 0.16647100448608398,
+      "max_z": 1.4091026782989502,
+      "intersections": []
+    },
+    {
+      "bloom": 0.9,
+      "min_z": 0.1693882942199707,
+      "max_z": 1.3038016557693481,
+      "intersections": []
+    },
+    {
+      "bloom": 0.95,
+      "min_z": 0.17230556905269623,
+      "max_z": 1.198500633239746,
+      "intersections": []
+    },
+    {
+      "bloom": 1.0,
+      "min_z": 0.11537215113639832,
+      "max_z": 1.0938822031021118,
+      "intersections": []
+    }
+  ],
+  "focus_poses": [
+    {
+      "active": "perch",
+      "focus": 0,
+      "intersections": []
+    },
+    {
+      "active": "perch",
+      "focus": 0.25,
+      "intersections": []
+    },
+    {
+      "active": "perch",
+      "focus": 0.5,
+      "intersections": []
+    },
+    {
+      "active": "perch",
+      "focus": 0.75,
+      "intersections": []
+    },
+    {
+      "active": "perch",
+      "focus": 1,
+      "intersections": []
+    },
+    {
+      "active": "selvedge",
+      "focus": 0,
+      "intersections": []
+    },
+    {
+      "active": "selvedge",
+      "focus": 0.25,
+      "intersections": []
+    },
+    {
+      "active": "selvedge",
+      "focus": 0.5,
+      "intersections": []
+    },
+    {
+      "active": "selvedge",
+      "focus": 0.75,
+      "intersections": []
+    },
+    {
+      "active": "selvedge",
+      "focus": 1,
+      "intersections": []
+    },
+    {
+      "active": "forme",
+      "focus": 0,
+      "intersections": []
+    },
+    {
+      "active": "forme",
+      "focus": 0.25,
+      "intersections": []
+    },
+    {
+      "active": "forme",
+      "focus": 0.5,
+      "intersections": []
+    },
+    {
+      "active": "forme",
+      "focus": 0.75,
+      "intersections": []
+    },
+    {
+      "active": "forme",
+      "focus": 1,
+      "intersections": []
+    },
+    {
+      "active": "about",
+      "focus": 0,
+      "intersections": []
+    },
+    {
+      "active": "about",
+      "focus": 0.25,
+      "intersections": []
+    },
+    {
+      "active": "about",
+      "focus": 0.5,
+      "intersections": []
+    },
+    {
+      "active": "about",
+      "focus": 0.75,
+      "intersections": []
+    },
+    {
+      "active": "about",
+      "focus": 1,
+      "intersections": []
+    },
+    {
+      "active": "contact",
+      "focus": 0,
+      "intersections": []
+    },
+    {
+      "active": "contact",
+      "focus": 0.25,
+      "intersections": []
+    },
+    {
+      "active": "contact",
+      "focus": 0.5,
+      "intersections": []
+    },
+    {
+      "active": "contact",
+      "focus": 0.75,
+      "intersections": []
+    },
+    {
+      "active": "contact",
+      "focus": 1,
+      "intersections": []
+    }
+  ],
+  "glb_bytes": 847496
+}

@@ -1,0 +1,36 @@
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+const output = 'evidence/lotus-v2/candidate-site';
+await mkdir(output, { recursive: true });
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
+const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+const page = await context.newPage();
+const errors = []; page.on('pageerror', error => errors.push(error.message));
+const measures = [];
+for (const pose of [0, .25, .5, .75, 1]) {
+  await page.goto(`http://127.0.0.1:5318/soft-lotus.html?lang=en&pose=${pose}`);
+  await page.waitForFunction(() => document.querySelector('.soft-canvas')?.getAttribute('data-asset') === 'accepted');
+  await page.waitForFunction(value => document.querySelector('.soft-canvas')?.getAttribute('data-bloom') === value.toFixed(3), pose);
+  await page.evaluate(() => document.fonts.ready);
+  await page.screenshot({ path: `${output}/bloom-${String(pose * 100).padStart(3, '0')}.png` });
+  measures.push(await page.locator('.soft-canvas').evaluate(el => ({ ...el.dataset })));
+}
+await page.goto('http://127.0.0.1:5318/soft-lotus.html?lang=ru');
+await page.waitForFunction(() => document.querySelector('.soft-canvas')?.getAttribute('data-asset') === 'accepted');
+await page.locator('#index-perch').click();
+await page.waitForFunction(() => document.querySelector('.soft-canvas')?.getAttribute('data-animating') === 'false');
+await page.screenshot({ path: `${output}/perch-selected.png` });
+await page.locator('#preview-case-perch').click();
+await page.screenshot({ path: `${output}/perch-case.png` });
+await page.keyboard.press('Escape');
+await page.waitForFunction(() => !document.querySelector('dialog')?.open);
+await page.screenshot({ path: `${output}/perch-return.png` });
+await page.setViewportSize({ width: 390, height: 844 });
+await page.goto('http://127.0.0.1:5318/soft-lotus.html?lang=kk&pose=1');
+await page.waitForFunction(() => document.querySelector('.soft-canvas')?.getAttribute('data-asset') === 'accepted');
+await page.waitForFunction(() => document.querySelector('.soft-canvas')?.getAttribute('data-bloom') === '1.000');
+await page.screenshot({ path: `${output}/mobile-open.png` });
+await writeFile(`${output}/metrics.json`, JSON.stringify({ browser: browser.version(), measures, errors, note: 'CPU submission timings and geometry counts, not GPU FPS; mobile viewport emulation.' }, null, 2));
+await browser.close();
+if (errors.length) throw Error(errors.join('\n'));
+console.log(`Captured five bloom poses and PERCH case/return in ${output}`);
