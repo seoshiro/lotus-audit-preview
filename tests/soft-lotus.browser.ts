@@ -318,6 +318,8 @@ test('Fallback gives accurate directions, readable navigation and uncropped shor
       await expect(page).toHaveTitle(`${copy[locale].name} — ${sceneCopy[locale].headline}`);
       await expect(page.locator('.scene-introduction')).toContainText(sceneCopy[locale].fallbackHint);
       await expect(page.locator('.scene-poster')).toHaveCSS('opacity','1');
+      const status = await page.locator('.scene-bottom').boundingBox(), nav = await page.locator('.scene-index').boundingBox();
+      expect(status!.y + status!.height).toBeLessThanOrEqual(nav!.y);
       for(const id of ['perch','selvedge','forme','contact']) {
         await page.locator(`#index-${id}`).click();
         expect(await page.locator('.petal-preview').evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);

@@ -43,3 +43,5 @@ body[data-reduced-motion=true] .petal-drift{display:none}body[data-reduced-motio
 .ink-fill{fill:url(#ink-density)}.share-manual{display:block;font-size:12px}.share-manual input{display:block;width:100%;padding:12px;margin-top:8px;border:1px solid #9d9181;background:transparent;color:inherit;font:inherit}
 
 .hero-actions a{display:inline-flex;align-items:center;font-size:inherit}.static-languages{pointer-events:auto}
+
+@media(max-width:700px){body[data-model=failed] .scene-bottom{bottom:132px}}
