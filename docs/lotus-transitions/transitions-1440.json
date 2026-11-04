@@ -1,0 +1,63 @@
+{
+  "origin": "http://127.0.0.1:5319/",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "marks": [
+    {
+      "name": "ready",
+      "at": 2.643
+    },
+    {
+      "name": "overview-to-catalog",
+      "at": 3.449
+    },
+    {
+      "name": "catalog-to-overview",
+      "at": 4.772
+    },
+    {
+      "name": "select-selvedge",
+      "at": 5.907
+    },
+    {
+      "name": "selected-to-catalog",
+      "at": 7.175
+    },
+    {
+      "name": "catalog-to-selected",
+      "at": 8.239
+    },
+    {
+      "name": "beibars-to-overview",
+      "at": 9.365
+    },
+    {
+      "name": "select-forme",
+      "at": 10.721
+    },
+    {
+      "name": "return-to-flower",
+      "at": 11.756
+    },
+    {
+      "name": "rapid-reversals",
+      "at": 12.895
+    },
+    {
+      "name": "case-and-back",
+      "at": 15.567
+    },
+    {
+      "name": "history-back",
+      "at": 17.995
+    },
+    {
+      "name": "reduced-motion",
+      "at": 19.006
+    }
+  ],
+  "browser": "156.0.8078.76",
+  "conditions": "Continuous 25 fps recording of installed Chrome on Windows with hardware WebGL. No artificial network or CPU throttling for this demonstration. Phone viewport emulation, not a physical phone. Recording is not the performance measurement."
+}

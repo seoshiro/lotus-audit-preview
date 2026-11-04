@@ -1,0 +1,364 @@
+{
+  "origin": "http://127.0.0.1:5319/",
+  "browser": "156.0.8078.76",
+  "os": "Windows 11 Home",
+  "cpu": "AMD Ryzen 5 7535HS with Radeon Graphics        ",
+  "logicalCores": 12,
+  "memoryGiB": 15,
+  "conditions": "Installed headless Chrome on Windows hardware; cold browser cache; simulated 10 Mbps down / 5 Mbps up / 40 ms latency; no CPU throttle; phone viewport emulation, not a physical phone. Trace records compositor and GPU pipeline as well as main thread. No screenshot tracing during timed pass.",
+  "reports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "longTasks": [
+        {
+          "start": 1405.8999999761581,
+          "duration": 283
+        },
+        {
+          "start": 3803.2999999523163,
+          "duration": 114
+        }
+      ],
+      "marks": [
+        {
+          "name": "model-ready",
+          "at": 3944.899999976158
+        },
+        {
+          "name": "opening-complete",
+          "at": 4937.199999928474
+        },
+        {
+          "name": "catalog-open-start",
+          "at": 5456.899999976158
+        },
+        {
+          "name": "catalog-open-end",
+          "at": 6134.699999928474
+        },
+        {
+          "name": "catalog-close-start",
+          "at": 6136.099999904633
+        },
+        {
+          "name": "catalog-close-end",
+          "at": 6766.5
+        },
+        {
+          "name": "home-start",
+          "at": 7344.299999952316
+        },
+        {
+          "name": "home-end",
+          "at": 8018
+        },
+        {
+          "name": "reversals-start",
+          "at": 8019.199999928474
+        },
+        {
+          "name": "reversals-end",
+          "at": 9353.199999928474
+        }
+      ],
+      "lcp": [
+        {
+          "start": 468,
+          "size": 57380
+        }
+      ],
+      "cls": 0.001217034669308342,
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "resources": [
+        {
+          "url": "http://127.0.0.1:5319/models/soft-lotus-candidate.glb",
+          "duration": 1928.7000000476837,
+          "transfer": 2282256
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 5,
+          "domReady": 1354.5999999046326
+        }
+      ],
+      "presentation": [
+        {
+          "phase": "startup",
+          "durationMs": 3944.8,
+          "presentedAnimationFrames": 281,
+          "presentationIntervalMs": {
+            "p50": 6.963,
+            "p95": 7.863,
+            "max": 486.155,
+            "over33ms": 9
+          },
+          "drawFrames": 311,
+          "dropSignals": 77,
+          "partialUpdateSignals": 19,
+          "longTasks": [
+            {
+              "start": 1405.8999999761581,
+              "duration": 283
+            },
+            {
+              "start": 3803.2999999523163,
+              "duration": 114
+            }
+          ]
+        },
+        {
+          "phase": "opening",
+          "durationMs": 992.353,
+          "presentedAnimationFrames": 138,
+          "presentationIntervalMs": {
+            "p50": 6.955,
+            "p95": 7.128,
+            "max": 20.647,
+            "over33ms": 0
+          },
+          "drawFrames": 141,
+          "dropSignals": 2,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "catalog-open",
+          "durationMs": 677.768,
+          "presentedAnimationFrames": 86,
+          "presentationIntervalMs": {
+            "p50": 6.959,
+            "p95": 13.869,
+            "max": 27.847,
+            "over33ms": 0
+          },
+          "drawFrames": 89,
+          "dropSignals": 8,
+          "partialUpdateSignals": 7,
+          "longTasks": []
+        },
+        {
+          "phase": "catalog-close",
+          "durationMs": 630.553,
+          "presentedAnimationFrames": 87,
+          "presentationIntervalMs": {
+            "p50": 6.952,
+            "p95": 7.122,
+            "max": 34.311,
+            "over33ms": 1
+          },
+          "drawFrames": 87,
+          "dropSignals": 3,
+          "partialUpdateSignals": 3,
+          "longTasks": []
+        },
+        {
+          "phase": "home",
+          "durationMs": 673.668,
+          "presentedAnimationFrames": 96,
+          "presentationIntervalMs": {
+            "p50": 6.951,
+            "p95": 7.125,
+            "max": 13.902,
+            "over33ms": 0
+          },
+          "drawFrames": 97,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "reversals",
+          "durationMs": 1333.907,
+          "presentedAnimationFrames": 187,
+          "presentationIntervalMs": {
+            "p50": 6.959,
+            "p95": 7.211,
+            "max": 13.94,
+            "over33ms": 0
+          },
+          "drawFrames": 192,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "longTasks": [
+        {
+          "start": 2404.6999999284744,
+          "duration": 51
+        }
+      ],
+      "marks": [
+        {
+          "name": "model-ready",
+          "at": 2473.100000023842
+        },
+        {
+          "name": "opening-complete",
+          "at": 3472
+        },
+        {
+          "name": "catalog-open-start",
+          "at": 3983.100000023842
+        },
+        {
+          "name": "catalog-open-end",
+          "at": 4641.600000023842
+        },
+        {
+          "name": "catalog-close-start",
+          "at": 4642.5
+        },
+        {
+          "name": "catalog-close-end",
+          "at": 5279.699999928474
+        },
+        {
+          "name": "home-start",
+          "at": 5857.600000023842
+        },
+        {
+          "name": "home-end",
+          "at": 6531.600000023842
+        },
+        {
+          "name": "reversals-start",
+          "at": 6533
+        },
+        {
+          "name": "reversals-end",
+          "at": 7868.899999976158
+        }
+      ],
+      "lcp": [
+        {
+          "start": 484,
+          "size": 20956
+        }
+      ],
+      "cls": 0.0061005024201881974,
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "resources": [
+        {
+          "url": "http://127.0.0.1:5319/models/soft-lotus-mobile.glb",
+          "duration": 862.5,
+          "transfer": 963892
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 3.299999952316284,
+          "domReady": 1368
+        }
+      ],
+      "presentation": [
+        {
+          "phase": "startup",
+          "durationMs": 2472.9,
+          "presentedAnimationFrames": 138,
+          "presentationIntervalMs": {
+            "p50": 6.953,
+            "p95": 52.866,
+            "max": 490.473,
+            "over33ms": 7
+          },
+          "drawFrames": 155,
+          "dropSignals": 17,
+          "partialUpdateSignals": 15,
+          "longTasks": [
+            {
+              "start": 2404.6999999284744,
+              "duration": 51
+            }
+          ]
+        },
+        {
+          "phase": "opening",
+          "durationMs": 998.942,
+          "presentedAnimationFrames": 142,
+          "presentationIntervalMs": {
+            "p50": 6.956,
+            "p95": 7.135,
+            "max": 7.205,
+            "over33ms": 0
+          },
+          "drawFrames": 144,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "catalog-open",
+          "durationMs": 658.567,
+          "presentedAnimationFrames": 87,
+          "presentationIntervalMs": {
+            "p50": 6.96,
+            "p95": 13.882,
+            "max": 13.948,
+            "over33ms": 0
+          },
+          "drawFrames": 92,
+          "dropSignals": 3,
+          "partialUpdateSignals": 3,
+          "longTasks": []
+        },
+        {
+          "phase": "catalog-close",
+          "durationMs": 637.13,
+          "presentedAnimationFrames": 88,
+          "presentationIntervalMs": {
+            "p50": 6.955,
+            "p95": 7.15,
+            "max": 40.888,
+            "over33ms": 1
+          },
+          "drawFrames": 87,
+          "dropSignals": 4,
+          "partialUpdateSignals": 2,
+          "longTasks": []
+        },
+        {
+          "phase": "home",
+          "durationMs": 674.077,
+          "presentedAnimationFrames": 95,
+          "presentationIntervalMs": {
+            "p50": 6.957,
+            "p95": 7.153,
+            "max": 13.974,
+            "over33ms": 0
+          },
+          "drawFrames": 97,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        },
+        {
+          "phase": "reversals",
+          "durationMs": 1335.84,
+          "presentedAnimationFrames": 189,
+          "presentationIntervalMs": {
+            "p50": 6.957,
+            "p95": 7.142,
+            "max": 13.911,
+            "over33ms": 0
+          },
+          "drawFrames": 192,
+          "dropSignals": 0,
+          "partialUpdateSignals": 0,
+          "longTasks": []
+        }
+      ]
+    }
+  ],
+  "method": "Chrome trace AnimationFrame::Presentation feedback scoped to the page renderer and marked phases; unique DrawFrame / DroppedFrame sequence IDs also counted. Partial-update signals are reported separately and are not silently treated as entirely missed frames. Startup includes deliberately idle network waiting and is not a steady-state FPS score. Headless compositor measurements, not a physical-screen or physical-phone certification. Raw traces retained locally."
+}

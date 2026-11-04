@@ -116,6 +116,49 @@ test('All-project catalog excludes the selected card and restores selection and 
   }
 });
 
+test('Catalog reversals preserve the live pose and home navigation reuses the loaded scene', async ({page}) => {
+  test.setTimeout(60000);
+  let modelRequests=0;
+  page.on('request',r=>{if(r.url().endsWith('.glb'))modelRequests++;});
+  await page.goto(`${entry}?lang=ru`);
+  const scene=page.locator('.soft-canvas'),dialog=page.locator('#work-browser');
+  await expect(scene).toHaveAttribute('data-bloom','1.000',{timeout:20000});
+  await expect(scene).toHaveAttribute('data-animating','false');
+  const identity=await page.evaluate(()=>{(window as unknown as {originalCanvas:HTMLCanvasElement|null}).originalCanvas=document.querySelector('canvas');return performance.timeOrigin;});
+  await page.locator('#index-selvedge').click();await expect(scene).toHaveAttribute('data-animating','false');
+  const pose=await scene.getAttribute('data-pose');
+  await page.locator('#index-all').click();await expect(dialog).toHaveAttribute('data-phase','open');
+  expect(await scene.getAttribute('data-pose')).toBe(pose);
+  await page.keyboard.press('Escape');await expect(dialog).toBeHidden();await expect(scene).toHaveAttribute('data-catalog-depth','0.00000');
+  expect(await scene.getAttribute('data-pose')).toBe(pose);
+  for(let i=0;i<3;i++){
+    await page.locator('#index-all').click();await page.waitForTimeout(110);
+    await page.keyboard.press('Escape');await page.waitForTimeout(80);
+    await page.locator('#index-all').click();
+    await expect(dialog).toHaveAttribute('data-phase','open');
+    await page.locator('.work-browser-close').click();await expect(dialog).toBeHidden();
+  }
+  await page.locator('.signature').click();await expect(page.locator('body')).toHaveAttribute('data-view','overview');
+  await expect(scene).toHaveAttribute('data-animating','false');
+  const homePose=JSON.parse((await scene.getAttribute('data-pose'))!);
+  expect(homePose[0]).toBe(1);expect(Math.sin(homePose[1]+.18)).toBeCloseTo(0,4);expect(homePose.slice(2)).toEqual([0,0]);
+  await expect(page.locator('.ink-loading')).toHaveCount(0);
+  await page.goBack();await expect(page.locator('body')).toHaveAttribute('data-petal','selvedge');
+  await page.goForward();await expect(page.locator('body')).toHaveAttribute('data-view','overview');
+  await page.locator('#index-forme').click();await page.locator('.preview-close').click();
+  await expect(scene).toHaveAttribute('data-animating','false');
+  expect(await page.evaluate(()=>performance.timeOrigin)).toBe(identity);
+  expect(await page.evaluate(()=>document.querySelector('canvas')===(window as unknown as {originalCanvas:HTMLCanvasElement}).originalCanvas)).toBe(true);
+  expect(modelRequests).toBe(1);
+  await page.locator('#index-perch').click();await page.locator('#index-all').click();await page.goBack();
+  await expect(dialog).toBeHidden();await expect(page.locator('body')).toHaveAttribute('data-view','overview');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.locator('#hero-work').click();await expect(dialog).toHaveAttribute('data-phase','open');
+  await expect(scene).toHaveAttribute('data-catalog-depth','0.00000');
+  expect(await dialog.locator('.work-browser-header').evaluate(el=>getComputedStyle(el).transform)).toMatch(/none|matrix\(1, 0, 0, 1, 0, 0\)/);
+  await page.keyboard.press('Escape');await expect(dialog).toBeHidden();await expect(page.locator('#hero-work')).toBeFocused();
+});
+
 test('Cached revisit skips the opening delay and share errors expose a selectable link', async ({page}) => {
   await page.goto(`${entry}?lang=en`);
   await expect(page.locator('body')).toHaveAttribute('data-model','ready', { timeout: 20000 });

@@ -1,0 +1,21 @@
+npm notice run seoshiro-portfolio@1.0.0 test
+npm notice run node --experimental-strip-types --test tests/content.test.ts tests/soft-lotus.test.ts
+тЬФ Locale selection rejects malformed or unsupported preferences (1.5079ms)
+тЬФ Every locale has complete project evidence and descriptive copy (2.4071ms)
+тЬФ Static home and case pages expose real work and explicit limitations in every locale (4.5989ms)
+тЬФ Links preserve locale and resolve correctly from home or case directory (0.3525ms)
+тЬФ HTML escaping prevents content from creating executable markup (0.5994ms)
+тЬФ Project descriptions retain the narrow product and human evidence boundaries (0.514ms)
+тЬФ Legacy section links migrate without losing language or poisoning later navigation (4.2662ms)
+тЬФ An early project selection survives late model readiness and failure (0.585ms)
+тЬФ Case close restores the selected petal and preserves locale and focus origin (0.352ms)
+тЬФ Rapid input and history restoration cannot revive the previous case (0.3648ms)
+тЬФ Direct preview URLs validate petals and preserve case and language on round trip (0.59ms)
+тД╣ tests 11
+тД╣ suites 0
+тД╣ pass 11
+тД╣ fail 0
+тД╣ cancelled 0
+тД╣ skipped 0
+тД╣ todo 0
+тД╣ duration_ms 305.1726

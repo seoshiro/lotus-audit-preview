@@ -5,7 +5,7 @@ for(const r of report.reports){
  const mark=name=>t.find(e=>e.name===name&&e.cat==='blink.user_timing');
  const ready=mark('model-ready'),open=mark('opening-complete'),start=mark('rapid-start'),end=mark('rapid-complete');
  const origin=ready.ts-ready.args.data.startTime*1000;
- const windows=[['startup',origin,ready.ts],['opening',ready.ts,open.ts],['rapid-selection',start.ts,end.ts]];
+ const windows=[['startup',origin,ready.ts],['opening',ready.ts,open.ts],...(start&&end?[['rapid-selection',start.ts,end.ts]]:['catalog-open','catalog-close','home','reversals'].map(name=>[name,mark(`${name}-start`).ts,mark(`${name}-end`).ts]))];
  r.presentation=windows.map(([name,a,b])=>{
   const events=t.filter(e=>e.pid===ready.pid&&e.ts>=a&&e.ts<=b);
   const present=[...new Set(events.filter(e=>e.name==='AnimationFrame::Presentation').map(e=>e.ts))].sort((x,y)=>x-y);

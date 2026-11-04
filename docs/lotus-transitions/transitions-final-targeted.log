@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:71380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\soft-lotus.browser.ts:26:1 тА║ Main work action opens a visible project list and returns keyboard focus in every language (8.0s)
+  ok 2 tests\soft-lotus.browser.ts:119:1 тА║ Catalog reversals preserve the live pose and home navigation reuses the loaded scene (15.6s)
+  ok 3 tests\soft-lotus.browser.ts:177:1 тА║ Draft PERCH flow preserves real content, Back, Escape and exact trigger focus (3.1s)
+
+  3 passed (28.7s)

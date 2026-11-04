@@ -84,11 +84,15 @@ export function App() {
   const labels = useRef<HTMLElement>(null);
   const runtime = useRef<SceneRuntime | null>(null);
   const preview = useRef<HTMLElement>(null);
+  const lastPreview = useRef<PetalId | null>(state.active);
+  if (state.active) lastPreview.current = state.active;
+  const previewId = state.active || lastPreview.current;
   const petalOrigin = useRef<{ image: DOMRect; title: DOMRect } | null>(null);
   const navigation = useRef<(event: SceneEvent, replace?: boolean) => void>(() => {});
   const c = copy[state.locale], s = sceneCopy[state.locale];
   const activeProject = isFeatured(state.active) ? projects.find(p => p.id === state.active)! : null;
-  const activeCopy = activeProject ? c.project[activeProject.id] : null;
+  const previewProject = isFeatured(previewId) ? projects.find(p => p.id === previewId)! : null;
+  const previewCopy = previewProject ? c.project[previewProject.id] : null;
 
   useEffect(() => {
     if (state.model !== 'ready') return;
@@ -110,12 +114,15 @@ export function App() {
   }
   navigation.current = navigate;
   function restoreFocus() {
-    const target = current.current.returnFocus;
-    const element = target ? document.getElementById(target) : null;
-    const visible = element && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
-    // Direct URLs have no invoking control. The semantic index is available
-    // even while projected labels are hidden or waiting for the next draw.
-    (visible ? element : document.getElementById(`index-${current.current.active || 'perch'}`))?.focus({ preventScroll: true });
+    // A keyboard dismissal can finish before the parent's layout effect has
+    // revealed the retained preview. Restore on its first visible frame.
+    gsap.delayedCall(.04, () => {
+      if (current.current.view !== 'selected' || workOpenRef.current) return;
+      const target = current.current.returnFocus;
+      const element = target ? document.getElementById(target) : null;
+      const visible = element && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
+      (visible ? element : document.getElementById(`index-${current.current.active || 'perch'}`))?.focus({ preventScroll: true });
+    });
   }
   function back() {
     if (history.state?.softLotus && history.state.softLotusDepth > 0) history.back();
@@ -139,6 +146,11 @@ export function App() {
     workReturn.current = trigger;
     setWorkOpen(true);
   }
+  function goHome(event: MouseEvent<HTMLAnchorElement>) {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.defaultPrevented) return;
+    event.preventDefault();
+    if (current.current.view !== 'overview') navigate({ type: 'overview' });
+  }
   function containWorkTab(event: KeyboardEvent<HTMLDialogElement>) {
     if (event.key !== 'Tab') return;
     const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button,a[href]')];
@@ -148,16 +160,48 @@ export function App() {
   }
   useLayoutEffect(() => {
     const dialog = workDialog.current!;
+    const stage = host.current!.parentElement!;
+    const reduced = state.reducedMotion;
+    const header = dialog.querySelector('.work-browser-header');
+    const rows = dialog.querySelectorAll('#work-list>a');
+    delete stage.dataset.workSettled;
+    runtime.current?.setCatalog(workOpen, reduced);
+    const timeline = gsap.timeline();
     if (workOpen) {
+      const fresh = !dialog.open;
+      if (dialog.open && !dialog.matches(':modal')) dialog.close();
       if (!dialog.open) dialog.showModal();
+      dialog.inert = false; dialog.removeAttribute('aria-hidden');
+      dialog.dataset.phase = 'opening';
+      if (fresh) {
+        gsap.set(dialog, { opacity: 0 });
+        gsap.set([header, ...rows], { opacity: 0, y: reduced ? 0 : 12 });
+      }
       workClose.current?.focus({ preventScroll: true });
+      timeline.to(dialog, { opacity: 1, duration: reduced ? .14 : .48, ease: 'power2.inOut' }, 0)
+        .to(header, { opacity: 1, y: 0, duration: reduced ? .14 : .32, ease: 'power2.out' }, reduced ? 0 : .04)
+        .to(rows, { opacity: 1, y: 0, duration: reduced ? .14 : .32, stagger: reduced ? 0 : { amount: .16 }, ease: 'power2.out' }, reduced ? 0 : .12)
+        .call(() => { if (workOpenRef.current) { dialog.dataset.phase = 'open'; stage.dataset.workSettled = 'true'; } });
     } else if (dialog.open) {
-      dialog.close();
+      // Release the native modal immediately, leaving a non-interactive visual
+      // exit. A second click can reverse the current tween without a reset.
+      if (dialog.matches(':modal')) { dialog.close(); dialog.show(); }
+      dialog.inert = true; dialog.setAttribute('aria-hidden', 'true'); dialog.dataset.phase = 'closing';
       const target = workReturn.current;
       const available = target && !target.closest('[inert]') && target.getClientRects().length > 0;
       (available ? target : document.getElementById('index-all'))?.focus({ preventScroll: true });
+      timeline.to(dialog, { opacity: 0, duration: reduced ? .14 : .36, ease: 'power2.inOut' }, 0)
+        .to([header, ...rows], { opacity: 0, y: reduced ? 0 : 8, duration: reduced ? .14 : .24, ease: 'power2.in' }, 0)
+        .call(() => {
+          // The hero becomes focusable on the first fade-in frame. Do not
+          // steal focus if the user already chose another visible control.
+          if (!workOpenRef.current && (document.activeElement === document.body || dialog.contains(document.activeElement)))
+            (available ? target : document.getElementById('index-all'))?.focus({ preventScroll: true });
+        }, [], .04)
+        .call(() => { if (!workOpenRef.current) { dialog.close(); dialog.dataset.phase = 'closed'; } });
     }
-  }, [workOpen]);
+    return () => { timeline.kill(); };
+  }, [workOpen, state.reducedMotion]);
 
   useEffect(() => {
     history.replaceState({ softLotus: true, softLotusDepth: Number(history.state?.softLotusDepth || 0) }, '', routeURL(new URL(location.href), current.current));
@@ -187,7 +231,7 @@ export function App() {
   }, []);
 
   useLayoutEffect(() => {
-    runtime.current?.update(workOpen ? { ...state, reducedMotion: true } : state);
+    runtime.current?.update(state);
     document.documentElement.lang = state.locale;
     document.title = `${c.name} — ${s.headline}`;
     document.body.dataset.view = state.view;
@@ -195,13 +239,31 @@ export function App() {
     document.body.dataset.model = state.model;
     document.body.dataset.reducedMotion = String(state.reducedMotion);
     try { localStorage.setItem('seoshiro-portfolio-language-v1', state.locale); } catch { /* Optional. */ }
-  }, [state, workOpen, c.name, s.headline]);
+  }, [state, c.name, s.headline]);
+
+  useLayoutEffect(() => {
+    const stage = host.current!.parentElement!;
+    const intro = stage.querySelector('.scene-introduction');
+    const home = state.view === 'overview' && !workOpen;
+    const selected = state.view === 'selected' && !workOpen;
+    const reduced = state.reducedMotion;
+    const labelView = state.view === 'overview' ? 'overview' : 'selected';
+    stage.dataset.labelView ||= labelView;
+    const changingLabels = stage.dataset.labelView !== labelView;
+    if (changingLabels && home && innerWidth <= 700) gsap.set(labels.current, { '--labels-reveal': 0 });
+    const timeline = gsap.timeline();
+    timeline.to(intro, { autoAlpha: home ? 1 : 0, y: reduced || home ? 0 : -8, duration: reduced ? .14 : .25, ease: 'power2.out' }, home && !workOpen && previewId && !workDialog.current?.open && !reduced ? .34 : 0);
+    if (changingLabels) timeline.to(labels.current, { '--labels-reveal': 0, duration: reduced ? 0 : .12 }, 0)
+      .call(() => { stage.dataset.labelView = labelView; }, [], reduced ? 0 : .12);
+    timeline.to(labels.current, { '--labels-reveal': workOpen || state.view === 'case' ? 0 : 1, duration: reduced ? .14 : .3 }, changingLabels && !reduced ? home ? .3 : .13 : 0);
+    if (preview.current) timeline.to(preview.current, { autoAlpha: selected ? 1 : 0, y: reduced || selected ? 0 : 8, duration: reduced ? .14 : selected ? .3 : .2, ease: 'power2.out' }, 0);
+    return () => { timeline.kill(); };
+  }, [state.view, state.active, state.reducedMotion, workOpen, previewId]);
 
   useLayoutEffect(() => {
     if (!preview.current || state.view !== 'selected') return;
     const reduced = state.reducedMotion || document.documentElement.dataset.input === 'keyboard';
     const context = gsap.context(() => {
-      gsap.fromTo(preview.current, { opacity: 0 }, { opacity: 1, duration: reduced ? 0 : .3, ease: 'power2.out' });
       if (!reduced && petalOrigin.current && state.model === 'ready') {
         preview.current!.dataset.transitioning = 'true';
         gsap.delayedCall(.66, () => { if (preview.current) delete preview.current.dataset.transitioning; });
@@ -215,7 +277,7 @@ export function App() {
     }, preview);
     petalOrigin.current = null;
     const element = preview.current;
-    return () => { context.revert(); if (element) delete element.dataset.transitioning; };
+    return () => { context.kill(false); if (element) delete element.dataset.transitioning; };
   }, [state.active, state.view, state.reducedMotion]);
 
   const petalName = (id: PetalId) => isFeatured(id) ? id.toUpperCase() : s[id];
@@ -223,7 +285,7 @@ export function App() {
   const loadLabel = loadProgress.phase === 'prepare' ? s.prepare : s.transfer;
   return <>
     <a className="soft-skip" href="#scene-index">{s.skip}</a>
-    <header className="soft-header"><a href={`?lang=${state.locale}`} className="signature">BEIBARS</a><div className="soft-languages" role="group" aria-label={c.language}>{(['ru', 'en', 'kk'] as Locale[]).map(locale => <button key={locale} type="button" lang={locale} aria-pressed={locale === state.locale} onClick={() => navigate({ type: 'locale', locale }, true)}>{locale.toUpperCase()}</button>)}</div></header>
+    <header className="soft-header"><a href={`?lang=${state.locale}`} className="signature" onClick={goHome}>BEIBARS</a><div className="soft-languages" role="group" aria-label={c.language}>{(['ru', 'en', 'kk'] as Locale[]).map(locale => <button key={locale} type="button" lang={locale} aria-pressed={locale === state.locale} onClick={() => navigate({ type: 'locale', locale }, true)}>{locale.toUpperCase()}</button>)}</div></header>
     <main id="main">
     {softLotusAsset.state !== 'accepted' && <p className="prototype-note">{state.locale === 'ru' ? 'Предпросмотр · проверка Tripo-модели' : state.locale === 'kk' ? 'Алдын ала көрініс · Tripo моделін тексеру' : 'Preview · Tripo model under review'}</p>}
       <div className="soft-stage" data-view={state.view} data-work-open={workOpen} aria-busy={state.model === 'pending'}>
@@ -231,11 +293,11 @@ export function App() {
         <div ref={host} className="soft-canvas" />
         <div className="paper-grain" aria-hidden="true" />
         {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-desktop.png`} alt="" /></picture>}
-        <div className="scene-introduction" inert={state.view !== 'overview'}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button id="hero-work" type="button" aria-expanded={workOpen} aria-controls="work-browser" aria-haspopup="dialog" onClick={event => openWork(event.currentTarget)}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
+        <div className="scene-introduction" inert={state.view !== 'overview' || workOpen}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button id="hero-work" type="button" aria-expanded={workOpen} aria-controls="work-browser" aria-haspopup="dialog" onClick={event => openWork(event.currentTarget)}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
         <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}-petal.webp`} alt="" width="320" height={Math.round(320 * dimensions[id].main[1] / dimensions[id].main[0])} />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
-        {state.view === 'selected' && state.active && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title"><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => focusNavigation(id)); }}>{s.close}</button>
-          <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(state.active)} reduced={state.reducedMotion} className="preview-title" />
-          {activeProject && activeCopy ? <><p className="preview-subtitle">{s[activeProject.id as FeaturedId]}</p><img className="preview-product" style={{backgroundImage:`url(assets/${activeProject.id}-petal.webp)`,backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPosition:"center"}} src={`assets/${activeProject.id}.webp`} width={dimensions[activeProject.id].main[0]} height={dimensions[activeProject.id].main[1]} alt={activeCopy.alt} /><p>{activeCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${activeProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: activeProject.id as FeaturedId, source: `preview-case-${activeProject.id}` })}>{s.read} →</button><a className="primary-action" href={activeProject.live} target="_blank" rel="noreferrer">{s.demo} ↗</a></div></> : state.active === 'about' ? <><p>{s.aboutWork}</p></> : <><p>{s.contactText}</p><div className="contact-actions"><a className="primary-action" href="https://t.me/tserriednichs" target="_blank" rel="noreferrer">{s.discuss} · Telegram ↗</a><a href="mailto:beibars.ileskhan2405@gmail.com">beibars.ileskhan2405@gmail.com</a><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></div></>}
+        {previewId && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title" inert={state.view !== 'selected' || workOpen} aria-hidden={state.view !== 'selected' || workOpen}><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => focusNavigation(id)); }}>{s.close}</button>
+          <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(previewId)} reduced={state.reducedMotion} className="preview-title" />
+          {previewProject && previewCopy ? <><p className="preview-subtitle">{s[previewProject.id as FeaturedId]}</p><img className="preview-product" style={{backgroundImage:`url(assets/${previewProject.id}-petal.webp)`,backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPosition:"center"}} src={`assets/${previewProject.id}.webp`} width={dimensions[previewProject.id].main[0]} height={dimensions[previewProject.id].main[1]} alt={previewCopy.alt} /><p>{previewCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${previewProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: previewProject.id as FeaturedId, source: `preview-case-${previewProject.id}` })}>{s.read} →</button><a className="primary-action" href={previewProject.live} target="_blank" rel="noreferrer">{s.demo} ↗</a></div></> : previewId === 'about' ? <><p>{s.aboutWork}</p></> : <><p>{s.contactText}</p><div className="contact-actions"><a className="primary-action" href="https://t.me/tserriednichs" target="_blank" rel="noreferrer">{s.discuss} · Telegram ↗</a><a href="mailto:beibars.ileskhan2405@gmail.com">beibars.ileskhan2405@gmail.com</a><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></div></>}
         </aside>}
         {state.model === 'pending' && <div className="ink-loading" data-phase={loadProgress.phase}>
           <svg viewBox="0 0 260 30" aria-hidden="true">
@@ -258,7 +320,7 @@ export function App() {
         <div className="scene-bottom"><div><p role="status">{state.model === 'failed' ? s.fallback : state.model === 'ready' ? s.ready : ''}</p></div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>
       </div>
       <nav id="scene-index" className="scene-index" aria-label={`${s.scene} — ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<button id="index-all" type="button" aria-haspopup="dialog" aria-expanded={workOpen} aria-controls="work-browser" onClick={event => openWork(event.currentTarget)}>{s.all}</button></nav>
-      <dialog ref={workDialog} id="work-browser" className="work-browser" aria-labelledby="work-browser-title" data-native-scroll onKeyDown={containWorkTab} onCancel={event => { event.preventDefault(); event.stopPropagation(); setWorkOpen(false); }} onClose={event => { if (!event.currentTarget.open) setWorkOpen(false); }}>
+      <dialog ref={workDialog} id="work-browser" className="work-browser" aria-labelledby="work-browser-title" data-native-scroll onKeyDown={containWorkTab} onCancel={event => { event.preventDefault(); event.stopPropagation(); setWorkOpen(false); }} onClose={event => { if (!event.currentTarget.open && !workOpenRef.current) setWorkOpen(false); }}>
         <div className="work-browser-shell">
           <header className="work-browser-header"><h2 id="work-browser-title">{s.all}</h2><button ref={workClose} type="button" className="work-browser-close" onClick={() => setWorkOpen(false)}>{s.closeWork} <span aria-hidden="true">×</span></button></header>
           <div id="work-list">{projects.map(p => <a key={p.id} href={pageHref(p.id, state.locale, false)}><img src={`assets/${p.id}.webp`} alt="" loading="lazy" width={dimensions[p.id].main[0]} height={dimensions[p.id].main[1]} /><span><strong>{p.name} <span aria-hidden="true">↗</span></strong><small>{projectLabels[state.locale][p.id]}</small></span></a>)}</div>

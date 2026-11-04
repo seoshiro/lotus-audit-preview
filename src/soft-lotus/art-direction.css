@@ -32,9 +32,17 @@ body[data-reduced-motion=true] .ink-reveal,body[data-reduced-motion=true] .ink-a
 @media(prefers-reduced-motion:reduce){.ink-reveal,.ink-absorption{animation:none;transition:none}}
 
 /* All projects is its own reading surface, never a popover over the lotus. */
-.soft-stage[data-work-open=true]{visibility:hidden}
+.soft-stage[data-work-settled=true]{visibility:hidden}
+.soft-stage[data-work-settled=true] .petal-labels{display:none}
+.scene-introduction{transition:none}
+.petal-labels{opacity:var(--labels-reveal,1)}
+.soft-stage[data-label-view=overview] .petal-labels img{display:block}
+.soft-stage[data-label-view=selected] .petal-labels img{display:none}
+.petal-preview{opacity:0;visibility:hidden}
 .work-browser{position:fixed;inset:0;margin:0;width:100vw;height:100svh;max-width:none;max-height:none;padding:0;border:0;background:var(--paper);color:var(--ink);overscroll-behavior:contain}
-.work-browser::backdrop{background:var(--paper)}
+.work-browser{z-index:20}
+.work-browser::backdrop{background:transparent}
+.work-browser[data-phase=closing]{pointer-events:none}
 .work-browser-shell{width:min(100%,1120px);margin:auto;padding:0 40px 48px}
 .work-browser-header{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 0 24px;background:var(--paper);border-bottom:1px solid #91857338}
 .work-browser-header h2{font-size:clamp(36px,4vw,58px);line-height:1.1}
