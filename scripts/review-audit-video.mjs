@@ -22,7 +22,7 @@ try {
   const marks=JSON.parse(await fs.readFile(`${dir}/flow-${width}.json`,'utf8'));
   await page.evaluate(async ({width,ready,open})=>{
    const video=document.querySelector('video');document.querySelector('main').replaceChildren();
-   const start=Math.max(0,ready-.4),end=Math.min(video.duration-.02,open+.4);
+   const start=Math.max(0,ready-1.4),end=Math.min(video.duration-.02,open+.4);
    for(let i=0;i<24;i++){
     const time=start+(end-start)*i/23;
     await new Promise(resolve=>{video.onseeked=resolve;video.currentTime=time;});

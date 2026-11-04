@@ -17,6 +17,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   onModel: (ready: boolean) => void, onProgress: (progress: LoadProgress) => void): SceneRuntime {
   let disposed = false;
   let contextLost = false;
+  let warming = false;
   let introduced = false;
   try { introduced = sessionStorage.getItem('soft-lotus-intro-v2') === '1'; } catch { /* Optional. */ }
   let dirty = true;
@@ -110,7 +111,9 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       // poster is still visible, then wait for actual GPU completion rather
       // than moving that first-frame cost into the opening animation.
       dirty = true;
+      warming = true;
       draw();
+      warming = false;
       const context = renderer.getContext();
       const gl = context instanceof WebGL2RenderingContext ? context : null;
       const fence = gl?.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
@@ -159,7 +162,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     gsap.to(petalHover, { value: (i: number) => !state?.reducedMotion && state?.view === 'overview' && i === index ? .16 : 0, duration: .25, overwrite: true, onUpdate: () => { dirty = true; } });
   }
   function draw() {
-    if (disposed || contextLost || document.hidden || !state || !width || !height) return;
+    if (disposed || contextLost || document.hidden || !state || !width || !height || (state.model === 'pending' && !warming)) return;
     const frameState = state;
     const moving = gsap.isTweening(pose) || gsap.isTweening(petalFocus) || gsap.isTweening(petalHover);
     if (!dirty && !moving) return;

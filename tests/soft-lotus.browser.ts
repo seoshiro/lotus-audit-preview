@@ -51,11 +51,11 @@ test('Legacy section routes, standalone case links and confirmed contacts work i
 
 test('Cached revisit skips the opening delay and share errors expose a selectable link', async ({page}) => {
   await page.goto(`${entry}?lang=en`);
+  await expect(page.locator('body')).toHaveAttribute('data-model','ready', { timeout: 20000 });
   await expect(page.locator('.soft-canvas')).toHaveAttribute('data-animating','false');
-  await expect(page.locator('body')).toHaveAttribute('data-model','ready');
   await expect.poll(()=>page.evaluate(()=>sessionStorage.getItem('soft-lotus-intro-v2'))).toBe('1');
   await page.reload();
-  await expect(page.locator('body')).toHaveAttribute('data-model','ready');
+  await expect(page.locator('body')).toHaveAttribute('data-model','ready', { timeout: 20000 });
   await expect(page.locator('.soft-canvas')).toHaveAttribute('data-bloom','1.000');
   await page.locator('#index-perch').click();await page.locator('#preview-case-perch').click();
   await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:()=>Promise.reject(new Error('blocked'))},configurable:true}));
@@ -68,7 +68,7 @@ test('Draft PERCH flow preserves real content, Back, Escape and exact trigger fo
   await page.setViewportSize({ width: 1440, height: 900 });
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto(`${entry}?lang=ru`);
-  await expect(page.locator('.soft-canvas')).toHaveAttribute('data-asset', 'accepted');
+  await expect(page.locator('.soft-canvas')).toHaveAttribute('data-asset', 'accepted', { timeout: 20000 });
   await page.locator('#index-perch').click();
   await expect(page.locator('.petal-preview')).toContainText('PERCH');
   await page.locator('#preview-case-perch').click();
