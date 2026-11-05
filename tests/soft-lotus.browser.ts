@@ -421,6 +421,8 @@ test('The actual petal surface selects SELVEDGE and a drag does not select', asy
   await page.setViewportSize({width:1440,height:900});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto(`${entry}?lang=en`);
+  // Reduced motion warms the open pose while loading is still hidden.
+  await expect(page.locator('body')).toHaveAttribute('data-model','ready');
   await expect(page.locator('.soft-canvas')).toHaveAttribute('data-bloom','1.000');
   // Bare front-right surface of the nearest petal, outside its HTML label.
   await page.mouse.move(970,710);await page.mouse.down();await page.mouse.move(995,710);await page.mouse.up();

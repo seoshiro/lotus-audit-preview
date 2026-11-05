@@ -74,3 +74,6 @@ body[data-model=failed][data-view=case] .scene-poster{inset:20% auto auto 0;widt
 
 .scene-index button[aria-pressed=true]{color:#715244}
 @media(min-width:701px){.petal-labels>div[data-active=true] button>span{font-size:clamp(18px,1.6vw,23px)}}
+
+/* The opening can be skipped with a tap or keyboard without blocking navigation. */
+.scene-bottom .intro-skip{padding:8px 0;min-height:44px;color:#4a413a;text-align:left;border-radius:0}.intro-skip span{font-size:.85em}

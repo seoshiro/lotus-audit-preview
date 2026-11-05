@@ -81,6 +81,7 @@ function Reader({ state, onBack, onReturnFocus }: { state: SceneState; onBack: (
 
 export function App() {
   const [workOpen, setWorkOpen] = useState(false);
+  const [introPlaying, setIntroPlaying] = useState(false);
   const workDialog = useRef<HTMLDialogElement>(null);
   const workClose = useRef<HTMLButtonElement>(null);
   const workOpenRef = useRef(workOpen); workOpenRef.current = workOpen;
@@ -246,12 +247,17 @@ export function App() {
     window.addEventListener('popstate', restoreRoute, { signal: controller.signal });
     window.addEventListener('hashchange', restoreRoute, { signal: controller.signal });
     window.addEventListener('keydown', event => {
-      if (event.key !== 'Escape' || workOpenRef.current || current.current.view !== 'selected') return;
+      if (event.key !== 'Escape') return;
+      if (runtime.current?.skipIntro()) { event.preventDefault(); return; }
+      if (workOpenRef.current || current.current.view !== 'selected') return;
       const source = current.current.active;
       navigation.current({ type: 'overview' });
       queueMicrotask(() => focusNavigation(source));
     }, { signal: controller.signal });
-    const instance = createRuntime(host.current!, labels.current!, id => { rememberPetal(id); navigation.current({ type: 'select', id, source: `petal-${id}` }); }, ready => dispatch({ type: 'model', status: ready ? 'ready' : 'failed' }), setLoadProgress);
+    const instance = createRuntime(host.current!, labels.current!, id => { rememberPetal(id); navigation.current({ type: 'select', id, source: `petal-${id}` }); }, ready => dispatch({ type: 'model', status: ready ? 'ready' : 'failed' }), setLoadProgress, playing => {
+      if (!playing && document.activeElement?.classList.contains('intro-skip')) document.getElementById('index-perch')?.focus({ preventScroll: true });
+      setIntroPlaying(playing);
+    });
     runtime.current = instance; instance.update(current.current);
     return () => { controller.abort(); instance.dispose(); runtime.current = null; };
   }, []);
@@ -339,7 +345,7 @@ export function App() {
         <div className="paper-grain" aria-hidden="true" />
         {state.model !== 'ready' && <picture className="scene-poster" aria-hidden="true"><source media="(max-width:700px)" srcSet={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-mobile.png`} /><img src={`models/soft-lotus-${state.model === 'failed' ? (state.view === 'selected' ? 'selected' : 'open') : 'bud'}-desktop.png`} alt="" /></picture>}
         <div className="scene-introduction" inert={state.view !== 'overview' || workOpen}><p className="eyebrow">{c.eyebrow}</p><RevealText text={s.headline} reduced={state.reducedMotion} /><p className="hero-offer">{s.intro}</p><div className="hero-actions"><button id="hero-work" type="button" aria-expanded={workOpen} aria-controls="work-browser" aria-haspopup="dialog" onClick={event => openWork(event.currentTarget)}>{s.work} ↓</button><button type="button" onClick={() => navigate({ type: 'select', id: 'contact' })}>{s.discuss} ↗</button></div><p className="scene-hint">{state.model === 'failed' ? s.fallbackHint : s.hint}</p></div>
-        <nav ref={labels} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}-petal.webp`} alt="" width="320" height={Math.round(320 * dimensions[id].main[1] / dimensions[id].main[0])} />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
+        <nav ref={labels} inert={introPlaying} className="petal-labels" aria-label={s.scene}>{petalIds.map(id => <div key={id} data-anchor={id}><button id={`petal-${id}`} type="button" aria-pressed={state.active === id} onClick={event => select(event, id)}>{isFeatured(id) && <img src={`assets/${id}-petal.webp`} alt="" width="320" height={Math.round(320 * dimensions[id].main[1] / dimensions[id].main[0])} />}<span>{petalName(id)} <span aria-hidden="true">↗</span></span></button></div>)}</nav>
         {previewId && <aside ref={preview} className="petal-preview" aria-labelledby="preview-title" inert={state.view !== 'selected' || workOpen} aria-hidden={state.view !== 'selected' || workOpen}><button type="button" className="preview-close" aria-label={s.close} onClick={() => { const id = state.active; navigate({ type: 'overview' }); queueMicrotask(() => focusNavigation(id)); }}>{s.close}</button>
           <p className="eyebrow">{s.preview}</p><RevealText id="preview-title" tag="h2" text={petalName(previewId)} reduced={state.reducedMotion} className="preview-title" />
           {previewProject && previewCopy ? <><p className="preview-subtitle">{s[previewProject.id as FeaturedId]}</p><img className="preview-product" style={{backgroundImage:`url(assets/${previewProject.id}-petal.webp)`,backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPosition:"center"}} src={`assets/${previewProject.id}.webp`} width={dimensions[previewProject.id].main[0]} height={dimensions[previewProject.id].main[1]} alt={previewCopy.alt} /><p>{previewCopy.summary}</p><div className="preview-actions"><button id={`preview-case-${previewProject.id}`} type="button" onClick={() => navigate({ type: 'read', id: previewProject.id as FeaturedId, source: `preview-case-${previewProject.id}` })}>{s.read} →</button><a className="primary-action" href={previewProject.live} target="_blank" rel="noreferrer">{s.demo} ↗</a></div></> : previewId === 'about' ? <><p>{s.aboutWork}</p></> : <><p>{s.contactText}</p><div className="contact-actions"><a className="primary-action" href="https://t.me/tserriednichs" target="_blank" rel="noreferrer">{s.discuss} · Telegram ↗</a><a href="mailto:beibars.ileskhan2405@gmail.com">beibars.ileskhan2405@gmail.com</a><a href="https://github.com/seoshiro" target="_blank" rel="noreferrer">GitHub ↗</a></div></>}
@@ -362,7 +368,7 @@ export function App() {
           </svg>
           <p role="status">{loadLabel}{percent !== undefined ? ` · ${percent}%` : ''}</p><progress className="scene-loading" aria-label={loadLabel} max={100} value={percent} />
         </div>}
-        <div className="scene-bottom"><div><p role="status">{state.model === 'failed' ? s.fallback : state.model === 'ready' ? s.ready : ''}</p></div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>
+        <div className="scene-bottom"><div>{introPlaying ? <button type="button" className="intro-skip" onClick={() => { runtime.current?.skipIntro(); document.getElementById('index-perch')?.focus({ preventScroll: true }); }}>{s.skipIntro} <span aria-hidden="true">· Esc</span></button> : <p role="status">{state.model === 'failed' ? s.fallback : state.model === 'ready' ? s.ready : ''}</p>}</div><button type="button" aria-pressed={state.reducedMotion} onClick={() => dispatch({ type: 'motion', reduced: !state.reducedMotion })}>{s.motion}</button></div>
       </div>
       <nav id="scene-index" className="scene-index" inert={state.view === 'case'} aria-label={`${s.scene} - ${s.all}`}><span id="work" />{petalIds.map((id, index) => <button id={`index-${id}`} type="button" key={id} aria-pressed={state.active === id} onClick={event => select(event, id)}><span>0{index + 1}</span> {petalName(id)}</button>)}<button id="index-all" type="button" aria-haspopup="dialog" aria-expanded={workOpen} aria-controls="work-browser" onClick={event => openWork(event.currentTarget)}>{s.all}</button></nav>
       <dialog ref={workDialog} id="work-browser" className="work-browser" aria-labelledby="work-browser-title" data-native-scroll onKeyDown={containWorkTab} onCancel={event => { event.preventDefault(); event.stopPropagation(); setWorkOpen(false); }} onClose={event => { if (!event.currentTarget.open && !workOpenRef.current) setWorkOpen(false); }}>

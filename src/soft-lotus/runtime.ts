@@ -10,6 +10,7 @@ import { createReadingLayout } from './reading-layout.ts';
 export interface SceneRuntime {
   update(state: SceneState): void;
   setCatalog(open: boolean, reduced: boolean): void;
+  skipIntro(): boolean;
   dispose(): void;
 }
 export type LoadProgress = { phase: 'transfer' | 'prepare'; loaded: number; total: number | null };
@@ -17,7 +18,7 @@ export type LoadProgress = { phase: 'transfer' | 'prepare'; loaded: number; tota
 // One GSAP ticker owns pointer updates, animation and rendering. There is no
 // renderer RAF loop and no continuously changing value in React state.
 export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: (id: PetalId) => void,
-  onModel: (ready: boolean) => void, onProgress: (progress: LoadProgress) => void): SceneRuntime {
+  onModel: (ready: boolean) => void, onProgress: (progress: LoadProgress) => void, onIntro: (playing: boolean) => void): SceneRuntime {
   let disposed = false;
   let contextLost = false;
   let warming = false;
@@ -69,6 +70,62 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const rim = new THREE.DirectionalLight(0xfff9eb, 1.1);
   rim.position.set(5, 3, -3); scene.add(rim);
   const pose = { bloom: introduced ? 1 : 0, turn: -0.18, emphasis: 0, reading: 0 };
+  // Loading is complete before this independent, interruptible opening starts.
+  const petalBloom = petalIds.map(() => ({ bloom: introduced ? 1 : 0 }));
+  const entrance = { labels: introduced ? 1 : 0, elapsed: 0 };
+  let introTimeline: gsap.core.Timeline | null = null;
+  let introStarted = false;
+  host.dataset.intro = 'waiting';
+  function rememberIntro() {
+    introduced = true;
+    try { sessionStorage.setItem('soft-lotus-intro-v2', '1'); } catch { /* Optional. */ }
+  }
+  function finishIntro(reason: string) {
+    introTimeline?.kill(); introTimeline = null;
+    rememberIntro();
+    host.dataset.intro = reason;
+    host.dataset.introEndedAt = String(performance.now());
+    onIntro(false); dirty = true;
+  }
+  function skipIntro() {
+    if (!introTimeline || host.dataset.introMode !== 'opening') return false;
+    finishIntro('skipped');
+    // A tap completes the current pose; it never resets to a stored keyframe.
+    const duration = state?.reducedMotion ? 0 : .18;
+    gsap.to([pose, ...petalBloom], { bloom: 1, duration, ease: 'power2.out', overwrite: 'auto', onUpdate: () => { dirty = true; } });
+    gsap.to(entrance, { labels: 1, duration: .18, overwrite: true, onUpdate: () => { dirty = true; } });
+    return true;
+  }
+  function startIntro(reduced: boolean, direct: boolean) {
+    introStarted = true;
+    gsap.killTweensOf(pose);
+    const quiet = introduced || reduced || direct || catalogOpen || inspectionPose !== null;
+    host.dataset.introMode = reduced ? 'reduced' : introduced ? 'cached' : quiet ? 'direct' : 'opening';
+    host.dataset.introStartedAt = String(performance.now());
+    host.dataset.intro = quiet ? 'appearing' : 'hold';
+    onIntro(!quiet);
+    introTimeline = gsap.timeline({ onUpdate: () => {
+      dirty = true;
+      host.dataset.introElapsed = entrance.elapsed.toFixed(3);
+    }, onComplete: () => { finishIntro('complete'); } });
+    if (quiet) {
+      pose.bloom = 1; petalBloom.forEach(petal => { petal.bloom = 1; });
+      // Reduced motion and repeat visits use opacity only, without a spatial opening.
+      gsap.set(renderer!.domElement, { opacity: 0 });
+      introTimeline.to(renderer!.domElement, { opacity: 1, duration: .18, clearProps: 'opacity' }, 0)
+        .to(entrance, { labels: 1, elapsed: .18, duration: .18, ease: 'none' }, 0);
+      return;
+    }
+    // 0.4 s hold + 2.2 s staggered unfolding + 0.6 s settling = 3.2 s.
+    // Stagger fits inside the unfolding interval; it adds no extra waiting.
+    introTimeline.to(entrance, { elapsed: 3.2, duration: 3.2, ease: 'none' }, 0)
+      .call(() => { host.dataset.intro = 'unfolding'; }, [], .4)
+      .to(pose, { bloom: .97, duration: 2.2, ease: 'power2.inOut' }, .4)
+      .to(petalBloom, { bloom: .97, duration: 2, stagger: .05, ease: 'power2.inOut' }, .4)
+      .call(() => { host.dataset.intro = 'settling'; }, [], 2.6)
+      .to([pose, ...petalBloom], { bloom: 1, duration: .6, ease: 'sine.out' }, 2.6)
+      .to(entrance, { labels: 1, duration: .6, ease: 'power2.out' }, 2.6);
+  }
   const catalog = { depth: 0 };
   let catalogOpen = false;
   const petalFocus = petalIds.map(() => ({ value: 0 }));
@@ -232,6 +289,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       if (timedOut || contextLost) throw Error('GPU preparation was interrupted.');
       host.dataset.asset = softLotusAsset.state;
       host.dataset.assetUrl = assetURL;
+      host.dataset.modelReadyAt = String(performance.now());
       onModel(true);
       if (!introduced && !state?.reducedMotion) driftTween = gsap.to(drift, { elapsed: 12, duration: 12, ease: 'none', onUpdate: () => { dirty = true; } });
       if (catalogOpen) driftTween?.pause();
@@ -260,7 +318,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     if (hoverEvent) { setHover(pick(hoverEvent)); hoverEvent = null; }
   }
   function setHover(index: number) {
-    if (catalogOpen) return;
+    if (catalogOpen || (introTimeline && host.dataset.introMode === 'opening')) return;
     if (hovered === index) return;
     hovered = index; host.style.cursor = index >= 0 ? 'pointer' : '';
     gsap.to(petalHover, { value: (i: number) => !state?.reducedMotion && state?.view === 'overview' && i === index ? .16 : 0, duration: .25, overwrite: true, onUpdate: () => { dirty = true; } });
@@ -268,7 +326,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   function draw() {
     if (disposed || contextLost || document.hidden || !state || !width || !height || (state.model === 'pending' && !warming)) return;
     const frameState = state;
-    const flowerMoving = gsap.isTweening(pose) || gsap.isTweening(petalFocus) || gsap.isTweening(petalHover);
+    const flowerMoving = Boolean(introTimeline?.isActive()) || gsap.isTweening(pose) || gsap.isTweening(petalBloom) || gsap.isTweening(petalFocus) || gsap.isTweening(petalHover);
     const catalogMoving = gsap.isTweening(catalog);
     const moving = flowerMoving || catalogMoving || gsap.isTweening(drift);
     if (!dirty && !moving) return;
@@ -331,7 +389,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     morphMeshes.forEach(object => {
       if (object instanceof THREE.Mesh && object.morphTargetDictionary && object.morphTargetInfluences) {
         const index = object.morphTargetDictionary[softLotusContract.morphTarget];
-        if (index !== undefined) object.morphTargetInfluences[index] = pose.bloom;
+        if (index !== undefined) object.morphTargetInfluences[index] = inspectionPose ?? petalBloom[object.userData.petal].bloom;
         const focusIndex = object.morphTargetDictionary.Focus;
         if (focusIndex !== undefined) object.morphTargetInfluences[focusIndex] = ((petalFocus[object.userData.petal]?.value || 0) + (petalHover[object.userData.petal]?.value || 0)) * pose.bloom ** 3;
       }
@@ -351,7 +409,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     }
     anchors.forEach((anchor, index) => {
       if (anchor.userData.closed_position_yup && anchor.userData.openPosition) {
-        anchor.position.fromArray(anchor.userData.closed_position_yup).lerp(anchor.userData.openPosition, pose.bloom);
+        anchor.position.fromArray(anchor.userData.closed_position_yup).lerp(anchor.userData.openPosition, inspectionPose ?? petalBloom[index].bloom);
         const focus = (petalFocus[index].value + petalHover[index].value) * pose.bloom ** 3;
         anchor.position.x *= 1 + focus * 0.18; anchor.position.z *= 1 + focus * 0.18; anchor.position.y += focus * 0.12;
         anchor.updateMatrixWorld();
@@ -362,12 +420,14 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       const x = (projected.x * 0.5 + 0.5) * width;
       const y = (-projected.y * 0.5 + 0.5) * height;
       el.style.transform = `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) translate(-50%,-50%)`;
-      el.style.visibility = pose.bloom > 0.6 && frameState.view !== 'case' ? 'visible' : 'hidden';
+      el.style.visibility = pose.bloom > 0.6 && entrance.labels > 0 && frameState.view !== 'case' ? 'visible' : 'hidden';
       el.dataset.active = String(frameState.active === petalIds[index]);
-      el.style.opacity = String(THREE.MathUtils.smoothstep(pose.bloom, 0.65, 1));
+      el.style.opacity = String(THREE.MathUtils.smoothstep(pose.bloom, 0.65, 1) * entrance.labels);
     });
     renderer?.render(scene, camera);
     host.dataset.bloom = pose.bloom.toFixed(3);
+    host.dataset.petals = JSON.stringify(petalBloom.map(petal => Number(petal.bloom.toFixed(5))));
+    host.dataset.introLabels = entrance.labels.toFixed(3);
     host.dataset.animating = String(flowerMoving || catalogMoving);
     host.dataset.pose = JSON.stringify([pose.bloom, pose.turn, pose.emphasis, pose.reading].map(value => Number(value.toFixed(5))));
     host.dataset.catalogDepth = catalog.depth.toFixed(5);
@@ -382,7 +442,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   document.addEventListener('visibilitychange', () => { dirty = true; }, { signal: abort.signal });
 
   function pick(event: PointerEvent) {
-    if (contextLost || catalogOpen || state?.view === 'case' || state?.model !== 'ready') return -1;
+    if (contextLost || catalogOpen || (introTimeline && host.dataset.introMode === 'opening') || state?.view === 'case' || state?.model !== 'ready') return -1;
     const rect = host.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
     ray.setFromCamera(pointer, camera);
@@ -405,12 +465,13 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   }, { signal: abort.signal });
   host.addEventListener('pointerup', event => {
     const start = press; press = null;
-    if (!start || start.index < 0 || start.pointer !== event.pointerId || Math.hypot(event.clientX - start.x, event.clientY - start.y) > 8 || Math.abs(window.scrollY - start.scroll) > 8) return;
+    if (!start || start.pointer !== event.pointerId || Math.hypot(event.clientX - start.x, event.clientY - start.y) > 8 || Math.abs(window.scrollY - start.scroll) > 8) return;
+    if (skipIntro() || start.index < 0) return;
     if (pick(event) === start.index) onChoose(petalIds[start.index]);
   }, { signal: abort.signal });
   host.addEventListener('pointercancel', () => { press = null; }, { signal: abort.signal });
   renderer?.domElement.addEventListener('webglcontextlost', event => {
-    event.preventDefault(); contextLost = true; host.dataset.webgl = 'lost'; onModel(false);
+    event.preventDefault(); contextLost = true; introTimeline?.kill(); introTimeline = null; onIntro(false); host.dataset.webgl = 'lost'; onModel(false);
   }, { signal: abort.signal });
   void load();
 
@@ -420,12 +481,14 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     } });
   }
   return {
+    skipIntro,
     setCatalog(open, reduced) {
+      if (open) skipIntro();
       catalogOpen = open;
       host.dataset.animating = 'true';
       // Freeze the base pose instead of completing its tweens. The independent
       // camera offset can reverse without altering bloom, selection or rotation.
-      for (const tween of gsap.getTweensOf([pose, ...petalFocus, ...petalHover])) {
+      for (const tween of gsap.getTweensOf([pose, ...petalBloom, ...petalFocus, ...petalHover])) {
         if (open) tween.pause(); else tween.resume();
       }
       if (open || state?.view !== 'overview' || state?.reducedMotion) driftTween?.pause();
@@ -446,23 +509,23 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       const angle = next.active && anchors[index]?.userData.selection_turn_degrees !== undefined
         ? THREE.MathUtils.degToRad(anchors[index].userData.selection_turn_degrees) : next.active ? -index * Math.PI * 2 / 5 : -.18;
       const nearestTurn = pose.turn + Math.atan2(Math.sin(angle - pose.turn), Math.cos(angle - pose.turn));
-      const open = introduced || next.model !== 'pending' || next.active !== null;
+      if (next.model === 'ready' && !introStarted) startIntro(next.reducedMotion, next.active !== null);
+      else if (next.active !== null || next.reducedMotion) skipIntro();
+      const open = introduced || next.reducedMotion || next.model !== 'pending' || next.active !== null;
+      if (!introTimeline && open) gsap.to(petalBloom, { bloom: 1, duration: next.reducedMotion ? 0 : .18, overwrite: true, onUpdate: () => { dirty = true; } });
       gsap.to(petalFocus, { value: (i: number) => next.active && i === index ? 1 : 0,
         duration: next.reducedMotion ? 0 : 0.55,
         ease: 'power3.inOut', overwrite: true, onUpdate: () => { dirty = true; } });
-      gsap.to(pose, { bloom: open ? 1 : 0, turn: nearestTurn,
+      gsap.to(pose, { ...(introTimeline ? {} : { bloom: open ? 1 : 0 }), turn: nearestTurn,
         emphasis: next.active ? 1 : 0, reading: next.view === 'case' ? 1 : 0,
-        duration: next.reducedMotion ? 0 : !introduced && open && !next.active ? 1.1 : next.view === 'overview' ? .65 : .55, ease: 'power3.inOut', overwrite: true,
-        onUpdate: () => { dirty = true; }, onComplete: () => {
-          dirty = true;
-          if (state?.model === 'ready') { introduced = true; try { sessionStorage.setItem('soft-lotus-intro-v2', '1'); } catch { /* Optional. */ } }
-        } });
-      if (catalogOpen) for (const tween of gsap.getTweensOf([pose, ...petalFocus, ...petalHover])) tween.pause();
+        duration: next.reducedMotion ? 0 : next.view === 'overview' ? .65 : .55, ease: 'power3.inOut', overwrite: 'auto',
+        onUpdate: () => { dirty = true; } });
+      if (catalogOpen) for (const tween of gsap.getTweensOf([pose, ...petalBloom, ...petalFocus, ...petalHover])) tween.pause();
       dirty = true;
       if (inspectionPose !== null) { gsap.killTweensOf(pose); pose.bloom = inspectionPose; pose.turn = -.18; pose.reading = 0; dirty = true; }
     },
     dispose() {
-      disposed = true; abort.abort(); loadingManager.abort(); observer.disconnect();
+      disposed = true; introTimeline?.kill(); gsap.killTweensOf(petalBloom); gsap.killTweensOf(entrance); abort.abort(); loadingManager.abort(); observer.disconnect();
       gsap.ticker.remove(beforeTick); gsap.ticker.remove(draw); gsap.killTweensOf(pose); gsap.killTweensOf(catalog); gsap.killTweensOf(petalFocus); gsap.killTweensOf(petalHover); driftTween?.kill(); decorationGeometry?.dispose();
       disposeObject(flower); disposeObject(ground); disposeObject(contact); contactMap.dispose(); key.shadow.dispose(); renderer?.dispose(); renderer?.forceContextLoss(); renderer?.domElement.remove();
     },

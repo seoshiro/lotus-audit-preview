@@ -2,6 +2,7 @@ import type { Locale } from '../content.ts';
 
 export const sceneCopy = {
   ru: {
+    skipIntro: 'Пропустить вступление',
     closeWork: 'Закрыть список',
     intro: 'Я Бейбарс. Создаю интерактивные сайты и прототипы веб-продуктов с помощью ИИ.',
     discuss: 'Обсудить проект', work: 'Посмотреть работы', demo: 'Открыть демо',
@@ -19,6 +20,7 @@ export const sceneCopy = {
     skip: 'Перейти к проектам', motion: 'Уменьшить движение', direct: 'Отдельная страница кейса',
   },
   en: {
+    skipIntro: 'Skip introduction',
     closeWork: 'Close project list',
     intro: 'I’m Beibars. I create interactive websites and web-product prototypes with AI assistance.',
     discuss: 'Discuss a project', work: 'Explore the work', demo: 'Open demo',
@@ -36,6 +38,7 @@ export const sceneCopy = {
     skip: 'Skip to projects', motion: 'Reduce motion', direct: 'Standalone case page',
   },
   kk: {
+    skipIntro: 'Кіріспені өткізу',
     closeWork: 'Жобалар тізімін жабу',
     intro: 'Мен Бейбарспын. ИИ көмегімен интерактивті сайттар мен веб-өнім прототиптерін жасаймын.',
     discuss: 'Жобаны талқылау', work: 'Жұмыстарды көру', demo: 'Демоны ашу',
