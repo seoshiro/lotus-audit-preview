@@ -115,22 +115,57 @@ test('Early project and gallery navigation complete the entrance once, preservin
   }
 });
 
-test('Reduced motion and repeat visits use only a short appearance', async ({ page }) => {
+test('Reduced motion and repeat visits use only a short appearance', async ({ page }, testInfo) => {
+  // Retain the real native animations after they finish. On software WebGL a
+  // compositor stall can delay the completion callback without extending their
+  // scheduled duration. Record that delay separately from the motion contract.
+  await page.addInitScript(() => {
+    const target = window as unknown as Window & { quietAppearances: Animation[] };
+    target.quietAppearances = [];
+    const animate = Element.prototype.animate;
+    Element.prototype.animate = function (...args: Parameters<Element['animate']>) {
+      const animation = animate.apply(this, args);
+      if (this.matches('.soft-canvas canvas, [data-anchor]')) target.quietAppearances.push(animation);
+      return animation;
+    };
+  });
+  const checkAppearance = async (mode: string) => {
+    const result = await page.evaluate(() => {
+      const host = document.querySelector<HTMLElement>('.soft-canvas')!;
+      const animations = (window as unknown as Window & { quietAppearances: Animation[] }).quietAppearances;
+      return {
+        started: Number(host.dataset.introStartedAt), ended: Number(host.dataset.introEndedAt),
+        animations: animations.map(animation => ({ start: Number(animation.startTime), state: animation.playState,
+          timing: animation.effect!.getComputedTiming(), frames: (animation.effect as KeyframeEffect).getKeyframes() })),
+        frames: (window as unknown as SampleWindow).openingFrames,
+      };
+    });
+    expect(result.animations).toHaveLength(6);
+    for (const animation of result.animations) {
+      expect(animation.timing.duration).toBe(180);
+      expect(animation.timing.delay).toBe(0);
+      expect(animation.timing.iterations).toBe(1);
+      expect(animation.start).toBe(result.animations[0].start);
+      expect(animation.start).toBeLessThanOrEqual(result.started + 1);
+      expect(animation.frames.map(frame => frame.opacity)).toEqual(['0', '1']);
+      expect(animation.state).toBe('finished');
+    }
+    expect(result.frames.length).toBeGreaterThan(0);
+    expect(result.frames.every(frame => frame.bloom === 1 && frame.petals.every(value => value === 1))).toBe(true);
+    await testInfo.attach(`${mode}-appearance.json`, { body: JSON.stringify({ ...result, observedMs: result.ended - result.started }, null, 2), contentType: 'application/json' });
+  };
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await observe(page);
   await page.goto(`${entry}?lang=kk`);
   const scene = page.locator('.soft-canvas');
   await expect(scene).toHaveAttribute('data-intro', 'complete', { timeout: 20000 });
   await expect(scene).toHaveAttribute('data-intro-mode', 'reduced');
-  let data = await scene.evaluate(host => ({ ...(host as HTMLElement).dataset }));
-  expect(Number(data.introEndedAt) - Number(data.introStartedAt)).toBeLessThan(400);
-  expect(await page.evaluate(() => (window as unknown as SampleWindow).openingFrames.every(frame => frame.bloom === 1 && frame.petals.every(value => value === 1)))).toBe(true);
+  await checkAppearance('reduced');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.reload();
   await expect(scene).toHaveAttribute('data-intro', 'complete', { timeout: 20000 });
   await expect(scene).toHaveAttribute('data-intro-mode', 'cached');
-  data = await scene.evaluate(host => ({ ...(host as HTMLElement).dataset }));
-  expect(Number(data.introEndedAt) - Number(data.introStartedAt)).toBeLessThan(400);
+  await checkAppearance('cached');
   await expect(page.locator('.intro-skip')).toHaveCount(0);
 });
 

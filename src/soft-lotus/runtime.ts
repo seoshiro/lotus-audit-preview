@@ -112,6 +112,10 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       // A slow software GPU must not become the clock for this quiet appearance.
       quietAnimations = [renderer!.domElement, ...labelElements.filter((el): el is HTMLElement => el !== null)]
         .map(el => el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' }));
+      // Resolve the shared start now. Waiting for the next composited paint can
+      // add a software-GPU frame before the short fade even begins.
+      const appearanceStart = document.timeline.currentTime;
+      if (appearanceStart !== null) quietAnimations.forEach(animation => { animation.startTime = appearanceStart; });
       void Promise.all(quietAnimations.map(animation => animation.finished)).then(() => {
         if (disposed) return;
         entrance.elapsed = .18; host.dataset.introElapsed = '.180'; finishIntro('complete');

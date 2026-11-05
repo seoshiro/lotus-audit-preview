@@ -87,6 +87,41 @@
       "durationMs": 193.40000009536743,
       "frameSamples": 27,
       "longTasksDuringAppearance": []
+    },
+    {
+      "label": "hardware-final-explicit-start",
+      "phase": "first",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "durationMs": 3196.8000000715256,
+      "frameSamples": 460,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "hardware-final-explicit-start",
+      "phase": "cached",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "durationMs": 175.89999997615814,
+      "frameSamples": 24,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "hardware-final-explicit-start",
+      "phase": "reduced",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "durationMs": 176,
+      "frameSamples": 25,
+      "longTasksDuringAppearance": []
     }
-  ]
+  ],
+  "softwareLimitation": {
+    "linuxCiReducedCallbackMs": [
+      434.7,
+      502.9
+    ],
+    "windowsSwiftShader4xCpuReducedCallbackMs": {
+      "beforeExplicitStart": 504.5,
+      "afterExplicitStart": 558.9
+    },
+    "explanation": "A compositor/frame delivery stall can delay notification beyond the 180 ms native opacity effect. Final regression checks the actual six synchronized native effects and attaches callback timing separately. No smooth physical-display claim for software rendering."
+  }
 }
