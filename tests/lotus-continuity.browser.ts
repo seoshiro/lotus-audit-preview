@@ -154,13 +154,19 @@ test('Every shared case fits the whole flower in its actual column and adapts wh
 });
 
 test('Reader and flower stay clear through Escape and history reversals without scene resets', async ({ page }) => {
-  test.setTimeout(60000);
+  test.setTimeout(120000);
+  // Sample every 20 ms of scene time, including interrupted intermediate poses.
+  // Software-renderer cadence must not decide how many states get inspected.
+  await page.clock.install();
+  const advanceScene = async (ms: number) => { for (let left = ms; left > 0; left -= 20) await page.clock.fastForward(Math.min(left, 20)); };
   for (const width of [1440, 800]) {
+  await page.clock.resume();
   await page.setViewportSize({ width, height: 900 });
   await page.goto(`${entry}?lang=ru`);
   await expect(page.locator('body')).toHaveAttribute('data-model', 'ready', { timeout: 20000 });
   await page.locator('#index-perch').click();
   await expect(page.locator('.soft-canvas')).toHaveAttribute('data-animating', 'false');
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 20));
   const sampled = page.evaluate(async () => {
     const frames: { left: number; right: number; panel: number; bloom: number; reading: number; time: number; caption: number; labels: number; readerLayer: number; headerLayer: number }[] = [];
     const start = performance.now();
@@ -173,13 +179,16 @@ test('Reader and flower stay clear through Escape and history reversals without 
     return frames;
   });
   await page.locator('#preview-case-perch').click();
-  await page.waitForTimeout(170); await page.keyboard.press('Escape');
-  await page.waitForTimeout(120); await page.goForward();
-  await page.waitForTimeout(650); await page.goBack();
+  await advanceScene(170); await page.keyboard.press('Escape');
+  await advanceScene(120); await page.goForward();
+  await advanceScene(650); await page.goBack();
+  await advanceScene(650);
   await expect(page.locator('.case-reader')).toBeHidden();
   await page.locator('#preview-case-perch').click();
-  await page.waitForTimeout(650); await page.locator('.reader-top button').click();
+  await advanceScene(650); await page.locator('.reader-top button').click();
+  await advanceScene(650);
   await expect(page.locator('.case-reader')).toBeHidden();
+  await advanceScene(2400);
   const frames = await sampled;
   expect(frames.length).toBeGreaterThan(20);
   expect(frames.some(frame => frame.reading > .2 && frame.reading < .8)).toBe(true);

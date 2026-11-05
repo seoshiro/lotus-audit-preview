@@ -1,0 +1,92 @@
+{
+  "conditions": "Separate free-running installed headless Chrome 156 on Windows; 1440x900; fresh browser context, no CPU/network throttle. Forced SwiftShader versus default AMD hardware ANGLE. One diagnostic run per mode; requestAnimationFrame samples are not physical-display FPS measurements. Functional phase checks use controlled time separately. Physical phones and Safari unavailable.",
+  "rows": [
+    {
+      "label": "software-before",
+      "phase": "first",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "durationMs": 3260.899999976158,
+      "frameSamples": 21,
+      "longTasksDuringAppearance": [
+        {
+          "start": 4327,
+          "duration": 52
+        }
+      ]
+    },
+    {
+      "label": "software-before",
+      "phase": "cached",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "durationMs": 442.40000009536743,
+      "frameSamples": 4,
+      "longTasksDuringAppearance": [
+        {
+          "start": 1893.7000000476837,
+          "duration": 120
+        }
+      ]
+    },
+    {
+      "label": "software-before",
+      "phase": "reduced",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "durationMs": 246.30000007152557,
+      "frameSamples": 4,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "software-after",
+      "phase": "first",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "durationMs": 3251,
+      "frameSamples": 22,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "software-after",
+      "phase": "cached",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "durationMs": 291.2000000476837,
+      "frameSamples": 3,
+      "longTasksDuringAppearance": [
+        {
+          "start": 1862.2999999523163,
+          "duration": 69
+        }
+      ]
+    },
+    {
+      "label": "software-after",
+      "phase": "reduced",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "durationMs": 251.10000002384186,
+      "frameSamples": 3,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "hardware-after",
+      "phase": "first",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "durationMs": 3202.2999999523163,
+      "frameSamples": 461,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "hardware-after",
+      "phase": "cached",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "durationMs": 192.60000002384186,
+      "frameSamples": 27,
+      "longTasksDuringAppearance": []
+    },
+    {
+      "label": "hardware-after",
+      "phase": "reduced",
+      "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001681) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "durationMs": 193.40000009536743,
+      "frameSamples": 27,
+      "longTasksDuringAppearance": []
+    }
+  ]
+}

@@ -24,19 +24,40 @@ async function observe(page: Page) {
   });
 }
 
-for (const width of [1440, 390]) test(`First entrance lasts 3.2 seconds after real readiness with a held bud and staggered petals (${width})`, async ({ page }, testInfo) => {
-  await page.setViewportSize({ width, height: width === 1440 ? 900 : 844 });
-  await observe(page);
+// Control feature time independently of the runner's GPU cadence. These are
+// sampled animation-state checks, not an FPS benchmark. Ordinary-speed hardware
+// recordings separately measure actual wall-clock duration.
+const clockPages = new WeakSet<Page>();
+async function advance(page: Page, milliseconds: number) {
+  for (let left = milliseconds; left > 0; left -= 50) await page.clock.fastForward(Math.min(left, 50));
+}
+async function loadPaused(page: Page, locale: string, verifyLoading = false) {
+  if (!clockPages.has(page)) { await page.clock.install(); clockPages.add(page); }
+  else await page.clock.resume();
+  await page.addInitScript(() => sessionStorage.removeItem('soft-lotus-intro-v2'));
   let release!: () => void;
   const transfer = new Promise<void>(resolve => { release = resolve; });
   await page.route('**/models/*.glb', async route => { await transfer; await route.continue(); });
-  await page.goto(`${entry}?lang=ru`, { waitUntil: 'domcontentloaded' });
-  const scene = page.locator('.soft-canvas');
+  await page.goto(`${entry}?lang=${locale}`, { waitUntil: 'domcontentloaded' });
   await expect(page.locator('.ink-loading')).toBeVisible();
-  await page.waitForTimeout(250);
-  await expect(scene).toHaveAttribute('data-intro', 'waiting');
-  expect(await scene.getAttribute('data-intro-started-at')).toBeNull();
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 20));
+  if (verifyLoading) {
+    await advance(page, 250);
+    await expect(page.locator('.soft-canvas')).toHaveAttribute('data-intro', 'waiting');
+    expect(await page.locator('.soft-canvas').getAttribute('data-intro-started-at')).toBeNull();
+  }
   release();
+  await expect.poll(async () => { await page.clock.fastForward(16); return page.locator('body').getAttribute('data-model'); }, { timeout: 25000, intervals: [20] }).toBe('ready');
+  await page.unroute('**/models/*.glb');
+}
+
+for (const width of [1440, 390]) test(`Opening preserves the 0.4 / 2.2 / 0.6 second schedule with staggered petals (${width})`, async ({ page }, testInfo) => {
+  test.setTimeout(60000);
+  await page.setViewportSize({ width, height: width === 1440 ? 900 : 844 });
+  await observe(page);
+  await loadPaused(page, 'ru', true);
+  const scene = page.locator('.soft-canvas');
+  await advance(page, 3300);
   await expect(scene).toHaveAttribute('data-intro', 'complete', { timeout: 20000 });
   const result = await scene.evaluate(host => ({ data: { ...(host as HTMLElement).dataset }, frames: (window as unknown as SampleWindow).openingFrames }));
   const duration = Number(result.data.introEndedAt) - Number(result.data.introStartedAt);
@@ -59,14 +80,15 @@ for (const width of [1440, 390]) test(`First entrance lasts 3.2 seconds after re
 for (const method of ['escape', 'tap', 'button'] as const) test(`Opening can be skipped by ${method} without selecting a project`, async ({ page }) => {
   const locale = method === 'escape' ? 'ru' : method === 'tap' ? 'kk' : 'en';
   if (method === 'tap') await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(`${entry}?lang=${locale}`);
+  await loadPaused(page, locale);
   const scene = page.locator('.soft-canvas');
   await expect(page.locator('.intro-skip')).toHaveText(`${sceneCopy[locale].skipIntro} · Esc`, { timeout: 20000 });
-  await page.waitForTimeout(method === 'escape' ? 80 : method === 'tap' ? 1000 : 2500);
+  await advance(page, method === 'escape' ? 80 : method === 'tap' ? 1000 : 2750);
   if (method === 'escape') await page.keyboard.press('Escape');
   else if (method === 'button') { await page.locator('.intro-skip').focus(); await page.keyboard.press('Enter'); }
   else await page.touchscreen.tap(210, 500);
   await expect(scene).toHaveAttribute('data-intro', 'skipped');
+  await advance(page, 250);
   await expect(scene).toHaveAttribute('data-bloom', '1.000');
   await expect(page.locator('body')).toHaveAttribute('data-view', 'overview');
   await expect(page.locator('.ink-loading')).toHaveCount(0);
@@ -76,16 +98,14 @@ for (const method of ['escape', 'tap', 'button'] as const) test(`Opening can be 
 test('Early project and gallery navigation complete the entrance once, preserving the scene through returns and history', async ({ page }) => {
   test.setTimeout(60000);
   for (const action of ['#hero-work', '#index-perch']) {
-    await page.goto(`${entry}?lang=ru`);
-    await page.evaluate(() => sessionStorage.removeItem('soft-lotus-intro-v2'));
-    await page.reload();
+    await loadPaused(page, 'ru');
     const scene = page.locator('.soft-canvas');
     await expect(page.locator('.intro-skip')).toBeVisible({ timeout: 20000 });
     const started = await scene.getAttribute('data-intro-started-at');
     await page.evaluate(() => { (window as unknown as SampleWindow).originalCanvas = document.querySelector('.soft-canvas canvas')!; });
     await page.locator(action).click();
-    if (action === '#hero-work') { await page.keyboard.press('Escape'); await expect(page.locator('#work-browser')).toBeHidden(); }
-    else { await page.locator('#preview-case-perch').click(); await page.keyboard.press('Escape'); await expect(page.locator('.case-reader')).toBeHidden(); await page.locator('.signature').click(); await page.goBack(); await page.goForward(); }
+    if (action === '#hero-work') { await advance(page, 150); await page.keyboard.press('Escape'); await advance(page, 800); await expect(page.locator('#work-browser')).toBeHidden(); }
+    else { await advance(page, 600); await page.locator('#preview-case-perch').click(); await advance(page, 200); await page.keyboard.press('Escape'); await advance(page, 700); await expect(page.locator('.case-reader')).toBeHidden(); await page.locator('.signature').click(); await advance(page, 700); await page.goBack(); await advance(page, 700); await page.goForward(); await advance(page, 700); }
     await expect(scene).toHaveAttribute('data-bloom', '1.000');
     await expect(scene).toHaveAttribute('data-intro', 'skipped');
     expect(await scene.getAttribute('data-intro-started-at')).toBe(started);
@@ -115,7 +135,7 @@ test('Reduced motion and repeat visits use only a short appearance', async ({ pa
 });
 
 test('Locale changes preserve elapsed opening time and automatic completion retains keyboard focus', async ({ page }) => {
-  await page.goto(`${entry}?lang=ru`);
+  await loadPaused(page, 'ru');
   const scene = page.locator('.soft-canvas');
   await expect(page.locator('.intro-skip')).toBeVisible({ timeout: 20000 });
   const started = await scene.getAttribute('data-intro-started-at');
@@ -125,6 +145,7 @@ test('Locale changes preserve elapsed opening time and automatic completion reta
     expect(await scene.getAttribute('data-intro-started-at')).toBe(started);
   }
   await page.locator('.intro-skip').focus();
+  await advance(page, 3300);
   await expect(scene).toHaveAttribute('data-intro', 'complete');
   await expect(page.locator('#index-perch')).toBeFocused();
   const duration = await scene.evaluate(host => Number((host as HTMLElement).dataset.introEndedAt) - Number((host as HTMLElement).dataset.introStartedAt));

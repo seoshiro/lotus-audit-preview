@@ -75,6 +75,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
   const entrance = { labels: introduced ? 1 : 0, elapsed: 0 };
   let introTimeline: gsap.core.Timeline | null = null;
   let introStarted = false;
+  let quietAnimations: Animation[] = [];
   host.dataset.intro = 'waiting';
   function rememberIntro() {
     introduced = true;
@@ -104,18 +105,23 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     host.dataset.introStartedAt = String(performance.now());
     host.dataset.intro = quiet ? 'appearing' : 'hold';
     onIntro(!quiet);
+    if (quiet) {
+      pose.bloom = 1; petalBloom.forEach(petal => { petal.bloom = 1; });
+      entrance.labels = 1;
+      // Fade composited DOM surfaces without redrawing a stationary 3D flower.
+      // A slow software GPU must not become the clock for this quiet appearance.
+      quietAnimations = [renderer!.domElement, ...labelElements.filter((el): el is HTMLElement => el !== null)]
+        .map(el => el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' }));
+      void Promise.all(quietAnimations.map(animation => animation.finished)).then(() => {
+        if (disposed) return;
+        entrance.elapsed = .18; host.dataset.introElapsed = '.180'; finishIntro('complete');
+      }).catch(() => { /* Disposal cancels the appearance. */ });
+      return;
+    }
     introTimeline = gsap.timeline({ onUpdate: () => {
       dirty = true;
       host.dataset.introElapsed = entrance.elapsed.toFixed(3);
     }, onComplete: () => { finishIntro('complete'); } });
-    if (quiet) {
-      pose.bloom = 1; petalBloom.forEach(petal => { petal.bloom = 1; });
-      // Reduced motion and repeat visits use opacity only, without a spatial opening.
-      gsap.set(renderer!.domElement, { opacity: 0 });
-      introTimeline.to(renderer!.domElement, { opacity: 1, duration: .18, clearProps: 'opacity' }, 0)
-        .to(entrance, { labels: 1, elapsed: .18, duration: .18, ease: 'none' }, 0);
-      return;
-    }
     // 0.4 s hold + 2.2 s staggered unfolding + 0.6 s settling = 3.2 s.
     // Stagger fits inside the unfolding interval; it adds no extra waiting.
     introTimeline.to(entrance, { elapsed: 3.2, duration: 3.2, ease: 'none' }, 0)
@@ -428,7 +434,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
     host.dataset.bloom = pose.bloom.toFixed(3);
     host.dataset.petals = JSON.stringify(petalBloom.map(petal => Number(petal.bloom.toFixed(5))));
     host.dataset.introLabels = entrance.labels.toFixed(3);
-    host.dataset.animating = String(flowerMoving || catalogMoving);
+    host.dataset.animating = String(flowerMoving || catalogMoving || quietAnimations.some(animation => animation.playState === 'running'));
     host.dataset.pose = JSON.stringify([pose.bloom, pose.turn, pose.emphasis, pose.reading].map(value => Number(value.toFixed(5))));
     host.dataset.catalogDepth = catalog.depth.toFixed(5);
     host.dataset.renderCpuMs = (performance.now() - started).toFixed(2);
@@ -512,12 +518,18 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       if (next.model === 'ready' && !introStarted) startIntro(next.reducedMotion, next.active !== null);
       else if (next.active !== null || next.reducedMotion) skipIntro();
       const open = introduced || next.reducedMotion || next.model !== 'pending' || next.active !== null;
-      if (!introTimeline && open) gsap.to(petalBloom, { bloom: 1, duration: next.reducedMotion ? 0 : .18, overwrite: true, onUpdate: () => { dirty = true; } });
-      gsap.to(petalFocus, { value: (i: number) => next.active && i === index ? 1 : 0,
+      if (!introTimeline && open) {
+        gsap.killTweensOf(petalBloom);
+        if (petalBloom.some(petal => petal.bloom !== 1)) gsap.to(petalBloom, { bloom: 1, duration: next.reducedMotion ? 0 : .18, onUpdate: () => { dirty = true; } });
+      }
+      gsap.killTweensOf(petalFocus);
+      if (petalFocus.some((petal, i) => petal.value !== (next.active && i === index ? 1 : 0))) gsap.to(petalFocus, { value: (i: number) => next.active && i === index ? 1 : 0,
         duration: next.reducedMotion ? 0 : 0.55,
         ease: 'power3.inOut', overwrite: true, onUpdate: () => { dirty = true; } });
-      gsap.to(pose, { ...(introTimeline ? {} : { bloom: open ? 1 : 0 }), turn: nearestTurn,
-        emphasis: next.active ? 1 : 0, reading: next.view === 'case' ? 1 : 0,
+      const destination = { ...(introTimeline ? {} : { bloom: open ? 1 : 0 }), turn: nearestTurn,
+        emphasis: next.active ? 1 : 0, reading: next.view === 'case' ? 1 : 0 };
+      gsap.killTweensOf(pose, Object.keys(destination).join(','));
+      if (Object.entries(destination).some(([key, value]) => pose[key as keyof typeof pose] !== value)) gsap.to(pose, { ...destination,
         duration: next.reducedMotion ? 0 : next.view === 'overview' ? .65 : .55, ease: 'power3.inOut', overwrite: 'auto',
         onUpdate: () => { dirty = true; } });
       if (catalogOpen) for (const tween of gsap.getTweensOf([pose, ...petalBloom, ...petalFocus, ...petalHover])) tween.pause();
@@ -525,7 +537,7 @@ export function createRuntime(host: HTMLElement, labels: HTMLElement, onChoose: 
       if (inspectionPose !== null) { gsap.killTweensOf(pose); pose.bloom = inspectionPose; pose.turn = -.18; pose.reading = 0; dirty = true; }
     },
     dispose() {
-      disposed = true; introTimeline?.kill(); gsap.killTweensOf(petalBloom); gsap.killTweensOf(entrance); abort.abort(); loadingManager.abort(); observer.disconnect();
+      disposed = true; quietAnimations.forEach(animation => animation.cancel()); introTimeline?.kill(); gsap.killTweensOf(petalBloom); gsap.killTweensOf(entrance); abort.abort(); loadingManager.abort(); observer.disconnect();
       gsap.ticker.remove(beforeTick); gsap.ticker.remove(draw); gsap.killTweensOf(pose); gsap.killTweensOf(catalog); gsap.killTweensOf(petalFocus); gsap.killTweensOf(petalHover); driftTween?.kill(); decorationGeometry?.dispose();
       disposeObject(flower); disposeObject(ground); disposeObject(contact); contactMap.dispose(); key.shadow.dispose(); renderer?.dispose(); renderer?.forceContextLoss(); renderer?.domElement.remove();
     },
